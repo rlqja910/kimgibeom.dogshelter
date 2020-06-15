@@ -24,11 +24,18 @@ public class UserController {
 
 	@RequestMapping("/joinProc")
 	@ResponseBody
-	public String joinProc(User user) {
-		System.out.println(user + "--------------------");
-		System.out.println(user.getUserId() + "--------------------");
-		System.out.println(user.getUserPhone() + "--------------------");
+	public void joinProc(User user) {
 		userService.writeUser(user);
-		return "redirect:/login";
+	}
+
+	@RequestMapping("/idCheck")
+	@ResponseBody
+	public boolean idCheck(String userId) {
+		System.out.println("Ddddd---------------------------------");
+		if (userService.idCheck(userId)) { // 중복이 아니면 true로 출력
+			return true;
+		} else { // 이미 사용중인 ID인 경우 false 값 return
+			return false;
+		}
 	}
 }

@@ -1,5 +1,7 @@
 package kimgibeom.dogshelter.user.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,4 +18,19 @@ public class UserServiceImpl implements UserService {
 		return userDao.addUser(user);
 	}
 
+	@Override
+	public List<User> readUsers() {
+		return userDao.getUsers();
+	}
+
+	@Override
+	public boolean idCheck(String userId) {
+		boolean availableId = true;
+		List<User> users = userDao.getUsers();
+		for (User user : users) {
+			if (user.getUserId() == userId)
+				availableId = false;
+		}
+		return availableId;
+	}
 }

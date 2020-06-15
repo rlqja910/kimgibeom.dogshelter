@@ -1,5 +1,7 @@
 package kimgibeom.dogshelter.user.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +18,8 @@ public class UserDaoImpl implements UserDao {
 		return userMap.addUser(user);
 	}
 
+	@Override
+	public List<User> getUsers() {
+		return userMap.getUsers();
+	}
 }

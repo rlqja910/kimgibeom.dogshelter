@@ -7,4 +7,10 @@
 		insert into users
 		values(#{userId},#{userPw},#{userName},#{userPhone},#{userEmail},sysdate)
 	</insert>
+
+	<select id='getUsers' resultType='user'>
+		select user_id userId,passworduserPw,name userName,phone_number userPhone,
+		e_mail userEmail,reg_date regDate
+		from users
+	</select>
 </mapper>

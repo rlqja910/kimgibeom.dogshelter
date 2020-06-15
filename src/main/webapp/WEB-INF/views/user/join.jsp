@@ -18,7 +18,6 @@
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
-
 <script>
 	$(()=>{ 
 		join(); 
@@ -30,29 +29,79 @@
 	    }    
 	  }
 	
+	function clearConfirmMsg(){
+		$('#idmsg').text('');
+		$('#pwmsg').text('');
+		$('#namemsg').text('');
+		$('#phonemsg').text('');
+		$('#emailmsg').text('');
+	}
+	
 	function join(){
-		$('#join').click(function(e){
+		$('#join').click(()=>{ 
+			clearConfirmMsg();
 			if($(':input:checkbox:checked').val()){
+				let idCheck = /^[a-z]{1}[a-z0-9]{7,11}$/; //정규식으로 ID 제한
+				let pwCheck = /((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9가-힣]).{8,15})/;//정규식으로 PW 제한
+				let emailCheck = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;//정규식으로 EMAIL 제한
+				let updateUserName=$('#userName').val().replace(/ /gi, '');
+				
+				if(!idCheck.test($('#userId').val())){
+					$('#idmsg').text('아이디가 조건에 맞지 않습니다.');
+					return;
+				}
+				
+				if(!pwCheck.test($('#userPw').val())){
+					$('#pwmsg').text('암호가 조건에 맞지 않습니다.');
+					return;
+				}
+
+				if(updateUserName===''){
+					$('#namemsg').text('이름을 입력하세요.');
+					return;
+				}
+				
+				if(!$('#userPhone1').val()||
+					!$('#userPhone2').val()||!$('#userPhone3').val()){
+					$('#phonemsg').text('전화번호을 입력하세요.');
+					return;
+				}
+				
+				if(!emailCheck.test($('#userEmail').val())){
+					$('#emailmsg').text('이메일이 형식에 맞지 않습니다.');
+					return;
+				}
+				
+				
+				console.log('db에 전달 시작');
 				let phoneNum=$('#userPhone1').val()+'-'+$('#userPhone2').val()+'-'+$('#userPhone3').val();
 				let user={
-						userId:$('#userId').val(),
+						userId:$('#userId').val().trim(),
 						userPw:$('#userPw').val(),
-						userName:$('#userName').val(),
+						userName:updateUserName,
 						userPhone:phoneNum,
 						userEmail:$('#userEmail').val(),
-				};
-				console.log(user); 
+				}; 
+				console.log(user);
+
 				
 				$.ajax({
 					url:'joinProc', 
 					data:user,
-					success: () =>{
-						swal('가입완료', '가입되었습니다.');
+					success: () =>{ 
+						swal({
+							title:'가입성공',
+							text:'',
+							type:'success', 
+						},
+						function(isConfirm){
+							$('#goLogin').submit();
+						});
 					},
 				});
 			}else{
-				e.preventDefault();
-				swal('개인정보처리 방침에\n동의하세요.');
+				swal('개인정보처리 방침에\n동의해 주세요.');
+				return;
 			}
 		});
 	}
@@ -418,7 +467,7 @@ footer .fot div:nth-child(2) {
 		<!-- 회원가입 -->
 		<div class="content">
 			<div class="member">
-				<form>
+				<form action='login' id='goLogin'>
 					<div class='contTitle'>회원가입</div>
 					<hr class='contHr'>
 					<div class='agree'>
@@ -435,35 +484,40 @@ footer .fot div:nth-child(2) {
 					<table>
 						<tr class="text">
 							<th><span>*</span> 아이디</th>
-							<td><input type="text" maxlength="16" id="userId" required />
-								<input type="button" value="중복확인">&nbsp;&nbsp;&nbsp;<span>8자리
-									이상의 국문, 영문, 숫자 가능</span></td>
+							<td><font color='tomato'><p id='idmsg'></p> </font><input
+								type="text" maxlength="12" id="userId" value='' /> <input
+								type="button" value="중복확인"> <br> <span>8자리
+									이상 12글자 이하의 영문, 숫자 각 최소 1개 이상(첫글자는 영문), 공백 불가</span></td>
 						</tr>
 						<tr class="text">
 							<th><span>*</span> 암호</th>
-							<td><input type="password" id="userPw" required />&nbsp;&nbsp;&nbsp;<span>8자리
-									이상의 영문, 숫자 가능</span></td>
+							<td><font color='tomato'><p id='pwmsg'></p> </font><input
+								type="password" maxlength="16" id="userPw" />&nbsp;&nbsp;&nbsp;<br>
+								<span>8자리 이상 16글자 이하의 영문 대소문자, 숫자, 특수문자 각 최소 1개 이상, 공백 불가</span></td>
 						</tr>
 						<tr class="text">
 							<th><span>*</span> 이름</th>
-							<td><input type="text" id="userName" required /></td>
+							<td><font color='tomato'><p id='namemsg'></p> </font><input
+								type="text" id="userName" maxlength="10" value='' /></td>
 						</tr>
 						<tr class="number">
 							<th><span>*</span> 전화번호</th>
-							<td><input type="number" id="userPhone1" maxlength="4"
-								oninput="maxLengthCheck(this)" required /> - <input
-								type="number" id="userPhone2" maxlength="4"
-								oninput="maxLengthCheck(this)" required /> - <input
-								type="number" id="userPhone3" maxlength="4"
-								oninput="maxLengthCheck(this)" required /></td>
+							<td><font color='tomato'><p id='phonemsg'></p> </font><input
+								type="number" id="userPhone1" min="0" maxlength="3"
+								oninput="maxLengthCheck(this)" /> - <input type="number"
+								id="userPhone2" min="0" maxlength="4"
+								oninput="maxLengthCheck(this)" /> - <input type="number"
+								id="userPhone3" min="0" maxlength="4"
+								oninput="maxLengthCheck(this)" /></td>
 						</tr>
 						<tr class="text">
 							<th><span>*</span> E-mail</th>
-							<td><input type="email" id="userEmail" required /></td>
+							<td><font color='tomato'><p id='emailmsg'></p> </font><input
+								type="email" id="userEmail" maxlength="40" /></td>
 						</tr>
 					</table>
 					<div class="button">
-						<input type="submit" class="ok" id="join" value="확인"> <input
+						<input type="button" class="ok" id="join" value="확인"> <input
 							type="submit" class="no" value="취소">
 					</div>
 				</form>
