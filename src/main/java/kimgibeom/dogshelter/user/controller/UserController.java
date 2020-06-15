@@ -29,6 +29,6 @@ public class UserController {
 		System.out.println(user.getUserId() + "--------------------");
 		System.out.println(user.getUserPhone() + "--------------------");
 		userService.writeUser(user);
-		return "user/login";
+		return "redirect:/login";
 	}
 }

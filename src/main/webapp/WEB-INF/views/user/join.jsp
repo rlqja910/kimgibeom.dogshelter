@@ -20,31 +20,40 @@
 <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
 
 <script>
-	$(()=>{
-		join();
+	$(()=>{ 
+		join(); 
 	});
 	
+	function maxLengthCheck(object){ //숫자 max값 초과시 제한
+	    if (object.value.length > object.maxLength){
+	      object.value = object.value.slice(0, object.maxLength);
+	    }    
+	  }
+	
 	function join(){
-		$('#join').click(()=>{
-			console.log($(':input:checkbox:checked').val());
-			let phoneNum=$('#userPhone1').val()+'-'+$('#userPhone2').val()+'-'+$('#userPhone3').val();
-			let user={
-					userId:$('#userId').val(),
-					userPw:$('#userPw').val(),
-					userName:$('#userName').val(),
-					userPhone:phoneNum,
-					userEmail:$('#userEmail').val(),
-			};
-			console.log(user); 
-			
-			$.ajax({
-				url:'joinProc', 
-				data:user,
-				success: () =>{
-					swal('가입완료', '가입되었습니다.');
-				},
-			});
-
+		$('#join').click(function(e){
+			if($(':input:checkbox:checked').val()){
+				let phoneNum=$('#userPhone1').val()+'-'+$('#userPhone2').val()+'-'+$('#userPhone3').val();
+				let user={
+						userId:$('#userId').val(),
+						userPw:$('#userPw').val(),
+						userName:$('#userName').val(),
+						userPhone:phoneNum,
+						userEmail:$('#userEmail').val(),
+				};
+				console.log(user); 
+				
+				$.ajax({
+					url:'joinProc', 
+					data:user,
+					success: () =>{
+						swal('가입완료', '가입되었습니다.');
+					},
+				});
+			}else{
+				e.preventDefault();
+				swal('개인정보처리 방침에\n동의하세요.');
+			}
 		});
 	}
 </script>
@@ -427,8 +436,8 @@ footer .fot div:nth-child(2) {
 						<tr class="text">
 							<th><span>*</span> 아이디</th>
 							<td><input type="text" maxlength="16" id="userId" required />
-								<button>중복확인</button>&nbsp;&nbsp;&nbsp;<span>8자리 이상의 국문,
-									영문, 숫자 가능</span></td>
+								<input type="button" value="중복확인">&nbsp;&nbsp;&nbsp;<span>8자리
+									이상의 국문, 영문, 숫자 가능</span></td>
 						</tr>
 						<tr class="text">
 							<th><span>*</span> 암호</th>
@@ -442,9 +451,11 @@ footer .fot div:nth-child(2) {
 						<tr class="number">
 							<th><span>*</span> 전화번호</th>
 							<td><input type="number" id="userPhone1" maxlength="4"
-								required /> - <input type="number" id="userPhone2"
-								maxlength="4" required /> - <input type="number"
-								id="userPhone3" maxlength="4" required /></td>
+								oninput="maxLengthCheck(this)" required /> - <input
+								type="number" id="userPhone2" maxlength="4"
+								oninput="maxLengthCheck(this)" required /> - <input
+								type="number" id="userPhone3" maxlength="4"
+								oninput="maxLengthCheck(this)" required /></td>
 						</tr>
 						<tr class="text">
 							<th><span>*</span> E-mail</th>
@@ -452,8 +463,8 @@ footer .fot div:nth-child(2) {
 						</tr>
 					</table>
 					<div class="button">
-						<input type="button" class="ok" id="join" value="확인"> <input
-							type="button" class="no" value="취소">
+						<input type="submit" class="ok" id="join" value="확인"> <input
+							type="submit" class="no" value="취소">
 					</div>
 				</form>
 			</div>
