@@ -52,7 +52,7 @@
 			value='classpath:kimgibeom/dogshelter/config/sqlMapConfig.xml' />
 		<property name='mapperLocations'>
 			<array>
-				<value>classpath:kimgibeom/dogshelter2/**/dao/map/*.xml</value>
+				<value>classpath:kimgibeom/dogshelter/**/dao/map/*.xml</value>
 			</array>
 		</property>
 	</bean>

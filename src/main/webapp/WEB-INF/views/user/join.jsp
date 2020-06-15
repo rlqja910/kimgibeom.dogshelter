@@ -5,14 +5,50 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>유기견 보호소</title>
-<script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<link rel="stylesheet"
+	href="http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <link rel="stylesheet" type="text/css" href="fontium/css/fontium.css" />
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
+<script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
+
+<script>
+	$(()=>{
+		join();
+	});
+	
+	function join(){
+		$('#join').click(()=>{
+			console.log($(':input:checkbox:checked').val());
+			let phoneNum=$('#userPhone1').val()+'-'+$('#userPhone2').val()+'-'+$('#userPhone3').val();
+			let user={
+					userId:$('#userId').val(),
+					userPw:$('#userPw').val(),
+					userName:$('#userName').val(),
+					userPhone:phoneNum,
+					userEmail:$('#userEmail').val(),
+			};
+			console.log(user); 
+			
+			$.ajax({
+				url:'joinProc', 
+				data:user,
+				success: () =>{
+					swal('가입완료', '가입되었습니다.');
+				},
+			});
+
+		});
+	}
+</script>
+
 <style>
 /* 초기화 */
 html {
@@ -373,7 +409,7 @@ footer .fot div:nth-child(2) {
 		<!-- 회원가입 -->
 		<div class="content">
 			<div class="member">
-				<form action="#">
+				<form>
 					<div class='contTitle'>회원가입</div>
 					<hr class='contHr'>
 					<div class='agree'>
@@ -384,43 +420,44 @@ footer .fot div:nth-child(2) {
 							2년, 정보제공자의 삭제 요청 시 즉시
 						</div>
 						<div class="text">
-							<input type="checkbox" /> 개인정보 수집 및 이용에 동의합니다.
+							<input type="checkbox" id="agreecheck" /> 개인정보 수집 및 이용에 동의합니다.
 						</div>
 					</div>
 					<table>
 						<tr class="text">
 							<th><span>*</span> 아이디</th>
-							<td><input type="text" />
+							<td><input type="text" maxlength="16" id="userId" required />
 								<button>중복확인</button>&nbsp;&nbsp;&nbsp;<span>8자리 이상의 국문,
 									영문, 숫자 가능</span></td>
 						</tr>
 						<tr class="text">
 							<th><span>*</span> 암호</th>
-							<td><input type="password" />&nbsp;&nbsp;&nbsp;<span>8자리
+							<td><input type="password" id="userPw" required />&nbsp;&nbsp;&nbsp;<span>8자리
 									이상의 영문, 숫자 가능</span></td>
 						</tr>
 						<tr class="text">
 							<th><span>*</span> 이름</th>
-							<td><input type="text" /></td>
+							<td><input type="text" id="userName" required /></td>
 						</tr>
 						<tr class="number">
 							<th><span>*</span> 전화번호</th>
-							<td><input type="text" /> - <input type="text" /> - <input
-								type="text" /></td>
+							<td><input type="number" id="userPhone1" maxlength="4"
+								required /> - <input type="number" id="userPhone2"
+								maxlength="4" required /> - <input type="number"
+								id="userPhone3" maxlength="4" required /></td>
 						</tr>
 						<tr class="text">
 							<th><span>*</span> E-mail</th>
-							<td><input type="text" /></td>
+							<td><input type="email" id="userEmail" required /></td>
 						</tr>
 					</table>
 					<div class="button">
-						<button class="ok" type="submit">확인</button>
-						<button class="no" type="submit" formaction="#">취소</button>
+						<input type="button" class="ok" id="join" value="확인"> <input
+							type="button" class="no" value="취소">
 					</div>
 				</form>
 			</div>
 		</div>
-
 		<!-- 푸터 -->
 		<footer>
 			<div class="fot">

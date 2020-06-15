@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class User {
 	private String userId;
-	private int userPw;
+	private String userPw;
 	private String userName;
 	private String userPhone;
 	private String userEmail;
@@ -13,7 +13,7 @@ public class User {
 	public User() {
 	}
 
-	public User(String userId, int userPw, String userName, String userPhone, String userEmail, Date regDate) {
+	public User(String userId, String userPw, String userName, String userPhone, String userEmail, Date regDate) {
 		this.userId = userId;
 		this.userPw = userPw;
 		this.userName = userName;
@@ -30,11 +30,11 @@ public class User {
 		this.userId = userId;
 	}
 
-	public int getUserPw() {
+	public String getUserPw() {
 		return userPw;
 	}
 
-	public void setUserPw(int userPw) {
+	public void setUserPw(String userPw) {
 		this.userPw = userPw;
 	}
 
