@@ -31,7 +31,7 @@ public class UserController {
 	@RequestMapping("/idCheck")
 	@ResponseBody
 	public boolean idCheck(String userId) {
-		System.out.println("Ddddd---------------------------------");
+		System.out.println(userId + "를 가지고 controller 진입");
 		if (userService.idCheck(userId)) { // 중복이 아니면 true로 출력
 			return true;
 		} else { // 이미 사용중인 ID인 경우 false 값 return

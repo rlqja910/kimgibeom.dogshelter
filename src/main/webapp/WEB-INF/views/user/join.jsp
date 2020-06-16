@@ -19,8 +19,9 @@
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
 <script>
-	$(()=>{ 
+	$(()=>{  
 		join(); 
+		availableIdCheck();
 	});
 	
 	function maxLengthCheck(object){ //숫자 max값 초과시 제한
@@ -28,6 +29,33 @@
 	      object.value = object.value.slice(0, object.maxLength);
 	    }    
 	  }
+	
+	function availableIdCheck(){ //ID 확인
+		$('#availCheck').click(()=>{
+			let idCheck = /^[a-z]{1}[a-z0-9]{7,11}$/; //정규식으로 ID 제한
+			
+			if(!idCheck.test($('#userId').val())){
+				swal('','아이디가 조건에 맞지 않습니다.','error');
+				return;
+			}else{
+				$.ajax({ 
+					url:'idCheck', 
+					data:{
+						userId:$('#userId').val(),
+					},
+					success: (result) =>{ 
+						if(result){
+							console.log(result);
+							swal('','사용 가능한 아이디입니다.','success');
+						}else{
+							console.log(result);
+							swal('','이미 사용중인 아이디입니다.','error');
+						}
+					},
+				});
+			}
+		});
+	}
 	
 	function clearConfirmMsg(){
 		$('#idmsg').text('');
@@ -40,6 +68,7 @@
 	function join(){
 		$('#join').click(()=>{ 
 			clearConfirmMsg();
+			
 			if($(':input:checkbox:checked').val()){
 				let idCheck = /^[a-z]{1}[a-z0-9]{7,11}$/; //정규식으로 ID 제한
 				let pwCheck = /((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9가-힣]).{8,15})/;//정규식으로 PW 제한
@@ -88,7 +117,7 @@
 				$.ajax({
 					url:'joinProc', 
 					data:user,
-					success: () =>{ 
+					success: () =>{  
 						swal({
 							title:'가입성공',
 							text:'',
@@ -486,7 +515,7 @@ footer .fot div:nth-child(2) {
 							<th><span>*</span> 아이디</th>
 							<td><font color='tomato'><p id='idmsg'></p> </font><input
 								type="text" maxlength="12" id="userId" value='' /> <input
-								type="button" value="중복확인"> <br> <span>8자리
+								type="button" value="중복확인" id='availCheck'> <br> <span>8자리
 									이상 12글자 이하의 영문, 숫자 각 최소 1개 이상(첫글자는 영문), 공백 불가</span></td>
 						</tr>
 						<tr class="text">
@@ -518,7 +547,8 @@ footer .fot div:nth-child(2) {
 					</table>
 					<div class="button">
 						<input type="button" class="ok" id="join" value="확인"> <input
-							type="submit" class="no" value="취소">
+							type="button" class="no" value="취소"
+							onClick="location.href='login'">
 					</div>
 				</form>
 			</div>
