@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>유기견 보호소</title>
+<link rel="stylesheet"
+	href="http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <link rel="stylesheet"
@@ -13,6 +15,50 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+<script>
+	$(()=>{
+		login();
+	});
+	
+	function clearMsg(){
+		$('#idCheckMsg').text('');
+		$('#pwCheckMsg').text('');
+	}
+	
+	function login(){
+		$('#login_btn').click((e)=>{
+			e.preventDefault();
+			$.ajax({ 
+				url:'loginProc',
+				method:'post',
+				data:{
+					'userId':$('#userId').val(),
+					'userPw':$('#userPw').val(),
+				},
+				success:(result)=>{  
+					if($('#userId').val()===''&&$('#userPw').val()===''){
+						return;
+					}else if(result==1){
+						console.log('로그인 성공');
+						$('#loginf').submit();
+					}else if(result==0){
+						clearMsg();
+						console.log('없는 아이디입니다.');
+						$('#idCheckMsg').text('없는 아이디입니다');
+						return;
+					}else if(result==-1){
+						clearMsg();
+						console.log('암호가 틀렸습니다.');
+						$('#pwCheckMsg').text('암호가 틀렸습니다');
+						return;
+					}
+				},
+			});
+		});
+	}
+</script>
+
 <style>
 /* 초기화 */
 html {
@@ -289,21 +335,24 @@ footer .fot div:nth-child(2) {
 		<!-- 로그인 -->
 		<div class="content">
 			<div class="login">
-				<form name="loginform">
+				<form name="loginform" action='../' id='loginf' method='post'>
 					<div id="login_box">
+						<font color='tomato'><p id='idCheckMsg'></p> </font><font
+							color='tomato'><p id='pwCheckMsg'></p> </font>
 						<ul id="input_button">
-							<li id="id_pass"><input name="id" type="text"
-								placeholder=" 아이디" required></li>
-							<li id="pass"><input name="pwd" type="password"
-								placeholder=" 암호" required></li>
+							<li id="id_pass"><input name="id" type="text" id='userId'
+								maxlength='12' placeholder=" 아이디" required>${userId}</li>
+							<li id="pass"><input name="pwd" type="password" id='userPw'
+								placeholder=" 암호" maxlength='16' required></li>
 						</ul>
+
 					</div>
-					<button id="login_btn" type="submit" onclick="login_error()">로그인</button>
+					<input type='submit' id="login_btn" value='로그인'>
 					<div class="btns">
 						<input type="checkbox" name="" /> <label>아이디 저장</label>
 					</div>
 					<div class='newUser'>
-						<a href='join.html'>회원가입</a>
+						<a href='join'>회원가입</a>
 					</div>
 					<div class='logintext'>
 						<label>*비밀번호 분실 시 관리자한테 문의해 주세요.</label>

@@ -10,4 +10,6 @@ public interface UserService {
 	boolean idCheck(String userId);
 
 	List<User> readUsers();
+
+	String readuserPw(String userId);
 }

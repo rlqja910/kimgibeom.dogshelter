@@ -38,4 +38,9 @@ public class UserServiceImpl implements UserService {
 		System.out.println(availableId);
 		return availableId;
 	}
+
+	@Override
+	public String readuserPw(String userId) {
+		return userDao.getuserPw(userId);
+	}
 }

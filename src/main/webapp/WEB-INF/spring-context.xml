@@ -91,6 +91,16 @@
 	<tx:annotation-driven
 		transaction-manager='transactionManager' />
 
+	<!-- interceptor 사용을 위한 bean 객체 등록 -->
+	<bean id='loginCheckInterceptor'
+		class='kimgibeom.dogshelter.user.controller.LoginCheckInterceptor' />
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/d/**" /> <!-- 이것만 가로채겠다. -->
+			<ref bean='loginCheckInterceptor' />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
 	<!-- Google Mail 전송 기능 등록 -->
 	<bean id='mailSender'
 		class='org.springframework.mail.javamail.JavaMailSenderImpl'>

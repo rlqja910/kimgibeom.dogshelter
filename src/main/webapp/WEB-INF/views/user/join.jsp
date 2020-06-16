@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>유기견 보호소</title>
 
 <link rel="stylesheet"
@@ -32,6 +30,7 @@
 	
 	function availableIdCheck(){ //ID 확인
 		$('#availCheck').click(()=>{
+			clearConfirmMsg();
 			let idCheck = /^[a-z]{1}[a-z0-9]{7,11}$/; //정규식으로 ID 제한
 			
 			if(!idCheck.test($('#userId').val())){

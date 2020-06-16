@@ -22,4 +22,9 @@ public class UserDaoImpl implements UserDao {
 	public List<User> getUsers() {
 		return userMap.getUsers();
 	}
+
+	@Override
+	public String getuserPw(String userId) {
+		return userMap.getuserPw(userId);
+	}
 }

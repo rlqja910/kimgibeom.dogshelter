@@ -13,4 +13,9 @@
 		e_mail userEmail,reg_date regDate
 		from users
 	</select>
+	
+	<select id='getuserPw' resultType='String' parameterType="String">
+		select password from users
+		where user_id=#{userId}
+	</select>
 </mapper>

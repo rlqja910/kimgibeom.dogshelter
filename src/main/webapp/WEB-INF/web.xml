@@ -7,7 +7,7 @@
 	<display-name>kimgibeom.dogshelter</display-name>
 
 	<welcome-file-list>
-		<welcome-file>main.jsp</welcome-file>
+		<welcome-file>/WEB-INF/views/main.jsp</welcome-file>
 	</welcome-file-list>
 
 	<error-page>

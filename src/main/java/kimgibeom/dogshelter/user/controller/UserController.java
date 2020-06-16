@@ -1,8 +1,11 @@
 package kimgibeom.dogshelter.user.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kimgibeom.dogshelter.user.domain.User;
@@ -16,6 +19,11 @@ public class UserController {
 
 	@RequestMapping("/login")
 	public void login() {
+	}
+
+	@RequestMapping(value = "/main", method = RequestMethod.POST)
+	public String main() {
+		return "redirect:main";
 	}
 
 	@RequestMapping("/join")
@@ -36,6 +44,24 @@ public class UserController {
 			return true;
 		} else { // 이미 사용중인 ID인 경우 false 값 return
 			return false;
+		}
+	}
+
+	@RequestMapping("/loginProc")
+	@ResponseBody
+	public int loginProc(HttpServletRequest request, String userId, String userPw) {
+		System.out.println("controller 진입");
+		String pw = userService.readuserPw(userId); // 입력한 ID의 PW를 추출
+		System.out.println(pw); // null일경우 아이디가 없다는 의미
+
+		if (userPw.equals(pw)) { // 로그인 성공
+			request.getSession().setAttribute("userId", userId);
+
+			return 1;// 로그인 성공
+		} else if (pw == null) { // 아이디가 없음
+			return 0;// 아이디가 아예 없음
+		} else {
+			return -1; // 암호가 틀림
 		}
 	}
 }

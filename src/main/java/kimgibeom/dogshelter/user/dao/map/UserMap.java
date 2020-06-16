@@ -8,4 +8,6 @@ public interface UserMap {
 	int addUser(User user);
 
 	List<User> getUsers();
+	
+	String getuserPw(String userId);
 }
