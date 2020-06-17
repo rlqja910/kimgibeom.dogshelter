@@ -297,7 +297,7 @@ footer .fot div:nth-child(2) {
 		$('#emailmsg').text('');
 	}
 	
-	function join(){
+	function join(){ 
 		$('#join').click(()=>{ 
 			clearConfirmMsg();
 			
