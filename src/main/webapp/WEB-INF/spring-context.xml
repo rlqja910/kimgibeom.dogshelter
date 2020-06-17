@@ -21,7 +21,7 @@
 
 	<!-- component scan할 패키지 등록 -->
 	<context:component-scan
-		base-package="kimgibeom.dogshelter" />
+		base-package="kimgibeom.dog" />
 
 	<!-- 로그기록 등의 중복작업을 위한 aspect 사용 등록 -->
 	<aop:aspectj-autoproxy />
@@ -40,7 +40,7 @@
 	<bean id='dataSource'
 		class='org.springframework.jndi.JndiObjectFactoryBean'>
 		<property name='jndiName'
-			value='java:comp/env/jdbc/dogshelter' />
+			value='java:comp/env/jdbc/dog' />
 		<property name='resourceRef' value='true' />
 	</bean>
 
@@ -49,15 +49,15 @@
 		class='org.mybatis.spring.SqlSessionFactoryBean'>
 		<property name='dataSource' ref='dataSource' />
 		<property name='configLocation'
-			value='classpath:kimgibeom/dogshelter/config/sqlMapConfig.xml' />
+			value='classpath:kimgibeom/dog/config/sqlMapConfig.xml' />
 		<property name='mapperLocations'>
 			<array>
-				<value>classpath:kimgibeom/dogshelter/**/dao/map/*.xml</value>
+				<value>classpath:kimgibeom/dog/**/dao/map/*.xml</value>
 			</array>
 		</property>
 	</bean>
 	<mybatis:scan
-		base-package="kimgibeom.dogshelter.**.dao.map" />
+		base-package="kimgibeom.dog.**.dao.map" />
 
 	<!-- JSON과 오브젝트 사이의 변환을 지원하는 MappingJacksonHttpMessageConverter 등록 -->
 	<bean
@@ -79,7 +79,7 @@
 
 	<!-- 첨부파일 경로 지정 -->
 	<context:property-placeholder
-		location="classPath:kimgibeom/dogshelter/config/attach.properties" />
+		location="classPath:kimgibeom/dog/config/attach.properties" />
 	<mvc:resources mapping="/attach/**"
 		location="/WEB-INF/attach/"></mvc:resources>
 
@@ -93,7 +93,7 @@
 
 	<!-- interceptor 사용을 위한 bean 객체 등록 -->
 	<bean id='loginCheckInterceptor'
-		class='kimgibeom.dogshelter.user.controller.LoginCheckInterceptor' />
+		class='kimgibeom.dog.user.controller.LoginCheckInterceptor' />
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/user/d/**" /> <!-- 이것만 가로채겠다. -->

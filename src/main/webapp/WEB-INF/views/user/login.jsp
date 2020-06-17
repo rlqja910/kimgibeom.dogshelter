@@ -18,7 +18,7 @@
 
 <script>
 	$(()=>{
-		login();
+		login(); 
 	});
 	
 	function clearMsg(){
@@ -26,7 +26,7 @@
 		$('#pwCheckMsg').text('');
 	}
 	
-	function login(){
+	function login(){ 
 		$('#login_btn').click((e)=>{
 			e.preventDefault();
 			$.ajax({ 
