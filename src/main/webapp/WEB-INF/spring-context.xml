@@ -96,7 +96,7 @@
 		class='kimgibeom.dog.user.controller.LoginCheckInterceptor' />
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/user/d/**" /> <!-- 이것만 가로채겠다. -->
+			<mvc:mapping path="/user/D/**" /> <!-- 이것만 가로채겠다. -->
 			<ref bean='loginCheckInterceptor' />
 		</mvc:interceptor>
 	</mvc:interceptors>
