@@ -17,10 +17,19 @@
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
 <script>
+	let availCheck=false;
+	
 	$(()=>{  
 		join(); 
 		availableIdCheck();
+		idChange();
 	});
+	
+	function idChange(){
+		$('#userId').change(()=>{
+			availCheck=false;
+		})
+	}
 	
 	function maxLengthCheck(object){ //숫자 max값 초과시 제한
 	    if (object.value.length > object.maxLength){
@@ -28,13 +37,13 @@
 	    }    
 	  }
 	
-	function availableIdCheck(){ //ID 확인
+	function availableIdCheck(){ //ID 중복확인
 		$('#availCheck').click(()=>{
 			clearConfirmMsg();
 			let idCheck = /^[a-z]{1}[a-z0-9]{7,11}$/; //정규식으로 ID 제한
 			
 			if(!idCheck.test($('#userId').val())){
-				swal('','아이디가 조건에 맞지 않습니다.','error');
+				swal('','아이디가 조건에 맞지 않습니다','error');
 				return;
 			}else{
 				$.ajax({ 
@@ -45,10 +54,11 @@
 					success: (result) =>{ 
 						if(result){
 							console.log(result);
-							swal('','사용 가능한 아이디입니다.','success');
+							swal('','사용 가능한 아이디입니다','success');
+							availCheck=true;
 						}else{
 							console.log(result);
-							swal('','이미 사용중인 아이디입니다.','error');
+							swal('','이미 사용중인 아이디입니다','error');
 						}
 					},
 				});
@@ -68,67 +78,71 @@
 		$('#join').click(()=>{ 
 			clearConfirmMsg();
 			
-			if($(':input:checkbox:checked').val()){
-				let idCheck = /^[a-z]{1}[a-z0-9]{7,11}$/; //정규식으로 ID 제한
-				let pwCheck = /((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9가-힣]).{8,15})/;//정규식으로 PW 제한
-				let emailCheck = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;//정규식으로 EMAIL 제한
-				let updateUserName=$('#userName').val().replace(/ /gi, '');
-				
-				if(!idCheck.test($('#userId').val())){
-					$('#idmsg').text('아이디가 조건에 맞지 않습니다.');
-					return;
-				}
-				
-				if(!pwCheck.test($('#userPw').val())){
-					$('#pwmsg').text('암호가 조건에 맞지 않습니다.');
-					return;
-				}
-
-				if(updateUserName===''){
-					$('#namemsg').text('이름을 입력하세요.');
-					return;
-				}
-				
-				if(!$('#userPhone1').val()||
-					!$('#userPhone2').val()||!$('#userPhone3').val()){
-					$('#phonemsg').text('전화번호을 입력하세요.');
-					return;
-				}
-				
-				if(!emailCheck.test($('#userEmail').val())){
-					$('#emailmsg').text('이메일이 형식에 맞지 않습니다.');
-					return;
-				}
-				
-				
-				console.log('db에 전달 시작');
-				let phoneNum=$('#userPhone1').val()+'-'+$('#userPhone2').val()+'-'+$('#userPhone3').val();
-				let user={
-						userId:$('#userId').val().trim(),
-						userPw:$('#userPw').val(),
-						userName:updateUserName,
-						userPhone:phoneNum,
-						userEmail:$('#userEmail').val(),
-				}; 
-				console.log(user);
-
-				
-				$.ajax({
-					url:'joinProc', 
-					data:user,
-					success: () =>{  
-						swal({
-							title:'가입성공',
-							text:'',
-							type:'success', 
+			if(availCheck){
+				if($(':input:checkbox:checked').val()){
+					let idCheck = /^[a-z]{1}[a-z0-9]{7,11}$/; //정규식으로 ID 제한
+					let pwCheck = /((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9가-힣]).{8,15})/;//정규식으로 PW 제한
+					let emailCheck = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;//정규식으로 EMAIL 제한
+					let updateUserName=$('#userName').val().replace(/ /gi, '');
+					
+					if(!idCheck.test($('#userId').val())){
+						$('#idmsg').text('아이디가 조건에 맞지 않습니다');
+						return;
+					}
+					
+					if(!pwCheck.test($('#userPw').val())){
+						$('#pwmsg').text('암호가 조건에 맞지 않습니다');
+						return;
+					}
+	
+					if(updateUserName===''){
+						$('#namemsg').text('이름을 입력하세요');
+						return;
+					}
+					
+					if(!$('#userPhone1').val()||
+						!$('#userPhone2').val()||!$('#userPhone3').val()){
+						$('#phonemsg').text('전화번호을 입력하세요');
+						return;
+					}
+					
+					if(!emailCheck.test($('#userEmail').val())){
+						$('#emailmsg').text('이메일이 형식에 맞지 않습니다');
+						return;
+					}
+					
+					console.log('db에 전달 시작');
+					let phoneNum=$('#userPhone1').val()+'-'+$('#userPhone2').val()+'-'+$('#userPhone3').val();
+					let user={
+							userId:$('#userId').val().trim(),
+							userPw:$('#userPw').val(),
+							userName:updateUserName,
+							userPhone:phoneNum,
+							userEmail:$('#userEmail').val(),
+					}; 
+					console.log(user);
+	
+					
+					$.ajax({
+						url:'joinProc', 
+						data:user,
+						success: () =>{
+							swal({
+								title:'가입성공',
+								text:'',
+								type:'success', 
+							},
+							function(isConfirm){
+									$('#goLogin').submit();
+							});
 						},
-						function(isConfirm){
-							$('#goLogin').submit();
-						});
-					},
-				});
-			}else{
-				swal('개인정보처리 방침에\n동의해 주세요.');
+					});
+				}else{
+					swal('개인정보처리 방침에\n동의해 주세요');
+					return;
+				}
+			}else{ //ID 중복확인 안했을 경우.
+				swal('아이디 중복확인을 해주세요');
 				return;
 			}
 		});
