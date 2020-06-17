@@ -5,7 +5,7 @@
 			<PatternLayout />
 		</Console>
 		<RollingFile name="file"
-			fileName="c:/DEV/kimgibeom.dogshelter.log"
+			fileName="c:/DEV/kimgibeom.dog.log"
 			filePattern="c:/DEV/jspLog.%d{yyyy-MM-dd-HH-mm-ss}.log" append="true">
 			<PatternLayout
 				pattern="[%-5p: %d{yyyy/MM/dd HH:mm:ss}] %m%n" />
