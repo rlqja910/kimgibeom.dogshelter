@@ -26,7 +26,7 @@
 	.content .mainText .text{color:#666;}
 	.content .mainText .text span{font-size:40px; color:#282320; font-weight:bold;}
 	.content .mainText .text span span{color:#f5bf25;}
-	.content .mainText .text i{list-style:none}
+	.content .mainText .text i{list-style:none} 
 
 	/* introduction */
 	.content .introduction{text-align:center; margin:0 auto; margin-top:80px; width:80%;}
