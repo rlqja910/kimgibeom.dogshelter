@@ -117,7 +117,6 @@
 <script>
 	$(()=>{
 		logInConfrim();
-		logOut();
 		console.log(`${userId}`);
 	});
 	function logInConfrim(){
@@ -133,11 +132,7 @@
 			console.log('로그인 안됨');
 		}
 	}
-	
-	function logOut(){
-		$('#logoutBtn').click(()=>{
-		});
-	}
+
 	
 	function afterUserLogin(){
 		$('#headBtn').empty();
@@ -149,7 +144,7 @@
 		$('#headBtn').empty();
 		$('#headBtn').append("<li><a href='admin'>관리자페이지</a></li>");
 		$('#headBtn').append("<li><a href='/dog/user/mypage'>마이페이지 </a></li>");
-		$('#headBtn').append("<li><a href='/dog' id='logoutBtn'>로그아웃</a></li>");
+		$('#headBtn').append("<li><a href='user/logout' id='logoutBtn'>로그아웃</a></li>");
 	}
 	
 </script>

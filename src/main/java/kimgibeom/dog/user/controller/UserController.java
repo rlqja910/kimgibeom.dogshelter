@@ -64,4 +64,11 @@ public class UserController {
 			return -1; // 암호가 틀림
 		}
 	}
+
+	@RequestMapping("/logout")
+	public String logout(HttpServletRequest request) {
+		System.out.println("logout진입");
+		request.getSession().invalidate();
+		return "redirect:/user/login";
+	}
 }

@@ -259,7 +259,7 @@
 						</div>
 					</div>
 					<div class='newUser'>
-						<a href='user.02.html'>회원가입</a>
+						<a href='join'>회원가입</a>
 					</div>
 					<div class='logintext'>
 						<label>*비밀번호 분실 시 관리자한테 문의해 주세요.</label>

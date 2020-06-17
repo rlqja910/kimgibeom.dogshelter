@@ -261,7 +261,7 @@ footer .fot div:nth-child(2) {
 	  }
 	
 	function availableIdCheck(){ //ID 중복확인
-		$('#availCheck').click(()=>{
+		$('#availCheck').click(()=>{ 
 			clearConfirmMsg();
 			let idCheck = /^[a-z]{1}[a-z0-9]{7,11}$/; //정규식으로 ID 제한
 			
