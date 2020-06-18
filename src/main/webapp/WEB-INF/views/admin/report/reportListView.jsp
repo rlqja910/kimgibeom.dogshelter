@@ -67,10 +67,10 @@ function reportWrite() {
 	$('tbody').html(
 		`<c:forEach var='report' items='${reports}'>
 		<tr>
-			<td><input type='checkbox' value=${report.postNum} name='postNum'/></td>
-			<td>${report.postNum}</td>
+			<td><input type='checkbox' value=${report.reportNum} name='reportNum'/></td>
+			<td>${report.reportNum}</td>
 			<td>${report.userId}</td>
-			<td><a href='./post/${report.postNum}' id='detailReport'>${report.title}</a></td>
+			<td><a href='./post/${report.reportNum}' id='detailReport'>${report.title}</a></td>
 			<td>${report.regDate}</td>
 		</tr>
 		</c:forEach>`)

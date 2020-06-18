@@ -18,8 +18,8 @@ public class ReportDaoImpl implements ReportDao{
 	}
 	
 	@Override
-	public Report getReport(int postNum) {
-		return reportMap.getReport(postNum);
+	public Report getReport(int reportNum) {
+		return reportMap.getReport(reportNum);
 	}
 	
 	@Override
@@ -33,7 +33,7 @@ public class ReportDaoImpl implements ReportDao{
 	}
 	
 	@Override
-	public int delReport(int postNum) {
-		return reportMap.delReport(postNum);
+	public int delReport(int reportNum) {
+		return reportMap.delReport(reportNum);
 	}
 }

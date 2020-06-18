@@ -6,8 +6,8 @@ import kimgibeom.dog.report.domain.Report;
 
 public interface ReportDao {
 	List<Report> getReports();
-	Report getReport(int postNum);
+	Report getReport(int reportNum);
 	int addReport(String title);
 	int modifyReport(Report post);
-	int delReport(int postNum);
+	int delReport(int reportNum);
 }

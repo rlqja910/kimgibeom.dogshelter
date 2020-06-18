@@ -18,8 +18,8 @@ public class ReportServiceImpl implements ReportService{
 	}
 	
 	@Override
-	public Report readReport(int postNum) {
-		return reportDao.getReport(postNum);
+	public Report readReport(int reportNum) {
+		return reportDao.getReport(reportNum);
 	}
 	
 	@Override
@@ -33,7 +33,7 @@ public class ReportServiceImpl implements ReportService{
 	}
 	
 	@Override
-	public int removeReport(int postNum) {
-		return reportDao.delReport(postNum);
+	public int removeReport(int reportNum) {
+		return reportDao.delReport(reportNum);
 	}
 }

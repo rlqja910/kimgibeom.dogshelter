@@ -21,7 +21,7 @@ public class ReportController {
 	/* 관리자 페이지 */
 	@RequestMapping
 	public String report() {
-		return "/admin/main";
+		return "main";
 	}
 	
 	@RequestMapping("/report/list")
@@ -29,10 +29,11 @@ public class ReportController {
 		return reportService.readReports();
 	}
 	
-	@RequestMapping("/report/post/{postNum}")
-	public String user(@PathVariable String postNum, Model model) {
-		int postNo = Integer.parseInt(postNum);
-		Report report = reportService.readReport(postNo);
+	@RequestMapping("/report/post/{reportNum}") // 주소에 변수를 포함시킨다.
+	// @PathVariable : PathVariable에 있는 변수값을 가져다 쓰겠다.
+	public String user(@PathVariable String reportNum, Model model) {
+		int reportNo = Integer.parseInt(reportNum);
+		Report report = reportService.readReport(reportNo);
 		model.addAttribute("report", report);
 		return "/report/post";
 	}

@@ -6,7 +6,7 @@ public class Report {
 	private String title;
 	private String userId;
 	private String content;
-	private int view;
+	private int viewCount;
 	private Date regDate;
 	private int reportNum;
 	
@@ -16,8 +16,8 @@ public class Report {
 	public String getUserId() {
 		return userId;
 	}
-	public int getView() {
-		return view;
+	public int getViewCount() {
+		return viewCount;
 	}
 	public Date getRegDate() {
 		return regDate;
@@ -31,8 +31,8 @@ public class Report {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public void setView(int view) {
-		this.view = view;
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
 	}
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
