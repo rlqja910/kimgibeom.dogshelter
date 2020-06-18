@@ -21,22 +21,22 @@ public class UserController {
 	public void login() {
 	}
 
-	@RequestMapping(value = "/main", method = RequestMethod.POST)
+	@RequestMapping(value = "/main", method = RequestMethod.POST) //
 	public String main() {
 		return "redirect:main";
 	}
 
-	@RequestMapping("/join")
+	@RequestMapping("/join") //회원가입 버튼 누를시
 	public void join() {
 	}
 
-	@RequestMapping("/joinProc")
+	@RequestMapping("/joinProc") //회원가입
 	@ResponseBody
 	public void joinProc(User user) {
 		userService.writeUser(user);
 	}
 
-	@RequestMapping("/idCheck")
+	@RequestMapping("/idCheck") //회원가입시 중복확인
 	@ResponseBody
 	public boolean idCheck(String userId) {
 		System.out.println(userId + "를 가지고 controller 진입");
@@ -47,7 +47,7 @@ public class UserController {
 		}
 	}
 
-	@RequestMapping("/loginProc")
+	@RequestMapping("/loginProc") //로그인 정보확인
 	@ResponseBody
 	public int loginProc(HttpServletRequest request, String userId, String userPw) {
 		System.out.println("controller 진입");
@@ -71,4 +71,7 @@ public class UserController {
 		request.getSession().invalidate();
 		return "redirect:/user/login";
 	}
+	
+	//관리자 페이지 Handler-----------------------------------------------------------------------------
+	@RequestMapping
 }
