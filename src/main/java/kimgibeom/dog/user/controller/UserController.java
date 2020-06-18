@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kimgibeom.dog.user.domain.User;
@@ -19,11 +18,6 @@ public class UserController {
 
 	@RequestMapping("/login")
 	public void login() {
-	}
-
-	@RequestMapping(value = "/main", method = RequestMethod.POST) //
-	public String main() {
-		return "redirect:main";
 	}
 
 	@RequestMapping("/join") //회원가입 버튼 누를시
