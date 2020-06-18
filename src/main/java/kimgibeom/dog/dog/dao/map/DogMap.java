@@ -1,5 +1,9 @@
 package kimgibeom.dog.dog.dao.map;
 
-public class DogMap {
+import java.util.List;
 
+import kimgibeom.dog.dog.domain.Dog;
+
+public interface DogMap {
+	List<Dog> getDogs(); //동물 리스트 뽑음
 }

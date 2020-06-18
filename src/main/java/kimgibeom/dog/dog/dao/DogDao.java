@@ -1,5 +1,9 @@
 package kimgibeom.dog.dog.dao;
 
-public class DogDao {
+import java.util.List;
 
+import kimgibeom.dog.dog.domain.Dog;
+
+public interface DogDao {
+	List<Dog> getDogs();
 }

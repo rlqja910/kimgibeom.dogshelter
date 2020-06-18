@@ -1,5 +1,9 @@
 package kimgibeom.dog.dog.service;
 
-public class DogService {
+import java.util.List;
 
+import kimgibeom.dog.dog.domain.Dog;
+
+public interface DogService {
+	List<Dog> readDogs();
 }
