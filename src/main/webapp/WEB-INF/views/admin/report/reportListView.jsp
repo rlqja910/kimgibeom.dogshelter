@@ -196,15 +196,14 @@ th, td {
 
 th {
 	color: #4b4276;
-	width: 60px;
 }
 
 .title {
-	width: 400px;
+	width: 950px;
 }
 
 .date {
-	width: 150px;
+	width: 200px;
 }
 
 .buttons{
