@@ -73,5 +73,5 @@ public class UserController {
 	}
 	
 	//관리자 페이지 Handler-----------------------------------------------------------------------------
-	@RequestMapping
+	
 }
