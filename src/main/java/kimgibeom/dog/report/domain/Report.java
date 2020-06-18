@@ -8,7 +8,7 @@ public class Report {
 	private String content;
 	private int view;
 	private Date regDate;
-	private int postNum;
+	private int reportNum;
 	
 	public String getTitle() {
 		return title;
@@ -16,14 +16,14 @@ public class Report {
 	public String getUserId() {
 		return userId;
 	}
-	public int getHit() {
+	public int getView() {
 		return view;
 	}
 	public Date getRegDate() {
 		return regDate;
 	}
-	public int getPostNum() {
-		return postNum;
+	public int getReportNum() {
+		return reportNum;
 	}
 	public void setTitle(String title) {
 		this.title = title;
@@ -31,14 +31,14 @@ public class Report {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public void setview(int view) {
+	public void setView(int view) {
 		this.view = view;
 	}
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	public void setPostNum(int postNum) {
-		this.postNum = postNum;
+	public void setReportNum(int reportNum) {
+		this.reportNum = reportNum;
 	}
 	public String getContent() {
 		return content;
