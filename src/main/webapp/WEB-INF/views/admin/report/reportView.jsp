@@ -171,7 +171,7 @@ body {
 						<strong>${report.title}</strong>
 					</h4>
 					<strong class='postInfo'>${report.userId}</strong>
-					<span class='glyphicon glyphicon-eye-open postInfo'>&nbsp;${report.hit}</span>
+					<span class='glyphicon glyphicon-eye-open postInfo'>&nbsp;${report.viewCount}</span>
 					<span class='glyphicon glyphicon-time postInfo'>&nbsp;${report.regDate}</span>		
 					<hr>					
 				</div>	
