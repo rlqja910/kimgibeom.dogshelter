@@ -155,7 +155,9 @@ function mobile_menu(){
 		footer .fot div:nth-child(2){margin:0 5% 0 0; font-size:11px; float:right;}
 	}
 </style>
-<div class='headA'><%=session.getAttribute("userId") %>님 환영합니다
+<div class='headA'>
+<%if(session.getAttribute("userId")!=null){ %>
+<%=session.getAttribute("userId") %>님 환영합니다<%} %>
 	<ul id='headBtn'>
 		<li><a href='/dog/user/login'>로그인</a></li>
 		<li><a href='/dog/user/join'>회원가입</a></li>

@@ -137,7 +137,7 @@
 	function afterUserLogin(){
 		$('#headBtn').empty();
 		$('#headBtn').append("<li><a href='/dog/user/mypage'>마이페이지</a></li>");
-		$('#headBtn').append("<li><a href='/dog' id='logoutBtn'>로그아웃</a></li>");
+		$('#headBtn').append("<li><a href='user/logout' id='logoutBtn'>로그아웃</a></li>");
 	}
 	
 	function afterAdminLogin(){
@@ -155,7 +155,7 @@
 		<div class='header'>
 			<div class='headerBackground'>
 				<header>
-					<%@ include file="common.header.jsp" %>
+					<%@ include file="common/header.jsp" %>
 				</header>
 				<div class='mainTitle'>
 					<div class='subTitle'>Not only people<br>Need a house</div>
@@ -344,7 +344,7 @@
 		
 		<!-- 푸터 -->
 		<footer>
-			<%@ include file="common.footer.jsp" %>
+			<%@ include file="common/footer.jsp" %>
 		</footer>
 	</div>
 </body>

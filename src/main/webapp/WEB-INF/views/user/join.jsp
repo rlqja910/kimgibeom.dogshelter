@@ -299,7 +299,7 @@ footer .fot div:nth-child(2) {
 	
 	function join(){ 
 		$('#join').click(()=>{ 
-			clearConfirmMsg();
+			clearConfirmMsg(); 
 			
 			if(availCheck){
 				if($(':input:checkbox:checked').val()){
@@ -377,7 +377,7 @@ footer .fot div:nth-child(2) {
 	<div class='container'>
 		<div class='header'>
 			<div class='headerBackground'>
-				<header><%@ include file="../common.header.jsp"%>
+				<header><%@ include file="../common/header.jsp"%>
 				</header>
 				<hr class='subHr'>
 				<div class='subTitle'>회원가입</div>
@@ -448,7 +448,7 @@ footer .fot div:nth-child(2) {
 
 		<!-- 푸터 -->
 		<footer>
-			<%@ include file="../common.footer.jsp"%>
+			<%@ include file="../common/footer.jsp"%>
 		</footer>
 	</div>
 </body>

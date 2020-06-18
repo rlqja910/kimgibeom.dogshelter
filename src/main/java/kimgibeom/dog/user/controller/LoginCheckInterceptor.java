@@ -9,7 +9,7 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		boolean isCheck = true;
-
+		System.out.println("interceptor 진입");
 		try {
 			if (request.getRequestURI().equals("/dog/user/login")) { // login 진입했을때
 				if (request.getSession().getAttribute("userId") == null) { // 로그인 안되어있으면 진입
