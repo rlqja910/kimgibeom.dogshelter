@@ -46,18 +46,18 @@ function reportDel() {
 	});
 };
 
-function reportSearch(){
+function reportSearch() {
 	$('#search').click(() => {
-		if($('#searchContent').val().trim()) {
-			
-		}else {
+		if(!$('#searchContent').val().trim()) {
 			swal({
 				title: '',
 				text: '검색할 내용을 입력해주세요.',
 				type: 'warning',
 				confirmButtonText: '확인',
 				closeOnConfirm: false
-			})			
+			})	
+		}else {
+		
 		}	
 	});
 }
