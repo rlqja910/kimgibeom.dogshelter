@@ -223,16 +223,7 @@ body {
 <body>
 <div class='wrapper' id='leftNav'>
    <div class='sidebar' id='sidebar'>
-      <h2><b>DOG SHELTER</b></h2>
-      <ul>
-         <li><a href='../main.html'> <span class='glyphicon glyphicon-home'></span>메인</a></li>
-			<li><a href='../user/01.html'> <span class='glyphicon glyphicon-user'></span>회원관리</a></li>
-			<li><a href='01.html'> <span class='glyphicon glyphicon-heart'></span>유기견관리</a></li>
-			<li><a href='../adopt/01.html'> <span class='glyphicon glyphicon-calendar'></span>입양관리</a></li>
-			<li><a href='../review/01.html'> <span class='glyphicon glyphicon-list'></span>후기관리</a></li>
-			<li><a href='../report/01.html'> <span class='glyphicon glyphicon-bullhorn'></span>신고관리</a></li>
-			<li><a href='../donation/01.html'> <span class='glyphicon glyphicon-piggy-bank'></span>후원금 관리</a></li>
-      </ul>
+      <%@ include file="../common/nav.jsp" %>
    </div>
    <div class='main_content'>
       <div class='header'>
