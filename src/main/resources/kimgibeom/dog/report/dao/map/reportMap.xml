@@ -4,29 +4,29 @@
 <mapper namespace='kimgibeom.dog.report.dao.map.UserMap'>
 	<select id='getReports' resultType='report'>
 		select title, user_id userId, content, view, reg_date regDate, report_num reportNum
-		from reports
+		from kimgibeom.reports
 		order by reg_date
 	</select>
 	
 	<select id='getReport' parameterType='int' resultType='report'>
 		select title, user_id userId, content, view, reg_date regDate, report_num reportNum
-		from reports
+		from kimgibeom.reports
 		where report_num = #{reportNum}
 	</select>
 	
 	<insert id='addReport' parameterType='string'>
-		insert into reports (title, user_id, content, view, reg_date, report_num)
+		insert into kimgibeom.reports (title, user_id, content, view, reg_date, report_num)
 		values(#{title}, #{userId}, #{content}, #{view}, sysdate, repost_num_seq.nextval)
 	</insert>
 	
 	<update id='modifyReport' parameterType='report'>
-		update reports
+		update kimgibeom.reports
 		set title = #{title}, content = #{content}
 		where report_num = #{reportNum}
 	</update>
 	
 	<delete id='delReport' parameterType='int'>
-		delete reports
+		delete kimgibeom.reports
 		where report_num = #{reportNum}
 	</delete>
 </mapper>	
