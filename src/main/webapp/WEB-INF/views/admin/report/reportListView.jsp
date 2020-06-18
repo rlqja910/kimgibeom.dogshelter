@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <script>
 function reportDel() {
 	$('#delete').click(() => {
@@ -61,8 +62,29 @@ function reportSearch(){
 	});
 }
 
+function reportWrite() {
+	let date = new Date(); 
+	
+	$('tbody').empty();
+	$('tbody').html(
+		`<c:forEach var='report' items='${reports}'>
+		<tr>
+			<td><input type='checkbox'/></td>
+			<td>${report.postNum}</td>
+			<td>${report.userId}</td>
+			<td><a href='./post' id='detailReport'>${report.title}</a></td>
+			<td>${report.regDate}</td>
+		</tr>
+		</c:forEach>`)
+	
+	if ($('tbody').html() == ``) {
+		$('tbody').html('<tr><td colspan="5">게시글이 없습니다.</td></tr>');
+	}	
+}
+
 $(reportDel);
 $(reportSearch);
+$(reportWrite);
 </script>
 <style>
 * {
@@ -254,22 +276,7 @@ th {
 							<th class='date'>작성일</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td><input type='checkbox'/></td>
-							<td>123</td>
-							<td>coco1234</td>
-							<td><a href='02.html' id='detailReport'>중화동 근처 말티즈 잃어버리신 분 있나요?</a></td>
-							<td>2016-06-02</td>
-						</tr>
-						<tr>
-							<td><input type='checkbox'/></td>
-							<td>122</td>
-							<td>arimarim</td>
-							<td><a href='02.html' id='detailReport'>저희 집 강아지가 문 열린 틈에 나가버렸어요.</a></td>
-							<td>2016-06-02</td>
-						</tr>				
-					</tbody>
+					<tbody></tbody>
 				</table>	
 					
 				<button type='button' class='btn btn-warning buttons' id='delete'>삭제</button>
