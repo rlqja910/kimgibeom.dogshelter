@@ -63,16 +63,14 @@ function reportSearch(){
 }
 
 function reportWrite() {
-	let date = new Date(); 
-	
 	$('tbody').empty();
 	$('tbody').html(
 		`<c:forEach var='report' items='${reports}'>
 		<tr>
-			<td><input type='checkbox'/></td>
+			<td><input type='checkbox' value=${report.postNum} name='postNum'/></td>
 			<td>${report.postNum}</td>
 			<td>${report.userId}</td>
-			<td><a href='./post' id='detailReport'>${report.title}</a></td>
+			<td><a href='./post/${report.postNum}' id='detailReport'>${report.title}</a></td>
 			<td>${report.regDate}</td>
 		</tr>
 		</c:forEach>`)

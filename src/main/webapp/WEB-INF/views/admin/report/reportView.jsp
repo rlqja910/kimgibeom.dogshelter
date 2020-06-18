@@ -11,7 +11,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
 <script>
-function del() {
+function reportDel() {
 	$('.delete').click(() => {
 		swal({
 			title: '',
@@ -25,7 +25,7 @@ function del() {
 	});
 };
 
-$(del);
+$(reportDel);
 </script>
 <style>
 * {
@@ -114,18 +114,11 @@ body {
 	color: #717171;
 }
 
-#content {
-	float: left;
-	margin-left: 10px;
-	width: 400px;
-	display: inline;
-}
-
-.post-info {
+.postInfo {
 	margin-right: 15px;
 }
 
-.post-text {
+.postText {
 	margin-bottom: 150px;
 }
 
@@ -172,21 +165,23 @@ body {
 					<strong> 신고 게시판 관리</strong>
 				</h3>
 				<hr style='border: 1px solid #a0a0a0;'>
-				<h4>
-					<strong>중화동 근처 말티즈 잃어버리신 분 있나요?</strong>
-				</h4>
-				<strong class='post-info'>coco1234</strong>
-				<span class='glyphicon glyphicon-eye-open post-info'>&nbsp;21</span>
-				<span class='glyphicon glyphicon-time post-info'>&nbsp;2020-06-13</span>							
+				
+				<div>
+					<h4>
+						<strong>${report.title}</strong>
+					</h4>
+					<strong class='postInfo'>${report.userId}</strong>
+					<span class='glyphicon glyphicon-eye-open postInfo'>&nbsp;${report.hit}</span>
+					<span class='glyphicon glyphicon-time postInfo'>&nbsp;${report.regDate}</span>		
+					<hr>					
+				</div>	
+				<div class='postText'>
+					${report.content}
+				</div>							
 			</div>
-			<hr>
-			<div class='post-text'>
-				퇴근하고 집 가는데 말티즈 한 마리가 혼자서 돌아다니더라구요.<br>
-				깨끗하고 관리가 잘 된걸 보면 유기는 아니고<br>
-				잃어버리신거 같은데 임보 중이니 연락 주세요. 010-3434-1221<br> <!-- 강아지 사진, 지도 -->				
-			</div>
-			<a href='01.html'><button class='btn list'>목록</button></a><br><br>
-			<hr>
+			
+			<a href='../list'><button class='btn list'>목록</button></a><br><br>
+			<hr>		
 			
 			<h4><strong>댓글</strong></h4>
 			<br>
@@ -198,9 +193,9 @@ body {
 						아이가 얼른 주인분 만났으면 좋겠네요.
 					</div>
 				</div>
-					
 			</div>
 			<br>
+			
 			<div style='background-color:#eeeeee;'>
 				<div class='replyBox'>
 					<span><strong>smile1</strong>&nbsp;&nbsp;2020-06-10</span>
