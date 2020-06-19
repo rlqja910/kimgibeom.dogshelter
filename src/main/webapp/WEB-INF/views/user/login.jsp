@@ -13,6 +13,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
+<script type="text/javascript" src='../res/cookie.js'></script>
 
 <style>
 /* header */
@@ -180,9 +181,31 @@
 </style>
 
 <script>
-	$(()=>{
+	$(()=>{ 
 		login(); 
+		idSave();
 	});
+	function idSave(){ //아이디 저장
+		$('#userId').val($.cookie('userId'));
+		console.log('sss');
+		if($('#userId').val()!=''){
+			$('#userIdSave').attr('checked',true);
+		}
+			
+		$('#userIdSave').change(()=>{
+			if($('#userIdSave').is(':checked')){
+				$.cookie('userId',$('#userId').val(),{expires:7});
+			}else{
+				$.removeCookie('userId');
+			} 
+		});
+		
+		$('#userId').keyup(()=>{
+			if($('#userIdSave').is(':checked')){
+				$.cookie('userId',$('#userId').val(),{expires:7});
+			}
+		});
+	}
 	
 	function clearMsg(){
 		$('#idCheckMsg').text('');
@@ -221,7 +244,9 @@
 		});
 	}
 </script>
-
+<%
+	
+%>
 </head>
 <body>
 	<div class='container'>
@@ -243,7 +268,7 @@
 							color='tomato'><p id='pwCheckMsg'></p> </font>
 						<ul id="input_button">
 							<li id="id_pass"><input name="id" type="text" id='userId'
-								maxlength='12' placeholder=" 아이디" required>${userId}</li>
+								maxlength='12' placeholder=" 아이디" value='' required></li>
 							<li id="pass"><input name="pwd" type="password" id='userPw'
 								placeholder=" 암호" maxlength='16' required></li>
 						</ul>
@@ -252,7 +277,7 @@
 					<input type='submit' id="login_btn" value='로그인'>
 					<div class="btns">
 						<div>
-							<input type="checkbox" name="" /> <label>아이디 저장</label>
+							<input type="checkbox" id='userIdSave' /> <label>아이디 저장</label>
 						</div>
 						<div class='idPw'>
 							<a href='#'>아이디 /&nbsp;</a><a href='#'>비밀번호 찾기</a>

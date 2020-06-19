@@ -213,10 +213,10 @@ function mobile_menu(){
 		<a href="#" class="close"><i class="fas fa-times" style="width:40px; height:40px;"></i></a>
 		<ul class="left_gnb">
 			<li class='mobileLogin' id='mLoginBtn'>
-				<a href="user/login">로그인</a>
+				<a href="/dog/user/login">로그인</a>
 			</li>
 			<li class='mobileLogin' id='mLoginBtn'>
-				<a href="user/join">회원가입</a>
+				<a href="/dog/user/join">회원가입</a>
 			</li>
 			<br>
 			<li>
