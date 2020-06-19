@@ -10,7 +10,7 @@ public class AdminCheckInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		boolean isCheck = true;
 		System.out.println("interceptor 진입");
-		String urlFirstPath = (request.getServletPath().split("/"))[1]; // url servletPath 맨앞만 추출
+		String urlFirstPath = (request.getServletPath().split("/"))[1]; // 묹자열 admin 추출, url servletPath 맨앞만 추출
 		try {
 			if (urlFirstPath.equals("admin")) { // login 진입했을때
 				System.out.println("인터맨----------1");
