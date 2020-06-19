@@ -14,7 +14,7 @@ public class DogServiceImpl implements DogService {
 	private DogDao dogDao;
 
 	@Override
-	public List<Dog> readDogs() {
+	public List<Dog> readDogs() { // 강아지 리스트로 출력
 		return dogDao.getDogs();
 	}
 

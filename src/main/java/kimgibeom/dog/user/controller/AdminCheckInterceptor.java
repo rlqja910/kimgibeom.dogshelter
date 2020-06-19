@@ -5,16 +5,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
+public class AdminCheckInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		boolean isCheck = true;
 		System.out.println("interceptor 진입");
-		String urlFirstPath = (request.getServletPath().split("/"))[1];
+		String urlFirstPath = (request.getServletPath().split("/"))[1]; // url servletPath 맨앞만 추출
 		try {
-			if (urlFirstPath.equals("user")) { // login 진입했을때
+			if (urlFirstPath.equals("admin")) { // login 진입했을때
 				System.out.println("인터맨----------1");
-				if (request.getSession().getAttribute("userId") == null) { // 로그인 안되어있으면 진입
+				if (((String) request.getSession().getAttribute("userId")).equals("admin")) { // 관리자계정이면 진입
 					System.out.println("인터맨----------2");
 				} else {
 					System.out.println("인터맨----------3");

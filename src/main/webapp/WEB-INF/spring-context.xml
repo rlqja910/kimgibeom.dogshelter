@@ -39,8 +39,7 @@
 	<!-- Java Naming and Directory Interface API 등록 -->
 	<bean id='dataSource'
 		class='org.springframework.jndi.JndiObjectFactoryBean'>
-		<property name='jndiName'
-			value='java:comp/env/jdbc/dog' />
+		<property name='jndiName' value='java:comp/env/jdbc/dog' />
 		<property name='resourceRef' value='true' />
 	</bean>
 
@@ -56,8 +55,7 @@
 			</array>
 		</property>
 	</bean>
-	<mybatis:scan
-		base-package="kimgibeom.dog.**.dao.map" />
+	<mybatis:scan base-package="kimgibeom.dog.**.dao.map" />
 
 	<!-- JSON과 오브젝트 사이의 변환을 지원하는 MappingJacksonHttpMessageConverter 등록 -->
 	<bean
@@ -96,8 +94,17 @@
 		class='kimgibeom.dog.user.controller.LoginCheckInterceptor' />
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/user/**" /> <!-- 이것만 가로채겠다. -->
+			<mvc:mapping path="/user/**" /> <!-- user 업무 시작시 로그인 확인 -->
 			<ref bean='loginCheckInterceptor' />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<bean id='adminCheckInterceptor'
+		class='kimgibeom.dog.user.controller.AdminCheckInterceptor' />
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**" /> <!-- 관리자만 관리자페이지에 접근가능하다 -->
+			<ref bean='adminCheckInterceptor' />
 		</mvc:interceptor>
 	</mvc:interceptors>
 

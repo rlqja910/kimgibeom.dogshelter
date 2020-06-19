@@ -114,40 +114,7 @@
 		.header{background-size: 113%;}
 	}
 </style>
-<script>
-	$(()=>{
-		logInConfrim();
-		console.log(`${userId}`);
-	});
-	function logInConfrim(){
-		if(`${userId}`){ //로그인 했을경우
-			if(`${userId}` === 'admin'){ //관리자가 로그인 했을경우
-				console.log('관리자로 로그인됨');
-				afterAdminLogin();
-			}else{ //관리자가 아닌 사용자가 로그인 했을경우
-				console.log('사용자로 로그인됨');
-				afterUserLogin();
-			}
-		}else{ //로그인이 안된 상태일 때
-			console.log('로그인 안됨');
-		}
-	}
 
-	
-	function afterUserLogin(){
-		$('#headBtn').empty();
-		$('#headBtn').append("<li><a href='/dog/user/mypage'>마이페이지</a></li>");
-		$('#headBtn').append("<li><a href='user/logout' id='logoutBtn'>로그아웃</a></li>");
-	}
-	
-	function afterAdminLogin(){
-		$('#headBtn').empty();
-		$('#headBtn').append("<li><a href='admin'>관리자페이지</a></li>");
-		$('#headBtn').append("<li><a href='/dog/user/mypage'>마이페이지 </a></li>");
-		$('#headBtn').append("<li><a href='user/logout' id='logoutBtn'>로그아웃</a></li>");
-	}
-	
-</script>
 </head>
 
 <body>

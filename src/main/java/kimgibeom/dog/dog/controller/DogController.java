@@ -16,6 +16,10 @@ public class DogController {
 	private DogService dogService;
 
 	@RequestMapping("/dogListView")
+	public void dogListView() {
+	}
+
+	@RequestMapping("/dogList") // 유기견 리스트 추출
 	public List<Dog> getDogs() {
 		return dogService.readDogs();
 	}

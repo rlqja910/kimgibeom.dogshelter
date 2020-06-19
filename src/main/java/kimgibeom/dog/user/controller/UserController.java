@@ -17,22 +17,22 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping("/login")
-	public void login() {
+	public void userLogin() {
 	}
 
-	@RequestMapping("/join") //회원가입 버튼 누를시
-	public void join() {
+	@RequestMapping("/join") // 회원가입 버튼 누를시
+	public void userJoin() {
 	}
 
-	@RequestMapping("/joinProc") //회원가입
+	@RequestMapping("/joinProc") // 회원가입ㄱ
 	@ResponseBody
-	public void joinProc(User user) {
+	public void userJoinProc(User user) {
 		userService.writeUser(user);
 	}
 
-	@RequestMapping("/idCheck") //회원가입시 중복확인
+	@RequestMapping("/idCheck") // 회원가입시 중복확인
 	@ResponseBody
-	public boolean idCheck(String userId) {
+	public boolean userIdCheck(String userId) {
 		System.out.println(userId + "를 가지고 controller 진입");
 		if (userService.idCheck(userId)) { // 중복이 아니면 true로 출력
 			return true;
@@ -41,9 +41,9 @@ public class UserController {
 		}
 	}
 
-	@RequestMapping("/loginProc") //로그인 정보확인
+	@RequestMapping("/loginProc") // 로그인 정보확인
 	@ResponseBody
-	public int loginProc(HttpServletRequest request, String userId, String userPw) {
+	public int userLoginProc(HttpServletRequest request, String userId, String userPw) {
 		System.out.println("controller 진입");
 		String pw = userService.readuserPw(userId); // 입력한 ID의 PW를 추출
 		System.out.println(pw); // null일경우 아이디가 없다는 의미
@@ -60,12 +60,9 @@ public class UserController {
 	}
 
 	@RequestMapping("/logout")
-	public String logout(HttpServletRequest request) {
+	public String userLogout(HttpServletRequest request) {
 		System.out.println("logout진입");
 		request.getSession().invalidate();
 		return "redirect:/user/login";
 	}
-	
-	//관리자 페이지 Handler-----------------------------------------------------------------------------
-	
 }

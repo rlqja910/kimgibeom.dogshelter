@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -151,24 +151,24 @@ body {
 	<div class='wrapper' id='leftNav'>
 		<header></header>
 		<div class='sidebar' id='sidebar'>
-			<%@ include file="common/nav.jsp" %> 
+			<%@ include file="common/nav.jsp"%>
 		</div>
 		<div class='main_content'>
 			<div class='header'>
 				<strong>&nbsp;&nbsp;ADMINSTRATOR</strong>
 				<div id='topButton'>
-					<a href='logo/01.html'>로고관리</a>&nbsp;|&nbsp;
-					<a href='banner/01.html'>배너관리</a>&nbsp;|&nbsp; 
-					<a href='../main.html'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-					<a href='../main.html'>로그아웃</a>
+					<a href='logo/01.html'>로고관리</a>&nbsp;|&nbsp; <a
+						href='banner/01.html'>배너관리</a>&nbsp;|&nbsp; <a href=''>홈페이지
+						돌아가기</a>&nbsp;|&nbsp; <a href='user/logout'>로그아웃</a>
 				</div>
 			</div>
 			<div class='info'>
 				<!-- info 밑으로 화면 구성하면되고 글리피콘 사용할때 id 만들어서 사용해주세요. 안그러면 네비게이션바 글리피콘도 움직여요. -->
 				<div class='item'>
-					<div style='overflow: hidden;'>	
-						<strong class='border'>분양 관리</strong> <a href='dog/01.html' class='plus'>
-							<span class='glyphicon glyphicon-plus'></span> 더보기
+					<div style='overflow: hidden;'>
+						<strong class='border'>분양 관리</strong> <a href='dog/01.html'
+							class='plus'> <span class='glyphicon glyphicon-plus'></span>
+							더보기
 						</a>
 					</div>
 					<hr style='border: 1px solid black; margin-top: 8px;'>
@@ -220,8 +220,9 @@ body {
 
 				<div class='item'>
 					<div style='overflow: hidden;'>
-						<strong class='border'>신고 접수</strong> <a href='report/01.html' class='plus'><span
-							class='glyphicon glyphicon-plus'></span> 더보기</a>
+						<strong class='border'>신고 접수</strong> <a href='report/01.html'
+							class='plus'><span class='glyphicon glyphicon-plus'></span>
+							더보기</a>
 					</div>
 					<hr style='border: 1px solid black; margin-top: 8px;'>
 					<table class='table table-hover'>
@@ -255,8 +256,9 @@ body {
 
 				<div class='item' id='supportItem'>
 					<div style='overflow: hidden;'>
-						<strong class='border'>후원금 현황</strong> <a href='donation/01.html' class='plus'><span
-							class='glyphicon glyphicon-plus'></span> 더보기</a>
+						<strong class='border'>후원금 현황</strong> <a href='donation/01.html'
+							class='plus'><span class='glyphicon glyphicon-plus'></span>
+							더보기</a>
 					</div>
 
 					<hr style='border: 1px solid black; margin-top: 8px;'>
