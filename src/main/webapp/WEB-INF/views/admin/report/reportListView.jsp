@@ -12,8 +12,41 @@
 <script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <script>
+function reportSearch() {
+	$('#search').click(() => {
+		if(!$('#searchContent').val().trim()) {
+			swal({
+				title: '',
+				text: '검색어를 입력해주세요.',
+				type: 'warning',
+				confirmButtonText: '확인'
+			})	
+		}
+	});
+}
+
+function reportList() {
+	let date = new Date(); 
+	
+	$('tbody').empty();
+	$('tbody').html(
+		`<c:forEach var='report' items='${reports}'>
+		<tr>
+			<td><input type='checkbox' value=${report.reportNum} name='reportNum'/></td>
+			<td>${report.reportNum}</td>
+			<td id='userId'>${report.userId}</td>
+			<td><a href='./read/${report.reportNum}' id='detailReport'>${report.title}</a></td>
+			<td>${report.regDate}</td>
+		</tr>
+		</c:forEach>`)
+	
+	if ($('tbody').html() == ``) {
+		$('tbody').html('<tr><td colspan="5">게시글이 없습니다.</td></tr>');
+	}	
+}
+
 function reportDel() {
-	$('#delete').click(() => {
+	$('#reportDel').click(() => {
 		if($('input:checkbox').is(':checked')) {
 			swal({
 				title: '',
@@ -25,13 +58,24 @@ function reportDel() {
 				closeOnConfirm: false
 			},
 			function(isConfirm) {
-				if(isConfirm) 
-					swal({
-						title: '',
-						text: '신고글이 삭제되었습니다.',
-						type: 'success',
-						confirmButtonText: '확인'
-					});	
+				if(isConfirm) {
+					$.ajax({
+						url: 'remove',
+						data: {reportNum: $('input:checked').parent().next().text().trim()},
+						success: () => {
+							swal({
+								title: '',
+								text: '신고글이 삭제되었습니다.',
+								type: 'success',
+								confirmButtonText: '확인',
+								closeOnConfirm: false
+							},
+							function(isConfirm) {
+								if(isConfirm) location.reload();
+							});
+						}
+					});
+				}	
 			});
 		} else {
 			swal({
@@ -42,47 +86,13 @@ function reportDel() {
 				confirmButtonText: '확인',
 				closeOnConfirm: false
 			})			
-		}	
-	});
-};
-
-function reportSearch() {
-	$('#search').click(() => {
-		if(!$('#searchContent').val().trim()) {
-			swal({
-				title: '',
-				text: '검색할 내용을 입력해주세요.',
-				type: 'warning',
-				confirmButtonText: '확인',
-				closeOnConfirm: false
-			})	
-		}else {
-		
-		}	
+		}
 	});
 }
 
-function reportWrite() {
-	$('tbody').empty();
-	$('tbody').html(
-		`<c:forEach var='report' items='${reports}'>
-		<tr>
-			<td><input type='checkbox' value=${report.reportNum} name='reportNum'/></td>
-			<td>${report.reportNum}</td>
-			<td>${report.userId}</td>
-			<td><a href='./post/${report.reportNum}' id='detailReport'>${report.title}</a></td>
-			<td>${report.regDate}</td>
-		</tr>
-		</c:forEach>`)
-	
-	if ($('tbody').html() == ``) {
-		$('tbody').html('<tr><td colspan="5">게시글이 없습니다.</td></tr>');
-	}	
-}
-
-$(reportDel);
 $(reportSearch);
-$(reportWrite);
+$(reportList);
+$(reportDel);
 </script>
 <style>
 * {
@@ -256,7 +266,7 @@ th {
 						<input type='text' id='searchContent' class='form-control' placeholder='검색어를 입력해주세요.'/>
 					</div>
 					<div class='form-group'>
-						<button type='submit' class='btn btn-default' id='search'>
+						<button type='button' class='btn btn-default' id='search'>
 							<span id='spanSearch'>검색</span>
 						</button>
 					</div>
@@ -276,7 +286,7 @@ th {
 					<tbody></tbody>
 				</table>	
 					
-				<button type='button' class='btn btn-warning buttons' id='delete'>삭제</button>
+				<button type='button' class='btn btn-warning buttons' id='reportDel'>삭제</button>
 				
 				<br><br><br>
 					
