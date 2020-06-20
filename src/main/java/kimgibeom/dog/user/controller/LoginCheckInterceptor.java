@@ -10,7 +10,7 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		boolean isCheck = true;
 		System.out.println("interceptor 진입");
-		String urlFirstPath = (request.getServletPath().split("/"))[2]; //기능
+		String urlFirstPath = (request.getServletPath().split("/"))[2]; // 기능
 		try {
 			if (urlFirstPath.equals("login") || urlFirstPath.equals("join")) { // 로그
 				System.out.println("인터맨----------1");

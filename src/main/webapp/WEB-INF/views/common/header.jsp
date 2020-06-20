@@ -199,7 +199,7 @@ function mobile_menu(){
 	<div class='logo'><a href='/dog'>로고 이미지</a></div>
 	<ul>
 		<li><a href='#'>보호소 소개</a></li>
-		<li><a href='#'>무료분양</a></li>
+		<li><a href='/dog/dog/dogListView'>무료분양</a></li>
 		<li><a href='#'>분양후기</a></li>
 		<li><a href='#'>신고하기</a></li>
 		<li><a href='#'>후원하기</a></li>
@@ -223,7 +223,7 @@ function mobile_menu(){
 				<a href="#">보호소 소개</a>
 			</li>
 			<li>
-				<a href="#">무료분양</a>
+				<a href="/dog/dog/dogListView">무료분양</a>
 			</li>
 			<li>
 				<a href="#">분양후기</a>

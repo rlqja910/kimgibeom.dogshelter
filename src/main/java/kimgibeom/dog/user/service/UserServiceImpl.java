@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
 	public String readuserPw(String userId) {
 		return userDao.getuserPw(userId);
 	}
-	
+
 	@Override
 	public User findUserId(String userName, String userPhone) {
 		return userDao.getUserId(userName, userPhone);
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean modPw(String userId,  String userPw) {
-		return userDao.updatePw(userId, userPw)>0;
+	public boolean modPw(String userId, String userPw) {
+		return userDao.updatePw(userId, userPw) > 0;
 	}
 }

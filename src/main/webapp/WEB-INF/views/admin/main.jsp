@@ -159,71 +159,60 @@ body {
 				<div id='topButton'>
 					<a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
 				<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-				<a href='../'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+				<a href='../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
 				<a href='../user/logout'>로그아웃</a>
 				</div>
 			</div>
 			<div class='info'>
 				<!-- info 밑으로 화면 구성하면되고 글리피콘 사용할때 id 만들어서 사용해주세요. 안그러면 네비게이션바 글리피콘도 움직여요. -->
 				<div class='item'>
-					<div style='overflow: hidden;'>
-						<strong class='border'>분양 관리</strong> <a href='dog/01.html'
-							class='plus'> <span class='glyphicon glyphicon-plus'></span>
-							더보기
+					<div style='overflow: hidden;'>	
+						<strong class='border'>분양 관리</strong> <a href='dog/01.html' class='plus'>
+							<span class='glyphicon glyphicon-plus'></span> 더보기
 						</a>
 					</div>
 					<hr style='border: 1px solid black; margin-top: 8px;'>
 					<table class='table table-hover'>
 						<tr>
-							<td>강아지 분양합니다</td>
+							<td>진돗개 까미 분양합니다</td>
 							<td>2020-06-10</td>
+						</tr>
 						<tr>
-						<tr>
-							<td>강아지 분양합니다</td>
+							<td>치와와치치  분양합니다</td>
 							<td>2020-06-10</td>
+						</tr>
 						<tr>
-						<tr>
-							<td>강아지 분양합니다</td>
+							<td>포메라니안  분양합니다</td>
 							<td>2020-06-10</td>
+						</tr>
 						<tr>
-						<tr>
-							<td>강아지 분양합니다</td>
+							<td>달마시안 분양합니다</td>
 							<td>2020-06-10</td>
+						</tr>
 						<tr>
-						<tr>
-							<td>강아지 분양합니다</td>
+							<td>슈나우저  분양합니다</td>
 							<td>2020-06-10</td>
+						</tr>
 						<tr>
-						<tr>
-							<td>강아지 분양합니다</td>
+							<td>말티즈  분양합니다</td>
 							<td>2020-06-10</td>
+						</tr>
 						<tr>
-						<tr>
-							<td>강아지 분양합니다</td>
+							<td>비글  분양합니다</td>
 							<td>2020-06-10</td>
+						</tr>
 						<tr>
-						<tr>
-							<td>강아지 분양합니다</td>
+							<td>시바견 분양합니다</td>
 							<td>2020-06-10</td>
-						<tr>
-						<tr>
-						<tr>
-							<td>강아지 분양합니다</td>
-							<td>2020-06-10</td>
-						<tr>
-						<tr>
-						<tr>
-							<td>강아지 분양합니다</td>
-							<td>2020-06-10</td>
-						<tr>
+						</tr>
+						
 					</table>
 				</div>
 
 				<div class='item'>
 					<div style='overflow: hidden;'>
-						<strong class='border'>신고 접수</strong> <a href='report/01.html'
-							class='plus'><span class='glyphicon glyphicon-plus'></span>
-							더보기</a>
+						<strong class='border'>신고 접수</strong> <a href='report/01.html' class='plus'><span
+							class='glyphicon glyphicon-plus'></span> 더보기</a>
 					</div>
 					<hr style='border: 1px solid black; margin-top: 8px;'>
 					<table class='table table-hover'>
@@ -257,9 +246,8 @@ body {
 
 				<div class='item' id='supportItem'>
 					<div style='overflow: hidden;'>
-						<strong class='border'>후원금 현황</strong> <a href='donation/01.html'
-							class='plus'><span class='glyphicon glyphicon-plus'></span>
-							더보기</a>
+						<strong class='border'>후원금 현황</strong> <a href='donation/01.html' class='plus'><span
+							class='glyphicon glyphicon-plus'></span> 더보기</a>
 					</div>
 
 					<hr style='border: 1px solid black; margin-top: 8px;'>

@@ -12,10 +12,10 @@ public interface UserService {
 	List<User> readUsers();
 
 	String readuserPw(String userId);
-	
+
 	User findUserId(String userName, String userPhone);
-	
+
 	User findUserMail(String userId);
-	
-	boolean modPw(String userId,  String userPw);
+
+	boolean modPw(String userId, String userPw);
 }

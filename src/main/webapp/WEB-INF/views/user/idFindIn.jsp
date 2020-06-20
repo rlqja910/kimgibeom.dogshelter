@@ -137,7 +137,7 @@ $(()=>{
 		<div class='header'>
 			<div class='headerBackground'>
 				<header>
-					
+					<header><%@ include file="../common/header.jsp"%>
 				</header>
 				<hr class='subHr'>
 				<div class='subTitle'>아이디 찾기</div>
@@ -178,7 +178,7 @@ $(()=>{
 
 		<!-- 푸터 -->
 		<footer>
-			
+			<footer><%@ include file="../common/footer.jsp"%>
 		</footer>
 	</div>
 </body>

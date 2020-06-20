@@ -10,7 +10,7 @@ import kimgibeom.dog.dog.domain.Dog;
 import kimgibeom.dog.dog.service.DogService;
 
 @Controller
-@RequestMapping("/admin/dog")
+@RequestMapping("/dog")
 public class DogController {
 	@Autowired
 	private DogService dogService;

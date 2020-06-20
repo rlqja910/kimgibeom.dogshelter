@@ -9,29 +9,30 @@ import kimgibeom.dog.report.dao.ReportReplyDao;
 import kimgibeom.dog.report.domain.ReportReply;
 
 @Service
-public class ReportReplyServiceImpl implements ReportReplyService{
-	@Autowired private ReportReplyDao reportReplyDao;
-	
+public class ReportReplyServiceImpl implements ReportReplyService {
+	@Autowired
+	private ReportReplyDao reportReplyDao;
+
 	@Override
 	public List<ReportReply> readReportReplies() {
 		return reportReplyDao.getReportReplies();
 	}
-	
+
 	@Override
 	public ReportReply readReportReply(int replyNum) {
 		return reportReplyDao.getReportReply(replyNum);
 	}
-	
+
 	@Override
 	public int writeReportReply(String content) {
 		return reportReplyDao.addReportReply(content);
 	}
-	
+
 	@Override
 	public int updateReportReply(ReportReply reply) {
 		return reportReplyDao.modifyReportReply(reply);
 	}
-	
+
 	@Override
 	public int removeReportReply(int replyNum) {
 		return reportReplyDao.delReportReply(replyNum);
