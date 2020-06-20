@@ -1,10 +1,15 @@
 package kimgibeom.dog.user.controller;
 
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kimgibeom.dog.user.domain.User;
@@ -16,12 +21,31 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private JavaMailSender mailSender;
+
 	@RequestMapping("/login")
 	public void userLogin() {
 	}
 
 	@RequestMapping("/join") // 회원가입 버튼 누를시
 	public void userJoin() {
+	}
+
+	@RequestMapping("/idFindIn") // 아이디찾기 입력 화면 이동
+	public void idFindIn() {
+	}
+
+	@RequestMapping("/idFindOut") // 아이디 찾은 화면 이동
+	public void idFindOut() {
+	}
+
+	@RequestMapping("/pwFindIn") // 비밀번호찾기 입력 화면 이동
+	public void pwFindIn() {
+	}
+
+	@RequestMapping("/pwFindOut") // 비밀번호 새롭게 설정하는 화면 이동
+	public void pwFindOut() {
 	}
 
 	@RequestMapping("/joinProc") // 회원가입ㄱ
@@ -64,5 +88,50 @@ public class UserController {
 		System.out.println("logout진입");
 		request.getSession().invalidate();
 		return "redirect:/user/login";
+	}
+
+	// 아이디 찾기
+	@RequestMapping(value = "/idFindProc", method = RequestMethod.POST)
+	@ResponseBody
+	public User idFindIn(String name, String phone) {
+		User user = userService.findUserId(name, phone);
+		return user;
+	}
+
+	// 비밀번호 찾기위한 이에일 전송
+	@RequestMapping(value = "/pwFindProc", method = RequestMethod.POST)
+	@ResponseBody
+	public String pwFindIn(String userId, String inEmail) {
+		User user = userService.findUserMail(userId);
+		String userEmail = user.getUserEmail();
+
+		MimeMessage message = mailSender.createMimeMessage();
+		int num = (int) (Math.random() * 1000000);
+		String code = Integer.toString(num);
+
+		try {
+			message.addRecipient(RecipientType.TO, new InternetAddress(userEmail));
+			message.setSubject("유기견 보호소 인증번호 발송");
+			message.setText("<h3>유기견 보호소 비밀번호 찾기의 인증번호는 아래와 같습니다</h3><br>"
+					+ "<p style='font-size:large; text-decoration: underline;'>인증번호: &nbsp;" + code + "</p><br>"
+					+ "<p>인증번호 확인 후 홈페이지 비밀번호 찾기 인증번호 항목에 입력해주세요</p>", "utf-8", "html");
+
+		} catch (Exception e) {
+		}
+
+		// 사용자email과 입력email이 같으면 메일 전송
+		if (userEmail.equals(inEmail)) {
+			mailSender.send(message);
+		} else {
+			return "0";
+		}
+		return code;
+	}
+
+	// 유저의 새 비밀번호 설정
+	@RequestMapping(value = "/pwFindOutProc", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean pwFindOut(String userId, String userPw) {
+		return userService.modPw(userId, userPw);
 	}
 }

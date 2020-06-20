@@ -31,7 +31,7 @@ function afterUserLogin(){
 function afterAdminLogin(){
 	$('#headBtn').empty();
 	$('#headBtn').append("<li><a href='/dog/admin'>관리자페이지</a></li>");
-	$('#headBtn').append("<li><a href='/dog/user/mypage'>마이페이지 </a></li>");
+	$('#headBtn').append("<li><a href='/dog/user/mypage'>마이페이지 &nbsp;&nbsp;</a></li>");
 	$('#headBtn').append("<li><a href='/dog/user/logout' id='logoutBtn'>로그아웃</a></li>");
 }
 

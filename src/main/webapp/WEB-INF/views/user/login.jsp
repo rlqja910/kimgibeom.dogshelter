@@ -280,14 +280,11 @@
 							<input type="checkbox" id='userIdSave' /> <label>아이디 저장</label>
 						</div>
 						<div class='idPw'>
-							<a href='#'>아이디 /&nbsp;</a><a href='#'>비밀번호 찾기</a>
+							<a href='idFindIn'>아이디 /&nbsp;</a><a href='pwFindIn'>비밀번호 찾기</a>
 						</div>
 					</div>
 					<div class='newUser'>
 						<a href='join'>회원가입</a>
-					</div>
-					<div class='logintext'>
-						<label>*비밀번호 분실 시 관리자한테 문의해 주세요.</label>
 					</div>
 				</form>
 			</div>

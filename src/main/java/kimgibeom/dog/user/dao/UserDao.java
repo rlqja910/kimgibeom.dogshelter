@@ -10,4 +10,10 @@ public interface UserDao {
 	List<User> getUsers();
 
 	String getuserPw(String userId);
+	
+	User getUserId(String userName, String userPhone);
+	
+	User getUserMail(String userId);
+	
+	int updatePw(String userId,  String userPw);
 }

@@ -27,4 +27,19 @@ public class UserDaoImpl implements UserDao {
 	public String getuserPw(String userId) {
 		return userMap.getuserPw(userId);
 	}
+	
+	@Override
+	public User getUserId(String userName, String userPhone) {
+		return userMap.getUserId(userName, userPhone);
+	}
+
+	@Override
+	public User getUserMail(String userId) {
+		return userMap.getUserMail(userId);
+	}
+
+	@Override
+	public int updatePw(String userId, String userPw) {
+		return userMap.updatePw(userId, userPw);
+	}
 }

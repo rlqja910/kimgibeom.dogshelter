@@ -356,7 +356,7 @@ footer .fot div:nth-child(2) {
 								type:'success', 
 							},
 							function(isConfirm){
-									location.href='/dog';
+									location.href='login';
 							});
 						},
 					});
