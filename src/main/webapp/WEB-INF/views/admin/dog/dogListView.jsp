@@ -229,10 +229,10 @@ body {
       <div class='header'>
          <strong>&nbsp;&nbsp;ADMINSTRATOR</strong>
          <div id='topButton'>
-            <a href='../logo/01.html'>로고관리</a>&nbsp;|&nbsp;
-				<a href='../banner/01.html'>배너관리</a>&nbsp;|&nbsp; 
-				<a href='../../main.html'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-				<a href='../../main.html'>로그아웃</a>
+            <a href='../logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
+				<a href='../banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
+				<a href='../../'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+				<a href='../../user/logout'>로그아웃</a>
          </div>
       </div>
       <div class='info'>

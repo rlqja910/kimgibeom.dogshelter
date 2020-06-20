@@ -181,7 +181,7 @@
 </style>
 
 <script>
-	$(()=>{ 
+	$(()=>{   
 		login(); 
 		idSave();
 	});
