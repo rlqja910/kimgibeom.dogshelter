@@ -387,6 +387,6 @@
 		</div>
 
 		<!-- 푸터 -->
-		<footer><footer><%@ include file="../common/footer.jsp"%> </footer>
+		<footer><%@ include file="../common/footer.jsp"%> </footer>
 	</div>
 </body>

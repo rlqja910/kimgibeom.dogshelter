@@ -286,7 +286,7 @@ $(()=>{
 	<div class='container'>
 		<div class='header'>
 			<div class='headerBackground'>
-				<header> <header><%@ include file="../common/header.jsp"%></header>
+			 <header><%@ include file="../common/header.jsp"%></header>
 				<hr class='subHr'>
 				<div class='subTitle'>무료 분양</div>
 			</div>
@@ -374,7 +374,6 @@ $(()=>{
 			</div>
 		</div>
 
-		<!-- 푸터 -->
-		<footer><footer><%@ include file="../common/footer.jsp"%> </footer>
+		<!-- 푸터 --><footer><%@ include file="../common/footer.jsp"%> </footer>
 	</div>
 </body>
