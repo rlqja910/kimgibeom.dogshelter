@@ -10,6 +10,29 @@
 <script src="../res/layoutsub.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+<script>
+function readReports() {
+	console.log($('#report'));
+	$('.reportCont').html(
+		`<c:forEach var='report' items='${reports}'>
+			<a href='./reportView/${report.reportNum}'>
+				<ul>
+					<li><div style="height:100px; width:273px; border:1px solid;">강아지 이미지</div></li>
+					<li>${report.title}</li>
+					<li>${report.content}</li>
+					<li>+더보기</li>
+				</ul>
+			</a>
+		</c:forEach>`);
+	
+	if($('.reportCont').html() == ``) {
+		$('.reportCont').html('<br><div class="reportEmpty">등록된 게시글이 없습니다.</div><br>');
+	}
+}
+
+$(readReports);
+</script>
 <style>
 	/* header */
 	.header{width:100%; background-color:#ccc; background-image:url('../img/loginImg.jpg'); background-position: center;}
@@ -22,12 +45,12 @@
 
 	/* 유기견 신고 */
 	.report{width:80%;font-size:14px; margin:0 auto; margin-top:100px; margin-bottom:100px;}
-	.report .reviewCont{width:100%; overflow:hidden;}
-	.report .reviewCont ul{width:23.5%; float:left; margin:1% 0 0 1%; border:1px solid #ccc;}
-	.report .reviewCont ul li:nth-child(2){font-weight:bold; margin:5% 3% 3% 3%;}
-	.report .reviewCont ul li:nth-child(3){margin:0 3% 0 3%; color:#666; font-size:12px;}
-	.report .reviewCont ul li:nth-child(4){text-align:right; margin:6% 3% 5% 3%;}
-	.report .reviewCont ul img{width:100%;}
+	.report .reportCont{width:100%; overflow:hidden;}
+	.report .reportCont ul{width:23.5%; float:left; margin:1% 0 0 1%; border:1px solid #ccc;}
+	.report .reportCont ul li:nth-child(2){font-weight:bold; margin:5% 3% 3% 3%;}
+	.report .reportCont ul li:nth-child(3){margin:0 3% 0 3%; color:#666; font-size:12px;}
+	.report .reportCont ul li:nth-child(4){text-align:right; margin:6% 3% 5% 3%;}
+	.report .reportCont ul img{width:100%;}
 
 	/* 검색 */
 	.report .search{width:100%; overflow:hidden; padding:0.3%; display:flex; margin:0 auto; justify-content:center; margin-bottom:60px;}
@@ -60,7 +83,7 @@
 		
 		/* 유기견 신고 */
 		.report{margin-top:10%; margin-bottom:10%;}
-		.report .reviewCont ul{width:48%;}
+		.report .reportCont ul{width:48%;}
 
 		/* 페이징 */
 		.report .page{width:100%; margin-top:10%;}
@@ -87,7 +110,7 @@
 			</div>
 		</div>
 		
-		<!-- 입양후기 -->
+		<!-- 유기견 신고 -->
 			<div class="content">
 				<div class="report">
 					<div class='contTitle'>유기견 신고</div>
@@ -103,72 +126,7 @@
 						<input type='button' value='검색'/>
 					</div>
 
-					<div class='reviewCont'>
-						<a href='03.html'>
-							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">강아지 이미지</div></li>
-								<li>왕십리역에서 비글 발견했어요</li>
-								<li>얼른 데려가주세요.ㅠㅠ</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
-						<a href='03.html'>
-							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">강아지 이미지</div></li>
-								<li>중계역 치와와 발견했어요</li>
-								<li>얼른 데려가주세요.ㅠㅠ</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
-						<a href='03.html'>
-							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">강아지 이미지</div></li>
-								<li>석계역 푸들 발견했어요</li>
-								<li>얼른 데려가주세요.ㅠㅠ</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
-						<a href='03.html'>
-							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">강아지 이미지</div></li>
-								<li>홍대입구역 비글 발견했어요</li>
-								<li>얼른 데려가주세요.ㅠㅠ</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
-						<a href='03.html'>
-							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">강아지 이미지</div></li>
-								<li>약수역 말티즈 발견했어요</li>
-								<li>얼른 데려가주세요.ㅠㅠ</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
-						<a href='03.html'>
-							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">강아지 이미지</div></li>
-								<li>수원역 시바견 발견했어요</li>
-								<li>얼른 데려가주세요.ㅠㅠ</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
-						<a href='03.html'>
-							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">강아지 이미지</div></li>
-								<li>노원역 푸들 발견했어요</li>
-								<li>얼른 데려가주세요.ㅠㅠ</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
-						<a href='03.html'>
-							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">강아지 이미지</div></li>
-								<li>성수역 달마시안 발견했어요</li>
-								<li>얼른 데려가주세요.ㅠㅠ</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
-					</div>
+					<div class='reportCont'></div>
 					
 					<!-- 동록버튼 -->
 					<div class='reportBtn'>
