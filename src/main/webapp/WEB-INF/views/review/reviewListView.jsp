@@ -56,7 +56,7 @@
 		<div class='header'>
 			<div class='headerBackground'>
 				<header>
-					
+					<%@ include file="../common/header.jsp"%>
 				</header>
 				<hr class='subHr'>
 				<div class='subTitle'>입양후기</div>
@@ -156,7 +156,7 @@
 
 		<!-- 푸터 -->
 		<footer>
-			
+			<%@ include file="../common/footer.jsp"%>
 		</footer>
 	</div>
 </body>

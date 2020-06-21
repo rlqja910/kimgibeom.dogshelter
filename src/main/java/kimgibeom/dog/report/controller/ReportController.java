@@ -16,19 +16,19 @@ import kimgibeom.dog.report.service.ReportReplyService;
 import kimgibeom.dog.report.service.ReportService;
 
 @Controller
-@RequestMapping
+@RequestMapping("/admin/report")
 public class ReportController {
 	@Autowired
 	private ReportService reportService;
 	@Autowired
 	private ReportReplyService reportReplyService;
 
-	@RequestMapping("/admin/reportListView")
+	@RequestMapping("/reportListView")
 	public void readReports(Model model) {
 		model.addAttribute("reports", reportService.readReports());
 	}
 
-	@RequestMapping("/admin/read/{reportNum}")
+	@RequestMapping("read/{reportNum}")
 	public String readReport(@PathVariable String reportNum, Model model) {
 		// 게시글
 		int reportNo = Integer.parseInt(reportNum);

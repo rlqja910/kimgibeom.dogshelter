@@ -80,7 +80,7 @@
 		<div class='header'>
 			<div class='headerBackground'>
 				<header>
-					
+					<%@ include file="../common/header.jsp"%>
 				</header>
 				<hr class='subHr'>
 				<div class='subTitle'>유기견 신고</div>
@@ -196,7 +196,7 @@
 
 		<!-- 푸터 -->
 		<footer>
-			
+			<%@ include file="../common/footer.jsp"%>
 		</footer>
 	</div>
 </body>

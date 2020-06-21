@@ -32,45 +32,6 @@ body {
 	position: relative;
 }
 
-#leftNav #sidebar {
-	position: fixed;
-	width: 200px;
-	height: 100%;
-	background: #4b4276;
-	padding: 20px 0;
-}
-
-#leftNav #sidebar h2 {
-	color: #fff;
-	text-align: center;
-	margin-bottom: 30px;
-}
-
-#leftNav #sidebar ul li {
-	padding: 15px;
-	list-style: none;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-	border-top: 1px solid rgba(225, 225, 225, 0.05);
-}
-
-#leftNav #sidebar ul li a {
-	color: #bdb8d7;
-	display: black;
-}
-
-#leftNav #sidebar ul li a span {
-	width: 25px;
-}
-
-#leftNav #sidebar ul li:hover {
-	background: #594f8d;
-}
-
-#leftNav #sidebar ul li:hover a {
-	color: #fff;
-	text-decoration: none;
-}
-
 #leftNav .main_content {
 	width: 100%;
 	margin-left: 200px;
@@ -151,24 +112,25 @@ body {
 	<div class='wrapper' id='leftNav'>
 		<header></header>
 		<div class='sidebar' id='sidebar'>
-			<%@ include file="common/nav.jsp"%>
+			<%@ include file="../common/nav.jsp"%>
 		</div>
 		<div class='main_content'>
 			<div class='header'>
 				<strong>&nbsp;&nbsp;ADMINSTRATOR</strong>
 				<div id='topButton'>
 					<a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
-				<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-				<a href='../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-				<a href='../user/logout'>로그아웃</a>
+					<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
+					<a href='../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+					<a href='../dog/user/logout'>로그아웃</a>
 				</div>
 			</div>
 			<div class='info'>
 				<!-- info 밑으로 화면 구성하면되고 글리피콘 사용할때 id 만들어서 사용해주세요. 안그러면 네비게이션바 글리피콘도 움직여요. -->
 				<div class='item'>
-					<div style='overflow: hidden;'>	
-						<strong class='border'>분양 관리</strong> <a href='dog/01.html' class='plus'>
-							<span class='glyphicon glyphicon-plus'></span> 더보기
+					<div style='overflow: hidden;'>
+						<strong class='border'>유기견 관리</strong> <a href='admin/dogListView'
+							class='plus'> <span class='glyphicon glyphicon-plus'></span>
+							더보기
 						</a>
 					</div>
 					<hr style='border: 1px solid black; margin-top: 8px;'>
@@ -178,11 +140,11 @@ body {
 							<td>2020-06-10</td>
 						</tr>
 						<tr>
-							<td>치와와치치  분양합니다</td>
+							<td>치와와치치 분양합니다</td>
 							<td>2020-06-10</td>
 						</tr>
 						<tr>
-							<td>포메라니안  분양합니다</td>
+							<td>포메라니안 분양합니다</td>
 							<td>2020-06-10</td>
 						</tr>
 						<tr>
@@ -190,29 +152,30 @@ body {
 							<td>2020-06-10</td>
 						</tr>
 						<tr>
-							<td>슈나우저  분양합니다</td>
+							<td>슈나우저 분양합니다</td>
 							<td>2020-06-10</td>
 						</tr>
 						<tr>
-							<td>말티즈  분양합니다</td>
+							<td>말티즈 분양합니다</td>
 							<td>2020-06-10</td>
 						</tr>
 						<tr>
-							<td>비글  분양합니다</td>
+							<td>비글 분양합니다</td>
 							<td>2020-06-10</td>
 						</tr>
 						<tr>
 							<td>시바견 분양합니다</td>
 							<td>2020-06-10</td>
 						</tr>
-						
+
 					</table>
 				</div>
 
 				<div class='item'>
 					<div style='overflow: hidden;'>
-						<strong class='border'>신고 접수</strong> <a href='report/01.html' class='plus'><span
-							class='glyphicon glyphicon-plus'></span> 더보기</a>
+						<strong class='border'>신고 접수</strong> <a href='admin/reportListView'
+							class='plus'><span class='glyphicon glyphicon-plus'></span>
+							더보기</a>
 					</div>
 					<hr style='border: 1px solid black; margin-top: 8px;'>
 					<table class='table table-hover'>
@@ -246,8 +209,9 @@ body {
 
 				<div class='item' id='supportItem'>
 					<div style='overflow: hidden;'>
-						<strong class='border'>후원금 현황</strong> <a href='donation/01.html' class='plus'><span
-							class='glyphicon glyphicon-plus'></span> 더보기</a>
+						<strong class='border'>후원금 현황</strong> <a href='donation/01.html'
+							class='plus'><span class='glyphicon glyphicon-plus'></span>
+							더보기</a>
 					</div>
 
 					<hr style='border: 1px solid black; margin-top: 8px;'>
