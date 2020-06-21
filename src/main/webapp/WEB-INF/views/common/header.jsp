@@ -223,7 +223,7 @@ function mobile_menu(){
 				<a href="/dog/introduce">보호소 소개</a>
 			</li>
 			<li>
-				<a href="/dog/dog/dogListView">무료분양</a>
+				<a href="/dog/dog/dogListView">무료분양</a> 
 			</li>
 			<li>
 				<a href="/dog/review/reviewListView">분양후기</a>
