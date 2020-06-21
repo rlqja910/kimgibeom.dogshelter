@@ -10,6 +10,7 @@
 <link rel='stylesheet' href='http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css'/>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js'></script>
 <script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
+<script src="../../res/adminNavSub.js"></script>
 <script>
 function reviewDel(){
 	$('#delete').click(() => {
@@ -227,16 +228,16 @@ body {
 <body>
 <div class='wrapper' id='leftNav'>
    <div class='sidebar' id='sidebar'>
-     <%@ include file="../common/nav.jsp" %>
+      
    </div>
    <div class='main_content'>
       <div class='header'>
          <strong>&nbsp;&nbsp;ADMINSTRATOR</strong>
          <div id='topButton'>
-           <a href='../logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
-				<a href='../banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-				<a href='../../'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-				<a href='../../user/logout'>로그아웃</a>
+            <a href='../logo/01.html'>로고관리</a>&nbsp;|&nbsp;
+					<a href='../banner/01.html'>배너관리</a>&nbsp;|&nbsp; 
+					<a href='../../main.html'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+					<a href='../../main.html'>로그아웃</a>
          </div>
       </div>
       <div class='info'>
@@ -275,7 +276,8 @@ body {
                         <div><input type='checkbox' id='chk'/></div>
                         유기견 이미지
                      </div>
-                     <p>겸댕이 슛돌이 3남매 동시입양</p></a>
+                     <p>점박이 치와와 치치!! 따뜻한 가정으로
+</p></a>
                   </div>
                   
                   <div class='imgbox'>

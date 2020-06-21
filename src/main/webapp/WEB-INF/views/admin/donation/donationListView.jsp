@@ -15,6 +15,7 @@
 <script src="https://code.jquery.com/jquery-1.10.1.js"
 	integrity="sha256-663tSdtipgBgyqJXfypOwf9ocmvECGG8Zdl3q+tk+n0="
 	crossorigin="anonymous"></script>
+<script src="../../res/adminNavSub.js"></script>
 <script>
 function contributionSearch(){
 	$('#search').click(() => {
@@ -196,16 +197,16 @@ th {
 <body>
 	<div class='wrapper' id='leftNav'>
 		<div class='sidebar' id='sidebar'>
-			<%@ include file="../common/nav.jsp" %>
+			
 		</div>
 		<div class='main_content'>
 			<div class='header'>
 				<strong>&nbsp;&nbsp;ADMINSTRATOR</strong>
 				<div id='topButton'>
-					<a href='../logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
-				<a href='../banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-				<a href='../../'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-				<a href='../../user/logout'>로그아웃</a>
+					<a href='../logo/01.html'>로고관리</a>&nbsp;|&nbsp;
+					<a href='../banner/01.html'>배너관리</a>&nbsp;|&nbsp; 
+					<a href='../../main.html'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+					<a href='../../main.html'>로그아웃</a>
 				</div>
 			</div>
 			
@@ -233,7 +234,7 @@ th {
 		            <form>
 		               <div>
 		                  <button class='form-control' style='width: 100px; height: 35px; float:left;'>
-		                    	 제목
+		                    	 후원자 명
 		                  </button>
 		                  <div class='form-group' id='content'>
 		                     <input type='text' id='searchContent' class='form-control' placeholder='검색어를 입력해주세요.'/>

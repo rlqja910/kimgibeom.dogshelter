@@ -12,6 +12,7 @@
 <script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
 <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 <script src="${path}/ckeditor/ckeditor.js"></script>
+<script src="../../res/adminNavSub.js"></script>
 <script>
 function modify(){
 	let count = 0;
@@ -136,16 +137,16 @@ textarea{
 <body>
 <div class='wrapper' id='leftNav'>
 	<div class='sidebar' id='sidebar'>
-		<%@ include file="../common/nav.jsp" %>
+		
 	</div>
 	<div class='main_content'>
 		<div class='header'>
 			<strong>&nbsp;&nbsp;ADMINSTRATOR</strong>
 			<div id='topButton'>
-				<a href='../logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
-				<a href='../banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-				<a href='../../'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-				<a href='../../user/logout'>로그아웃</a>
+				<a href='../logo/01.html'>로고관리</a>&nbsp;|&nbsp;
+				<a href='../banner/01.html'>배너관리</a>&nbsp;|&nbsp; 
+				<a href='../../main.html'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+				<a href='../../main.html'>로그아웃</a>
 			</div>
 		</div>
 		<div class='info'> <!-- info 밑으로 화면 구성하면되고 글리피콘 사용할때 id 만들어서 사용해주세요. 안그러면 네비게이션바 글리피콘도 움직여요. -->
@@ -158,26 +159,20 @@ textarea{
 						<tr>
 							<th class='th'>제목</th>
 							<td colspan='3'><input type='text' style='width:400px;' 
-									placeholder='코리안 숏헤어 책임입양'/></td>
+									placeholder='비글 오렌지 책임분양'/></td>
 						</tr>
 						<tr>
 							<th class='th'>이름</th>
-							<td><input type='text' placeholder='라라'/></td>
+							<td><input type='text' placeholder='오렌지'/></td>
 							<th class='th'>품종</th>
-							<td><input type='text' placeholder='멍멍이'/></td>
+							<td><input type='text' placeholder='비글'/></td>
 						</tr>
 						<tr>
 							<th class='th'>체중</th>
 							<td><input type='number' style='width:70px;' 
-									placeholder='5'/> (kg)</td>
+									placeholder='2'/> (kg)</td>
 							<th class='th'>나이</th>
 							<td><input type='number' placeholder='5'/></td>
-						</tr>
-						<tr>
-							<th class='th'>유기번호</th>
-							<td><input type='number' placeholder='000001'/></td>
-							<th class='th'>입소날짜</th>
-							<td><input type='date' value='2020-06-10'/></td>
 						</tr>
 						<tr>
 							<th class='th'>성별</th>
@@ -189,9 +184,7 @@ textarea{
 						<tr>
 							<th class='th'>내용</th>
 							<td colspan='3'>
-								<textarea id='description'> 오늘도 많은 아이들이 각자의 안타까운 사연을 가지고 보내시네요.
-입양 시 소정의 책임비가 발생되니 참고 부탁드립니다. 이 때 발생되는 책임비는 또 다른 유기견들의 관리 비용에 사용되고 있습니다. 아이들의 평생
-을 결정하는 선택, 신중히 생각해보신 후에 연락 주세요.
+								<textarea id='description'> 오늘도 많은 아이들이 각자의 안타까운 사연을 가지고 있습니다. 입양 시 소정의 책임비가 발생되니 참고 부탁드립니다. 이 때 발생되는 책임비는 또 다른 유기견들의 관리 비용에 사용되고 있습니다. 아이들의 평생을 결정하는 선택, 신중히 생각 해보신 후에 연락 주세요.
 								</textarea>
 								<script>
 									CKEDITOR.replace("description", {
@@ -208,7 +201,7 @@ textarea{
 					
 					<div class='button' style='text-align:right;'>
 						<button type='button' class='btn btn-primary' id='modify'>수정</button>
-						<button type='button' class='btn btn-default' id='cancel' onClick="location.href='01.html'">취소</button>
+						<button type='button' class='btn btn-default' id='cancel' onClick="location.href='03.html'">취소</button>
 					</div>
 				</form>
 			</div>	

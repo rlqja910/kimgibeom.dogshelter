@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
+<script src="../../res/adminNavSub.js"></script>
 <script>
 function userDel(){
 	$('#delete').click(() => {
@@ -191,16 +192,16 @@ th {
 <body>
 <div class='wrapper' id='leftNav'>
 	<div class='sidebar' id='sidebar'>
-		<%@ include file="../common/nav.jsp" %>
+		
 	</div>
 	<div class='main_content'>
 		<div class='header'>
 			<strong>&nbsp;&nbsp;ADMINSTRATOR</strong>
 			<div id='topButton'>
-				<a href='../logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
-				<a href='../banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-				<a href='../../'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-				<a href='../../user/logout'>로그아웃</a>
+				<a href='../logo/01.html'>로고관리</a>&nbsp;|&nbsp;
+					<a href='../banner/01.html'>배너관리</a>&nbsp;|&nbsp; 
+					<a href='../../main.html'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+					<a href='../../main.html'>로그아웃</a>
 			</div>
 		</div>
 		<div class='info'>
@@ -248,7 +249,7 @@ th {
 							<td>2016-06-02</td>
 							<td>
 								<button type='button' class='btn btn-default btn-xs'>
-									<span class='glyphicon glyphicon-pencil'></span>
+									<a href='03.html'><span class='glyphicon glyphicon-pencil'></span></a>
 								</button>
 							</td>
 						</tr>
@@ -261,33 +262,33 @@ th {
 							<td>2016-06-05</td>
 							<td>
 								<button type='button' class='btn btn-default btn-xs'>
-									<span class='glyphicon glyphicon-pencil'></span>
+									<a href='03.html'><span class='glyphicon glyphicon-pencil'></span></a>
 								</button>
 							</td>
 						</tr>	
 						<tr>
 							<td><input type='checkbox'/></td>
-							<td>sohyun2</td>
+							<td>sohyun232</td>
 							<td>김소현</td>
 							<td>010-8465-2656</td>
 							<td>sohyun2@google.com</td>
 							<td>2016-06-10</td>
 							<td>
 								<button type='button' class='btn btn-default btn-xs'>
-									<span class='glyphicon glyphicon-pencil'></span>
+									<a href='03.html'><span class='glyphicon glyphicon-pencil'></span></a>
 								</button>
 							</td>
 						</tr>	
 						<tr>
 							<td><input type='checkbox'/></td>
-							<td>arim051</td>
+							<td>arim05123</td>
 							<td>김아림</td>
 							<td>010-1895-7442</td>
 							<td>arim051@naver.com</td>
 							<td>2016-06-13</td>
 							<td>
 								<button type='button' class='btn btn-default btn-xs'>
-									<span class='glyphicon glyphicon-pencil'></span>
+									<a href='03.html'><span class='glyphicon glyphicon-pencil'></span></a>
 								</button>
 							</td>
 						</tr>															
