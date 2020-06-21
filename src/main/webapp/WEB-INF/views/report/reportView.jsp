@@ -15,8 +15,9 @@
 	href="http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>	
 <script>
-$(()=>{
+function reportDel() {
 	$('#reportDel').click(()=>{
 		$.ajax({
 			success: () =>{
@@ -29,9 +30,28 @@ $(()=>{
 						location.href='01.html';
 				})
 			}
-			});
 		});
-});
+	});
+}
+
+
+function readReply() {
+	$('.view').html(
+		`<c:forEach var='reply' items='${replies}'>
+			<ul>
+				<li>${reply.writer} <span>${reply.regDate}</span></li>
+				<li>${reply.content}</li>
+			</ul>
+		</c:forEach>`	
+	);
+	
+	if ($('.view').html() == ``) {
+		$('.view').html('<div class="viewEmpty">댓글이 없습니다.</div>')
+	}
+}
+
+$(readReply);
+$(reportDel);
 </script>
 <style>
 	/* header */
@@ -62,18 +82,18 @@ $(()=>{
 	.button input{float:right;}
 
 	/* 댓글 */
-	.writeCont{width:100%;}
-	.writeCont p{font-size:20px; font-weight:bold; colo:#333;}
-	.writeCont .write{border:1px solid #ccc;}
-	.writeCont .write textarea{width: 98%; height: 60px; padding:1%; border:0px; font-size: 14px; resize: both;}
-	.writeCont .write div{text-align:right;}
-	.writeCont .write div div{width:100%; border-top:1px solid #e2e2e2;}
-	.writeCont .write div div input{background-color:#f5bf25; width:70px; height:40px; border:0px; color:#fff;}
+	.replyCont{width:100%;}
+	.replyCont p{font-size:20px; font-weight:bold; colo:#333;}
+	.replyCont .reply{border:1px solid #ccc;}
+	.replyCont .reply textarea{width: 98%; height: 60px; padding:1%; border:0px; font-size: 14px; resize: both;}
+	.replyCont .reply div{text-align:right;}
+	.replyCont .reply div div{width:100%; border-top:1px solid #e2e2e2;}
+	.replyCont .reply div div input{background-color:#f5bf25; width:70px; height:40px; border:0px; color:#fff;}
 
-	.writeCont .view{margin-top:5%; font-size:16px;}
-	.writeCont .view ul{border-bottom:1px solid #ccc; padding:2% 0;}
-	.writeCont .view ul li:nth-child(1){margin-bottom:1%;}
-	.writeCont .view ul li span{color:#999;}
+	.replyCont .view{margin-top:5%; font-size:16px;}
+	.replyCont .view ul{border-bottom:1px solid #ccc; padding:2% 0;}
+	.replyCont .view ul li:nth-child(1){margin-bottom:1%;}
+	.replyCont .view ul li span{color:#999;}
 
 	/* 모바일 스타일 */
 	@media screen and (max-width:768px){
@@ -108,7 +128,7 @@ $(()=>{
 			</div>
 		</div>
 		
-		<!-- 입양후기 -->
+		<!-- 유기견 신고 -->
 			<div class="content">
 				<div class="review">
 					<div class='contTitle'>유기견 신고</div>
@@ -117,27 +137,27 @@ $(()=>{
 						<table>
 							<tr>
 								<th>제목</th>
-								<td>왕십리에서 비글 발견했습니다.</td>
+								<td>${report.title}</td>
 							</tr>
 							<tr>
 								<td colspan='2'>
 									<div style="height:100px; width:120px; border:1px solid;">강아지 이미지</div><br><br>
-									얼른 데려가주세요.ㅠㅠ
+									${report.content}
 								</td>
 							</tr>
 						</table>
 						
 						<!-- 목록 버튼 -->
 						<div class='button'>
-							<input type='button' value='목록' onClick="location.href='01.html'"/>
+							<a href='../reportListView'><input type='button' value='목록'/></a>
 							<input type='button' value='삭제' id='reportDel'/>
 							<input type='button' value='수정' onClick="location.href='04.html'"/>
 						</div>
 						
-						<!-- 답글 -->
-						<div class='writeCont'>
+						<!-- 댓글 -->
+						<div class='replyCont'>
 							<p>댓글</p>
-							<div class='write'>
+							<div class='reply'>
 								<div>
 									<textarea>
 
@@ -147,20 +167,7 @@ $(()=>{
 									</div>
 								</div>
 							</div>
-							<div class='view'>
-								<ul>
-									<li>miso93 <span>2020-06-10</span></li>
-									<li>아이가 얼른 주인 분 만났으면 좋겠네요.</li>
-								</ul>
-								<ul>
-									<li>miso93 <span>2020-06-10</span></li>
-									<li>아이가 얼른 주인 분 만났으면 좋겠네요.</li>
-								</ul>
-								<ul>
-									<li>miso93 <span>2020-06-10</span></li>
-									<li>아이가 얼른 주인 분 만났으면 좋겠네요.</li>
-								</ul>
-							</div>
+							<div class='view'></div>
 						</div>
 					</div>
 

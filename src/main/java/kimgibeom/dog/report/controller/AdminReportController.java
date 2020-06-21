@@ -16,45 +16,45 @@ import kimgibeom.dog.report.service.ReportReplyService;
 import kimgibeom.dog.report.service.ReportService;
 
 @Controller
-@RequestMapping("/report")
-public class ReportController {
-	@Autowired 
+@RequestMapping("/admin/report")
+public class AdminReportController {
+	@Autowired
 	private ReportService reportService;
-	@Autowired 
+	@Autowired
 	private ReportReplyService reportReplyService;
-	
+
 	@RequestMapping("/reportListView")
 	public void readReports(Model model) {
-		model.addAttribute("reports", reportService.readReports()); 
+		model.addAttribute("reports", reportService.readReports());
 	}
-	
-	@RequestMapping("/reportView/{reportNum}")
+
+	@RequestMapping("/read/{reportNum}")
 	public String readReport(@PathVariable String reportNum, Model model) {
 		// 게시글
 		int reportNo = Integer.parseInt(reportNum);
 		Report report = reportService.readReport(reportNo);
 		model.addAttribute("report", report);
-		
-		// 댓글 
+
+		// 댓글
 		List<ReportReply> replies = reportReplyService.readReportReplies();
 		List<ReportReply> repliesOfReport = new ArrayList<ReportReply>();
-		for(int idx=0; idx<replies.size(); idx++) {
-			if(replies.get(idx).getReportNum() == reportNo) {
+		for (int idx = 0; idx < replies.size(); idx++) {
+			if (replies.get(idx).getReportNum() == reportNo) {
 				repliesOfReport.add(replies.get(idx));
 			}
 		}
 		model.addAttribute("replies", repliesOfReport);
-		
-		return "report/reportView";
+
+		return "admin/report/reportView";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/remove")
 	public int removeReport(String reportNum) {
 		int reportNo = Integer.parseInt(reportNum);
 		return reportService.removeReport(reportNo);
 	}
-	 
+
 	@ResponseBody
 	@RequestMapping("/removeReply")
 	public void removeReply(String replyNum) {
