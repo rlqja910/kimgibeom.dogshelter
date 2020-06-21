@@ -30,7 +30,6 @@ function readReports() {
 		$('.reportCont').html('<br><div class="reportEmpty">등록된 게시글이 없습니다.</div><br>');
 	}
 }
-
 $(readReports);
 </script>
 <style>
@@ -42,7 +41,6 @@ $(readReports);
 	.header .subTitle{text-align:center; font-size:42px; color:#fff; margin-top:20px;}
 	.contHr{width:45px; margin-top:20px; margin-bottom:60px; border:1px solid #f5bf25;}
 	.contTitle{font-size:32px; font-weight:bold; text-align:center;}
-
 	/* 유기견 신고 */
 	.report{width:80%;font-size:14px; margin:0 auto; margin-top:100px; margin-bottom:100px;}
 	.report .reportCont{width:100%; overflow:hidden;}
@@ -51,7 +49,6 @@ $(readReports);
 	.report .reportCont ul li:nth-child(3){margin:0 3% 0 3%; color:#666; font-size:12px;}
 	.report .reportCont ul li:nth-child(4){text-align:right; margin:6% 3% 5% 3%;}
 	.report .reportCont ul img{width:100%;}
-
 	/* 검색 */
 	.report .search{width:100%; overflow:hidden; padding:0.3%; display:flex; margin:0 auto; justify-content:center; margin-bottom:60px;}
 	.report .search input{float:left;}
@@ -62,19 +59,16 @@ $(readReports);
 	/* 등록버튼 */
 	.report .reportBtn{text-align:center; margin-top:50px;}
 	.report .reportBtn input{width:70px; height:40px; background-color:#f5bf25; color:#fff; border:0px;}
-
 	/* 페이징 */
 	.report .page{width:100%; margin-top:70px;}
 	.report .page ul{display:flex; margin:0 auto; justify-content:center;}
 	.report .page ul li{border:1px solid #ccc;}
 	.report .page ul li a{padding:10px 15px;}
 	.report .page ul li a:hover{background-color:#333; color:#fff;}
-
 	/* 모바일 스타일 */
 	@media screen and (max-width:768px){
 		.subHr{margin-top:20%;}
 		.contHr{margin-top:5%; margin-bottom:10%;}
-
 		.header .subTitle{font-size:36px; margin-top:0; padding-bottom:5%;}
 		.contTitle{font-size:28px;}
 		
@@ -84,15 +78,12 @@ $(readReports);
 		/* 유기견 신고 */
 		.report{margin-top:10%; margin-bottom:10%;}
 		.report .reportCont ul{width:48%;}
-
 		/* 페이징 */
 		.report .page{width:100%; margin-top:10%;}
 		.report .page ul li a{padding:8px 14px;}
-
 		/* 등록버튼 */
 		.report .reportBtn{margin-top:8%;}
 	}
-
 	@media screen and (max-width:540px){
 		.report .page ul li a{padding:6px 12px;}
 	}
@@ -109,7 +100,7 @@ $(readReports);
 				<div class='subTitle'>유기견 신고</div>
 			</div>
 		</div>
-		
+
 		<!-- 유기견 신고 -->
 			<div class="content">
 				<div class="report">
@@ -127,12 +118,11 @@ $(readReports);
 					</div>
 
 					<div class='reportCont'></div>
-					
+
 					<!-- 동록버튼 -->
 					<div class='reportBtn'>
 						<input type='button' value='등록' onClick="location.href='02.html'"/>
 					</div>
-
 					<!-- 페이징 -->
 					<div class='page'>
 						<ul>
@@ -151,7 +141,6 @@ $(readReports);
 					</div>
 				</div>
 			</div>
-
 		<!-- 푸터 -->
 		<footer>
 			<%@ include file="../common/footer.jsp"%>

@@ -33,8 +33,6 @@ function reportDel() {
 		});
 	});
 }
-
-
 function readReply() {
 	$('.view').html(
 		`<c:forEach var='reply' items='${replies}'>
@@ -49,7 +47,6 @@ function readReply() {
 		$('.view').html('<div class="viewEmpty">댓글이 없습니다.</div>')
 	}
 }
-
 $(readReply);
 $(reportDel);
 </script>
@@ -62,7 +59,6 @@ $(reportDel);
 	.header .subTitle{text-align:center; font-size:42px; color:#fff; margin-top:20px;}
 	.contHr{width:45px; margin-top:20px; margin-bottom:60px; border:1px solid #f5bf25;}
 	.contTitle{font-size:32px; font-weight:bold; text-align:center;}
-
 	/* 입양후기 */
 	.review{width:80%;font-size:14px; margin:0 auto; margin-top:100px; margin-bottom:100px;}
 	.review .reportView{width:90%; margin:0 auto;}
@@ -80,7 +76,6 @@ $(reportDel);
 	.button input:nth-child(1){float:left;}
 	.button input:nth-child(2){border:1px solid #ccc; background-color:#fff; color:#666; margin-left:5px;}
 	.button input{float:right;}
-
 	/* 댓글 */
 	.replyCont{width:100%;}
 	.replyCont p{font-size:20px; font-weight:bold; colo:#333;}
@@ -89,17 +84,14 @@ $(reportDel);
 	.replyCont .reply div{text-align:right;}
 	.replyCont .reply div div{width:100%; border-top:1px solid #e2e2e2;}
 	.replyCont .reply div div input{background-color:#f5bf25; width:70px; height:40px; border:0px; color:#fff;}
-
 	.replyCont .view{margin-top:5%; font-size:16px;}
 	.replyCont .view ul{border-bottom:1px solid #ccc; padding:2% 0;}
 	.replyCont .view ul li:nth-child(1){margin-bottom:1%;}
 	.replyCont .view ul li span{color:#999;}
-
 	/* 모바일 스타일 */
 	@media screen and (max-width:768px){
 		.subHr{margin-top:20%;}
 		.contHr{margin-top:5%; margin-bottom:10%;}
-
 		.header .subTitle{font-size:36px; margin-top:0; padding-bottom:5%;}
 		.contTitle{font-size:28px;}
 		
@@ -107,9 +99,7 @@ $(reportDel);
 		.review .reviewView{width:100%;}
 		.review .reviewView table tr{font-size:14px;}
 		.review .reviewView table tr th{background-color:#ccc; width:20%; padding:2% 0;}
-
 		.button input{margin-top:5%;}
-
 		.writeCont .view{font-size:14px;}
 		.writeCont .view ul{border-bottom:1px solid #ccc; padding:4% 0;}
 		.writeCont .view ul li:nth-child(1){margin-bottom:2%;}
@@ -127,7 +117,7 @@ $(reportDel);
 				<div class='subTitle'>유기견 신고</div>
 			</div>
 		</div>
-		
+
 		<!-- 유기견 신고 -->
 			<div class="content">
 				<div class="review">
@@ -146,17 +136,19 @@ $(reportDel);
 								</td>
 							</tr>
 						</table>
-						
+
 						<!-- 목록 버튼 -->
 						<div class='button'>
+							<input type='button' value='목록'/>
 							<a href='../reportListView'><input type='button' value='목록'/></a>
 							<input type='button' value='삭제' id='reportDel'/>
 							<input type='button' value='수정' onClick="location.href='04.html'"/>
 						</div>
-						
+
 						<!-- 댓글 -->
 						<div class='replyCont'>
 							<p>댓글</p>
+							<div class='write'>
 							<div class='reply'>
 								<div>
 									<textarea>
@@ -167,15 +159,14 @@ $(reportDel);
 									</div>
 								</div>
 							</div>
+						
 							<div class='view'></div>
 						</div>
 					</div>
 
 					<!-- 페이징 -->
-
 				</div>
 			</div>
-
 		<!-- 푸터 -->
 		<footer>
 			<%@ include file="../common/footer.jsp"%>

@@ -16,7 +16,7 @@ import kimgibeom.dog.report.service.ReportReplyService;
 import kimgibeom.dog.report.service.ReportService;
 
 @Controller
-@RequestMapping("/admin/report")
+@RequestMapping("/report")
 public class ReportController {
 	@Autowired
 	private ReportService reportService;
@@ -26,9 +26,10 @@ public class ReportController {
 	@RequestMapping("/reportListView")
 	public void readReports(Model model) {
 		model.addAttribute("reports", reportService.readReports());
+		model.addAttribute("reports", reportService.readReports());
 	}
 
-	@RequestMapping("read/{reportNum}")
+	@RequestMapping("/reportView/{reportNum}")
 	public String readReport(@PathVariable String reportNum, Model model) {
 		// 게시글
 		int reportNo = Integer.parseInt(reportNum);
@@ -36,8 +37,11 @@ public class ReportController {
 		model.addAttribute("report", report);
 
 		// 댓글
+
+		// 댓글
 		List<ReportReply> replies = reportReplyService.readReportReplies();
 		List<ReportReply> repliesOfReport = new ArrayList<ReportReply>();
+
 		for (int idx = 0; idx < replies.size(); idx++) {
 			if (replies.get(idx).getReportNum() == reportNo) {
 				repliesOfReport.add(replies.get(idx));
@@ -45,7 +49,7 @@ public class ReportController {
 		}
 		model.addAttribute("replies", repliesOfReport);
 
-		return "admin/report/reportView";
+		return "report/reportView";
 	}
 
 	@ResponseBody
