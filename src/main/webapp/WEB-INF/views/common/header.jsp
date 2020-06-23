@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<meta charset='utf-8'>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 
 <script>
-$(()=>{
+$(()=>{ 
 	logInConfrim();
 	console.log(`${userId}`);
 });
@@ -24,15 +24,15 @@ function logInConfrim(){
 
 function afterUserLogin(){
 	$('#headBtn').empty();
-	$('#headBtn').append("<li><a href='/dog/user/mypage'>마이페이지</a></li>");
-	$('#headBtn').append("<li><a href='/dog/user/logout' id='logoutBtn'>로그아웃</a></li>");
+	$('#headBtn').append("<li><a href='<c:url value='/user/mypage'/>'>마이페이지</a></li>");
+	$('#headBtn').append("<li><a href='<c:url value='/user/logout'/>'>로그아웃</a></li>");
 }
 
 function afterAdminLogin(){
 	$('#headBtn').empty();
-	$('#headBtn').append("<li><a href='/dog/admin'>관리자페이지</a></li>");
-	$('#headBtn').append("<li><a href='/dog/user/mypage'>마이페이지 &nbsp;&nbsp;</a></li>");
-	$('#headBtn').append("<li><a href='/dog/user/logout' id='logoutBtn'>로그아웃</a></li>");
+	$('#headBtn').append("<li><a href='<c:url value='/admin'/>'>관리자페이지</a></li>");
+	$('#headBtn').append("<li><a href='<c:url value='/user/mypage'/>'>마이페이지 &nbsp;&nbsp;</a></li>");
+	$('#headBtn').append("<li><a href='<c:url value='/user/logout'/>' id='logoutBtn'>로그아웃</a></li>");
 }
 
 
@@ -134,7 +134,7 @@ function mobile_menu(){
 	.header header .headA ul li:nth-child(2){margin-left:10px;}
 	.header header .headB{overflow:hidden;}
 	.header header .headB .logo a{padding:20px 20px; border:1px solid #fff; float:left; color:#fff;}
-	.header header .headB ul{width:500px; float:right; margin-top:25px; color:#fff; font-weight:bold;}
+	.header header .headB ul{float:right; margin-top:25px; color:#fff; font-weight:bold;}
 	.header header .headB ul li:hover{color:#f5bf25; transition-duration:.5s;}
 	.header header .headB ul li{float:left; margin-left:31px;}
 
@@ -172,7 +172,8 @@ function mobile_menu(){
 	/* 모바일 스타일 */
 	@media screen and (max-width:768px){
 		body{min-width:480px;}
-		.header{width:100%; height:auto; background-color:#282320; background:url('mobileMainImg.jpg') no-repeat; background-size: 100%; background-position: center;}
+		.header{width:100%; height:auto; background-color:#282320; background:url('../img/mobileMainImg.jpg') no-repeat; background-size: 100%; background-position: center;}
+		.mainHeader{background:url('img/mobileMainImg.jpg') no-repeat;}
 		.mobileHead{display:block;}
 		.header header{width:90%; margin:0 5%;}
 		.header header .headA{display:none;}
@@ -187,6 +188,7 @@ function mobile_menu(){
 		footer .fot div:nth-child(2){margin:0 5% 0 0; font-size:11px; float:right;}
 	}
 </style>
+
 <div class='headA'>
 <%if(session.getAttribute("userId")!=null){ %>
 <%=session.getAttribute("userId") %>님 환영합니다<%} %>
@@ -196,13 +198,13 @@ function mobile_menu(){
 	</ul>	
 </div>
 <div class='headB'>
-	<div class='logo'><a href='/dog'>로고 이미지</a></div>
+	<div class='logo'><a href='<c:url value="/"/>'>로고 이미지</a></div>
 	<ul>
-		<li><a href='/dog/introduce'>보호소 소개</a></li>
-		<li><a href='/dog/dog/dogListView'>무료분양</a></li>
-		<li><a href='/dog/review/reviewListView'>분양후기</a></li>
-		<li><a href='/dog/report/reportListView'>신고하기</a></li>
-		<li><a href='/dog/donation/donate'>후원하기</a></li>
+		<li><a href='<c:url value="/introduce"/>'>보호소 소개</a></li>
+		<li><a href='<c:url value="/dog/dogListView"/>'>무료분양</a></li>
+		<li><a href='<c:url value="/review/reviewListView"/>'>입양후기</a></li>
+		<li><a href='<c:url value="/report/reportListView"/>'>신고하기</a></li>
+		<li><a href='<c:url value="/donation/donate"/>'>후원하기</a></li>
 	</ul>
 </div>			
 <div class='mobileHead'>
@@ -216,23 +218,23 @@ function mobile_menu(){
 				<a href="/dog/user/login">로그인</a>
 			</li>
 			<li class='mobileLogin' id='mLoginBtn'>
-				<a href="/dog/user/join">회원가입</a>
+				<a href="<c:url value="/user/join"/>">회원가입</a>
 			</li>
 			<br>
 			<li>
-				<a href="/dog/introduce">보호소 소개</a>
+				<a href="<c:url value="/introduce"/>">보호소 소개</a>
 			</li>
 			<li>
-				<a href="/dog/dog/dogListView">무료분양</a> 
+				<a href="<c:url value="/dog/dogListView"/>">무료분양</a> 
 			</li>
 			<li>
-				<a href="/dog/review/reviewListView">분양후기</a>
+				<a href="<c:url value="/review/reviewListView"/>">입양후기</a>
 			</li>
 			<li>
-				<a href="/dog/report/reportListView">신고하기</a>
+				<a href="<c:url value="/report/reportListView"/>">신고하기</a>
 			</li>
 			<li>
-				<a href="/dog/donation/donate">후원하기</a>
+				<a href="<c:url value="/donation/donate"/>">후원하기</a>
 			</li>
 		</ul>
 	</nav>

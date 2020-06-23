@@ -10,6 +10,7 @@
 <script src="../res/layoutsub.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
 <style>
 	/* header */
 	.header{width:100%; height:<a href=''><</a>80px; background-color:#ccc; background-image:url('../img/loginImg.jpg'); background-position: center;}
@@ -56,7 +57,7 @@
 		<div class='header'>
 			<div class='headerBackground'>
 				<header>
-					<%@ include file="../common/header.jsp"%>
+					<%@ include file="../common/header.jsp" %>
 				</header>
 				<hr class='subHr'>
 				<div class='subTitle'>입양후기</div>
@@ -71,7 +72,7 @@
 					<div class='reviewCont'>
 						<a href='02.html'>
 							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">강아지 이미지</div></li>
+								<li><div style="height:100px; width:273px; border:1px solid;">유기견 이미지</div></li>
 								<li>치와와치치 따뜻한 가정으로</li>
 								<li>작고 아담한 치와와 치치가...</li>
 								<li>+더보기</li>
@@ -79,7 +80,7 @@
 						</a>
 						<a href='02.html'>
 							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">강아지 이미지</div></li>
+								<li><div style="height:100px; width:273px; border:1px solid;">유기견 이미지</div></li>
 								<li>말티즈콩이 따뜻한 가정으로</li>
 								<li>작고 아담한 말티즈콩이가...</li>
 								<li>+더보기</li>
@@ -87,7 +88,7 @@
 						</a>
 						<a href='02.html'>
 							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">강아지 이미지</div></li>
+								<li><div style="height:100px; width:273px; border:1px solid;">유기견 이미지</div></li>
 								<li>푸들냥맨 따뜻한 가정으로</li>
 								<li>작고 아담한 푸들냥맨...</li>
 								<li>+더보기</li>
@@ -95,7 +96,7 @@
 						</a>
 						<a href='02.html'>
 							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">강아지 이미지</div></li>
+								<li><div style="height:100px; width:273px; border:1px solid;">유기견 이미지</div></li>
 								<li>푸들솜탄 따뜻한 가정으로</li>
 								<li>작고 아담한 푸들솜탄...</li>
 								<li>+더보기</li>
@@ -103,7 +104,7 @@
 						</a>
 						<a href='02.html'>
 							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">강아지 이미지</div></li>
+								<li><div style="height:100px; width:273px; border:1px solid;">유기견 이미지</div></li>
 								<li>말티즈커피 따뜻한 가정으로</li>
 								<li>작고 아담한 말티즈커피가...</li>
 								<li>+더보기</li>
@@ -111,7 +112,7 @@
 						</a>
 						<a href='02.html'>
 							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">강아지 이미지</div></li>
+								<li><div style="height:100px; width:273px; border:1px solid;">유기견 이미지</div></li>
 								<li>시바견쓰읍 따뜻한 가정으로</li>
 								<li>작고 아담한 시바견쓰읍...</li>
 								<li>+더보기</li>
@@ -119,7 +120,7 @@
 						</a>
 						<a href='02.html'>
 							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">강아지 이미지</div></li>
+								<li><div style="height:100px; width:273px; border:1px solid;">유기견 이미지</div></li>
 								<li>말티즈디비 따뜻한 가정으로</li>
 								<li>작고 아담한 말티즈디비가...</li>
 								<li>+더보기</li>
@@ -127,7 +128,7 @@
 						</a>
 						<a href='02.html'>
 							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">강아지 이미지</div></li>
+								<li><div style="height:100px; width:273px; border:1px solid;">유기견 이미지</div></li>
 								<li>비글오라클 따뜻한 가정으로</li>
 								<li>작고 아담한 치와와 치치가...</li>
 								<li>+더보기</li>

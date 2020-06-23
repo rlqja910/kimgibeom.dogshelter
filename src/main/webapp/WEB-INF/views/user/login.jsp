@@ -14,170 +14,45 @@
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
 <script type="text/javascript" src='../res/cookie.js'></script>
-
 <style>
-/* header */
-.header {
-	width: 100%;
-	height: 380px;
-	background-color: #ccc;
-	background-image: url('loginImg.jpg');
-	background-position: center;
-}
+	/* header */
+	.header{width:100%; height:380px; background-color:#ccc; background-image:url('../img/loginImg.jpg'); background-position: center;}
+	.header .headerBackground{background:rgba(0, 0, 0, .4); height:380px;}
+	
+	.subHr{width:45px; margin-top:140px; border:1px solid #f5bf25;}
+	.header .subTitle{text-align:center; font-size:42px; color:#fff; margin-top:20px;}
 
-.header .headerBackground {
-	background: rgba(0, 0, 0, .4);
-	height: 380px;
-}
+	/* 로그인 */
+	.login{width:80%; margin:0 auto; font-size:14px; clear:both; margin-bottom:140px; margin-top:140px;}
+	#login_box ul{list-style-type: none;}
+	.login form{width:450px;margin:0 auto;}
+	#input_button input {width:450px; height:50px; border:1px solid #ccc;}
+	#id_pass span{width:20px;}
+	#pass input{margin-top:-1px;}
+	.login form p{font-size:20px; font-weight:bold;}
+	.login form .newUser a{padding:14px 0; text-align:center; width:450px; background:#fff; color:#666; margin-top:20px; border:1px solid #ccc;}
+	.login form button{padding:12px; width:452px; height:50px; background:#f5bf25; border:0; color:#fff; margin-top:20px; font-size:16px;}
+	.login .btns{color:#959595; font-size:14px;width:450px; overflow:hidden;}
+	.login .btns div{float:left;}
+	.login .btns div a{float:left; margin-top:17px;}
+	.login .btns div:nth-child(2){float:right;}
+	.login .btns input, label{margin-top:20px;}
+	#autoLogin{margin:0;line-height: 16px;}
+	.logintext{color:#959595; text-align:center; margin-top:10px;}
+	.newUser:hover a{background-color:#333; color:#fff; transition-duration:.5s;}
 
-.subHr {
-	width: 45px;
-	margin-top: 140px;
-	border: 1px solid #f5bf25;
-}
+	/* 모바일 스타일 */
+	@media screen and (max-width:768px){
+		.subHr{margin-top:20%;}
 
-.header .subTitle {
-	text-align: center;
-	font-size: 42px;
-	color: #fff;
-	margin-top: 20px;
-}
-
-/* 로그인 */
-.login {
-	width: 80%;
-	margin: 0 auto;
-	font-size: 14px;
-	clear: both;
-	margin-bottom: 140px;
-	margin-top: 140px;
-}
-
-#login_box ul {
-	list-style-type: none;
-}
-
-.login form {
-	width: 450px;
-	margin: 0 auto;
-}
-
-#input_button input {
-	width: 450px;
-	height: 50px;
-	border: 1px solid #ccc;
-}
-
-#id_pass span {
-	width: 20px;
-}
-
-#pass input {
-	margin-top: -1px;
-}
-
-.login form p {
-	font-size: 20px;
-	font-weight: bold;
-}
-
-.login form .newUser a {
-	padding: 14px 0;
-	text-align: center;
-	width: 450px;
-	background: #fff;
-	color: #666;
-	margin-top: 20px;
-	border: 1px solid #ccc;
-}
-
-.login form button {
-	padding: 12px;
-	width: 452px;
-	height: 50px;
-	background: #f5bf25;
-	border: 0;
-	color: #fff;
-	margin-top: 20px;
-	font-size: 16px;
-}
-
-.login .btns {
-	color: #959595;
-	font-size: 14px;
-	width: 450px;
-	overflow: hidden;
-}
-
-.login .btns div {
-	float: left;
-}
-
-.login .btns div a {
-	float: left;
-	margin-top: 17px;
-}
-
-.login .btns div:nth-child(2) {
-	float: right;
-}
-
-.login .btns input, label {
-	margin-top: 20px;
-}
-
-#autoLogin {
-	margin: 0;
-	line-height: 16px;
-}
-
-.logintext {
-	color: #959595;
-	text-align: center;
-	margin-top: 10px;
-}
-
-.newUser:hover a {
-	background-color: #333;
-	color: #fff;
-	transition-duration: .5s;
-}
-
-/* 모바일 스타일 */
-@media screen and (max-width:768px) {
-	.subHr {
-		margin-top: 20%;
+		.header .subTitle{font-size:36px; margin-top:0; padding-bottom:5%;}
+		#input_button input{width:100%;}
+		.login{margin-top:15%; margin-bottom:15%;}
+		.login form{width:100%; text-align:center;}
+		.login .btns{width:100%; text-align:left;}
+		.login form .newUser a{width:100%; margin:0 auto; margin-top:4%;}
+		.login form button{width:100%; margin-top:4%;}
 	}
-	.header .subTitle {
-		font-size: 36px;
-		margin-top: 0;
-		padding-bottom: 5%;
-	}
-	#input_button input {
-		width: 100%;
-	}
-	.login {
-		margin-top: 15%;
-		margin-bottom: 15%;
-	}
-	.login form {
-		width: 100%;
-		text-align: center;
-	}
-	.login .btns {
-		width: 100%;
-		text-align: left;
-	}
-	.login form .newUser a {
-		width: 100%;
-		margin: 0 auto;
-		margin-top: 4%;
-	}
-	.login form button {
-		width: 100%;
-		margin-top: 4%;
-	}
-}
 </style>
 
 <script>
@@ -226,17 +101,14 @@
 					if($('#userId').val()===''&&$('#userPw').val()===''){
 						return;
 					}else if(result==1){
-						console.log('로그인 성공');
 						$('#loginf').submit();
 					}else if(result==0){
 						clearMsg();
-						console.log('없는 아이디입니다.');
 						$('#idCheckMsg').text('없는 아이디입니다');
 						return;
 					}else if(result==-1){
 						clearMsg();
-						console.log('암호가 틀렸습니다.');
-						$('#pwCheckMsg').text('암호가 틀렸습니다');
+						$('#pwCheckMsg').text('암호가 일치하지 않습니다');
 						return;
 					}
 				},

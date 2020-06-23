@@ -9,9 +9,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <style>
+
 	/* header */
-	.header{width:100%; height:520px; background-color:#ccc; background:url('mainImg.jpg'); padding-top:-50px; background-position: center;}
-	.header .headerBackground{background:rgba(0, 0, 0, .4); height:520px;} /* 메인과 서브페이지의 background크기가 다르다 */
+	.header{width:100%; height:520px; background-color:#ccc; background:url('img/mainImg.jpg'); padding-top:-50px; background-position: center;}
+	.header .headerBackground{background:rgba(0, 0, 0, .4); height:520px;} /* 메인과 서브페이지의 background크기가 다르다. */
+	.header .banner{text-align: center; color:#fff;}
 	
 	.subHr{width:45px; margin-top:140px; border:1px solid #f5bf25;}
 	.contHr{width:45px; margin-top:20px; margin-bottom:60px; border:1px solid #f5bf25;}
@@ -26,7 +28,7 @@
 	.content .mainText .text{color:#666;}
 	.content .mainText .text span{font-size:40px; color:#282320; font-weight:bold;}
 	.content .mainText .text span span{color:#f5bf25;}
-	.content .mainText .text i{list-style:none} 
+	.content .mainText .text i{list-style:none}
 
 	/* introduction */
 	.content .introduction{text-align:center; margin:0 auto; margin-top:80px; width:80%;}
@@ -40,7 +42,7 @@
 	.introductionBtn a:hover{background-color:#f5bf25; color:#fff; transition-duration:.5s;}
 
 	/* count */
-	.content .count{width:100%; height:200px; background-color:#ccc; margin-top:100px;}
+	.content .count{width:100%; height:200px; background-color:#ccc; margin-top:100px; background:url('img/countImg.jpg'); background-position: center;}
 	.content .count ul{width:70%; margin:0 auto; margin:0 15% 0 15%; overflow:hidden; padding-top:60px;}
 	.content .count ul li{float:left; text-align:center; width:33.33%; font-size:14px;}
 	.content .count ul li span{font-size:54px; margin-bottom:15px;}
@@ -60,7 +62,7 @@
 	.animalBtn a:hover{background-color:#f5bf25; color:#fff; transition-duration:.5s;}
 
 	/* 후원하기 */
-	.content .sponsor{background:url('sponsorImg.jpg'); background-position: center;}
+	.content .sponsor{background:url('img/sponsorImg.jpg'); background-position: center;}
 	.content .sponsor{width:100%; height:280px; background-color:#ccc; margin-top:80px; position:relative;}
 	.content .sponsor .sponsorBack{width:80%; margin:0 auto; text-align:center; padding-top:50px;}
 	.content .sponsor .sponsorBack .sponsorTitle{font-size:24px; font-weight:bold; color:#fff;}
@@ -114,20 +116,19 @@
 		.header{background-size: 113%;}
 	}
 </style>
-
 </head>
 
 <body>
 	<div class='container'>
-		<div class='header'>
+		<div class='header mainHeader'>
 			<div class='headerBackground'>
 				<header>
 					<%@ include file="common/header.jsp" %>
 				</header>
 				<div class='mainTitle'>
-					<div class='subTitle'>Not only people<br>Need a house</div>
+					<div class='subTitle'>Not only people<br>Need a house</div><p class='banner'>배너 이미지</p>
 					<div class='subText'>갈 곳 없는 유기 동물이 <span>당신의 손길</span>을 기다리고 있습니다.</div>
-					<div class='mainBtn'><a href='#'>무료분양 바로가기</a></div>
+					<div class='mainBtn'><a href='dog/01.html'>무료분양 바로가기</a></div>
 				</div>
 			</div>
 		</div>
@@ -149,7 +150,7 @@
 							이 세상 모든 반려동물과의 삶이 행복하기를 원하며 보호소를 섭립하게 되었습니다.<br>
 							저희 보소호소는 동물에 대한 마음으로 안락사 없는 동물 보호소 입니다.
 							</li>
-							<li class='introductionBtn'><a href='#'>보호소 소개 더보기</a></li>
+							<li class='introductionBtn'><a href='introduce/01.html'>보호소 소개 더보기</a></li>
 						</ul>
 					</div>
 				</div>
@@ -158,9 +159,9 @@
 			<!-- 카운트 -->
 			<div class='count'>
 				<ul>
-					<li><span id='totalDogCnt'>2,500</span><br>총 유기견 수</li>
-					<li><span id='todayProtectDogCnt'>1,200</span><br>오늘 보호된 유기견수</li>
-					<li><b><span id='adoptedDogCnt'>3,457</span><br>입양된 유기견 수</b></li>
+					<li><span>2,512</span><br>총 유기견 수</li>
+					<li><span>209</span><br>오늘 보호된 유기견수</li>
+					<li><b><span>1,457</span><br>입양된 유기견 수</b></li>
 				</ul>
 			</div>
 
@@ -169,7 +170,7 @@
 				<div class='text'><span><span>P</span>rotective <span>A</span>nimal</span><br>보호하고 있는 유기견을 소개합니다.</div>
 				<ul>
 					<li>
-						<a href='#'>
+						<a href='dog/02.html'>
 							<div>
 								<span>코리안 숏헤어 책임분양<br><span>view</span></span>
 							</div>
@@ -178,7 +179,7 @@
 						</a>
 					</li>
 					<li>
-						<a href='#'>
+						<a href='dog/02.html'>
 							<div>
 								<span>코리안 숏헤어 책임분양<br><span>view</span></span>
 							</div>
@@ -187,7 +188,7 @@
 						</a>
 					</li>
 					<li>
-						<a href='#'>
+						<a href='dog/02.html'>
 							<div>
 								<span>코리안 숏헤어 책임분양<br><span>view</span></span>
 							</div>
@@ -196,7 +197,7 @@
 						</a>
 					</li>
 					<li>
-						<a href='#'>
+						<a href='dog/02.html'>
 							<div>
 								<span>코리안 숏헤어 책임분양<br><span>view</span></span>
 							</div>
@@ -205,7 +206,7 @@
 						</a>
 					</li>
 					<li>
-						<a href='#'>
+						<a href='dog/02.html'>
 							<div>
 								<span>코리안 숏헤어 책임분양<br><span>view</span></span>
 							</div>
@@ -214,7 +215,7 @@
 						</a>
 					</li>
 					<li>
-						<a href='#'>
+						<a href='dog/02.html'>
 							<div>
 								<span>코리안 숏헤어 책임분양<br><span>view</span></span>
 							</div>
@@ -223,7 +224,7 @@
 						</a>
 					</li>
 					<li>
-						<a href='#'>
+						<a href='dog/02.html'>
 							<div>
 								<span>코리안 숏헤어 책임분양<br><span>view</span></span>
 							</div>
@@ -232,7 +233,7 @@
 						</a>
 					</li>
 					<li>
-						<a href='#'>
+						<a href='dog/02.html'>
 							<div>
 								<span>코리안 숏헤어 책임분양<br><span>view</span></span>
 							</div>
@@ -241,7 +242,7 @@
 						</a>
 					</li>
 				</ul>
-				<div class='animalBtn'><a href='#'>유기견 더보기</a></div>
+				<div class='animalBtn'><a href='dog/01.html'>유기견 더보기</a></div>
 			</div>
 
 			<!-- 후원하기 -->
@@ -252,7 +253,7 @@
 						후원금은 유기견이 생활하는 모든 곳에 사용됩니다.<br>
 						여러분의 도움으로 유기동물들이 밝고 건강하게 지낼 수 있습니다.
 					</div>
-					<div class='sponsorBtn'><a href='#'>후원하기</a></div>
+					<div class='sponsorBtn'><a href='donation/01.html'>후원하기</a></div>
 				</div>
 			</div>
 
@@ -263,44 +264,44 @@
 				<div class="swiper-container">
 					<div class="swiper-wrapper">
 						<div class="swiper-slide">
-							<a href='#'>
-								후기 이미지
+							<a href='review/02.html'>
+								유기견 이미지
 								<!-- <img src='./dog.jpg'> -->
 							</a>
 						</div>
 						<div class="swiper-slide">
-							<a href='#'>
-								후기 이미지
+							<a href='review/02.html'>
+								유기견 이미지
 								<!-- <img src='./dog.jpg'> -->
 							</a>
 						</div>
 						<div class="swiper-slide">
-							<a href='#'>
-								후기 이미지
+							<a href='review/02.html'>
+								유기견 이미지
 								<!-- <img src='./dog.jpg'> -->
 							</a>
 						</div>
 						<div class="swiper-slide">
-							<a href='#'>
-								후기 이미지
+							<a href='review/02.html'>
+								유기견 이미지
 								<!-- <img src='./dog.jpg'> -->
 							</a>
 						</div>
 						<div class="swiper-slide">
-							<a href='#'>
-								후기 이미지
+							<a href='review/02.html'>
+								유기견 이미지
 								<!-- <img src='./dog.jpg'> -->
 							</a>
 						</div>
 						<div class="swiper-slide">
-							<a href='#'>
-								후기 이미지
+							<a href='review/02.html'>
+								유기견 이미지
 								<!-- <img src='./dog.jpg'> -->
 							</a>
 						</div>
 						<div class="swiper-slide">
-							<a href='#'>
-								후기 이미지
+							<a href='review/02.html'>
+								유기견 이미지
 								<!-- <img src='./dog.jpg'> -->
 							</a>
 						</div>
@@ -315,6 +316,7 @@
 		</footer>
 	</div>
 </body>
+</html>
 
 <!-- 후기script -->
 <script>

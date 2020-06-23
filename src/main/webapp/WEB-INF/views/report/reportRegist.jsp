@@ -10,11 +10,10 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script src="../res/layoutsub.js"></script>
-<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-<script src="${path}/ckeditor/ckeditor.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
 <style>
 /* header */
 .header {
@@ -205,7 +204,7 @@ textarea {
 	<div class='container'>
 		<div class='header'>
 			<div class='headerBackground'>
-				<header> <%@ include file="../common/header.jsp"%></header>
+				<header> <%@ include file="../common/header.jsp" %></header>
 				<hr class='subHr'>
 				<div class='subTitle'>유기견 신고</div>
 			</div>
@@ -225,11 +224,7 @@ textarea {
 						<tr>
 							<th>내용</th>
 							<td><textarea id="description"> 
-								</textarea> <script>
-									CKEDITOR.replace("description", {
-										removePlugins : 'image'
-									});
-								</script></td>
+								</textarea></td>
 						</tr>
 						<tr>
 							<th>이미지</th>

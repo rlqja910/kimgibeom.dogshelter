@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 <head>
 <title>유기견 보호소</title>
 
@@ -18,225 +18,54 @@
 <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
 
 <style>
-/* header */
-.header {
-	width: 100%;
-	height: 380px;
-	background-color: #ccc;
-	background-image: url('loginImg.jpg');
-	background-position: center;
-}
+	/* header */
+	.header{width:100%; height:380px; background-color:#ccc; background-image:url('../img/loginImg.jpg'); background-position: center;}
+	.header .headerBackground{background:rgba(0, 0, 0, .4); height:380px;}
+	
+	.subHr{width:45px; margin-top:140px; border:1px solid #f5bf25;}
+	.header .subTitle{text-align:center; font-size:42px; color:#fff; margin-top:20px;}
+	.contHr{width:45px; margin-top:20px; margin-bottom:60px; border:1px solid #f5bf25;}
 
-.header .headerBackground {
-	background: rgba(0, 0, 0, .4);
-	height: 380px;
-}
+	/* 회원가입 */
+	.member>div:nth-child(1){text-align:center;}
+	.member>div:nth-child(1) span{font-weight:bold;}
+	.member{width:80%;font-size:14px; margin:0 auto;}
+	.member table input{border:1px solid #999;}
+	.member table{border:1px solid #f5bf25;border-collapse:collapse; text-align:left; width:80%; font-size:14px; margin:0 auto;}
+	.member table .text input{height:30px; width:45%;}
+	.member table .number input{height:30px; width:10%;}
+	.member form{margin:100px 0; text-align:center;}
+	.member form .contTitle{font-size:32px; font-weight:bold;}
+	.member form .button{overflow:hidden; width:100%; text-align:center;}
+	.member form .button input{height:40px; margin-top:60px;}
+	.member form .button .ok{background-color:#f5bf25; border:1px solid #f5bf25; width:70px; color:#fff; margin-left:5px;}
+	.member form .button .no{width:70px; margin-left:5px; background-color:#fff; border:1px solid #999;}
+	.member table tr{height:30px;}
+	.member th{border-left:1px solid #fff;padding:0 10px; border-bottom:1px solid #ccc; height:45px;background-color:#eee; color:#333;}
+	.member td{border-right:1px solid #fff;padding:0 10px; border-bottom:1px solid #ccc; height:50px;}
+	.member th span{color:red;}
+	.member .text button{height:33px; background-color:#666; border:0px; color:#fff;}
+	.member .text td span{font-size:12px;}
+	
+	.agree{width:80%; margin:0 auto; margin-bottom:30px;}
+	.agree .textbox{overflow-y:scroll; height:100px; border:1px solid #ccc; padding:15px;text-align:left;}
+	.agree .text{text-align:right; margin-top:10px;}
+	.tableH td{height:65px;}
 
-.subHr {
-	width: 45px;
-	margin-top: 140px;
-	border: 1px solid #f5bf25;
-}
+	/* 모바일 스타일 */
+	@media screen and (max-width:768px){
+		.subHr{margin-top:20%;}
+		.contHr{margin-top:5%; margin-bottom:10%;}
+		.member form .contTitle{font-size:28px;}
 
-.header .subTitle {
-	text-align: center;
-	font-size: 42px;
-	color: #fff;
-	margin-top: 20px;
-}
-
-/* 회원가입 */
-.member>div:nth-child(1) {
-	text-align: center;
-}
-
-.member>div:nth-child(1) span {
-	font-weight: bold;
-}
-
-.member {
-	width: 80%;
-	font-size: 14px;
-	margin: 0 auto;
-}
-
-.member table input {
-	border: 1px solid #999;
-}
-
-.member table {
-	border: 1px solid #f5bf25;
-	border-collapse: collapse;
-	text-align: left;
-	width: 80%;
-	font-size: 14px;
-	margin: 0 auto;
-}
-
-.member table .text input {
-	height: 30px;
-	width: 45%;
-}
-
-.member table .number input {
-	height: 30px;
-	width: 10%;
-}
-
-.member form {
-	margin: 100px 0;
-	text-align: center;
-}
-
-.member form .contTitle {
-	font-size: 28px;
-	font-weight: bold;
-}
-
-.member form .button {
-	overflow: hidden;
-	width: 100%;
-	text-align: center;
-}
-
-.member form .button input {
-	height: 40px;
-	margin-top: 60px;
-}
-
-.member form .button .ok {
-	background-color: #f5bf25;
-	border: 1px solid #f5bf25;
-	width: 70px;
-	color: #fff;
-	margin-left: 5px;
-}
-
-.member form .button .no {
-	width: 70px;
-	margin-left: 5px;
-}
-
-.member table tr {
-	height: 30px;
-}
-
-.member th {
-	border-left: 1px solid #fff;
-	padding: 0 10px;
-	border-bottom: 1px solid #ccc;
-	height: 45px;
-	background-color: #eee;
-	color: #333;
-}
-
-.member td {
-	border-right: 1px solid #fff;
-	padding: 0 10px;
-	border-bottom: 1px solid #ccc;
-	height: 50px;
-}
-
-.member th span {
-	color: red;
-}
-
-.member .text button {
-	height: 33px;
-	background-color: #666;
-	border: 0px;
-	color: #fff;
-}
-
-.member .text td span {
-	font-size: 12px;
-}
-
-.agree {
-	width: 80%;
-	margin: 0 auto;
-	margin-bottom: 30px;
-}
-
-.agree .textbox {
-	overflow-y: scroll;
-	height: 100px;
-	border: 1px solid #ccc;
-	padding: 15px;
-	text-align: left;
-}
-
-.agree .text {
-	text-align: right;
-	margin-top: 10px;
-}
-
-.tableH td {
-	height: 65px;
-}
-
-/* footer */
-footer {
-	width: 100%;
-	height: 95px;
-	background-color: #333;
-	margin-top: 50px;
-	color: #666
-}
-
-footer .fot {
-	width: 80%;
-	margin: 0 auto;
-	overflow: hidden;
-}
-
-footer .fot div {
-	float: left;
-}
-
-footer .fot div:nth-child(1) {
-	font-size: 18px;
-	margin: 35px 0 0 0;
-}
-
-footer .fot div:nth-child(2) {
-	margin: 24px 0 0 50px;
-	font-size: 12px;
-}
-
-/* 모바일 스타일 */
-@media screen and (max-width:768px) {
-	.subHr {
-		margin-top: 20%;
+		.header .subTitle{font-size:36px; margin-top:0; padding-bottom:5%;}
+		.member form{margin:15% 0;}
+		.agree{width:100%;}
+		.member table{width:100%;}
+		table th{width:25%;}
+		.member table .text input{width:60%;}
+		.member form .button input{margin-top:10%;}
 	}
-	.header .subTitle {
-		font-size: 36px;
-		margin-top: 0;
-		padding-bottom: 5%;
-	}
-	.member form {
-		margin: 15% 0;
-	}
-	.contHr {
-		margin-top: 5%;
-		margin-bottom: 10%;
-	}
-	.agree {
-		width: 100%;
-	}
-	.member table {
-		width: 100%;
-	}
-	table th {
-		width: 25%;
-	}
-	.member table .text input {
-		width: 60%;
-	}
-	.member form .button input {
-		margin-top: 10%;
-	}
-}
 </style>
 
 <script>
@@ -351,12 +180,12 @@ footer .fot div:nth-child(2) {
 						data:user,
 						success: () =>{
 							swal({
-								title:'가입성공',
-								text:'',
+								title:'',
+								text:'가입성공',
 								type:'success', 
 							},
 							function(isConfirm){
-									location.href='login';
+									location.href='<c:url value='/'/>';
 							});
 						},
 					});
@@ -365,7 +194,7 @@ footer .fot div:nth-child(2) {
 					return;
 				}
 			}else{ //ID 중복확인 안했을 경우.
-				swal('아이디 중복확인을 해주세요');
+				swal('','아이디 중복확인을 해주세요');
 				return;
 			}
 		});
@@ -407,14 +236,13 @@ footer .fot div:nth-child(2) {
 							<th><span>*</span> 아이디</th>
 							<td><font color='tomato'><p id='idmsg'></p> </font><input
 								type="text" maxlength="12" id="userId" value='' /> <input
-								type="button" value="중복확인" id='availCheck'> <br> <span>8자리
-									이상 12글자 이하의 영문, 숫자 각 최소 1개 이상(첫글자는 영문), 공백 불가</span></td>
+								type="button" value="중복확인" id='availCheck'> <br> <span>8자리 이상 12자리 이하, 영문, 숫자 최소 1개 이상 가능(시작은 영문, 공백불가)</span></td>
 						</tr>
 						<tr class="text">
 							<th><span>*</span> 암호</th>
 							<td><font color='tomato'><p id='pwmsg'></p> </font><input
 								type="password" maxlength="16" id="userPw" />&nbsp;&nbsp;&nbsp;<br>
-								<span>8자리 이상 16글자 이하의 영문 대소문자, 숫자, 특수문자 각 최소 1개 이상, 공백 불가</span></td>
+								<span>8자리 이상 16자리 이하, 영소문자, 숫자, 특수문자 각 최소 1개 이상 가능(공백불가)</span></td>
 						</tr>
 						<tr class="text">
 							<th><span>*</span> 이름</th>
@@ -432,7 +260,7 @@ footer .fot div:nth-child(2) {
 								oninput="maxLengthCheck(this)" /></td>
 						</tr>
 						<tr class="text">
-							<th><span>*</span> E-mail</th>
+							<th><span>*</span> 이메일</th>
 							<td><font color='tomato'><p id='emailmsg'></p> </font><input
 								type="email" id="userEmail" maxlength="40" /></td>
 						</tr>

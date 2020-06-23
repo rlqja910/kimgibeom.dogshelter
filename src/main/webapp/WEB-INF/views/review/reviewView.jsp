@@ -7,9 +7,11 @@
 <title>유기견 보호소</title>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+
 <script src="../res/layoutsub.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
 <style>
 	/* header */
 	.header{width:100%; height:380px; background-color:#ccc; background-image:url('../img/loginImg.jpg'); background-position: center;}
@@ -46,7 +48,9 @@
 
 	.writeCont .view{margin-top:5%; font-size:16px;}
 	.writeCont .view ul{border-bottom:1px solid #ccc; padding:2% 0;}
-	.writeCont .view ul li:nth-child(1){margin-bottom:1%;}
+	.writeCont .view ul li:nth-child(1){margin-bottom:1%; overflow:hidden;}
+	.writeCont .view ul li .viewDel{float:right;}
+	.writeCont .view ul li .viewDel input{background-color:#fff; border:1px solid #ccc; color:#666; padding:5px 10px;}
 	.writeCont .view ul li span{color:#999;}
 
 	/* 모바일 스타일 */
@@ -75,7 +79,7 @@
 		<div class='header'>
 			<div class='headerBackground'>
 				<header>
-					<%@ include file="../common/header.jsp"%>
+					<%@ include file="../common/header.jsp" %>
 				</header>
 				<hr class='subHr'>
 				<div class='subTitle'>입양후기</div>
@@ -95,7 +99,7 @@
 							</tr>
 							<tr>
 								<td colspan='2'>
-									<img src='../img/dog.jpg'><br><br>
+									<div style="height:100px; width:120px; border:1px solid;">유기견 이미지</div><br><br>
 									저희 센터에서 가장 작고 아담한 치와와 공주 치치가 드디어 좋은 견주를 만났어요. > <<br>
 									자식가진 부모님 마음은 한결같죠!!<br>
 									내 자식이 가지고 싶은거 하고 싶은거 할 수 잏게 해주는거요!!!<br>
@@ -120,21 +124,21 @@
 
 									</textarea>
 									<div>
-										<input type='button' value='등록'/>
+										<input type='button' value='등록' onClick="location.href='02.html'"/>
 									</div>
 								</div>
 							</div>
 							<div class='view'>
 								<ul>
-									<li>Smile1 <span>2020-06-17</span></li>
+									<li>Smile1 <span>2020-06-17</span> <span class='viewDel'><input type='button' value='삭제'/></li>
 									<li>치와와 치치가 좋은 주인을 만난거 같아서 너무 다행이네요~!</li>
 								</ul>
 								<ul>
-									<li>Smile1 <span>2020-06-17</span></li>
+									<li>Smile1 <span>2020-06-17</span> <span class='viewDel'><input type='button' value='삭제'/></li>
 									<li>치와와 치치가 좋은 주인을 만난거 같아서 너무 다행이네요~!</li>
 								</ul>
 								<ul>
-									<li>Smile1 <span>2020-06-17</span></li>
+									<li>Smile1 <span>2020-06-17</span> <span class='viewDel'><input type='button' value='삭제'/></li>
 									<li>치와와 치치가 좋은 주인을 만난거 같아서 너무 다행이네요~!</li>
 								</ul>
 							</div>

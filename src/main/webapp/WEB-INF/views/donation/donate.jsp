@@ -26,8 +26,8 @@ $(()=>{
 		$.ajax({
 			success: () =>{
 				swal({
-					title:'후원금 결제가 완료되었습니다',
-					text:'',
+					title:'',
+					text:'후원금 결제가 완료되었습니다',
 					type:'success', 
 				},
 				function(result){
@@ -98,12 +98,11 @@ $(()=>{
 	.modal-body table tr th{width:25%; text-align:center;}
 	.modal-body table tr td{width:75%;}
 	.modal-body table .name td input{width:80%; margin-bottom:20px;}
-	.modal-body table .name th{padding-bottom:20px;}
+	.modal-body table .name th{padding-bottom:35px;}
 	.modal-body table .tall td input{width:24%;}
-	.modal-body table .bank td select{width:35%; height:40px; margin-bottom:20px;}
-	.modal-body table .bank td input{width:80%; margin-bottom:20px;}
-	.modal-body table .bank th{padding-bottom:20px;}
-	.modal-body table .cardNum th{padding-bottom:20px;}
+	.modal-body table .bank td{padding-bottom:20px;}
+	.modal-body table .bank th{padding-bottom:25px;}
+	.modal-body table .cardNum th{padding-bottom:35px;}
 	
 	table{width:100%;}
 	.modal-body table .cardNum td input{width:80%; margin-bottom:20px;}
@@ -147,7 +146,7 @@ $(()=>{
 		<div class='header'>
 			<div class='headerBackground'>
 				<header>
-					<%@ include file="../common/header.jsp"%>
+					<%@ include file="../common/header.jsp" %>
 				</header>
 				<hr class='subHr'>
 				<div class='subTitle'>후원하기</div>
@@ -229,11 +228,7 @@ $(()=>{
 							<table>
 								<tr class='bank'>
 									<th>은행선택</th>
-									<td>
-										<select>
-											<option>국민은행</option>
-										</select>
-									</td>
+									<td>국민은행</td>
 								</tr>
 								<tr class='cardNum'>
 									<th>카드번호</th>

@@ -20,12 +20,12 @@ $(()=>{
 		$.ajax({
 			success: () =>{
 				swal({
-					title:'입양신청이 취소되었습니다',
-					text:'',
+					title:'',
+					text:'입양신청이 취소되었습니다',
 					type:'success', 
 				},
 				function(result){
-						location.href='01.html';
+						location.href='02.html';
 				})
 			}
 			});
@@ -94,7 +94,7 @@ $(()=>{
 		<div class='header'>
 			<div class='headerBackground'>
 				<header>
-					<%@ include file="../common/header.jsp"%>
+					<%@ include file="../common/header.jsp" %>
 				</header>
 				<hr class='subHr'>
 				<div class='subTitle'>마이페이지</div>

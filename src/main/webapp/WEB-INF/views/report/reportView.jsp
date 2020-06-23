@@ -15,9 +15,8 @@
 	href="http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>	
 <script>
-function reportDel() {
+$(()=>{
 	$('#reportDel').click(()=>{
 		$.ajax({
 			success: () =>{
@@ -30,25 +29,9 @@ function reportDel() {
 						location.href='01.html';
 				})
 			}
+			});
 		});
-	});
-}
-function readReply() {
-	$('.view').html(
-		`<c:forEach var='reply' items='${replies}'>
-			<ul>
-				<li>${reply.writer} <span>${reply.regDate}</span></li>
-				<li>${reply.content}</li>
-			</ul>
-		</c:forEach>`	
-	);
-	
-	if ($('.view').html() == ``) {
-		$('.view').html('<div class="viewEmpty">댓글이 없습니다.</div>')
-	}
-}
-$(readReply);
-$(reportDel);
+});
 </script>
 <style>
 	/* header */
@@ -59,6 +42,7 @@ $(reportDel);
 	.header .subTitle{text-align:center; font-size:42px; color:#fff; margin-top:20px;}
 	.contHr{width:45px; margin-top:20px; margin-bottom:60px; border:1px solid #f5bf25;}
 	.contTitle{font-size:32px; font-weight:bold; text-align:center;}
+
 	/* 입양후기 */
 	.review{width:80%;font-size:14px; margin:0 auto; margin-top:100px; margin-bottom:100px;}
 	.review .reportView{width:90%; margin:0 auto;}
@@ -76,22 +60,29 @@ $(reportDel);
 	.button input:nth-child(1){float:left;}
 	.button input:nth-child(2){border:1px solid #ccc; background-color:#fff; color:#666; margin-left:5px;}
 	.button input{float:right;}
+
 	/* 댓글 */
-	.replyCont{width:100%;}
-	.replyCont p{font-size:20px; font-weight:bold; colo:#333;}
-	.replyCont .reply{border:1px solid #ccc;}
-	.replyCont .reply textarea{width: 98%; height: 60px; padding:1%; border:0px; font-size: 14px; resize: both;}
-	.replyCont .reply div{text-align:right;}
-	.replyCont .reply div div{width:100%; border-top:1px solid #e2e2e2;}
-	.replyCont .reply div div input{background-color:#f5bf25; width:70px; height:40px; border:0px; color:#fff;}
-	.replyCont .view{margin-top:5%; font-size:16px;}
-	.replyCont .view ul{border-bottom:1px solid #ccc; padding:2% 0;}
-	.replyCont .view ul li:nth-child(1){margin-bottom:1%;}
-	.replyCont .view ul li span{color:#999;}
+	.writeCont{width:100%;}
+	.writeCont p{font-size:20px; font-weight:bold; colo:#333;}
+	.writeCont .write{border:1px solid #ccc;}
+	.writeCont .write textarea{width: 98%; height: 60px; padding:1%; border:0px; font-size: 14px; resize: both;}
+	.writeCont .write div{text-align:right;}
+	.writeCont .write div div{width:100%; border-top:1px solid #e2e2e2;}
+	.writeCont .write div div input{background-color:#f5bf25; width:70px; height:40px; border:0px; color:#fff;}
+
+	.writeCont .view{margin-top:5%; font-size:16px;}
+	.writeCont .view ul{border-bottom:1px solid #ccc; padding:2% 0;}
+	.writeCont .view ul li:nth-child(1){margin-bottom:1%; overflow:hidden;}
+	.writeCont .view ul li .viewDel{float:right;}
+	.writeCont .view ul li .viewDel input{background-color:#fff; border:1px solid #ccc; color:#666; padding:5px 10px;}
+	.writeCont .view ul li span{color:#999;}
+
+
 	/* 모바일 스타일 */
 	@media screen and (max-width:768px){
 		.subHr{margin-top:20%;}
 		.contHr{margin-top:5%; margin-bottom:10%;}
+
 		.header .subTitle{font-size:36px; margin-top:0; padding-bottom:5%;}
 		.contTitle{font-size:28px;}
 		
@@ -99,7 +90,9 @@ $(reportDel);
 		.review .reviewView{width:100%;}
 		.review .reviewView table tr{font-size:14px;}
 		.review .reviewView table tr th{background-color:#ccc; width:20%; padding:2% 0;}
+
 		.button input{margin-top:5%;}
+
 		.writeCont .view{font-size:14px;}
 		.writeCont .view ul{border-bottom:1px solid #ccc; padding:4% 0;}
 		.writeCont .view ul li:nth-child(1){margin-bottom:2%;}
@@ -111,14 +104,14 @@ $(reportDel);
 		<div class='header'>
 			<div class='headerBackground'>
 				<header>
-					<%@ include file="../common/header.jsp"%>
+					<%@ include file="../common/header.jsp" %>
 				</header>
 				<hr class='subHr'>
 				<div class='subTitle'>유기견 신고</div>
 			</div>
 		</div>
-
-		<!-- 유기견 신고 -->
+		
+		<!-- 입양후기 -->
 			<div class="content">
 				<div class="review">
 					<div class='contTitle'>유기견 신고</div>
@@ -127,46 +120,58 @@ $(reportDel);
 						<table>
 							<tr>
 								<th>제목</th>
-								<td>${report.title}</td>
+								<td>왕십리에서 비글 발견했습니다.</td>
 							</tr>
 							<tr>
 								<td colspan='2'>
-									<div style="height:100px; width:120px; border:1px solid;">강아지 이미지</div><br><br>
-									${report.content}
+									<div style="height:100px; width:120px; border:1px solid;">유기견 이미지</div><br><br>
+									얼른 데려가주세요.ㅠㅠ
 								</td>
 							</tr>
 						</table>
-
+						
 						<!-- 목록 버튼 -->
 						<div class='button'>
-							<input type='button' value='목록'/>
-							<a href='../reportListView'><input type='button' value='목록'/></a>
+							<input type='button' value='목록' onClick="location.href='01.html'"/>
 							<input type='button' value='삭제' id='reportDel'/>
 							<input type='button' value='수정' onClick="location.href='04.html'"/>
 						</div>
-
-						<!-- 댓글 -->
-						<div class='replyCont'>
+						
+						<!-- 답글 -->
+						<div class='writeCont'>
 							<p>댓글</p>
 							<div class='write'>
-							<div class='reply'>
 								<div>
 									<textarea>
 
 									</textarea>
 									<div>
-										<input type='button' value='등록'/>
+										<input type='button' value='등록' onClick="location.href='03.html'"/>
 									</div>
 								</div>
 							</div>
-						
-							<div class='view'></div>
+							<div class='view'>
+								<ul>
+									<li>miso93 <span>2020-06-10</span> <span class='viewDel'><input type='button' value='삭제'/></li>
+									<li>아이가 얼른 주인 분 만났으면 좋겠네요.</li>
+								</ul>
+								<ul>
+									<li>miso93 <span>2020-06-10</span> <span class='viewDel'><input type='button' value='삭제'/></li>
+									<li>아이가 얼른 주인 분 만났으면 좋겠네요.</li>
+								</ul>
+								<ul>
+									<li>miso93 <span>2020-06-10</span> <span class='viewDel'><input type='button' value='삭제'/></li>
+									<li>아이가 얼른 주인 분 만났으면 좋겠네요.</li>
+								</ul>
+							</div>
 						</div>
 					</div>
 
 					<!-- 페이징 -->
+
 				</div>
 			</div>
+
 		<!-- 푸터 -->
 		<footer>
 			<%@ include file="../common/footer.jsp"%>

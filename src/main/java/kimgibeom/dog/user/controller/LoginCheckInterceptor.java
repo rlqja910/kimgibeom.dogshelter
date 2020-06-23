@@ -12,21 +12,17 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
 		System.out.println("interceptor 진입");
 		String urlFirstPath = (request.getServletPath().split("/"))[2]; // 기능
 		try {
-			if (urlFirstPath.equals("login") || urlFirstPath.equals("join")) { // 로그
-				System.out.println("인터맨----------1");
-				if (request.getSession().getAttribute("userId") == null) { // 로그인 안되어있으면 진입
+			if (urlFirstPath.equals("login") || urlFirstPath.equals("join")) { // url 쳐서 로그인이나 회원가입 페이지 이동시
+				if (request.getSession().getAttribute("userId") == null) { // 로그인 안되어있으면 로그인,회원가입 페이지 진입가능
 					System.out.println("인터맨----------2");
-				} else { // 로그인 되어있으면 진입불가
-					System.out.println("인터맨----------3");
+				} else { // // 로그인 되어있으면 로그인,회원가입 페이지 진입거부(사용자페이지 메인으로 이동)
 					response.sendRedirect("/dog");
 					return false;
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("인터맨----------10");
 		}
-
 		return isCheck;
 	}
 }

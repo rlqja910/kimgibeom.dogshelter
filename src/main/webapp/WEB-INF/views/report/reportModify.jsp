@@ -10,8 +10,7 @@
 <script src="../res/layoutsub.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-<script src="${path}/ckeditor/ckeditor.js"></script>
+<script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
 <style>
 	/* header */
 	.header{width:100%; height:380px; background-color:#ccc; background-image:url('../img/loginImg.jpg'); background-position: center;}
@@ -69,7 +68,7 @@
 		<div class='header'>
 			<div class='headerBackground'>
 				<header>
-					<%@ include file="../common/header.jsp"%>
+					<%@ include file="../common/header.jsp" %>
 				</header>
 				<hr class='subHr'>
 				<div class='subTitle'>유기견 신고</div>
@@ -90,16 +89,15 @@
 							</tr>
 							<tr>
 								<th>내용</th>
-								<td><textarea id="description"> 
-								</textarea> <script>
-									CKEDITOR.replace("description", {
-										removePlugins : 'image'
-									});
-								</script></td>
+								<td>
+									<textarea>
+얼른 데려가주세요.ㅠㅠ
+									</textarea>
+								</td>
 							</tr>
 							<tr>
 								<th>이미지</th>
-								<td><div style="height:100px; width:120px; border:1px solid;">강아지 이미지</div></td>
+								<td><input type='file'/></td>
 							</tr>
 						</table>
 						

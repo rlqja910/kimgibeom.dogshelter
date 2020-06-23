@@ -10,6 +10,7 @@
 <script src="../res/layoutsub.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
 <script>
 	/* 원페이지 스크롤 */
 	$(function(){
@@ -88,7 +89,7 @@
 		<div class='header'>
 			<div class='headerBackground'>
 				<header>
-					<%@ include file="../common/header.jsp"%>
+					<%@ include file="../common/header.jsp" %>
 				</header>
 				<hr class='subHr'>
 				<div class='subTitle'>보호소 소개</div>
