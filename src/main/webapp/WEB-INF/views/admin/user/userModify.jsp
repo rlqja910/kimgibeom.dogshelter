@@ -10,6 +10,7 @@
 <link rel='stylesheet' href='http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css'/>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js'></script>
 <script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
+<script src="../res/adminNavSub.js"></script>
 <script>
 function userUpdate(){
 	$('#modify').on('click', () => {
@@ -130,16 +131,16 @@ p {
 <body>
 <div class='wrapper' id='leftNav'>
 	<div class='sidebar' id='sidebar'>
-		<%@ include file="../../common/nav.jsp" %>
+		<%@ include file="../common/nav.jsp"%>
 	</div>
 	<div class='main_content'>
 		<div class='header'>
 			<strong>&nbsp;&nbsp;ADMINSTRATOR</strong>
 			<div id='topButton'>
-					<a href='../logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
-					<a href='../banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-					<a href='../../'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-					<a href='../../user/logout'>로그아웃</a>
+					<a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
+					<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
+					<a href='../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+					<a href='user/logout'>로그아웃</a>
 			</div>
 		</div>
 		<div class='info'>
@@ -155,14 +156,14 @@ p {
 						<tr>
 							<th>아이디</th>
 							<td>
-								<input type='text' id='userId' value='sohyun2'/>
+								rlqja910
 							</td>
 						</tr>
 						<tr>
 							<th>비밀번호</th>
 							<td>
 								<input type='text' value='abcd1234!'/>
-								<p>* 8자리 이상 16자리 이하, 영 대소문자, 숫자, 특수문자 각 최소 1개 이상 가능(공백불가)</p>
+								<p>* * 8자리 이상 16자리 이하, 영소문자, 숫자, 특수문자 각 최소 1개 이상 가능(공백 불가) </p>
 							</td>
 						</tr>
 						<tr>

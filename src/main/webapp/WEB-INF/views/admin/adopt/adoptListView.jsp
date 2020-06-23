@@ -5,20 +5,41 @@
 <head>
 <meta charset='UTF-8'>
 <title>ADMIN PAGE</title>
-<meta name='viewport' content='width=device-width, initial-scale=1'>
-<link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
-<link rel='stylesheet' href='http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css'/>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js'></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
+<script src="../res/adminNavSub.js"></script>
 <script>
-function userUpdate(){
-	$('#modify').on('click', () => {
-		$('#modifypMsg').html('배너 등록이 완료되었습니다.');
+$(() => {
+	$('#complete').click(() => {
+		if($('input:checkbox').is(':checked')) {
+			swal({
+				title: '',
+				text: '분양을 완료하시겠습니까?',
+				showCancelButton: true,
+				confirmButtonText: '확인',
+				cancelButtonText: '취소',
+				closeOnConfirm: false
+			})
+		}
 	});
-}
-
-$(userUpdate);
-
+	
+	$('#cancel').click(() => {
+		if($('input:checkbox').is(':checked')) {
+			swal({
+				title: '',
+				text: '분양을 취소하시겠습니까?',
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonText: '확인',
+				cancelButtonText: '취소',
+				closeOnConfirm: false
+			})
+		}
+	});
+});
 </script>
 <style>
 * {
@@ -114,54 +135,131 @@ body {
 	display: inline;
 }
 
-th{
-	background-color:#EFEFEF;
+#search {
+	background: #4b4276;
+}
+
+#spanSearch {
+	color: #fff;
+}
+
+tr > th {
+	background: #dbd9e3;
+}
+
+th, td {
 	text-align: center;
-	width: 150px;
+}
+
+th {
+	color: #4b4276;
+	width: 100px;
+}
+
+.phone_num {
+	width: 400px;
+}
+
+.state, .date {
+	width: 200px;
+}
+
+.buttons{
+	float: right;
+}
+
+#pagination {
+	display: block;
+	text-align: center;
 }
 </style>
 </head>
+
 <body>
 <div class='wrapper' id='leftNav'>
 	<div class='sidebar' id='sidebar'>
-		<%@ include file="../../common/nav.jsp" %>
+		<%@ include file="../common/nav.jsp"%>
 	</div>
 	<div class='main_content'>
 		<div class='header'>
 			<strong>&nbsp;&nbsp;ADMINSTRATOR</strong>
 			<div id='topButton'>
-				<a href='../logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
-					<a href='../banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-					<a href='../../'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-					<a href='../../user/logout'>로그아웃</a>
+				<a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
+					<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
+					<a href='../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+					<a href='user/logout'>로그아웃</a>
 			</div>
 		</div>
 		<div class='info'>
 			<div class='content'>
 				<h3>
-					<span class='glyphicon glyphicon-picture'></span>
-					<strong> 배너등록</strong>
+					<span class='glyphicon glyphicon-calendar'></span>
+					<strong> 분양관리</strong>
 				</h3>
 				<hr style='border: 1px solid #a0a0a0;'>
 			
-				<form>
-					<table class='table'>
+				<form action='#'>
+					<div class='form-group' style='background-color:#eeeeee;'>
+						<select class='form-control' style='width: 120px; height: 35px; float:left;'>
+							<option>분양 미완료</option>
+							<option>분양 완료</option>
+						</select>
+					</div>		
+				</form>
+				
+				<br>
+				<p>&nbsp;</p>
+				
+				<table class='table table-hover'>
+					<thead>
 						<tr>
-							<th>배너 이미지</th>
-							<td>
-								<input type='file'/>
-								<div></div> <!-- 배너 이미지 출력할 공간 -->
-							</td>
+							<th>선택</th>
+							<th>번호</th>
+							<th>이름</th>
+							<th class='phone_num'>핸드폰 번호</th>
+							<th class='date'>신청일</th>
+							<th class='state'>상태</th>
 						</tr>
-					</table>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input type='checkbox'/></td>
+							<td>123</td>
+							<td>김소현</td>
+							<td>010-3534-8984</td>
+							<td>2016-06-02</td>
+							<td>입양 미완료</td>
+						</tr>
+						<tr>
+							<td><input type='checkbox'/></td>
+							<td>122</td>
+							<td>김아림</td>
+							<td>010-9844-4548</td>
+							<td>2016-06-02</td>
+							<td>입양 미완료</td>
+						</tr>				
+					</tbody>
+				</table>	
 					
-					<div class='button' style='text-align:right;'>
-						<span id='modifypMsg' style='color:red'></span>
-						<button type='button' class='btn btn-primary' id='modify'>등록</button>&nbsp;
-						<button type='button' class='btn btn-default' onClick="location.href='../main.html'">취소</button>
-					</div>
-				</form>	
-			</div>	
+				<div class='buttons'>
+					<button type='button' class='btn btn-primary' id='complete'>분양 완료</button>&nbsp;
+					<button type='button' class='btn btn-warning' id='cancel'>분양 취소</button>
+				</div>	
+				
+				<br><br><br>
+					
+				<div id="pagination">
+					<ul class="pagination">
+					    <li><a href="#">&laquo;</a></li>
+					    <li><a href="#">1</a></li>
+					    <li><a href="#">2</a></li>
+					    <li><a href="#">3</a></li>
+					    <li><a href="#">4</a></li>
+					    <li><a href="#">5</a></li>
+					    <li><a href="#">&raquo;</a></li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

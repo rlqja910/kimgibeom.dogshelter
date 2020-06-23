@@ -10,12 +10,10 @@
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
-<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+<script src="../res/adminNavSub.js"></script>
 <script>
-function replyDel() {
-	$('.replyDel').click(function(e) {
-		let replyNo = $(this).attr('id').trim();
-		
+function del() {
+	$('.delete').click(() => {
 		swal({
 			title: '',
 			text: '댓글을 삭제하시겠습니까?',
@@ -24,29 +22,11 @@ function replyDel() {
 			confirmButtonText: '확인',
 			cancelButtonText: '취소',
 			closeOnConfirm: false
-		},
-		function(isConfirm) {
-			if(isConfirm) {
-				$.ajax({
-					url: '../removeReply',
-					data: {replyNum: replyNo},
-					success: () => {
-						location.reload();
-					}
-				});
-			}	
-		});
+		})
 	});
 };
 
-function replyNum() {
-	let replyNum = $('.replyBox').length;
-	$('h4').eq(1).children().html('댓글 &nbsp;<font>' 
-			+ replyNum + '</font>');
-}
-
-$(replyDel);
-$(replyNum);
+$(del);
 </script>
 <style>
 * {
@@ -135,11 +115,18 @@ body {
 	color: #717171;
 }
 
-.postInfo {
+#content {
+	float: left;
+	margin-left: 10px;
+	width: 400px;
+	display: inline;
+}
+
+.post-info {
 	margin-right: 15px;
 }
 
-.postText {
+.post-text {
 	margin-bottom: 150px;
 }
 
@@ -149,7 +136,7 @@ body {
 	float: right;
 }
 
-.replyDel {
+.delete {
 	float: right;
 	margin-top: 3px;
 }
@@ -167,56 +154,70 @@ body {
 <body>
 <div class='wrapper' id='leftNav'>
 	<div class='sidebar' id='sidebar'>
-		<%@ include file="../../common/nav.jsp" %>
+		<%@ include file="../common/nav.jsp"%>
 	</div>
 	<div class='main_content'>
 		<div class='header'>
 			<strong>&nbsp;&nbsp;ADMINSTRATOR</strong>
 			<div id='topButton'>
-					<a href='../logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
-					<a href='../banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-					<a href='../../'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-					<a href='../../user/logout'>로그아웃</a>
+					<a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
+					<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
+					<a href='../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+					<a href='user/logout'>로그아웃</a>
 			</div>
 		</div>
 		<div class='info'>
 			<div class='content'>
 				<h3>
 					<span class='glyphicon glyphicon-bullhorn'></span>
-					<strong> 신고 게시판 관리</strong>
+					<strong> 신고 게시판 관리 > 상세</strong>
 				</h3>
 				<hr style='border: 1px solid #a0a0a0;'>
-				
-				<div>
-					<h4><strong>${report.title}</strong></h4>
-					<strong class='postInfo'>${report.userId}</strong>
-					<span class='glyphicon glyphicon-eye-open postInfo'>&nbsp;${report.viewCount}</span>
-					<span class='glyphicon glyphicon-time postInfo'>&nbsp;${report.regDate}</span>		
-					<hr>					
-				</div>	
-				
-				<div class='postText'>
-					${report.content}
-				</div>							
+				<h4>
+					<strong>중화동 근처 말티즈 잃어버리신 분 있나요?</strong>
+				</h4>
+				<strong class='post-info'>coco1234</strong>
+				<span class='glyphicon glyphicon-eye-open post-info'>&nbsp;21</span>
+				<span class='glyphicon glyphicon-time post-info'>&nbsp;2020-06-13</span>							
 			</div>
-			
-			<a href='../reportListView'><button class='btn list'>목록</button></a><br><br>
-			<hr>		
+			<hr>
+			<div class='post-text'>
+				퇴근하고 집 가는데 말티즈 한 마리가 혼자서 돌아다니더라구요.<br>
+				깨끗하고 관리가 잘 된걸 보면 유기는 아니고<br>
+				잃어버리신거 같은데 임보 중이니 연락 주세요. 010-3434-1221<br> <!-- 강아지 사진, 지도 -->				
+			</div>
+			<a href='01.html'><button class='btn list'>목록</button></a><br><br>
+			<hr>
 			
 			<h4><strong>댓글</strong></h4>
 			<br>
-			<c:forEach var='reply' items='${replies}'>
-				<div style='background-color:#eeeeee;'>
-					<div class='replyBox'>
-						<span><strong>${reply.writer}</strong>&nbsp;&nbsp;${reply.regDate}</span>
-						<button id='${reply.replyNum}' type='button' class='btn btn-danger replyDel'>삭제</button>
-						<div class='replyContent'>
-							${reply.content}<br>&nbsp;
-						</div>
+			<div style='background-color:#eeeeee;'>
+				<div class='replyBox'>
+					<span><strong>miso93</strong>&nbsp;&nbsp;2020-06-10</span>
+					<button type='button' class='btn btn-danger delete'>삭제</button>
+					<div class='replyContent'>
+						아이가 얼른 주인분 만났으면 좋겠네요.
 					</div>
 				</div>
-				<br>
-			</c:forEach>
+					
+			</div>
+			<br>
+			<div style='background-color:#eeeeee;'>
+				<div class='replyBox'>
+					<span><strong>smile1</strong>&nbsp;&nbsp;2020-06-10</span>
+					<button type='button' class='btn btn-danger delete'>삭제</button>
+					<div class='replyContent'>
+						안타깝네요.
+						<br>안타깝네요.
+						<br>안타깝네요.
+						<br>안타깝네요.
+						<br>안타깝네요.
+						<br>안타깝네요.
+						<br>안타깝네요.	
+					</div>
+				</div>
+			</div>
+			<br>
 		</div>
 	</div>
 </div>

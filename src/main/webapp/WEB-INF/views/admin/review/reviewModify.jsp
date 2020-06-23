@@ -9,9 +9,8 @@
 <link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
 <link rel='stylesheet' href='http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css'/>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js'></script>
-<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 <script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
-<script src="${path}/ckeditor/ckeditor.js"></script>
+<script src="../res/adminNavSub.js"></script>
 <script>function modify(){
 	let count = 0;
 	
@@ -125,8 +124,8 @@ th{
 }
 
 textarea{
-	width: 1500px;
-	height: 1000px;
+	width: 1300px;
+	height: 300px;
 	resize: none;
 	padding: 20px;
 }
@@ -135,16 +134,16 @@ textarea{
 <body>
 <div class='wrapper' id='leftNav'>
 	<div class='sidebar' id='sidebar'>
-		<%@ include file="../../common/nav.jsp" %>
+		<%@ include file="../common/nav.jsp"%>
 	</div>
 	<div class='main_content'>
 		<div class='header'>
 			<strong>&nbsp;&nbsp;ADMINSTRATOR</strong>
 			<div id='topButton'>
-					 <a href='../logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
-					<a href='../banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-					<a href='../../'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-					<a href='../../user/logout'>로그아웃</a>
+				 	<a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
+					<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
+					<a href='../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+					<a href='user/logout'>로그아웃</a>
 			</div>
 		</div>
 		<div class='info'>
@@ -159,7 +158,7 @@ textarea{
 					<table class='table'>
 						<tr>
 							<th>제목</th>
-							<td><input type='text' style='width:500px;' value='치치!!'/></td>
+							<td><input type='text' style='width:500px;' value='점박이 치와와 치치!! 따뜻한 가정으로'/></td>
 						</tr>
 						<tr>
 							<th>이미지</th>
@@ -176,12 +175,7 @@ textarea{
 견주님께서도 어릴때 강아지도 키워보고 너무나도 좋아했지만 그동안 잊고 지내셨었나봐요~
 따님 생일선물이기도 하지만 견주님께도 인생의 선물이 아닐까 싶네요 사랑스러운 새로운 가족이 생겼으니깐요^^
 								</textarea>
-								<script>
-									CKEDITOR.replace("description", {
-										removePlugins: 'image'
-									});
-									
-								</script>
+								
 							</td>
 						</tr>
 					</table>

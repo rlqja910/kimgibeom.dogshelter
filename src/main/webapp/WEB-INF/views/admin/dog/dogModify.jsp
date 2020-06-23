@@ -10,8 +10,7 @@
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
-<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-<script src="${path}/ckeditor/ckeditor.js"></script>
+<script src="../res/adminNavSub.js"></script>
 <script>
 function modify(){
 	let count = 0;
@@ -136,16 +135,16 @@ textarea{
 <body>
 <div class='wrapper' id='leftNav'>
 	<div class='sidebar' id='sidebar'>
-		<%@ include file="../../common/nav.jsp" %>
+		<%@ include file="../common/nav.jsp"%>
 	</div>
 	<div class='main_content'>
 		<div class='header'>
 			<strong>&nbsp;&nbsp;ADMINSTRATOR</strong>
 			<div id='topButton'>
-				<a href='../logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
-					<a href='../banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-					<a href='../../'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-					<a href='../../user/logout'>로그아웃</a>
+				<a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
+					<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
+					<a href='../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+					<a href='user/logout'>로그아웃</a>
 			</div>
 		</div>
 		<div class='info'> <!-- info 밑으로 화면 구성하면되고 글리피콘 사용할때 id 만들어서 사용해주세요. 안그러면 네비게이션바 글리피콘도 움직여요. -->
@@ -158,26 +157,32 @@ textarea{
 						<tr>
 							<th class='th'>제목</th>
 							<td colspan='3'><input type='text' style='width:400px;' 
-									placeholder='비글 오렌지 책임분양'/></td>
+									value='비글 오렌지 책임분양'/></td>
 						</tr>
 						<tr>
 							<th class='th'>이름</th>
-							<td><input type='text' placeholder='오렌지'/></td>
+							<td><input type='text' value='오렌지'/></td>
 							<th class='th'>품종</th>
-							<td><input type='text' placeholder='비글'/></td>
+							<td><input type='text' value='비글'/></td>
 						</tr>
 						<tr>
 							<th class='th'>체중</th>
 							<td><input type='number' style='width:70px;' 
 									placeholder='2'/> (kg)</td>
 							<th class='th'>나이</th>
-							<td><input type='number' placeholder='5'/></td>
+							<td><input type='number' value='5'/></td>
+						</tr>
+						<tr>
+							<th class='th'>입소날짜</th>
+							<td colspan='3'>
+								<input type='date' name='enterDate'/>
+							</td>
 						</tr>
 						<tr>
 							<th class='th'>성별</th>
 							<td colspan='3'>
-								<input type='radio' name='gender' checked/>남자 &nbsp;&nbsp;
-								<input type='radio' name='gender'/>여자
+								<input type='radio' name='gender' checked/>수컷 &nbsp;&nbsp;
+								<input type='radio' name='gender'/>암컷
 							</td>
 						</tr>
 						<tr>
@@ -185,11 +190,7 @@ textarea{
 							<td colspan='3'>
 								<textarea id='description'> 오늘도 많은 아이들이 각자의 안타까운 사연을 가지고 있습니다. 입양 시 소정의 책임비가 발생되니 참고 부탁드립니다. 이 때 발생되는 책임비는 또 다른 유기견들의 관리 비용에 사용되고 있습니다. 아이들의 평생을 결정하는 선택, 신중히 생각 해보신 후에 연락 주세요.
 								</textarea>
-								<script>
-									CKEDITOR.replace("description", {
-										removePlugins: 'image'
-									});
-								</script>								
+															
 							</td>
 						</tr>
 						<tr>

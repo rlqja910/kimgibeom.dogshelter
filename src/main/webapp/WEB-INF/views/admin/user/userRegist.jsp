@@ -10,12 +10,13 @@
 <link rel='stylesheet' href='http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css'/>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js'></script>
 <script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
+<script src="../res/adminNavSub.js"></script>
 <script>
 function idOverlapTest(){
 	$('#idOverlap').on('click', () => {
 		console.log($('#userId').val());
 		if($('#userId').val()){
-			
+			$('#idOverlapMsg').html('사용 가능한 아이디입니다.');
 		}else {
 			$('#idOverlapMsg').html('아이디를 입력해주세요.');
 		}
@@ -134,16 +135,16 @@ p {
 <body>
 <div class='wrapper' id='leftNav'>
 	<div class='sidebar' id='sidebar'>
-		<%@ include file="../../common/nav.jsp" %>
+		<%@ include file="../common/nav.jsp"%>
 	</div>
 	<div class='main_content'>
 		<div class='header'>
 			<strong>&nbsp;&nbsp;ADMINSTRATOR</strong>
 			<div id='topButton'>
-					<a href='../logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
-					<a href='../banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-					<a href='../../'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-					<a href='../../user/logout'>로그아웃</a>
+					<a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
+					<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
+					<a href='../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+					<a href='user/logout'>로그아웃</a>
 			</div>
 		</div>
 		<div class='info'>
@@ -160,7 +161,7 @@ p {
 							<th>아이디</th>
 							<td>
 								<input type='text' id='userId'/>&nbsp;
-								<button type='button' id='idOverlap'>ID 중복확인</button>
+								<button type='button' id='idOverlap'>중복확인</button>
 								<span id='idOverlapMsg' style='color:red'></span>
 								<br>
 								<p>* 8자리 이상 12자리 이하, 영문, 숫자 최소 1개 이상 가능(시작은 영문, 공백불가)</p>
@@ -170,7 +171,7 @@ p {
 							<th>비밀번호</th>
 							<td>
 								<input type='password'/>
-								<p>* 8자리 이상 16자리 이하, 영 대소문자, 숫자, 특수문자 각 최소 1개 이상 가능(공백불가)</p>
+								<p>* 8자리 이상 16자리 이하, 영소문자, 숫자, 특수문자 각 최소 1개 이상 가능(공백불가)</p>
 							</td>
 						</tr>
 						<tr>

@@ -10,13 +10,14 @@
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
+<script src="../res/adminNavSub.js"></script>
 <script>
 function userDel(){
 	$('#delete').click(() => {
 		if($('input:checkbox').is(':checked')) {
 			swal({
 				title: '회원 삭제',
-				text: '정말 회원을 삭제하시겠습니까?',
+				text: '회원을 삭제하시겠습니까?',
 				type: 'warning',
 				showCancelButton: true,
 				confirmButtonText: '확인',
@@ -32,15 +33,7 @@ function userDel(){
 						confirmButtonText: '확인'
 					});	
 			});
-		}else {
-			swal({
-				title: '',
-				text: '항목을 선택하세요.',
-				type: 'warning',
-				confirmButtonText: '확인',
-				closeOnConfirm: false
-			})			
-		}	
+		}
 	});
 }
 
@@ -48,14 +41,6 @@ function userSearch(){
 	$('#search').click(() => {
 		if($('#searchContent').val().trim()) {
 			
-		}else {
-			swal({
-				title: '',
-				text: '검색할 내용을 입력해주세요.',
-				type: 'warning',
-				confirmButtonText: '확인',
-				closeOnConfirm: false
-			})			
 		}	
 	});
 }
@@ -191,16 +176,16 @@ th {
 <body>
 <div class='wrapper' id='leftNav'>
 	<div class='sidebar' id='sidebar'>
-		<%@ include file="../../common/nav.jsp" %>
+		<%@ include file="../common/nav.jsp"%>
 	</div>
 	<div class='main_content'>
 		<div class='header'>
 			<strong>&nbsp;&nbsp;ADMINSTRATOR</strong>
 			<div id='topButton'>
-					<a href='../logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
-					<a href='../banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-					<a href='../../'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-					<a href='../../user/logout'>로그아웃</a>
+					<a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
+					<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
+					<a href='../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+					<a href='user/logout'>로그아웃</a>
 			</div>
 		</div>
 		<div class='info'>
@@ -225,7 +210,6 @@ th {
 					</div>
 				</form>
 				<br>
-				<p>총 10명</p>
 				<table class='table table-hover'>
 					<thead>
 						<tr>

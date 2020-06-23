@@ -15,24 +15,24 @@
 <script src="https://code.jquery.com/jquery-1.10.1.js"
 	integrity="sha256-663tSdtipgBgyqJXfypOwf9ocmvECGG8Zdl3q+tk+n0="
 	crossorigin="anonymous"></script>
+<script src="../res/adminNavSub.js"></script>
 <script>
 function contributionSearch(){
 	$('#search').click(() => {
 		if($('#searchContent').val().trim()) {
-			
-		}else {
-			swal({
-				title: '',
-				text: '검색할 내용을 입력해주세요.',
-				type: 'warning',
-				confirmButtonText: '확인',
-				closeOnConfirm: false
-			})			
 		}	
 	});
 }
+function logoutSe(){
+	$('#logoutSe').click(()=>{
+		sessionStorage.removeItem('userId');
+	});
+}
 
-$(contributionSearch);
+$(()=>{
+	contributionSearch();
+	logoutSe();
+});
 </script>
 <style>
 * {
@@ -196,16 +196,16 @@ th {
 <body>
 	<div class='wrapper' id='leftNav'>
 		<div class='sidebar' id='sidebar'>
-			<%@ include file="../../common/nav.jsp" %>
+			<%@ include file="../common/nav.jsp"%>
 		</div>
 		<div class='main_content'>
 			<div class='header'>
 				<strong>&nbsp;&nbsp;ADMINSTRATOR</strong>
 				<div id='topButton'>
-					<a href='../logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
-					<a href='../banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-					<a href='../../'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-					<a href='../../user/logout'>로그아웃</a>
+					<a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
+					<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
+					<a href='../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+					<a href='user/logout'>로그아웃</a>
 				</div>
 			</div>
 			
@@ -213,7 +213,7 @@ th {
 				<div class='content'>
 	            	<h3>
 	            		<span class='glyphicon glyphicon-bank'></span>
-	            		<strong> 후기금관리</strong>
+	            		<strong>  <span class='glyphicon glyphicon-piggy-bank'></span> 후원금관리</strong>
 	            	</h3>
 	           		<hr style='border: 1px solid #a0a0a0;'>
 	           		
@@ -247,7 +247,6 @@ th {
 		               <br>
 		            </form>  
 					
-					<p>총 3명</p>
 					<table class="table table-hover">
 						<tr>
 							<th>후원번호</th>

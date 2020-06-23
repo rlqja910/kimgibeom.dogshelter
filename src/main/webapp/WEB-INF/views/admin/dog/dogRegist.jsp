@@ -10,8 +10,7 @@
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
-<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-<script src="${path}/ckeditor/ckeditor.js"></script>
+<script src="../res/adminNavSub.js"></script>
 <style>
 * {
 	margin: 0;
@@ -106,36 +105,33 @@ body {
 	float: left;
 }
 
-.tdWidth {
-	width: 1200px;
-}
 .th{ 
  	background-color:#EFEFEF; 
-	width: 150px; 
+	width: 100px; 
 	text-align: center; 
 } 
 
 textarea{
-	width: 1550px;
+	width: 1000px;
 	height: 200px;
 	resize: none;
-	padding: 20px;
+	padding: 15px;
 }
 </style>
 </head>
 <body>
 <div class='wrapper' id='leftNav'>
 	<div class='sidebar' id='sidebar'>
-		<%@ include file="../../common/nav.jsp" %>
+		<%@ include file="../common/nav.jsp"%>
 	</div>
 	<div class='main_content'>
 		<div class='header'>
 			<strong>&nbsp;&nbsp;ADMINSTRATOR</strong>
 			<div id='topButton'>
-				<a href='../logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
-					<a href='../banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-					<a href='../../'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-					<a href='../../user/logout'>로그아웃</a>
+				<a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
+					<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
+					<a href='../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+					<a href='user/logout'>로그아웃</a>
 			</div>
 		</div>
 		<div class='info'> <!-- info 밑으로 화면 구성하면되고 글리피콘 사용할때 id 만들어서 사용해주세요. 안그러면 네비게이션바 글리피콘도 움직여요. -->
@@ -162,6 +158,12 @@ textarea{
 							<td><input type='number'/></td>
 						</tr> 
 						<tr>
+							<th class='th'>입소날짜</th>
+							<td colspan='3'>
+								<input type='date' name='enterDate'/>
+							</td>
+						</tr>
+						<tr>
 							<th class='th'>성별</th>
 							<td colspan='3'>
 								<input type='radio' name='gender'/> 수컷 &nbsp;&nbsp;
@@ -172,11 +174,7 @@ textarea{
 							<th class='th'>내용</th>
 							<td colspan='3'>
 							<textarea id='description'></textarea>
-							<script>
-								CKEDITOR.replace("description", {
-									removePlugins: 'image'
-								});
-							</script>								
+														
 							</td>
 						</tr>
 						<tr>

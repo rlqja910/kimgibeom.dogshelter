@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
+<script src="../res/adminNavSub.js"></script>
 <script>
 function dogDel() {
 	$('#delete').click(() => {
@@ -28,14 +29,6 @@ function dogDel() {
 		      if(isConfirm) swal('','유기견 정보가 삭제되었습니다.','success');
 		      else('취소','','error');
 		   });	
-		}else {
-			swal({
-				title: '',
-				text: '항목을 선택하세요.',
-				type: 'warning',
-				confirmButtonText: '확인',
-				closeOnConfirm: false
-			})			
 		}
 	});
 }
@@ -44,14 +37,6 @@ function reportSearch(){
 	$('#search').click(() => {
 		if($('#searchContent').val().trim()) {
 			
-		}else {
-			swal({
-				title: '',
-				text: '검색할 내용을 입력해주세요.',
-				type: 'warning',
-				confirmButtonText: '확인',
-				closeOnConfirm: false
-			})			
 		}	
 	});
 }
@@ -223,16 +208,16 @@ body {
 <body>
 <div class='wrapper' id='leftNav'>
    <div class='sidebar' id='sidebar'>
-      <%@ include file="../../common/nav.jsp" %>
+      <%@ include file="../common/nav.jsp"%>
    </div>
    <div class='main_content'>
       <div class='header'>
          <strong>&nbsp;&nbsp;ADMINSTRATOR</strong>
          <div id='topButton'>
-            		<a href='../logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
-					<a href='../banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-					<a href='../../'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-					<a href='../../user/logout'>로그아웃</a>
+	            <a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
+					<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
+					<a href='../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+					<a href='user/logout'>로그아웃</a>
          </div>
       </div>
       <div class='info'>
@@ -259,7 +244,6 @@ body {
                <button type='button' class='btn btn-default'>입양 후</button>
                
                <br><br>
-               <p>총 10마리</p>
                <div class='totalReview'>
                   <div class='imgbox'>
                       <a href='03.html'><div class='img'>

@@ -9,9 +9,9 @@
 <link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
 <link rel='stylesheet' href='http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css'/>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js'></script>
-<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-<script src="${path}/ckeditor/ckeditor.js"></script>
+
 <script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
+<script src="../res/adminNavSub.js"></script>
 <style>
 * {
 	margin: 0;
@@ -113,8 +113,8 @@ th{
 }
 
 textarea{
-	width: 1500px;
-	height: 1000px;
+	width: 1300px;
+	height: 300px;
 	resize: none;
 	padding: 20px;
 }
@@ -124,16 +124,16 @@ textarea{
 <body>
 <div class='wrapper' id='leftNav'>
 	<div class='sidebar' id='sidebar'>
-		<%@ include file="../../common/nav.jsp" %>
+		<%@ include file="../common/nav.jsp"%>
 	</div>
 	<div class='main_content'>
 		<div class='header'>
 			<strong>&nbsp;&nbsp;ADMINSTRATOR</strong>
 			<div id='topButton'>
-					<a href='../logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
-					<a href='../banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-					<a href='../../'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-					<a href='../../user/logout'>로그아웃</a>
+				  <a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
+					<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
+					<a href='../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+					<a href='user/logout'>로그아웃</a>
 			</div>
 		</div>
 		<div class='info'>
@@ -159,11 +159,7 @@ textarea{
 							<td>
 								<textarea id="description"> 
 								</textarea>
-								<script>
-									CKEDITOR.replace("description", {
-										removePlugins: 'image'
-									});
-								</script>
+								
 							</td>
 						</tr>
 					</table>

@@ -112,7 +112,7 @@ body {
 	<div class='wrapper' id='leftNav'>
 		<header></header>
 		<div class='sidebar' id='sidebar'>
-			<%@ include file="../common/nav.jsp"%>
+			<%@ include file="common/nav.jsp"%>
 		</div>
 		<div class='main_content'>
 			<div class='header'>
@@ -121,7 +121,7 @@ body {
 					<a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
 					<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
 					<a href='../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-					<a href='../dog/user/logout'>로그아웃</a>
+					<a href='user/logout'>로그아웃</a>
 				</div>
 			</div>
 			<div class='info'>
@@ -299,8 +299,8 @@ body {
 	}
 
 	$(()=>{
-		animateCount1(143252300);
+		animateCount1(143252300); 
 		animateCount2(454000);
 	});
 </script>
-</html>
+</html> 
