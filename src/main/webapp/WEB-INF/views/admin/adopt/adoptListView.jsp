@@ -6,11 +6,7 @@
 <meta charset='UTF-8'>
 <title>ADMIN PAGE</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-<script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
-<script src="../res/adminNavSub.js"></script>
+<%@ include file="../common/scriptImport.jsp" %>
 <script>
 $(() => {
 	$('#complete').click(() => {
