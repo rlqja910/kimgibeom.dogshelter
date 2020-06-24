@@ -31,8 +31,9 @@
 	.member th{border-left:1px solid #fff;padding:0 10px; border-bottom:1px solid #ccc; height:45px;background-color:#eee; color:#333;}
 	.member td{border-right:1px solid #fff;padding:0 10px; border-bottom:1px solid #ccc; height:50px;}
 	.member th span{color:red;}
-	.member .text button{height:33px; background-color:#666; border:0px; color:#fff;}
 	.member .text td span{font-size:12px;}
+	
+	#availCheck{height:33px; background-color:#666; border:0px; color:#fff; height:30px; width:80px; margin-left:-5px; margin-top:6px;}
 	
 	.agree{width:80%; margin:0 auto; margin-bottom:30px;}
 	.agree .textbox{overflow-y:scroll; height:100px; border:1px solid #ccc; padding:15px;text-align:left;}
@@ -92,11 +93,9 @@
 					},
 					success: (result) =>{ 
 						if(result){
-							console.log(result);
 							swal('','사용 가능한 아이디입니다','success');
 							availCheck=true;
 						}else{
-							console.log(result);
 							swal('','이미 사용중인 아이디입니다','error');
 						}
 					},
@@ -139,9 +138,13 @@
 						return;
 					}
 					
-					if(!$('#userPhone1').val()||
-						!$('#userPhone2').val()||!$('#userPhone3').val()){
+					if(!$('#userPhone1').val() &&
+						!$('#userPhone2').val() && !$('#userPhone3').val()){
 						$('#phonemsg').text('전화번호을 입력하세요');
+						return;
+					}
+					else if($('#userPhone1').val().length != 3||$('#userPhone2').val().length != 4||$('#userPhone3').val().length != 4){
+						$('#phonemsg').text('전화번호 형식에 맞게 입력해주세요.(000-0000-0000)');
 						return;
 					}
 					
@@ -150,7 +153,6 @@
 						return;
 					}
 					
-					console.log('db에 전달 시작');
 					let phoneNum=$('#userPhone1').val()+'-'+$('#userPhone2').val()+'-'+$('#userPhone3').val();
 					let user={
 							userId:$('#userId').val().trim(),
@@ -158,8 +160,7 @@
 							userName:updateUserName,
 							userPhone:phoneNum,
 							userEmail:$('#userEmail').val(),
-					}; 
-					console.log(user);
+					};
 	
 					
 					$.ajax({

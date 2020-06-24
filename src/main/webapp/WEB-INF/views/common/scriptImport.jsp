@@ -6,3 +6,4 @@
 	href="http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>

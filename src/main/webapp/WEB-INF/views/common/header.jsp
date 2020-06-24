@@ -5,19 +5,15 @@
 <script>
 $(()=>{ 
 	logInConfrim();
-	console.log(`${userId}`);
 });
 function logInConfrim(){
 	if(`${userId}`){ //로그인 했을경우
 		if(`${userId}` === 'admin'){ //관리자가 로그인 했을경우
-			console.log('관리자로 로그인됨');
 			afterAdminLogin();
 		}else{ //관리자가 아닌 사용자가 로그인 했을경우
-			console.log('사용자로 로그인됨');
 			afterUserLogin();
 		}
 	}else{ //로그인이 안된 상태일 때
-		console.log('로그인 안됨');
 	}
 }
 
@@ -26,6 +22,11 @@ function afterUserLogin(){
 	$('#headBtn').empty();
 	$('#headBtn').append("<li><a href='<c:url value='/user/mypage'/>'>마이페이지</a></li>");
 	$('#headBtn').append("<li><a href='<c:url value='/user/logout'/>'>로그아웃</a></li>");
+	
+	$('#mLoginBtn').empty();
+	$('#mLoginBtn').append("<a href='<c:url value='/user/mypage'/>'>마이페이지</a>");
+	$('#mJoinBtn').empty();
+	$('#mJoinBtn').append("<a href='<c:url value='/user/logout'/>'>로그아웃</a>");
 }
 
 function afterAdminLogin(){
@@ -33,6 +34,13 @@ function afterAdminLogin(){
 	$('#headBtn').append("<li><a href='<c:url value='/admin'/>'>관리자페이지</a></li>");
 	$('#headBtn').append("<li><a href='<c:url value='/user/mypage'/>'>마이페이지 &nbsp;&nbsp;</a></li>");
 	$('#headBtn').append("<li><a href='<c:url value='/user/logout'/>' id='logoutBtn'>로그아웃</a></li>");
+	
+	$('#mLoginBtn').empty();
+	$('#mLoginBtn').append('<a href="<c:url value="/admin"/>">관리자페이지</a>');
+	$('#mJoinBtn').empty();
+	$('#mJoinBtn').append('<a href="<c:url value="/user/mypage"/>">마이페이지</a>');
+	$('#mUl').append('<li><a href="<c:url value="/user/logout"/>">로그아웃</a></li>');
+	
 }
 
 
@@ -193,14 +201,14 @@ function mobile_menu(){
 <%if(session.getAttribute("userId")!=null){ %>
 <%=session.getAttribute("userId") %>님 환영합니다<%} %>
 	<ul id='headBtn'>
-		<li><a href='/dog/user/login'>로그인</a></li>
-		<li><a href='/dog/user/join'>회원가입</a></li>
+		<li><a href='<c:url value="/user/login"/>'>로그인</a></li>
+		<li><a href='<c:url value="/user/join"/>'>회원가입</a></li>
 	</ul>	
 </div>
 <div class='headB'>
 	<div class='logo'><a href='<c:url value="/"/>'>로고 이미지</a></div>
 	<ul>
-		<li><a href='<c:url value="/introduce"/>'>보호소 소개</a></li>
+		<li><a href="<c:url value="/introduce"/>">보호소 소개</a></li>
 		<li><a href='<c:url value="/dog/dogListView"/>'>무료분양</a></li>
 		<li><a href='<c:url value="/review/reviewListView"/>'>입양후기</a></li>
 		<li><a href='<c:url value="/report/reportListView"/>'>신고하기</a></li>
@@ -213,11 +221,11 @@ function mobile_menu(){
 	</div>
 	<nav class="left_gnbWrap">
 		<a href="#" class="close"><i class="fas fa-times" style="width:40px; height:40px;"></i></a>
-		<ul class="left_gnb">
+		<ul class="left_gnb" id='mUl'>
 			<li class='mobileLogin' id='mLoginBtn'>
-				<a href="/dog/user/login">로그인</a>
+				<a href='<c:url value="/user/login"/>'>로그인</a>
 			</li>
-			<li class='mobileLogin' id='mLoginBtn'>
+			<li class='mobileLogin' id='mJoinBtn'>
 				<a href="<c:url value="/user/join"/>">회원가입</a>
 			</li>
 			<br>
