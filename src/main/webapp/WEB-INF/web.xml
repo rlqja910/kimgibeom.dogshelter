@@ -4,16 +4,14 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
 	<display-name>kimgibeom.dog</display-name>
-	<welcome-file-list>
-		<welcome-file>/WEB-INF/views/main.jsp</welcome-file>
-	</welcome-file-list>
+
 	<error-page>
 		<error-code>404</error-code>
-		<location>/WEB-INF/views/noUrl.jsp</location>
+		<location>/WEB-INF/views/common/noUrl.jsp</location>
 	</error-page>
 	<error-page>
 		<error-code>500</error-code>
-		<location>/user/error.jsp</location>
+		<location>/WEB-INF/views/common/error.jsp</location>
 	</error-page>
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
