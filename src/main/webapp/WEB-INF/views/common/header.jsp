@@ -181,8 +181,8 @@ function mobile_menu(){
 	/* 모바일 스타일 */
 	@media screen and (max-width:768px){
 		body{min-width:480px;}
-		.header{width:100%; height:auto; background-color:#282320; background:url('../img/mobileMainImg.jpg') no-repeat; background-size: 100%; background-position: center;}
-		.mainHeader{background:url('img/mobileMainImg.jpg') no-repeat;}
+		.header{width:100%; height:auto; background-color:#282320; background:url('<c:url value="../attach/banner/banner.jpg"/>') no-repeat; background-size: 100%; background-position: center;}
+		.mainHeader{background:url('<c:url value="../attach/banner/banner.jpg"/>') no-repeat;}
 		.mobileHead{display:block;}
 		.header header{width:90%; margin:0 5%;}
 		.header header .headA{display:none;}

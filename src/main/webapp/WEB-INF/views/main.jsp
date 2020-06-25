@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 <style>
-
 	/* header */
 	.header{width:100%; height:520px; background-color:#ccc; background:url('./attach/banner/banner.jpg'); padding-top:-50px; background-position: center;}
 	.header .headerBackground{background:rgba(0, 0, 0, .4); height:520px;} /* 메인과 서브페이지의 background크기가 다르다. */
