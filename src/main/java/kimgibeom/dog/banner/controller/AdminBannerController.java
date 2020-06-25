@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin")
 public class AdminBannerController {
-	@RequestMapping("/banner/bannerRegist")
+	@RequestMapping("/logo/logoRegist")
 	public void bannerRegister() {
 	}
 }
