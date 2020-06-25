@@ -141,7 +141,8 @@ function mobile_menu(){
 	.header header .headA ul li{text-align:right; font-size:12px; float:left;}
 	.header header .headA ul li:nth-child(2){margin-left:10px;}
 	.header header .headB{overflow:hidden;}
-	.header header .headB .logo a{padding:20px 20px; border:1px solid #fff; float:left; color:#fff;}
+	.header header .headB .logo a{width:100px; height: auto; float:left; color:#fff;}
+	.header header .headB .logo a img{width:100%}
 	.header header .headB ul{float:right; margin-top:25px; color:#fff; font-weight:bold;}
 	.header header .headB ul li:hover{color:#f5bf25; transition-duration:.5s;}
 	.header header .headB ul li{float:left; margin-left:31px;}
@@ -206,7 +207,7 @@ function mobile_menu(){
 	</ul>	
 </div>
 <div class='headB'>
-	<div class='logo'><a href='<c:url value="/"/>'>로고 이미지</a></div>
+	<div class='logo'><a href='<c:url value="/"/>'><img src='<c:url value="/attach/logo/logo.jpg" />' /></a></div>
 	<ul>
 		<li><a href="<c:url value="/introduce"/>">보호소 소개</a></li>
 		<li><a href='<c:url value="/dog/dogListView"/>'>무료분양</a></li>

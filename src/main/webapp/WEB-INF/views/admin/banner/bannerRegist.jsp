@@ -8,13 +8,47 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <%@ include file="../common/scriptImport.jsp" %>
 <script>
-function userUpdate(){
-	$('#modify').on('click', () => {
-		$('#modifypMsg').html('배너 등록이 완료되었습니다.');
+$(()=>{
+	registBanner();
+});
+
+function registBanner(){
+	$('#attachFile').change(function(){ 
+		imgView(this);
+	})
+	
+	$('#sendBtn').click(()=>{
+		let data = new FormData($('form')[0]);
+		console.log(data);
+		
+		$.ajax({
+			url:'registProc',
+			method:'post',
+			data:data,
+			processData:false,
+			contentType:false,
+			success:(result)=>{
+				if(result){
+					$('#registMsg').text('전송성공');
+				}else{
+					$('#registMsg').text('사진없음');
+				}
+			},
+		});
 	});
 }
 
-$(userUpdate);
+function imgView(input){
+	console.log(input.files[0].name);
+	console.log(input.files[0]);
+	if(input.files && input.files[0]){
+		let reader = new FileReader();
+		reader.addEventListener('load', ()=>{
+			$('#previewImg').attr('src', reader.result);
+		},false);
+		reader.readAsDataURL(input.files[0]);
+	}
+}
 
 </script>
 <style>
@@ -146,16 +180,16 @@ th{
 						<tr>
 							<th>배너 이미지</th>
 							<td>
-								<input type='file'/>
-								<div></div> <!-- 배너 이미지 출력할 공간 -->
+								<input type='file' id='attachFile' name='attachFile' />
+									<div></div> <img id='previewImg' />
 							</td>
 						</tr>
 					</table>
 					
 					<div class='button' style='text-align:right;'>
-						<span id='modifypMsg' style='color:red'></span>
-						<button type='button' class='btn btn-primary' id='modify'>등록</button>&nbsp;
-						<button type='button' class='btn btn-default' onClick="location.href='../main.html'">취소</button>
+						<span id='registMsg' style='color:red'></span>
+						<button type='button' class='btn btn-primary' id='sendBtn'>등록</button>&nbsp;
+						<button type='button' class='btn btn-default' onClick="location.href='../'">취소</button>
 					</div>
 				</form>	
 			</div>	

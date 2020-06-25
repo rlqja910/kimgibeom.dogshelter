@@ -13,7 +13,41 @@ $(()=>{
 });
 
 function registLogo(){
+	$('#attachFile').change(function(){
+		imgView(this);
+	})
 	
+	$('#sendBtn').click(()=>{
+		let data = new FormData($('form')[0]);
+		console.log(data);
+		
+		$.ajax({
+			url:'registProc',
+			method:'post',
+			data:data,
+			processData:false,
+			contentType:false,
+			success:(result)=>{
+				if(result){
+					$('#registMsg').text('전송성공');
+				}else{
+					$('#registMsg').text('사진없음');
+				}
+			},
+		});
+	});
+}
+
+function imgView(input){
+	console.log(input.files[0].name);
+	console.log(input.files[0]);
+	if(input.files && input.files[0]){
+		let reader = new FileReader();
+		reader.addEventListener('load', ()=>{
+			$('#previewImg').attr('src', reader.result);
+		},false);
+		reader.readAsDataURL(input.files[0]);
+	}
 }
 
 </script>
@@ -135,7 +169,7 @@ th {
 			</div>
 			<div class='info'>
 				<div class='content'>
-					<h3>
+					<h3> 
 						<span class='glyphicon glyphicon-picture'></span> <strong>
 							로고관리</strong>
 					</h3>
@@ -146,16 +180,17 @@ th {
 							<tr>
 								<th>로고 이미지</th>
 								<td><input type='file' id='attachFile' name='attachFile' />
-									<div></div> <!-- 로고 이미지 출력할 공간 --></td>
+									<div></div> <img id='previewImg' />
+								</td>
 							</tr>
 						</table>
 
 						<div class='button' style='text-align: right;'>
-							<span id='modifypMsg' style='color: red'></span>
+							<span id='registMsg' style='color: red'></span>
 							<button type='button' class='btn btn-primary' id='sendBtn'>등록</button>
 							&nbsp;
 							<button type='button' class='btn btn-default'
-								onClick="location.href='../main.html'">취소</button>
+								onClick="location.href='../'">취소</button>
 						</div>
 					</form>
 				</div>

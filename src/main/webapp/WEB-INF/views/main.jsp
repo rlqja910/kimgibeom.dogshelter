@@ -10,7 +10,7 @@
 <style>
 
 	/* header */
-	.header{width:100%; height:520px; background-color:#ccc; background:url('img/mainImg.jpg'); padding-top:-50px; background-position: center;}
+	.header{width:100%; height:520px; background-color:#ccc; background:url('./attach/banner/banner.jpg'); padding-top:-50px; background-position: center;}
 	.header .headerBackground{background:rgba(0, 0, 0, .4); height:520px;} /* 메인과 서브페이지의 background크기가 다르다. */
 	.header .banner{text-align: center; color:#fff;}
 	
@@ -125,7 +125,7 @@
 					<%@ include file="common/header.jsp" %>
 				</header>
 				<div class='mainTitle'>
-					<div class='subTitle'>Not only people<br>Need a house</div><p class='banner'>배너 이미지</p>
+					<div class='subTitle'>Not only people<br>Need a house</div><p class='banner'></p>
 					<div class='subText'>갈 곳 없는 유기 동물이 <span>당신의 손길</span>을 기다리고 있습니다.</div>
 					<div class='mainBtn'><a href='dog/01.html'>무료분양 바로가기</a></div>
 				</div>
