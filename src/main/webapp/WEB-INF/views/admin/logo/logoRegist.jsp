@@ -10,7 +10,14 @@
 <script>
 $(()=>{
 	registLogo();
+	clearRegistMsg();
 });
+
+function clearRegistMsg(){
+	$('#attachFile').change(()=>{
+		$('#registMsg').text('');
+	});
+}
 
 function registLogo(){
 	$('#attachFile').change(function(){
@@ -18,8 +25,19 @@ function registLogo(){
 	})
 	
 	$('#sendBtn').click(()=>{
-		let data = new FormData($('form')[0]);
-		console.log(data);
+		let data = new FormData($('form')[0]); //첨부파일 정보
+		
+		if( $("#attachFile").val() != "" ){ 
+			let ext = $('#attachFile').val().split('.').pop().toLowerCase(); //확장자만 추출
+			
+			if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) { //확장자확인
+				$('#registMsg').text('gif, png, jpg, jpeg 파일만 첨부할 수 있습니다');
+			return;
+			}
+		}else if($("#attachFile").val()==""){ //첨부된 파일이 없을때
+			$('#registMsg').text('파일을 첨부해 주세요');
+			return;
+		}
 		
 		$.ajax({
 			url:'registProc',
@@ -29,9 +47,9 @@ function registLogo(){
 			contentType:false,
 			success:(result)=>{
 				if(result){
-					$('#registMsg').text('전송성공');
+					$('#registMsg').text('로고등록이 완료되었습니다');
 				}else{
-					$('#registMsg').text('사진없음');
+					$('#registMsg').text('등록실패');
 				}
 			},
 		});
@@ -169,7 +187,7 @@ th {
 			</div>
 			<div class='info'>
 				<div class='content'>
-					<h3> 
+					<h3>
 						<span class='glyphicon glyphicon-picture'></span> <strong>
 							로고관리</strong>
 					</h3>
@@ -179,9 +197,9 @@ th {
 						<table class='table'>
 							<tr>
 								<th>로고 이미지</th>
-								<td><input type='file' id='attachFile' name='attachFile' />
-									<div></div> <img id='previewImg' />
-								</td>
+								<td><input type='file' id='attachFile' name='attachFile'
+									accept=".gif, .jpg, .png" />
+									<div></div> <img id='previewImg' /></td>
 							</tr>
 						</table>
 

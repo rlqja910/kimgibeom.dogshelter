@@ -32,8 +32,10 @@ public class AdminLogoController {
 
 		try {
 			save(dir + "/" + "logo.jpg", attachFile);
+			System.out.println("첨부함");
 		} catch (IOException e) {
 			stored = false;
+			System.out.println("실패");
 		}
 
 		return stored;
