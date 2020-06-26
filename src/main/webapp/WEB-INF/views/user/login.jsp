@@ -11,7 +11,7 @@
 	width: 100%;
 	height: 380px;
 	background-color: #ccc;
-	background-image: url('../img/loginImg.jpg');
+	background-image: url('../attach/banner/banner.jpg');
 	background-position: center;
 }
 

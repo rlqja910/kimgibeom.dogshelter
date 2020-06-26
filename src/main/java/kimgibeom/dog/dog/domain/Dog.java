@@ -4,30 +4,32 @@ import java.sql.Date;
 
 public class Dog {
 	private int dogNum;
+	private String dogTitle;
 	private String dogName;
 	private int dogAge;
 	private String dogKind;
 	private int dogWeight;
-	private String dogSpecialFeature;
 	private String dogGender;
 	private String dogAdoptionStatus;
 	private Date dogEntranceDate;
+	private String dogContent;
 	private String attachName;
 
 	public Dog() {
 	}
 
-	public Dog(int dogNum, String dogName, int dogAge, String dogKind, int dogWeight, String dogSpecialFeature,
-			String dogGender, String dogAdoptionStatus, Date dogEntranceDate, String attachName) {
+	public Dog(int dogNum, String dogTitle, String dogName, int dogAge, String dogKind, int dogWeight, String dogGender,
+			String dogAdoptionStatus, Date dogEntranceDate, String dogContent, String attachName) {
 		this.dogNum = dogNum;
+		this.dogTitle = dogTitle;
 		this.dogAge = dogAge;
 		this.dogAge = dogAge;
 		this.dogKind = dogKind;
 		this.dogWeight = dogWeight;
-		this.dogSpecialFeature = dogSpecialFeature;
 		this.dogGender = dogGender;
 		this.dogAdoptionStatus = dogAdoptionStatus;
 		this.dogEntranceDate = dogEntranceDate;
+		this.dogContent = dogContent;
 		this.attachName = attachName;
 	}
 
@@ -37,6 +39,14 @@ public class Dog {
 
 	public void setDogNum(int dogNum) {
 		this.dogNum = dogNum;
+	}
+
+	public String getDogTitle() {
+		return dogTitle;
+	}
+
+	public void setDogTitle(String dogTitle) {
+		this.dogTitle = dogTitle;
 	}
 
 	public String getDogName() {
@@ -71,14 +81,6 @@ public class Dog {
 		this.dogWeight = dogWeight;
 	}
 
-	public String getDogSpecialFeature() {
-		return dogSpecialFeature;
-	}
-
-	public void setDogSpecialFeature(String dogSpecialFeature) {
-		this.dogSpecialFeature = dogSpecialFeature;
-	}
-
 	public String getDogGender() {
 		return dogGender;
 	}
@@ -101,6 +103,14 @@ public class Dog {
 
 	public void setDogEntranceDate(Date dogEntranceDate) {
 		this.dogEntranceDate = dogEntranceDate;
+	}
+
+	public String getDogContent() {
+		return dogContent;
+	}
+
+	public void setDogContent(String dogContent) {
+		this.dogContent = dogContent;
 	}
 
 	public String getAttachName() {

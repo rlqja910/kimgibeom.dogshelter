@@ -31,7 +31,7 @@ $(()=>{
 	.container{padding:0;}
 
 	/* header */
-	.header{width:100%; height:380px; background-color:#ccc; background-image:url('../img/loginImg.jpg'); background-position: center;}
+	.header{width:100%; height:380px; background-color:#ccc; background-image: url('../attach/banner/banner.jpg'); background-position: center;}
 	.header .headerBackground{background:rgba(0, 0, 0, .4); height:380px;}
 	
 	.subHr{width:45px; margin-top:140px; border:1px solid #f5bf25;}
