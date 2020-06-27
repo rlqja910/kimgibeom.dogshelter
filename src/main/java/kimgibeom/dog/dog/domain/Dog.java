@@ -22,7 +22,7 @@ public class Dog {
 			String dogAdoptionStatus, Date dogEntranceDate, String dogContent, String attachName) {
 		this.dogNum = dogNum;
 		this.dogTitle = dogTitle;
-		this.dogAge = dogAge;
+		this.dogName = dogName;
 		this.dogAge = dogAge;
 		this.dogKind = dogKind;
 		this.dogWeight = dogWeight;
@@ -119,5 +119,12 @@ public class Dog {
 
 	public void setAttachName(String attachName) {
 		this.attachName = attachName;
+	}
+
+	public String toString() {
+		return String.format(
+				"dogNum=%d,dogTitle=%s,dogName=%s,dogAge=%d,dogKind=%s,dogWeight=%d,dogGender=%s,dogAdoptionStatus=%s,dogEntranceDate=%s,dogContent=%s,attachName=%s",
+				dogNum, dogTitle, dogName, dogAge, dogKind, dogWeight, dogGender, dogAdoptionStatus, dogEntranceDate,
+				dogContent, attachName);
 	}
 }

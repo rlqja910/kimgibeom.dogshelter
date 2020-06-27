@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
 	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 
-<mapper namespace='kimgibeom.dog.user.dao.map.DogMap'>
-
+<mapper namespace='kimgibeom.dog.dog.dao.map.DogMap'>
+	<select id='getDogs' resultType="dog">
+		select dog_num dogNum,
+		title dogTitle,name dogName,age dogAge ,kind dogKind,weight dogWeight,gender
+		dogGender,adoption_status dogAdoptionStatus,entrance_date
+		dogEnteranceDate,content dogContent,attach_name dogAttachName
+		from dogs
+	</select>
 </mapper>

@@ -141,7 +141,7 @@ function mobile_menu(){
 	.header header .headA ul li{text-align:right; font-size:12px; float:left;}
 	.header header .headA ul li:nth-child(2){margin-left:10px;}
 	.header header .headB{overflow:hidden;}
-	.header header .headB .logo a{width:100px; height: auto; float:left; color:#fff;}
+	.header header .headB .logo a{width:100px; height: 100px; float:left; color:#fff;}
 	.header header .headB .logo a img{width:100%}
 	.header header .headB ul{float:right; margin-top:25px; color:#fff; font-weight:bold;}
 	.header header .headB ul li:hover{color:#f5bf25; transition-duration:.5s;}

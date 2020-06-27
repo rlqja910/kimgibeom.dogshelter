@@ -7,5 +7,6 @@
 	<typeAliases>
 		<package name='kimgibeom.dog.user.domain' />
 		<package name="kimgibeom.dog.report.domain"/>
+		<package name="kimgibeom.dog.dog.domain"/>
 	</typeAliases>
 </configuration>
