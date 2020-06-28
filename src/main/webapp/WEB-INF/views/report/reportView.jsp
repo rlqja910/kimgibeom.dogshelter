@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>     
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,33 +10,119 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script src="../res/layoutsub.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
-<link rel="stylesheet"
-	href="http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<%@ include file="../common/scriptImport.jsp"%>
 <script>
-$(()=>{
-	$('#reportDel').click(()=>{
-		$.ajax({
-			success: () =>{
-				swal({
-					title:'게시물이 삭제되었습니다',
-					text:'',
-					type:'success', 
-				},
-				function(result){
-						location.href='01.html';
-				})
-			}
-			});
+function delReport() {
+	$('#reportDel').click(() => {
+		swal({
+			title:'',
+			text:'게시물을 삭제하시겠습니까?',
+			type:'warning', 
+			showCancelButton: true,
+			confirmButtonText: '확인',
+			cancelButtonText: '취소',
+			closeOnConfirm: false
+		},
+		function(isConfirm) {
+			if (isConfirm) {
+				$.ajax({
+					url: '../remove',
+					data: {reportNum: $('table').attr('id')},
+					success: () => {
+						location.href = '../reportListView';
+					}
+				});
+			}	
 		});
-});
+	});
+}
+
+function registerReply() {
+	let reportNum = $('table').attr('id');
+
+	$('#replyRegist').click(() => {
+		let reply = {
+			reportNum: reportNum,
+			userId: `${userId}`,
+			content: $('textarea').val()
+		};
+		
+		$.ajax({
+			url: '../replyView',
+			data: reply,
+			success: () => {
+				location.reload();
+			}
+		})
+	})
+}
+
+function readReply() {
+	$('.view').html(
+			`<c:forEach var='reply' items='${replies}'>
+				<ul class='${reply.userId}'>
+					<li>${reply.userId} <span>${reply.regDate}</span><span class='replyDel'>
+						<input id='${reply.replyNum}' type='button' value='삭제'/></span></li>
+					<li>${reply.content}</li>
+				</ul>
+			</c:forEach>`	
+		);
+		
+		if ($('.view').html() == ``) {
+			$('.view').html('<div class="viewEmpty">등록된 댓글이 없습니다.</div>')
+		}
+}
+
+function delReply() {
+	$('.replyDel').click(function(e) {
+		let replyNo = $('.view').find('input').attr('id');
+		
+		swal({
+			title: '',
+			text: '댓글을 삭제하시겠습니까?',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonText: '확인',
+			cancelButtonText: '취소',
+			closeOnConfirm: false
+		},
+		function(isConfirm) {
+			if (isConfirm) {
+				$.ajax({
+					url: '../removeReply',
+					data: {replyNum: replyNo},
+					success: () => {
+						location.reload();
+					}
+				});
+			}	
+		});
+	});
+}
+
+function checkAuthority() {
+	// 글쓴이만 수정, 삭제 가능
+	if ($('table').attr('class') != `${userId}`) {
+		$('#reportDel').hide();
+		$('#reportUpdate').hide();
+	}
+	
+	// 댓글쓴이만 삭제 가능
+	$('.view').find('ul').each(function() {
+		if ($(this).attr('class') != `${userId}`) 
+			$('.replyDel').eq($(this).index()).hide();
+	})
+}
+
+$(delReport);
+$(registerReply);
+$(readReply);
+$(delReply);
+$(checkAuthority);
 </script>
 <style>
 	/* header */
-	.header{width:100%; height:380px; background-color:#ccc; background-image:url('../img/loginImg.jpg'); background-position: center;}
+	.header{width:100%; height:380px; background-color:#ccc; background-image: url('../attach/banner/banner.jpg'); background-position: center;}
 	.header .headerBackground{background:rgba(0, 0, 0, .4); height:380px;}
 	
 	.subHr{width:45px; margin-top:140px; border:1px solid #f5bf25;}
@@ -49,10 +136,12 @@ $(()=>{
 	.review .reportView table{width:100%; border-collapse: collapse;}
 	.review .reportView table tr{font-size:16px;}
 	.review .reportView table tr:nth-child(1){border-top:1px solid #333; border-bottom:1px solid #ccc;}
-	.review .reportView table tr:nth-child(2){border-bottom:1px solid #ccc;}
+	.review .reportView table tr{border-bottom:1px solid #ccc;}
 	.review .reportView table tr th{background-color:#ccc; width:20%; padding:1% 0;}
-	.review .reportView table tr td{width:80%; padding:1% 0 1% 2%;}
-	.review .reportView table tr:nth-child(2) td{padding:2% 0 2% 2%;}
+	.review .reportView table tr:nth-child(1) td{width:80%; padding:1% 0 1% 2%;}
+	.review .reportView table tr:nth-child(2) td{width:5%; padding:1% 0 1% 2%;}
+	.review .reportView table tr:nth-child(3) td{padding:2% 0 2% 2%;}
+	.review .reportView .reportInfo{text-align:right;}
 	
 	/* 목록 버튼 */
 	.button{text-align:center; overflow:hidden;}
@@ -65,7 +154,8 @@ $(()=>{
 	.writeCont{width:100%;}
 	.writeCont p{font-size:20px; font-weight:bold; colo:#333;}
 	.writeCont .write{border:1px solid #ccc;}
-	.writeCont .write textarea{width: 98%; height: 60px; padding:1%; border:0px; font-size: 14px; resize: both;}
+	.writeCont .write textarea{width: 98%; height: 60px; padding:1%; border:0px; font-size: 14px; 
+		font-family: "맑은고딕","Malgun Gothic",serif; resize: both;}
 	.writeCont .write div{text-align:right;}
 	.writeCont .write div div{width:100%; border-top:1px solid #e2e2e2;}
 	.writeCont .write div div input{background-color:#f5bf25; width:70px; height:40px; border:0px; color:#fff;}
@@ -73,10 +163,10 @@ $(()=>{
 	.writeCont .view{margin-top:5%; font-size:16px;}
 	.writeCont .view ul{border-bottom:1px solid #ccc; padding:2% 0;}
 	.writeCont .view ul li:nth-child(1){margin-bottom:1%; overflow:hidden;}
-	.writeCont .view ul li .viewDel{float:right;}
-	.writeCont .view ul li .viewDel input{background-color:#fff; border:1px solid #ccc; color:#666; padding:5px 10px;}
+	.writeCont .view ul li .replyDel{float:right;}
+	.writeCont .view ul li .replyDel input{background-color:#fff; border:1px solid #ccc; color:#666; padding:5px 10px;}
 	.writeCont .view ul li span{color:#999;}
-
+	.viewEmpty{text-align:center;}
 
 	/* 모바일 스타일 */
 	@media screen and (max-width:768px){
@@ -111,66 +201,54 @@ $(()=>{
 			</div>
 		</div>
 		
-		<!-- 입양후기 -->
-			<div class="content">
-				<div class="review">
-					<div class='contTitle'>유기견 신고</div>
-					<hr class='contHr'>
-					<div class='reportView'>
-						<table>
-							<tr>
-								<th>제목</th>
-								<td>왕십리에서 비글 발견했습니다.</td>
-							</tr>
-							<tr>
-								<td colspan='2'>
-									<div style="height:100px; width:120px; border:1px solid;">유기견 이미지</div><br><br>
-									얼른 데려가주세요.ㅠㅠ
-								</td>
-							</tr>
-						</table>
-						
-						<!-- 목록 버튼 -->
-						<div class='button'>
-							<input type='button' value='목록' onClick="location.href='01.html'"/>
-							<input type='button' value='삭제' id='reportDel'/>
-							<input type='button' value='수정' onClick="location.href='04.html'"/>
-						</div>
-						
-						<!-- 답글 -->
-						<div class='writeCont'>
-							<p>댓글</p>
-							<div class='write'>
+		<!-- 유기견 신고 -->
+		<div class="content">
+			<div class="review">
+				<div class='contTitle'>유기견 신고</div>
+				<hr class='contHr'>
+				<div class='reportView'>
+					<table id='${report.reportNum}' class='${report.userId}'>
+						<tr>
+							<th>제목</th>
+							<td>${report.title}</td>
+						</tr>
+						<tr>
+							<th>작성자</th>
+							<td>${report.userId}</td>
+						</tr>													
+						<tr>
+							<td colspan='2'>
+								<div class='reportInfo'>조회 ${report.viewCount} &nbsp;&nbsp;&nbsp;${report.regDate}</div><br><br>
+								<div style="height:100px; width:120px; border:1px solid;">강아지 이미지</div><br><br>
+								${report.content}
+							</td>
+						</tr>
+					</table>
+					
+					<!-- 목록 버튼 -->
+					<div class='button'>
+						<input type='button' value='목록' onClick='location.href="../reportListView"'/>
+						<input type='button' value='삭제' id='reportDel'/>
+						<input type='button' value='수정' id='reportUpdate' 
+							onClick="location.href='../reportModify/${report.reportNum}'"/>
+					</div>
+					
+					<!-- 답글 -->
+					<div class='writeCont'>
+						<p>댓글</p>
+						<div class='write'>
+							<div>
+								<textarea name='content' placeholder='댓글을 입력하세요.' maxlength='1050'></textarea>
 								<div>
-									<textarea>
-
-									</textarea>
-									<div>
-										<input type='button' value='등록' onClick="location.href='03.html'"/>
-									</div>
+									<input type='button' id='replyRegist' value='등록'/>
 								</div>
 							</div>
-							<div class='view'>
-								<ul>
-									<li>miso93 <span>2020-06-10</span> <span class='viewDel'><input type='button' value='삭제'/></li>
-									<li>아이가 얼른 주인 분 만났으면 좋겠네요.</li>
-								</ul>
-								<ul>
-									<li>miso93 <span>2020-06-10</span> <span class='viewDel'><input type='button' value='삭제'/></li>
-									<li>아이가 얼른 주인 분 만났으면 좋겠네요.</li>
-								</ul>
-								<ul>
-									<li>miso93 <span>2020-06-10</span> <span class='viewDel'><input type='button' value='삭제'/></li>
-									<li>아이가 얼른 주인 분 만났으면 좋겠네요.</li>
-								</ul>
-							</div>
 						</div>
+						<div class='view'></div>
 					</div>
-
-					<!-- 페이징 -->
-
 				</div>
 			</div>
+		</div>
 
 		<!-- 푸터 -->
 		<footer>

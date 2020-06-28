@@ -5,7 +5,7 @@ import java.sql.Date;
 public class ReportReply {
 	private int replyNum;
 	private int reportNum;
-	private String writer;
+	private String userId;
 	private String content;
 	private Date regDate;
 
@@ -25,12 +25,12 @@ public class ReportReply {
 		this.reportNum = reportNum;
 	}
 
-	public String getWriter() {
-		return writer;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getContent() {

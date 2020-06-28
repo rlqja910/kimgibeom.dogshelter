@@ -10,17 +10,82 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script src="../res/layoutsub.js"></script>
+<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+<script src="${path}/ckeditor/ckeditor.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
+<%@ include file="../common/scriptImport.jsp"%>	
+<script>
+function validateReport() { // 등록 버튼 누르기 전 검증
+	// 제목 글자수 검증
+	$('input[name="title"]').keydown(() => {
+		if($('input[name="title"]').val().length >= 30) {
+			$('font').eq(0).text(' 제목은 최대 30자 입력 가능합니다.');
+		} else $('font').eq(0).text('');
+	});
+	
+	// 내용 글자수 검증
+	CKEDITOR.replace('description', {
+		removePlugins : 'image'
+	});	
+	
+	let editor = CKEDITOR.instances.description;
+	
+	editor.on('key', function(e) {
+	    content = this;
+		if (content.getData().length > 1300) {
+			$('font').eq(1).text(' 내용은 최대 1250자 입력 가능합니다.');
+			$('#register').attr('disabled', true);
+		} else {
+			$('font').eq(1).text('');
+			$('#register').removeAttr('disabled');
+		}
+	});
+}
+
+function registReport() {
+	$('input[name="userId"]').hide();
+	$('input[name="userId"]').val(`${userId}`);
+	
+	$('#register').click(() => {
+		let content = CKEDITOR.instances.description.getData();
+		
+		if ($('input[name="title"]').val()) {
+			if (content) {
+				swal({
+					title:'',
+					text:'게시물이 등록되었습니다.',
+					type:'success',
+					confirmButtonText: '확인',
+					closeOnConfirm: false
+				},
+				function(isConfirm) {
+					if (isConfirm) {
+						$('form').submit();
+					}	
+				});
+			} else swal('', '내용을 입력하세요.', 'warning');
+		} else 	{	
+			swal({
+				title:'',
+				text:'제목을 입력하세요.',
+				type:'warning',
+				confirmButtonText:'확인'
+			});
+		}	
+	});
+}
+
+$(validateReport);
+$(registReport);
+</script>
 <style>
 /* header */
 .header {
 	width: 100%;
 	height: 380px;
 	background-color: #ccc;
-	background-image: url('../img/loginImg.jpg');
+	background-image: url('../attach/banner/banner.jpg');
 	background-position: center;
 }
 
@@ -210,33 +275,41 @@ textarea {
 			</div>
 		</div>
 
-		<!-- 입양후기 -->
+		<!-- 유기견 신고 -->
 		<div class="content">
 			<div class="review">
 				<div class='contTitle'>유기견 신고</div>
 				<hr class='contHr'>
 				<div class='reportWrite'>
-					<table>
-						<tr>
-							<th>제목</th>
-							<td><input type='text' /></td>
-						</tr>
-						<tr>
-							<th>내용</th>
-							<td><textarea id="description"> 
-								</textarea></td>
-						</tr>
-						<tr>
-							<th>이미지</th>
-							<td><input type='file' /></td>
-						</tr>
-					</table>
-
-					<!-- 목록 버튼 -->
-					<div class='button'>
-						<input type='button' value='등록' onClick="location.href='01.html'" />
-						<input type='button' value='취소' onClick="location.href='01.html'" />
-					</div>
+					<form action='reportRegister' method='post'>
+						<table>
+							<tr>
+								<th>제목</th>
+								<td>
+									<input type='text' name='title' maxlength='30'/>
+									<font color='red'></font>
+								</td>
+							</tr>
+							<tr>
+								<th>내용</th>
+								<td>
+									<input type='text' name='userId'/>
+									<textarea name='content' id='description' required></textarea>
+									<font color='red'></font>
+								</td>
+							</tr>
+							<tr>
+								<th>이미지</th>
+								<td><input type='file'/></td>
+							</tr>
+						</table>
+	
+						<!-- 목록 버튼 -->
+						<div class='button'>
+							<input type='button' id='register' value='등록'/>
+							<input type='button' value='취소' onClick='history.go(-1)'/>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>

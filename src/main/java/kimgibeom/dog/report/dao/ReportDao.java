@@ -2,16 +2,19 @@ package kimgibeom.dog.report.dao;
 
 import java.util.List;
 
+import kimgibeom.dog.report.domain.Criteria;
 import kimgibeom.dog.report.domain.Report;
 
 public interface ReportDao {
-	List<Report> getReports();
+	List<Report> getReports(Criteria cri);
+	
+	int getListCnt();
 
 	Report getReport(int reportNum);
 
-	int addReport(String title);
+	int addReport(Report report);
 
-	int modifyReport(Report post);
+	int modifyReport(Report report);
 
 	int delReport(int reportNum);
 }

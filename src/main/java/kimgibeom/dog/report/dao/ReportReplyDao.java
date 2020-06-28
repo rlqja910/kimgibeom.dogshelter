@@ -9,7 +9,7 @@ public interface ReportReplyDao {
 
 	ReportReply getReportReply(int replyNum);
 
-	int addReportReply(String content);
+	int addReportReply(ReportReply reply);
 
 	int modifyReportReply(ReportReply reply);
 

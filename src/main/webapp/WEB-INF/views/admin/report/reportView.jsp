@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>     
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,13 +8,13 @@
 <title>ADMIN PAGE</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-<script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
 <script src="../res/adminNavSub.js"></script>
+<%@ include file="../common/scriptImport.jsp"%>
 <script>
-function del() {
-	$('.delete').click(() => {
+function replyDel() {
+	$('.replyDel').click(function(e) {
+		let replyNo = $(this).attr('id').trim();
+		
 		swal({
 			title: '',
 			text: '댓글을 삭제하시겠습니까?',
@@ -22,11 +23,29 @@ function del() {
 			confirmButtonText: '확인',
 			cancelButtonText: '취소',
 			closeOnConfirm: false
-		})
+		},
+		function(isConfirm) {
+			if(isConfirm) {
+				$.ajax({
+					url: '../removeReply',
+					data: {replyNum: replyNo},
+					success: () => {
+						location.reload();
+					}
+				});
+			}	
+		});
 	});
 };
 
-$(del);
+function replyNum() {
+	let replyNum = $('.replyBox').length;
+	$('h4').eq(1).children().html('댓글 &nbsp;<font>' 
+			+ replyNum + '</font>');
+}
+
+$(replyDel);
+$(replyNum);
 </script>
 <style>
 * {
@@ -122,11 +141,11 @@ body {
 	display: inline;
 }
 
-.post-info {
+.reportInfo {
 	margin-right: 15px;
 }
 
-.post-text {
+.reportContent {
 	margin-bottom: 150px;
 }
 
@@ -136,7 +155,7 @@ body {
 	float: right;
 }
 
-.delete {
+.replyDel {
 	float: right;
 	margin-top: 3px;
 }
@@ -174,50 +193,33 @@ body {
 				</h3>
 				<hr style='border: 1px solid #a0a0a0;'>
 				<h4>
-					<strong>중화동 근처 말티즈 잃어버리신 분 있나요?</strong>
+					<strong>${report.title}</strong>
 				</h4>
-				<strong class='post-info'>coco1234</strong>
-				<span class='glyphicon glyphicon-eye-open post-info'>&nbsp;21</span>
-				<span class='glyphicon glyphicon-time post-info'>&nbsp;2020-06-13</span>							
+				<strong class='reportInfo'>${report.userId}</strong>
+				<span class='glyphicon glyphicon-eye-open reportInfo'>&nbsp;${report.viewCount}</span>
+				<span class='glyphicon glyphicon-time reportInfo'>&nbsp;${report.regDate}</span>							
 			</div>
 			<hr>
-			<div class='post-text'>
-				퇴근하고 집 가는데 말티즈 한 마리가 혼자서 돌아다니더라구요.<br>
-				깨끗하고 관리가 잘 된걸 보면 유기는 아니고<br>
-				잃어버리신거 같은데 임보 중이니 연락 주세요. 010-3434-1221<br> <!-- 강아지 사진, 지도 -->				
-			</div>
-			<a href='01.html'><button class='btn list'>목록</button></a><br><br>
+			<div class='reportContent'>
+				${report.content}
+			</div>	
+			<a href='../reportListView'><button class='btn list'>목록</button></a><br><br>
 			<hr>
 			
 			<h4><strong>댓글</strong></h4>
 			<br>
-			<div style='background-color:#eeeeee;'>
-				<div class='replyBox'>
-					<span><strong>miso93</strong>&nbsp;&nbsp;2020-06-10</span>
-					<button type='button' class='btn btn-danger delete'>삭제</button>
-					<div class='replyContent'>
-						아이가 얼른 주인분 만났으면 좋겠네요.
+			<c:forEach var='reply' items='${replies}'>
+				<div style='background-color:#eeeeee;'>
+					<div class='replyBox'>
+						<span><strong>${reply.userId}</strong>&nbsp;&nbsp;${reply.regDate}</span>
+						<button id='${reply.replyNum}' type='button' class='btn btn-danger replyDel'>삭제</button>
+						<div class='replyContent'>
+							${reply.content}<br>&nbsp;
+						</div>
 					</div>
 				</div>
-					
-			</div>
-			<br>
-			<div style='background-color:#eeeeee;'>
-				<div class='replyBox'>
-					<span><strong>smile1</strong>&nbsp;&nbsp;2020-06-10</span>
-					<button type='button' class='btn btn-danger delete'>삭제</button>
-					<div class='replyContent'>
-						안타깝네요.
-						<br>안타깝네요.
-						<br>안타깝네요.
-						<br>안타깝네요.
-						<br>안타깝네요.
-						<br>안타깝네요.
-						<br>안타깝네요.	
-					</div>
-				</div>
-			</div>
-			<br>
+				<br>
+			</c:forEach>	
 		</div>
 	</div>
 </div>

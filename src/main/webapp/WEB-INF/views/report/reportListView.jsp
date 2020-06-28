@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>     
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,11 +10,96 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script src="../res/layoutsub.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
+<%@ include file="../common/scriptImport.jsp"%>
+<script>
+function reportSearch() { 
+	$('#search').click(() => {
+		if(!$('#searchContent').val().trim()) {
+			swal({
+				title: '',
+				text: '검색어를 입력해주세요.',
+				type: 'warning',
+				confirmButtonText: '확인'
+			})	
+		}
+	});
+}
+
+function readReports() {
+	$('.reportCont').html(
+		`<c:forEach var='report' items='${reports}'>
+			<a href='./reportView/${report.reportNum}'>
+				<ul>
+					<li><div style="height:100px; width:355px; border:1px solid;">유기견 이미지</div></li>
+					<li class='title'>${report.title}</li>
+					<li class='contents'>${report.content}</li>
+					<li class='more'>+더보기</li>
+				</ul>
+			</a>
+		</c:forEach>`);
+	
+	if ($('.reportCont').html() == ``) {
+		$('.reportCont').html('<br><br><br><div class="reportEmpty">등록된 게시글이 없습니다.</div><br>');
+	}
+	
+	$('.contents').each(function (idx, content) {
+		if ($(this).text().length >= 31) {
+			$(this).text($(this).text().substring(0, 30) + "...");
+		}
+	})
+}
+
+function managePaging() {
+    let params = {};
+    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
+    
+    // active 표시
+	if (params.page == 1 || typeof params.page == 'undefined') { // 첫 페이지
+		$('.page').find('a').first().removeAttr('href');
+    	$('.page').find('a').eq(1).css({'background-color':'#333', color:'#fff'});
+    } else {
+    	$('.page').find('a').eq(params.page).css({'background-color':'#333', color:'#fff'});
+ 
+    	if (params.page == ${pageMaker.endPage}) // 마지막 페이지
+        	$('.page').find('a').last().removeAttr('href');
+    }
+    
+    // prev 버튼
+    $('.page').find('a').first().click(function() {
+    	let prev = params.page - 1;
+    	
+    	if (prev > 0) // 1페이지가 아니면 이전 페이지로 이동
+    		$(this).attr('href', 'reportListView?page=' + prev);
+    })
+    
+    // next 버튼
+    $('.page').find('a').last().click(function() {
+    	let next = Number(params.page) + 1;
+    	
+    	if (typeof params.page == 'undefined') { // 게시판 첫 진입 시 2페이지로 이동
+    		$(this).attr('href', 'reportListView?page=2');
+    	} else if (params.page != ${pageMaker.endPage}) { // 다음 페이지로 이동
+    		$(this).attr('href', 'reportListView?page=' + next);
+    	}
+    })
+}
+
+function register() {
+	if (`${userId}`) { // 로그인 한 상태이면 등록 페이지로 이동
+		$('#register').attr('onClick', "location.href='./reportRegister'");
+	} else { // 로그인 안 한 상태이면 로그인 페이지로 이동
+		$('#register').attr('onClick', "location.href='../user/login'");
+	}
+}
+
+$(readReports);
+$(managePaging);
+$(reportSearch);
+$(register);
+</script>
 <style>
 	/* header */
-	.header{width:100%; background-color:#ccc; background-image:url('../img/loginImg.jpg'); background-position: center;}
+	.header{width:100%; background-color:#ccc; background-image: url('../attach/banner/banner.jpg'); background-position: center;}
 	.header .headerBackground{background:rgba(0, 0, 0, .4); height:380px;}
 	
 	.subHr{width:45px; margin-top:140px; border:1px solid #f5bf25;}
@@ -23,12 +109,16 @@
 
 	/* 유기견 신고 */
 	.report{width:80%;font-size:14px; margin:0 auto; margin-top:100px; margin-bottom:100px;}
-	.report .reviewCont{width:100%; overflow:hidden;}
-	.report .reviewCont ul{width:23.5%; float:left; margin:1% 0 0 1%; border:1px solid #ccc;}
-	.report .reviewCont ul li:nth-child(2){font-weight:bold; margin:5% 3% 3% 3%;}
-	.report .reviewCont ul li:nth-child(3){margin:0 3% 0 3%; color:#666; font-size:12px;}
-	.report .reviewCont ul li:nth-child(4){text-align:right; margin:6% 3% 5% 3%;}
-	.report .reviewCont ul img{width:100%;}
+	.report .reportCont{width:100%; overflow:hidden;}
+	.report .reportCont ul{width:23.5%; float:left; margin:1% 0 0 1%; border:1px solid #ccc;}
+	.report .reportCont .title{font-weight:bold; margin:5% 3% 3% 3%;
+		white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+	.report .reportCont .contents{margin:0 3% 0 3%; color:#666; font-size:12px; 
+		white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+	.report P{margin-block-start: 0em; margin-block-end: 0em;}	
+	.report .reportCont .more{text-align:right; margin:6% 3% 5% 3%;}
+	.report .reportCont ul img{width:100%;}
+	.report .reportEmpty{text-align: center;}
 
 	/* 검색 */
 	.report .search{width:100%; overflow:hidden; padding:0.3%; display:flex; margin:0 auto; justify-content:center; margin-bottom:60px;}
@@ -61,7 +151,7 @@
 		
 		/* 유기견 신고 */
 		.report{margin-top:10%; margin-bottom:10%;}
-		.report .reviewCont ul{width:48%;}
+		.report .reportCont ul{width:48%;}
 
 		/* 페이징 */
 		.report .page{width:100%; margin-top:10%;}
@@ -88,112 +178,41 @@
 			</div>
 		</div>
 		
-		<!-- 입양후기 -->
-			<div class="content">
-				<div class="report">
-					<div class='contTitle'>유기견 신고</div>
-					<hr class='contHr'>
-					
-					<!-- 검색 -->
-					<div class='search'>
-						<select>
-							<option>아이디</option>
-							<option>글제목</option>
-						</select>
-						<input type='text'/>
-						<input type='button' value='검색'/>
-					</div>
+		<!-- 유기견 신고 -->
+		<div class="content">
+			<div class="report">
+				<div class='contTitle'>유기견 신고</div>
+				<hr class='contHr'>
+				
+				<!-- 검색 -->
+				<div class='search'>
+					<select>
+						<option>아이디</option>
+						<option>글제목</option>
+					</select>
+					<input id='searchContent' type='text' placeholder=' 검색어를 입력해주세요.'/>
+					<input id='search' type='button' value='검색'/>
+				</div>
 
-					<div class='reviewCont'>
-						<a href='03.html'>
-							<ul>
-								<li><div style="height:100px; width:355px; border:1px solid;">유기견 이미지</div></li>
-								<li>왕십리역에서 비글 발견했어요</li>
-								<li>얼른 데려가주세요.ㅠㅠ</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
-						<a href='03.html'>
-							<ul>
-								<li><div style="height:100px; width:355px; border:1px solid;">유기견 이미지</div></li>
-								<li>중계역 치와와 발견했어요</li>
-								<li>얼른 데려가주세요.ㅠㅠ</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
-						<a href='03.html'>
-							<ul>
-								<li><div style="height:100px; width:355px; border:1px solid;">유기견 이미지</div></li>
-								<li>석계역 푸들 발견했어요</li>
-								<li>얼른 데려가주세요.ㅠㅠ</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
-						<a href='03.html'>
-							<ul>
-								<li><div style="height:100px; width:355px; border:1px solid;">유기견 이미지</div></li>
-								<li>홍대입구역 비글 발견했어요</li>
-								<li>얼른 데려가주세요.ㅠㅠ</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
-						<a href='03.html'>
-							<ul>
-								<li><div style="height:100px; width:355px; border:1px solid;">유기견 이미지</div></li>
-								<li>약수역 말티즈 발견했어요</li>
-								<li>얼른 데려가주세요.ㅠㅠ</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
-						<a href='03.html'>
-							<ul>
-								<li><div style="height:100px; width:355px; border:1px solid;">유기견 이미지</div></li>
-								<li>수원역 시바견 발견했어요</li>
-								<li>얼른 데려가주세요.ㅠㅠ</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
-						<a href='03.html'>
-							<ul>
-								<li><div style="height:100px; width:355px; border:1px solid;">유기견 이미지</div></li>
-								<li>노원역 푸들 발견했어요</li>
-								<li>얼른 데려가주세요.ㅠㅠ</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
-						<a href='03.html'>
-							<ul>
-								<li><div style="height:100px; width:355px; border:1px solid;">유기견 이미지</div></li>
-								<li>성수역 달마시안 발견했어요</li>
-								<li>얼른 데려가주세요.ㅠㅠ</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
-					</div>
-					
-					<!-- 동록버튼 -->
-					<div class='reportBtn'>
-						<input type='button' value='등록' onClick="location.href='02.html'"/>
-					</div>
+				<div class='reportCont'></div>
+				
+				<!-- 동록버튼 -->
+				<div class='reportBtn'>
+					<input id='register' type='button' value='등록'/>
+				</div>
 
-					<!-- 페이징 -->
-					<div class='page'>
-						<ul>
-							<li><a href='#'><</a></li>
-							<li><a href='#'>1</a></li>
-							<li><a href='#'>2</a></li>
-							<li><a href='#'>3</a></li>
-							<li><a href='#'>4</a></li>
-							<li><a href='#'>5</a></li>
-							<li><a href='#'>6</a></li>
-							<li><a href='#'>7</a></li>
-							<li><a href='#'>8</a></li>
-							<li><a href='#'>9</a></li>
-							<li><a href='#'>></a></li>
-						</ul>
-					</div>
+				<!-- 페이징 -->
+				<div class='page'>
+					<ul>
+						<li><a href=''><</a></li>
+					    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+					    	<li><a href="reportListView${pageMaker.makeQuery(idx)}">${idx}</a></li>
+					    </c:forEach>
+					    <li><a href=''>></a></li>
+					</ul>
 				</div>
 			</div>
+		</div>
 
 		<!-- 푸터 -->
 		<footer>
