@@ -22,6 +22,147 @@ let dogsData=null;
 let dogsCnt=${dogsCnt};
 
 	$(()=>{
+		dogList();
+		
+		$('#searchDogBtn').click(()=>{
+				let dogKind = $('#dogKind').val();
+				let dogEntDate = $('#dogEntDate').val();
+				console.log(dogKind);
+				console.log(dogEntDate);
+				
+				if(dogKind==='' && dogEntDate===''){ //아무것도 입력안하면 리스트 전체 출력
+					console.log('11');
+					$('#pagingUl').empty();
+					dogList();
+				}else{
+					if(dogEntDate===''){
+						dogEntDate='1111-11-11';
+					}
+					$.ajax({
+						url:'dogSearch',
+						data:{
+							'dogKind':dogKind,
+							'dogEntDate':dogEntDate,
+						},
+						success:(data)=>{ 
+							$('#pagingUl').empty();
+							$('#dogPost').empty();
+							console.log('good');
+							
+							console.log(data);
+							
+							totalPageCnt=data.totalPageCnt;
+							console.log(totalPageCnt);
+							isOnePage=data.isOnePage;
+							console.log(isOnePage);
+							lastPageDataCnt=data.lastPageDataCnt;
+							console.log(lastPageDataCnt);
+							dogsData=null;
+							dogsCnt=data.dogsCnt;
+							
+							$('#pagingUl').append('<li><a href="#" id="firstViewBtn"><<</a></li>');
+							for(let i=1; i<=totalPageCnt;i++){
+								$('#pagingUl').append('<li><a href="#" id='+i+'page >' + i + '</a></li>');
+								if(i==1){
+									$('#'+i+'page').attr("style","font-weight:bold;");
+								}
+							}
+							$('#pagingUl').append('<li><a href="#" id="lastViewBtn">>></a></li>');
+							
+							$('.reviewCont').empty();
+							
+							if(isOnePage===false){ //한페이지가 아니라 여러 페이지일 경우
+								console.log('not onepage');
+								dogsData=data.pageData; //controller에서 뽑은 데이터들을 준비한다.
+								console.log(dogsData);
+								
+								for(let i=1;i<=8;i++){ //한페이지당 8개의 게시물이 있으므로 8번 반복한다.
+									$('#dogPost').append('<a href="../adopt/01.html"><ul><li>'+dogsData[i-1].attachName+'</li><li>'+dogsData[i-1].dogTitle+'</li><li>'+dogsData[i-1].dogContent+'</li><li>+더보기</li></ul></a>');
+								}
+								
+							}else if(isOnePage){ //1페이지만 있을때 (데이터가 아예 없는 경우에도 여기로 진입한다)
+								console.log('onepage');
+								if(dogsCnt==0){ //아예 데이터가 없을때
+									$('#pagingUl').empty();
+									$('#dogPost').append('<ul><li>등록된 데이터가 없습니다.</li></ul>');
+								}else{ //아예 데이터가 없는게 아니라 단 하나라도 있을때
+									let onlyOnePageData=data.onlyOnePageData;
+									console.log(onlyOnePageData);
+									
+									for(let i=1;i<=lastPageDataCnt;i++){ //데이터 출력
+										$('#dogPost').append('<a href="../adopt/01.html"><ul><li>'+onlyOnePageData[i-1].attachName+'</li><li>'+onlyOnePageData[i-1].dogTitle+'</li><li>'+onlyOnePageData[i-1].dogContent+'</li><li>+더보기</li></ul></a>');
+									}
+								}
+							}
+							console.log("끝");
+							
+							$('#firstViewBtn').click(()=>{
+								$('#1page').trigger('click');
+								return false;
+							});
+							
+							$('#lastViewBtn').click(()=>{
+								$('#'+totalPageCnt+'page').trigger('click');
+								return false;
+							});
+							
+							for(let i=1; i<=totalPageCnt;i++){
+								$('#'+i+'page').click(()=>{ //페이지 버튼 클릭시 발동
+									for(let j=1; j<=totalPageCnt; j++){
+										$('#'+j+'page').removeAttr('style'); //페이지 눌렀을때 스타일을 지웠다가 해당 페이지에 입힌다.
+									}
+									$('#'+i+'page').attr("style","font-weight:bold;"); //클릭한 페이지 번호 글씨체를 굵게 한다.
+									
+									console.log(i);
+									$('#dogPost').empty(); //리스트를 완전히 다 없앤다.
+									
+									if(isOnePage){ //페이지가 만약 1페이지밖에 없다면 진입
+										dogsData=data.onlyOnePageData;
+										
+										let cnt=0;
+										for(let j=1;j<=lastPageDataCnt;j++){ //마지막 페이지의 data 개수만큼 for를 작동
+											console.log((i-1)*8+cnt+"------------");
+											$('#dogPost').append('<a href="../adopt/01.html"><ul><li>'+dogsData[(i-1)*8+cnt].attachName+'</li><li>'+dogsData[(i-1)*8+cnt].dogTitle+'</li><li>'+dogsData[(i-1)*8+cnt].dogContent+'</li><li>+더보기</li></ul></a>');
+											cnt++; //하나씩 넣고 cnt를 올려주어 계단식 저장
+										}
+									}else if(i==totalPageCnt){ //만약에 마지막 페이지를 클릭했을 경우
+										dogsData=data.pageData; //그리고 Controller에서 불러온 데이터를 준비한다.
+										console.log(dogsData);
+										
+										let cnt=0;
+										for(let j=1;j<=lastPageDataCnt;j++){ //마지막 페이지의 data 개수만큼 for를 작동
+											console.log((i-1)*8+cnt+"------------");
+											$('#dogPost').append('<a href="../adopt/01.html"><ul><li>'+dogsData[(i-1)*8+cnt].attachName+'</li><li>'+dogsData[(i-1)*8+cnt].dogTitle+'</li><li>'+dogsData[(i-1)*8+cnt].dogContent+'</li><li>+더보기</li></ul></a>');
+											cnt++; //하나씩 넣고 cnt를 올려주어 계단식 저장
+										}
+										
+									}else{ //마지막 페이지가 아닌 다른 페이지번호를 클릭했을경우
+										dogsData=data.pageData; //그리고 Controller에서 불러온 데이터를 준비한다.
+										console.log(dogsData);
+										
+										let cnt=0;
+										for(let j=1;j<=8;j++){ //1페이지당 8개의 게시물이므로 8번 반복해서 데이터를 출력
+											console.log((i-1)*8+cnt+"------------");
+											$('#dogPost').append('<a href="../adopt/01.html"><ul><li>'+dogsData[(i-1)*8+cnt].attachName+'</li><li>'+dogsData[(i-1)*8+cnt].dogTitle+'</li><li>'+dogsData[(i-1)*8+cnt].dogContent+'</li><li>+더보기</li></ul></a>');
+											cnt++; //하나씩 넣고 cnt를 올려주어 계단식 저장
+										}
+									}
+									
+									return false;
+								});
+							}
+							
+						},error: function (xhr, ajaxOptions, thrownError) {
+							console.log(xhr);
+							console.log(ajaxOptions);
+							console.log(thrownError);
+		                }
+					});
+				}
+		});
+	});
+	
+	function dogList(){
 		$('#pagingUl').append('<li><a href="#" id="firstViewBtn"><<</a></li>');
 		for(let i=1; i<=totalPageCnt;i++){
 			$('#pagingUl').append('<li><a href="#" id='+i+'page >' + i + '</a></li>');
@@ -45,7 +186,6 @@ let dogsCnt=${dogsCnt};
 		}else if(isOnePage){ //1페이지만 있을때 (데이터가 아예 없는 경우에도 여기로 진입한다)
 			console.log('onepage');
 			if(dogsCnt==0){ //아예 데이터가 없을때
-				console.log('11111');
 				$('#pagingUl').empty();
 				$('#dogPost').append('<ul><li>등록된 데이터가 없습니다.</li></ul>');
 			}else{ //아예 데이터가 없는게 아니라 단 하나라도 있을때
@@ -114,7 +254,7 @@ let dogsCnt=${dogsCnt};
 				return false;
 			});
 		}
-	});
+	}
 </script>
 <style>
 /* header */
@@ -239,7 +379,7 @@ let dogsCnt=${dogsCnt};
 
 .report .search .search_1 .select {
 	float: left;
-	width: 90px;
+	width: 110px;
 	height: 38px;
 	padding: 0 5px 0 5px;
 	border: 2px solid #f5bf25;
@@ -415,15 +555,16 @@ let dogsCnt=${dogsCnt};
 				<div class='search'>
 					<div class='search_1'>
 						<div class='select'>
-							<p>입소날짜</p>
+							<p>입소날짜(이후)</p>
 						</div>
-						<input type='date' />
+						<input type='date' id='dogEntDate' />
 					</div>
 					<div class='search_2'>
 						<div class='select'>
 							<p>품종</p>
 						</div>
-						<input type='text' /> <input type='button' value='검색' />
+						<input type='text' id='dogKind' /> <input type='button'
+							value='검색' id='searchDogBtn' />
 					</div>
 				</div>
 
