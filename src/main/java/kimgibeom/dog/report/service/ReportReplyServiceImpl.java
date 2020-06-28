@@ -24,8 +24,8 @@ public class ReportReplyServiceImpl implements ReportReplyService {
 	}
 
 	@Override
-	public int writeReportReply(String content) {
-		return reportReplyDao.addReportReply(content);
+	public int writeReportReply(ReportReply reply) {
+		return reportReplyDao.addReportReply(reply);
 	}
 
 	@Override

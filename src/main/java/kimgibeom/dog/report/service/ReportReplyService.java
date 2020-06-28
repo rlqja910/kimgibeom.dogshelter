@@ -9,7 +9,7 @@ public interface ReportReplyService {
 
 	ReportReply readReportReply(int replyNum);
 
-	int writeReportReply(String content);
+	int writeReportReply(ReportReply reply);
 
 	int updateReportReply(ReportReply reply);
 

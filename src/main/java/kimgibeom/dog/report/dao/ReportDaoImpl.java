@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kimgibeom.dog.report.dao.map.ReportMap;
+import kimgibeom.dog.report.domain.Criteria;
 import kimgibeom.dog.report.domain.Report;
 
 @Repository
@@ -14,8 +15,13 @@ public class ReportDaoImpl implements ReportDao {
 	private ReportMap reportMap;
 
 	@Override
-	public List<Report> getReports() {
-		return reportMap.getReports();
+	public List<Report> getReports(Criteria cri) {
+		return reportMap.getReports(cri);
+	}
+	
+	@Override
+	public int getListCnt() {
+		return reportMap.getListCnt();
 	}
 
 	@Override
@@ -24,13 +30,13 @@ public class ReportDaoImpl implements ReportDao {
 	}
 
 	@Override
-	public int addReport(String title) {
-		return reportMap.addReport(title);
+	public int addReport(Report report) {
+		return reportMap.addReport(report);
 	}
 
 	@Override
-	public int modifyReport(Report post) {
-		return reportMap.modifyReport(post);
+	public int modifyReport(Report report) {
+		return reportMap.modifyReport(report);
 	}
 
 	@Override

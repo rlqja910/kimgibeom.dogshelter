@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>		
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,13 +8,44 @@
 <title>ADMIN PAGE</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-<script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
 <script src="../res/adminNavSub.js"></script>
+<%@ include file="../common/scriptImport.jsp"%>
 <script>
+function reportSearch() { 
+	$('#search').click(() => {
+		if(!$('#searchContent').val().trim()) {
+			swal({
+				title: '',
+				text: '검색어를 입력해주세요.',
+				type: 'warning',
+				confirmButtonText: '확인'
+			})	
+		}
+	});
+}
+
+function reportList() {
+	let date = new Date(); 
+	
+	$('tbody').empty();
+	$('tbody').html(
+		`<c:forEach var='report' items='${reports}'>
+		<tr>
+			<td><input type='checkbox' value=${report.reportNum} name='reportNum'/></td>
+			<td>${report.reportNum}</td>
+			<td id='userId'>${report.userId}</td>
+			<td><a href='./reportView/${report.reportNum}' id='detailReport'>${report.title}</a></td>
+			<td>${report.regDate}</td>
+		</tr>
+		</c:forEach>`)
+	
+	if ($('tbody').html() == ``) {
+		$('tbody').html('<tr><td colspan="5">게시글이 없습니다.</td></tr>');
+	}	
+}
+
 function reportDel() {
-	$('#delete').click(() => {
+	$('#reportDel').click(() => {
 		if($('input:checkbox').is(':checked')) {
 			swal({
 				title: '',
@@ -25,28 +57,76 @@ function reportDel() {
 				closeOnConfirm: false
 			},
 			function(isConfirm) {
-				if(isConfirm) 
-					swal({
-						title: '',
-						text: '신고글이 삭제되었습니다.',
-						type: 'success',
-						confirmButtonText: '확인'
-					});	
+				if(isConfirm) {
+					$.ajax({
+						url: 'remove',
+						data: {reportNum: $('input:checked').parent().next().text().trim()},
+						success: () => {
+							swal({
+								title: '',
+								text: '신고글이 삭제되었습니다.',
+								type: 'success',
+								confirmButtonText: '확인',
+								closeOnConfirm: false
+							},
+							function(isConfirm) {
+								if(isConfirm) location.reload();
+							});
+						}
+					});
+				}	
 			});
-		} 
-	});
-};
-
-function reportSearch(){
-	$('#search').click(() => {
-		if($('#searchContent').val().trim()) {
-			
-		}	
+		} else {
+			swal({
+				title: '',
+				text: '항목을 선택하세요.',
+				type: 'warning',
+				showCancelButton: false,
+				confirmButtonText: '확인'
+			})			
+		}
 	});
 }
 
-$(reportDel);
+function managePaging() {
+    let params = {};
+    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
+    
+    // active 표시
+	if (params.page == 1 || typeof params.page == 'undefined') { // 첫 페이지
+		$('#pagination').find('a').first().removeAttr('href');
+    	$('#pagination').find('a').eq(1).css({'background-color':'#333', color:'#fff'});
+    } else {
+    	$('#pagination').find('a').eq(params.page).css({'background-color':'#333', color:'#fff'});
+ 
+    	if (params.page == ${pageMaker.endPage}) // 마지막 페이지
+        	$('#pagination').find('a').last().removeAttr('href');
+    }
+    
+    // prev 버튼
+    $('#pagination').find('a').first().click(function() {
+    	let prev = params.page - 1;
+    	
+    	if (prev > 0) 
+    		$(this).attr('href', 'reportListView?page=' + prev);
+    })
+    
+    // next 버튼
+    $('#pagination').find('a').last().click(function() {
+    	let next = Number(params.page) + 1;
+    	
+    	if (typeof params.page == 'undefined') { // 게시판 첫 진입
+    		$(this).attr('href', 'reportListView?page=2');
+    	} else if (params.page != ${pageMaker.endPage}) {
+    		$(this).attr('href', 'reportListView?page=' + next);
+    	}
+    })
+}
+
 $(reportSearch);
+$(reportList);
+$(reportDel);
+$(managePaging);
 </script>
 <style>
 * {
@@ -221,7 +301,7 @@ th {
 						<input type='text' id='searchContent' class='form-control' placeholder='검색어를 입력해주세요.'/>
 					</div>
 					<div class='form-group'>
-						<button type='submit' class='btn btn-default' id='search'>
+						<button type='button' class='btn btn-default' id='search'>
 							<span id='spanSearch'>검색</span>
 						</button>
 					</div>
@@ -238,37 +318,20 @@ th {
 							<th class='date'>작성일</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td><input type='checkbox'/></td>
-							<td>123</td>
-							<td>coco1234</td>
-							<td><a href='02.html' id='detailReport'>중화동 근처 말티즈 잃어버리신 분 있나요?</a></td>
-							<td>2016-06-02</td>
-						</tr>
-						<tr>
-							<td><input type='checkbox'/></td>
-							<td>122</td>
-							<td>arimarim</td>
-							<td><a href='02.html' id='detailReport'>저희 집 강아지가 문 열린 틈에 나가버렸어요.</a></td>
-							<td>2016-06-02</td>
-						</tr>				
-					</tbody>
+					<tbody></tbody>
 				</table>	
 					
-				<button type='button' class='btn btn-warning buttons' id='delete'>삭제</button>
+				<button type='button' class='btn btn-warning buttons' id='reportDel'>삭제</button>
 				
 				<br><br><br>
 					
 				<div id="pagination">
 					<ul class="pagination">
-					    <li><a href="#">&laquo;</a></li>
-					    <li><a href="#">1</a></li>
-					    <li><a href="#">2</a></li>
-					    <li><a href="#">3</a></li>
-					    <li><a href="#">4</a></li>
-					    <li><a href="#">5</a></li>
-					    <li><a href="#">&raquo;</a></li>
+						<li><a href=''><</a></li>
+					    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+					    	<li><a href="reportListView${pageMaker.makeQuery(idx)}">${idx}</a></li>
+					    </c:forEach>
+					    <li><a href=''>></a></li>
 					</ul>
 				</div>
 			</div>

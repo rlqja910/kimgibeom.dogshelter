@@ -2,16 +2,19 @@ package kimgibeom.dog.report.service;
 
 import java.util.List;
 
+import kimgibeom.dog.report.domain.Criteria;
 import kimgibeom.dog.report.domain.Report;
 
 public interface ReportService {
-	List<Report> readReports();
+	List<Report> readReports(Criteria cri);
+
+	int readListCnt();
 
 	Report readReport(int reportNum);
 
-	int writeReport(String title);
+	int writeReport(Report report);
 
-	int updateReport(Report post);
+	int updateReport(Report report);
 
 	int removeReport(int reportNum);
 }

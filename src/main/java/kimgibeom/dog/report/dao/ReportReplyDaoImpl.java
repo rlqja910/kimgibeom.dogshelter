@@ -24,8 +24,8 @@ public class ReportReplyDaoImpl implements ReportReplyDao {
 	}
 
 	@Override
-	public int addReportReply(String content) {
-		return reportReplyMap.addReportReply(content);
+	public int addReportReply(ReportReply reply) {
+		return reportReplyMap.addReportReply(reply);
 	}
 
 	@Override

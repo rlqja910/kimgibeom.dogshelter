@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kimgibeom.dog.report.dao.ReportDao;
+import kimgibeom.dog.report.domain.Criteria;
 import kimgibeom.dog.report.domain.Report;
 
 @Service
@@ -14,8 +15,13 @@ public class ReportServiceImpl implements ReportService {
 	private ReportDao reportDao;
 
 	@Override
-	public List<Report> readReports() {
-		return reportDao.getReports();
+	public List<Report> readReports(Criteria cri) {
+		return reportDao.getReports(cri);
+	}
+	
+	@Override
+	public int readListCnt() {
+		return reportDao.getListCnt();
 	}
 
 	@Override
@@ -24,13 +30,13 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public int writeReport(String title) {
-		return reportDao.addReport(title);
+	public int writeReport(Report report) {
+		return reportDao.addReport(report);
 	}
 
 	@Override
-	public int updateReport(Report post) {
-		return reportDao.modifyReport(post);
+	public int updateReport(Report report) {
+		return reportDao.modifyReport(report);
 	}
 
 	@Override
