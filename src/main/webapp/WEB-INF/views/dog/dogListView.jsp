@@ -49,7 +49,7 @@ let dogsCnt=${dogsCnt};
 							'dogKind':dogKind,
 							'dogEntDate':dogEntDate,
 						},
-						success:(data)=>{ 
+						success:(data)=>{  
 							$('#pagingUl').empty();
 							$('#dogPost').empty();
 							console.log('good');
