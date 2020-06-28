@@ -1,6 +1,5 @@
 package kimgibeom.dog.dog.controller;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,6 +53,7 @@ public class DogController {
 		if (dogsCnt > 0 && dogsCnt <= 8) { // 데이터가 8개 이하면 페이지가 1페이지밖에 없으므로 기억해둔다.
 			model.addAttribute("isOnePage", "true");// 데이터가 8개 이하인지 boolean값 model
 													// 저장-------------------------
+			System.out.println(dogs);
 			model.addAttribute("onlyOnePageData", jsonDogArray.fromObject(dogs));// 데이터가 8개 이하면 dog값들 model
 			// 저장-------------------------
 			System.out.println(dogs);
@@ -89,7 +89,7 @@ public class DogController {
 
 	@RequestMapping("/dogSearch") // 유기견 리스트 추출
 	@ResponseBody
-	public HashMap<String, Object> getSearchDogs(String dogKind, Date dogEntDate) {
+	public HashMap<String, Object> getSearchDogs(String dogKind, String dogEntDate) {
 		System.out.println(dogKind + "==품종=============");
 		System.out.println(dogEntDate + "==입소날짜=============");
 		HashMap<String, Object> map = new HashMap<String, Object>();

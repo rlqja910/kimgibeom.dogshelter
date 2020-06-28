@@ -1,7 +1,5 @@
 package kimgibeom.dog.dog.domain;
 
-import java.sql.Date;
-
 public class Dog {
 	private int dogNum;
 	private String dogTitle;
@@ -11,7 +9,7 @@ public class Dog {
 	private int dogWeight;
 	private String dogGender;
 	private String dogAdoptionStatus;
-	private Date dogEntranceDate;
+	private String dogEntranceDate;
 	private String dogContent;
 	private String attachName;
 
@@ -19,7 +17,7 @@ public class Dog {
 	}
 
 	public Dog(int dogNum, String dogTitle, String dogName, int dogAge, String dogKind, int dogWeight, String dogGender,
-			String dogAdoptionStatus, Date dogEntranceDate, String dogContent, String attachName) {
+			String dogAdoptionStatus, String dogEntranceDate, String dogContent, String attachName) {
 		this.dogNum = dogNum;
 		this.dogTitle = dogTitle;
 		this.dogName = dogName;
@@ -97,11 +95,11 @@ public class Dog {
 		this.dogAdoptionStatus = dogAdoptionStatus;
 	}
 
-	public Date getDogEntranceDate() {
+	public String getDogEntranceDate() {
 		return dogEntranceDate;
 	}
 
-	public void setDogEntranceDate(Date dogEntranceDate) {
+	public void setDogEntranceDate(String dogEntranceDate) {
 		this.dogEntranceDate = dogEntranceDate;
 	}
 

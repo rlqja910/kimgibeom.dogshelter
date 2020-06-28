@@ -31,8 +31,13 @@ let dogsCnt=${dogsCnt};
 				console.log(dogEntDate);
 				
 				if(dogKind==='' && dogEntDate===''){ //아무것도 입력안하면 리스트 전체 출력
-					console.log('11');
 					$('#pagingUl').empty();
+					$('#dogPost').empty();
+					totalPageCnt=${totalPageCnt};
+					isOnePage=${isOnePage};
+					lastPageDataCnt=${lastPageDataCnt};
+					dogsData=null;
+					dogsCnt=${dogsCnt};
 					dogList();
 				}else{
 					if(dogEntDate===''){

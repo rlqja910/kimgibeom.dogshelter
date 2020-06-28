@@ -1,6 +1,5 @@
 package kimgibeom.dog.dog.service;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class DogServiceImpl implements DogService {
 	}
 
 	@Override
-	public List<Dog> findDogs(String dogKind, Date dogEntDate) {
+	public List<Dog> findDogs(String dogKind, String dogEntDate) {
 		return dogDao.searchDogs(dogKind, dogEntDate);
 	}
 }
