@@ -3,15 +3,15 @@
 	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 <mapper namespace='kimgibeom.dog.report.dao.map.ReportReplyMap'>
 	<select id='getReportReplies' resultType='ReportReply'>
-		select reply_num replyNum, report_num reportNum, user_id userId, content, reg_date regDate
+		select report_reply_num replyNum, report_num reportNum, user_id userId, content, reg_date regDate
 		from report_replies
 		order by reg_date DESC
 	</select>
 	
 	<select id='getReportReply' parameterType='int' resultType='ReportReply'>
-		select reply_num replyNum, report_num reportNum, user_id userId, content, reg_date regDate
+		select report_reply_num replyNum, report_num reportNum, user_id userId, content, reg_date regDate
 		from report_replies
-		where reply_num = #{replyNum}
+		where report_reply_num = #{replyNum}
 	</select>
 	
 	<insert id='addReportReply' parameterType='ReportReply'>
@@ -21,6 +21,6 @@
 	
 	<delete id='delReportReply' parameterType='int'>
 		delete report_replies
-		where reply_num = #{replyNum}
+		where report_reply_num = #{replyNum}
 	</delete>	
 </mapper>	
