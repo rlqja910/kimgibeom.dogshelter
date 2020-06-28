@@ -9,5 +9,6 @@
 		dogGender,adoption_status dogAdoptionStatus,entrance_date
 		dogEnteranceDate,content dogContent,attach_name dogAttachName
 		from dogs
+		order by 1 desc
 	</select>
 </mapper>

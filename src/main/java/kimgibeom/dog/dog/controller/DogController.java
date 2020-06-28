@@ -85,7 +85,7 @@ public class DogController {
 		}
 	}
 
-	@RequestMapping("/dogList") // 유기견 리스트 추출
+	@RequestMapping("/dogSearch") // 유기견 리스트 추출
 	@ResponseBody
 	public void getDogs() {
 	}

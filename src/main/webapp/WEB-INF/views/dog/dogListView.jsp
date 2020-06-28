@@ -20,62 +20,98 @@ let lastPageDataCnt=${lastPageDataCnt};
 console.log(lastPageDataCnt);
 let dogsData=null;
 let dogsCnt=${dogsCnt};
+
 	$(()=>{
-		$('#pagingUl').append('<li><a href="#" id=""><</a></li>');
+		$('#pagingUl').append('<li><a href="#" id="firstViewBtn"><<</a></li>');
 		for(let i=1; i<=totalPageCnt;i++){
 			$('#pagingUl').append('<li><a href="#" id='+i+'page >' + i + '</a></li>');
+			if(i==1){
+				$('#'+i+'page').attr("style","font-weight:bold;");
+			}
 		}
-		$('#pagingUl').append('<li><a href="#">></a></li>');
+		$('#pagingUl').append('<li><a href="#" id="lastViewBtn">>></a></li>');
 		
 		$('.reviewCont').empty();
 		
-		if(isOnePage==false){
+		if(isOnePage===false){ //한페이지가 아니라 여러 페이지일 경우
 			console.log('not onepage');
-			dogsData=JSON.parse('${pageData}');
+			dogsData=JSON.parse('${pageData}'); //controller에서 뽑은 데이터들을 준비한다.
 			console.log(dogsData);
 			
-			for(let i=1;i<=8;i++){
-				$('#dogPost').append('<a href="../adopt/01.html"><ul><li>'+dogsData[i].attachName+'</li><li>'+dogsData[i].dogTitle+'</li><li>'+dogsData[i].dogContent+'</li><li>+더보기</li></ul></a>');
+			for(let i=1;i<=8;i++){ //한페이지당 8개의 게시물이 있으므로 8번 반복한다.
+				$('#dogPost').append('<a href="../adopt/01.html"><ul><li>'+dogsData[i-1].attachName+'</li><li>'+dogsData[i-1].dogTitle+'</li><li>'+dogsData[i-1].dogContent+'</li><li>+더보기</li></ul></a>');
 			}
 			
-		}else if(isOnePage==true){
+		}else if(isOnePage){ //1페이지만 있을때 (데이터가 아예 없는 경우에도 여기로 진입한다)
 			console.log('onepage');
-			if(dogsCnt==0){
+			if(dogsCnt==0){ //아예 데이터가 없을때
 				console.log('11111');
 				$('#pagingUl').empty();
 				$('#dogPost').append('<ul><li>등록된 데이터가 없습니다.</li></ul>');
-			}else{
+			}else{ //아예 데이터가 없는게 아니라 단 하나라도 있을때
 				let onlyOnePageData=JSON.parse('${onlyOnePageData}');
 				console.log(onlyOnePageData);
 				
-				for(let i=1;i<=lastPageDataCnt;i++){
+				for(let i=1;i<=lastPageDataCnt;i++){ //데이터 출력
 					$('#dogPost').append('<a href="../adopt/01.html"><ul><li>'+onlyOnePageData[i-1].attachName+'</li><li>'+onlyOnePageData[i-1].dogTitle+'</li><li>'+onlyOnePageData[i-1].dogContent+'</li><li>+더보기</li></ul></a>');
 				}
 			}
 		}
 		console.log("끝");
+		
+		$('#firstViewBtn').click(()=>{
+			$('#1page').trigger('click');
+			return false;
+		});
+		
+		$('#lastViewBtn').click(()=>{
+			$('#'+totalPageCnt+'page').trigger('click');
+			return false;
+		});
+		
 		for(let i=1; i<=totalPageCnt;i++){
-			$('#'+i+'page').click(()=>{
-				dogsData=JSON.parse('${pageData}');
-				console.log(dogsData);
-				console.log(i);
-				$('#dogPost').empty();
+			$('#'+i+'page').click(()=>{ //페이지 버튼 클릭시 발동
+				for(let j=1; j<=totalPageCnt; j++){
+					$('#'+j+'page').removeAttr('style'); //페이지 눌렀을때 스타일을 지웠다가 해당 페이지에 입힌다.
+				}
+				$('#'+i+'page').attr("style","font-weight:bold;"); //클릭한 페이지 번호 글씨체를 굵게 한다.
 				
-				if(i==totalPageCnt){
+				console.log(i);
+				$('#dogPost').empty(); //리스트를 완전히 다 없앤다.
+				
+				if(isOnePage){ //페이지가 만약 1페이지밖에 없다면 진입
+					dogsData=JSON.parse('${onlyOnePageData}');
+					
 					let cnt=0;
-					for(let j=1;j<=lastPageDataCnt;j++){
+					for(let j=1;j<=lastPageDataCnt;j++){ //마지막 페이지의 data 개수만큼 for를 작동
 						console.log((i-1)*8+cnt+"------------");
 						$('#dogPost').append('<a href="../adopt/01.html"><ul><li>'+dogsData[(i-1)*8+cnt].attachName+'</li><li>'+dogsData[(i-1)*8+cnt].dogTitle+'</li><li>'+dogsData[(i-1)*8+cnt].dogContent+'</li><li>+더보기</li></ul></a>');
-						cnt++;
+						cnt++; //하나씩 넣고 cnt를 올려주어 계단식 저장
 					}
-				}else{
+				}else if(i==totalPageCnt){ //만약에 마지막 페이지를 클릭했을 경우
+					dogsData=JSON.parse('${pageData}'); //그리고 Controller에서 불러온 데이터를 준비한다.
+					console.log(dogsData);
+					
 					let cnt=0;
-					for(let j=1;j<=8;j++){
+					for(let j=1;j<=lastPageDataCnt;j++){ //마지막 페이지의 data 개수만큼 for를 작동
 						console.log((i-1)*8+cnt+"------------");
 						$('#dogPost').append('<a href="../adopt/01.html"><ul><li>'+dogsData[(i-1)*8+cnt].attachName+'</li><li>'+dogsData[(i-1)*8+cnt].dogTitle+'</li><li>'+dogsData[(i-1)*8+cnt].dogContent+'</li><li>+더보기</li></ul></a>');
-						cnt++;
+						cnt++; //하나씩 넣고 cnt를 올려주어 계단식 저장
+					}
+					
+				}else{ //마지막 페이지가 아닌 다른 페이지번호를 클릭했을경우
+					dogsData=JSON.parse('${pageData}'); //그리고 Controller에서 불러온 데이터를 준비한다.
+					console.log(dogsData);
+					
+					let cnt=0;
+					for(let j=1;j<=8;j++){ //1페이지당 8개의 게시물이므로 8번 반복해서 데이터를 출력
+						console.log((i-1)*8+cnt+"------------");
+						$('#dogPost').append('<a href="../adopt/01.html"><ul><li>'+dogsData[(i-1)*8+cnt].attachName+'</li><li>'+dogsData[(i-1)*8+cnt].dogTitle+'</li><li>'+dogsData[(i-1)*8+cnt].dogContent+'</li><li>+더보기</li></ul></a>');
+						cnt++; //하나씩 넣고 cnt를 올려주어 계단식 저장
 					}
 				}
+				
+				return false;
 			});
 		}
 	});
@@ -139,10 +175,17 @@ let dogsCnt=${dogsCnt};
 	float: left;
 	margin: 1% 0 0 1%;
 	border: 1px solid #ccc;
+	height: 400px;
+}
+
+.report .reviewCont li {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .report .reviewCont ul li:nth-child(1) {
-	padding: 30% 0;
+	padding: 40% 0;
 	border-bottom: 1px solid #ccc;
 	text-align: center;
 }
