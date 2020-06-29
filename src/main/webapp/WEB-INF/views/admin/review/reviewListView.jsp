@@ -1,20 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset='UTF-8'>
 <title>Dog Manage</title>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
-<link rel='stylesheet' href='http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css'/>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js'></script>
-<script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
-<script src="../res/adminNavSub.js"></script>
+<%@ include file="../common/scriptImport.jsp" %>
 <script>
-function reviewDel(){
-	$('#delete').click(() => {
-		if($('input:checkbox').is(':checked')) {
+function addReview(){
+	$("#addReview").click(() => {
+		location.href = "reviewRegist";
+	});
+}
+
+function delReview(){
+	$("#deleteReview").click(() => {
+		if($("input:checkbox").is(":checked")) {
 			swal({
 				title: '후기 삭제',
 				text: '정말 후기를 삭제하시겠습니까?',
@@ -25,28 +28,44 @@ function reviewDel(){
 				closeOnConfirm: false
 			},
 			function(isConfirm) {
-				if(isConfirm) 
+				if(isConfirm) {
 					swal({
 						title: '',
 						text: '후기가 삭제되었습니다.',
 						type: 'success',
 						confirmButtonText: '확인'
-					});	
+					});
+				}
 			});
+		}else {
+		  swal({
+		      title: '',
+		      text: '항목을 선택하세요.',
+		      type: 'warning',
+		      confirmButtonText: '확인',
+		      closeOnConfirm: false
+		   });
 		}
 	});
 }
 
-function reviewSearch(){
+function fn_reviewView(reviewNum){
+	let url = "reviewView";
+	url = url + "?reviewNum=" + reviewNum;
+
+	location.href = url;
+}
+
+function searchReview(){
 	$('#search').click(() => {
-		if($('#searchContent').val().trim()) {
-			
-		}	
+		
 	});
 }
 
-$(reviewDel);
-$(reviewSearch);
+$(() => {
+	addReview();
+	delReview();
+});
 </script>
 <style>
 * {
@@ -150,12 +169,12 @@ body {
 }
 
 /*------- 이미지 체크박스-------- */
-#chk{
+.reviewCheck{
    border: 2px solid black;
    width: 25px;
    height: 25px;
    position: relative;
-   top: -45px;
+   top: -244.5px;
    left: -165px;
 }
 
@@ -173,14 +192,17 @@ body {
 }
 
 .img{
-   border: 1px solid black;
    width: 355px;
-   height: 189px;
+   height: 240px;
    text-align: center;
-   padding-top: 40px;
    margin-bottom: 5px;
    background-color: white;
    margin-right: 10px;
+}
+
+img {
+	width: 355px;
+	height: 240px;
 }
 
 .button{
@@ -207,6 +229,13 @@ body {
 	display: block;
 	text-align: center;
 }
+
+.titleBox {
+	width: 350px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
 </style>
 </head>
 <body>
@@ -218,10 +247,10 @@ body {
       <div class='header'>
          <strong>&nbsp;&nbsp;ADMINSTRATOR</strong>
          <div id='topButton'>
-	          		 <a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
-					<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-					<a href='../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-					<a href='user/logout'>로그아웃</a>
+         	<a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
+			<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
+			<a href='../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+			<a href='user/logout'>로그아웃</a>
          </div>
       </div>
       <div class='info'>
@@ -245,76 +274,34 @@ body {
                </div>
                <br>
                
-               <div class='totalReview'>
-                  <div class='imgbox'>
-                     <a href='03.html'><div class='img'>
-                        <div><input type='checkbox' id='chk'/></div>
-                        유기견 이미지
-                     </div>
-                     <p>[입양 후기 글 제목]</p></a>
-                  </div>
-                  
-                  <div class='imgbox'>
-                     <a href='03.html'><div class='img'>
-                        <div><input type='checkbox' id='chk'/></div>
-                        유기견 이미지
-                     </div>
-                     <p>점박이 치와와 치치!! 따뜻한 가정으로
-</p></a>
-                  </div>
-                  
-                  <div class='imgbox'>
-                     <a href='03.html'><div class='img'>
-                        <div><input type='checkbox' id='chk'/></div>
-                        유기견 이미지
-                     </div>
-                     <p>2kg 미니핀,석핀,성수동으로</p></a>
-                  </div>
-                  
-                  <div class='imgbox'>
-                     <a href='03.html'><div class='img'>
-                        <div><input type='checkbox' id='chk'/></div>
-                        유기견 이미지
-                     </div>
-                     <p>뽀송뽀송 버블이 안녕!!</p></a>
-                  </div>
-                  
-                  <div class='imgbox'>
-                     <a href='03.html'><div class='img'>
-                        <div><input type='checkbox' id='chk'/></div>
-                        유기견 이미지
-                     </div>
-                     <p>비숑 프리제 에릭 부산행!!</p></a>
-                  </div>
-                  
-                  <div class='imgbox'>
-                     <a href='03.html'><div class='img'>
-                        <div><input type='checkbox' id='chk'/></div>
-                        유기견 이미지
-                     </div>
-                     <p>미친귀여움 웰시코기 뿅이</p></a>
-                  </div>
-                  
-                  <div class='imgbox'>
-                     <a href='03.html'><div class='img'>
-                        <div><input type='checkbox' id='chk'/></div>
-                        유기견 이미지
-                     </div>
-                     <p>너무귀여워시바!강산이!!</p></a>
-                  </div>
-                  
-                  <div class='imgbox'>
-                     <a href='03.html'><div class='img'>
-                        <div><input type='checkbox' id='chk'/></div>
-                        유기견 이미지
-                     </div>
-                     <p>센터1짱!슈나우져,가람아 빠이!</p></a>
-                  </div>
-               </div>
+               <c:choose>
+               		<c:when test="${empty reviewList}">
+               			<p>등록된 후기가 없습니다.</p>
+               		</c:when>
+               		<c:when test="${!empty reviewList}">
+               			<div class='totalReview'>
+               				<c:forEach var="reviewList" items="${reviewList}">
+			                  <div class='imgbox'>
+			                     <a href='#' onclick="fn_reviewView(<c:out value='${reviewList.reviewNum}'/>)">
+			                     	<div class='img'>
+			                        	<div>
+			                        		<img src='<c:url value="/attach/review/${reviewList.attachName}"/>'/>
+			                        		<input type='checkbox' class='reviewCheck'/>
+			                        	</div>
+			                     	</div>
+			                     </a>
+			                     <div class="titleBox">
+			                     	<strong><c:out value="${reviewList.title}"/></strong>
+			                     </div>
+			                  </div>
+			             	</c:forEach>
+			             </div>
+					</c:when>
+               </c:choose>
                
                <div class='button'>
-                  <button type='button' class='btn btn-primary' onClick="location.href='02.html'">등록</button>
-                  <button type='button' class='btn btn-warning' id='delete'>삭제</button>
+                  <button type='button' class='btn btn-primary' id="addReview">등록</button>
+                  <button type='button' class='btn btn-warning' id="deleteReview">삭제</button>
                </div>
             </form>  
             <br> 
