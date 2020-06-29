@@ -167,6 +167,10 @@ body {
 .replyContent {
 	margin-top: 3px;
 }
+
+.marker {
+	background-color:yellow;
+}
 </style>
 </head>
 

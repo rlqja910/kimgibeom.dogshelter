@@ -119,6 +119,7 @@ $(register);
 	.report .reportCont .more{text-align:right; margin:6% 3% 5% 3%;}
 	.report .reportCont ul img{width:100%;}
 	.report .reportEmpty{text-align: center;}
+	.report .reportCont .marker{background-color:yellow;}
 
 	/* 검색 */
 	.report .search{width:100%; overflow:hidden; padding:0.3%; display:flex; margin:0 auto; justify-content:center; margin-bottom:60px;}
