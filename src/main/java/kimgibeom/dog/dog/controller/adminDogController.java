@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import kimgibeom.dog.dog.domain.Dog;
 import kimgibeom.dog.dog.service.DogService;
@@ -20,8 +22,22 @@ public class adminDogController {
 	@Autowired
 	private DogService dogService;
 
-	@RequestMapping("/dogRegist")
-	public void dogRegist() {
+	@RequestMapping(value = "/dogRegist")
+	public void dogRegistPage() {
+	}
+
+	@RequestMapping(value = "/dogRegist", method = RequestMethod.POST)
+	public void dogRegist(String dogTitle, String dogName, String dogKind, int dogWeight, int dogAge,
+			String dogEntranceDate, String dogGender, String dogContent, MultipartFile attachFile) {
+		System.out.println(dogTitle);
+		System.out.println(dogName);
+		System.out.println(dogKind);
+		System.out.println(dogWeight);
+		System.out.println(dogAge);
+		System.out.println(dogEntranceDate);
+		System.out.println(dogGender);
+		System.out.println(dogContent);
+		System.out.println(attachFile.getOriginalFilename());
 	}
 
 	@RequestMapping("/dogListView")
