@@ -4,14 +4,81 @@
 <html>
 <head>
 <meta charset='UTF-8'>
-<title>ADMIN PAGE</title>
+<title>ADMIN PAGE</title> 
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
-<link rel='stylesheet' href='http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css'/>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js'></script>
+<%@ include file="../common/scriptImport.jsp" %>
+<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+<script src="${path}/ckeditor/ckeditor.js"></script>
+<script>
+CKEDITOR.config.resize_enabled = false;
 
-<script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
-<script src="../res/adminNavSub.js"></script>
+function cencelAdd(){
+	$("#cancelAdd").click(() => {
+		location.href = "reviewListView";
+	});
+}
+
+function addReview(){
+	$("#addReview").click(() => {
+		if(!$("#title").val().trim()){
+			$("#chkTitle").text("제목을 입력해주세요.");
+			$("#title").focus();
+		}else if(!$("#contentFile").val()){
+			$("#chkFile").html("첨부할 파일을 선택해주세요.");
+		}else if(!CKEDITOR.instances.description.getData()){
+			$("#chkContent").text("내용을 입력해주세요.");
+		}else {
+			$("#reviewForm").submit();
+		}
+	});
+}
+
+function fn_chkByteTitle(obj){
+	   let maxByte = 100; //최대 입력 바이트 수
+	   let str = obj.value;
+	   let strLength = str.length;
+	   console.log(strLength);
+	   
+	   let titleByte = 0; 
+	   let titleLength = 0; 
+	   let oneChar = "";
+	   let str2 = "";
+	   
+	   for(let i=0; i<strLength; i++){
+	      oneChar = str.charAt(i); //한글자씩 분해
+	      
+	      if(escape(oneChar).length > 4) titleByte += 3; //AS32UTF8은 한글 3byte로 인식함
+	      else titleByte++; //영어 숫자 특수문자 1byte 
+	      
+	      if(titleByte <= maxByte) titleLength = i + 1; //리턴할 문자열 갯수
+	   }
+	   
+	   if(titleByte > maxByte){
+	      $("#chkTitle").text("한글" + Math.round(maxByte/3) + "자 / 영문" + maxByte + "자까지 입력 가능합니다.");
+	      str2 = str.substr(0, titleLength); //문자열 자르기
+	      obj.value = str2;
+	   }else {
+	      $("#chkTitle").text("");
+	   }
+	}
+
+function fn_chkFile(obj){
+	let ext = $("#contentFile").val().split(".").pop().toLowerCase(); 
+	//"."를 기준으로 문자열로 나눈다. 배열의 마지막 요소를 제거한 후 제거한 요소를 반환하여 소문자로 변환한다.
+	
+	if($.inArray(ext, ["gif", "jpg", "jpeg", "png", "bmp"]) == -1){ //요소가 없을 경우 -1을 반환 
+		$("#chkFile").html("gif, jpg, jpeg, png, bmp 파일만 업로드 해주세요.");
+		$("#contentFile").val("");
+	}else {
+		$("#chkFile").html("");
+	}
+}
+
+$(() => {
+	addReview();
+	cencelAdd();
+});
+</script>
 <style>
 * {
 	margin: 0;
@@ -102,7 +169,6 @@ body {
 #content {
 	float: left;
 	margin-left: 10px;
-	width: 400px;
 	display: inline;
 }
 
@@ -110,6 +176,10 @@ th{
 	background-color:#EFEFEF;
 	text-align: center;
 	width: 150px;
+}
+
+.contentTd{
+	height: 350px;
 }
 
 textarea{
@@ -144,29 +214,56 @@ textarea{
 				</h3>
 				<hr style='border: 1px solid #a0a0a0;'>
 			
-				<form>
+				<form id="reviewForm" action="addReview" method="post" enctype="multipart/form-data">
 					<table class='table'>
 						<tr>
 							<th>제목</th>
-							<td><input type='text' style='width:500px;'/></td>
+							<td>
+								<input type='text' style='width:500px;' id="title" name="title" onkeyup="fn_chkByteTitle(this);"/>
+								<span id="chkTitle" style="color:red"></span>
+							</td>
 						</tr>
 						<tr>
 							<th>이미지</th>
-							<td><input type='file'/></td>
+							<td>
+								<input type='file' id="contentFile" name="attachFile" onchange="fn_chkFile(this)"/>
+								<span id="chkFile" style="color:red"></span>
+							</td>
 						</tr>
-						<tr>
+						<tr class="contentTd">
 							<th>내용</th>
 							<td>
-								<textarea id="description"> 
-								</textarea>
-								
+								<textarea id="description" name="content" maxlength="1250"></textarea>
+								<span id="chkContent" style="color:red"></span>
+								<script>
+									CKEDITOR.replace("description", {
+										removePlugins: "image",
+									});	
+									
+									CKEDITOR.instances.description.getData();
+									
+									CKEDITOR.instances.description.on('key', function(e) {
+									    content = this;
+									    text = content.getData();
+
+									    if(text.length > 1250) {
+											$("#chkContent").text("내용은 1250자까지 입력 가능합니다.");
+											$("#addReview").attr("disabled", true);
+
+										}else{
+											$("#chkContent").text("");
+											$("#addReview").attr("disabled", false);
+										}
+									});
+								</script>
 							</td>
 						</tr>
 					</table>
 					
 					<div class='button' style='text-align:right;'>
-						<button type='button' class='btn btn-primary' onClick="location.href='01.html'">등록</button>&nbsp;
-						<button type='button' class='btn btn-default' onClick="location.href='01.html'">취소</button>
+						<span id="chkAdd"></span>
+						<button type='button' class='btn btn-primary' id="addReview">등록</button>&nbsp;
+						<button type='button' class='btn btn-default' id="cancelAdd">취소</button>
 					</div>
 				</form>	
 			</div>	
