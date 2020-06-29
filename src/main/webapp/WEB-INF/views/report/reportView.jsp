@@ -146,6 +146,7 @@ $(checkAuthority);
 	.review .reportView table tr:nth-child(2) td{width:5%; padding:1% 0 1% 2%;}
 	.review .reportView table tr:nth-child(3) td{padding:2% 0 2% 2%;}
 	.review .reportView .reportInfo{text-align:right;}
+	.review .reportView .marker{background-color:yellow;}
 	
 	/* 목록 버튼 */
 	.button{text-align:center; overflow:hidden;}
