@@ -22,4 +22,36 @@
 		and entrance_date>=#{dogEntDate}
 		order by 1 desc
 	</select>
+	
+	<select id='searchDogsForTitle' resultType="dog" parameterType="String">
+		select dog_num dogNum,title
+		dogTitle,name dogName,age dogAge ,kind dogKind,weight dogWeight,gender
+		dogGender,adoption_status dogAdoptionStatus,to_char(entrance_date,'yyyy-mm-dd')
+		dogEntranceDate,content dogContent,attach_name dogAttachName
+		from dogs
+		where kind like '%'||#{dogTitle}||'%'
+		order by 1 desc
+	</select>
+	
+	<select id='searchBeforeAdoptDogs' resultType="dog">
+		select dog_num dogNum,title
+		dogTitle,name dogName,age dogAge ,kind dogKind,weight dogWeight,gender
+		dogGender,adoption_status dogAdoptionStatus,to_char(entrance_date,'yyyy-mm-dd')
+		dogEntranceDate,content dogContent,attach_name dogAttachName
+		from dogs
+		where kind like '%'||#{dogKind}||'%'
+		and adoption_status='입양미완료'
+		order by 1 desc
+	</select>
+	
+	<select id='searchAfterAdoptDogs' resultType="dog">
+		select dog_num dogNum,title
+		dogTitle,name dogName,age dogAge ,kind dogKind,weight dogWeight,gender
+		dogGender,adoption_status dogAdoptionStatus,to_char(entrance_date,'yyyy-mm-dd')
+		dogEntranceDate,content dogContent,attach_name dogAttachName
+		from dogs
+		where kind like '%'||#{dogKind}||'%'
+		and adoption_status='입양완료'
+		order by 1 desc
+	</select>
 </mapper>

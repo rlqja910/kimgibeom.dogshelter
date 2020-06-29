@@ -8,4 +8,10 @@ public interface DogService {
 	List<Dog> readDogs();
 
 	List<Dog> findDogs(String dogKind, String dogEntDate);
+
+	List<Dog> findDogsForTitle(String dogTitle);
+
+	List<Dog> findBeforeAdoptDogs(String dogTitle);
+
+	List<Dog> findAfterAdoptDogs(String dogTitle);
 }

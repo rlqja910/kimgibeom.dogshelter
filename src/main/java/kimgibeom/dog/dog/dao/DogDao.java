@@ -8,4 +8,10 @@ public interface DogDao {
 	List<Dog> getDogs();
 
 	List<Dog> searchDogs(String dogKind, String dogEntDate);
+
+	List<Dog> searchDogsForTitle(String dogTitle);
+
+	List<Dog> searchBeforeAdoptDogs(String dogTitle);
+
+	List<Dog> searchAfterAdoptDogs(String dogTitle);
 }

@@ -87,7 +87,7 @@ public class DogController {
 		}
 	}
 
-	@RequestMapping("/dogSearch") // 유기견 리스트 추출
+	@RequestMapping("/dogSearch") // 겅색 리스트 추출
 	@ResponseBody
 	public HashMap<String, Object> getSearchDogs(String dogKind, String dogEntDate) {
 		System.out.println(dogKind + "==품종=============");

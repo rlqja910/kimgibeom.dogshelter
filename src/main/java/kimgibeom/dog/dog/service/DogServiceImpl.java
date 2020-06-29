@@ -22,4 +22,20 @@ public class DogServiceImpl implements DogService {
 	public List<Dog> findDogs(String dogKind, String dogEntDate) {
 		return dogDao.searchDogs(dogKind, dogEntDate);
 	}
+
+	@Override
+	public List<Dog> findDogsForTitle(String dogTitle) {
+		return dogDao.searchDogsForTitle(dogTitle);
+	}
+
+	@Override
+	public List<Dog> findBeforeAdoptDogs(String dogTitle) {
+		return dogDao.searchBeforeAdoptDogs(dogTitle);
+	}
+
+	@Override
+	public List<Dog> findAfterAdoptDogs(String dogTitle) {
+		return dogDao.searchAfterAdoptDogs(dogTitle);
+	}
+
 }
