@@ -40,7 +40,7 @@ function delReport() {
 function registerReply() {
 	let reportNum = $('table').attr('id');
 
-	$('#replyRegist').click(() => {
+	$('#replyRegister').click(() => {
 		let reply = {
 			reportNum: reportNum,
 			userId: `${userId}`,
@@ -112,6 +112,10 @@ function checkAuthority() {
 		if ($(this).attr('class') != `${userId}`) 
 			$('.replyDel').eq($(this).index()).hide();
 	})
+	
+	if (!`${userId}`) { // 댓글 등록 시 로그인 안 한 상태이면 로그인 페이지로 이동
+		$('#replyRegister').attr('onClick', "location.href='../../user/login'");
+	}
 }
 
 $(delReport);
@@ -240,7 +244,7 @@ $(checkAuthority);
 							<div>
 								<textarea name='content' placeholder='댓글을 입력하세요.' maxlength='1050'></textarea>
 								<div>
-									<input type='button' id='replyRegist' value='등록'/>
+									<input type='button' id='replyRegister' value='등록'/>
 								</div>
 							</div>
 						</div>
