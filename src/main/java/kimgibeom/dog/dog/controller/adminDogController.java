@@ -20,6 +20,10 @@ public class adminDogController {
 	@Autowired
 	private DogService dogService;
 
+	@RequestMapping("/dogRegist")
+	public void dogRegist() {
+	}
+
 	@RequestMapping("/dogListView")
 	public void dogListView(Model model) {
 		List<Dog> dogs = dogService.readDogs();
@@ -309,7 +313,7 @@ public class adminDogController {
 				} else {
 					int cnt = 0;
 					System.out.println("for접근:" + i + "번째페이지임--admin");
-					for (int j = 1; j <= 8; j++) {// 마지막 페이지가 아닌 데이터들을 저장할때 
+					for (int j = 1; j <= 8; j++) {// 마지막 페이지가 아닌 데이터들을 저장할때
 						dogList.add(dogs.get((i - 1) * 8 + cnt++));
 					}
 				}

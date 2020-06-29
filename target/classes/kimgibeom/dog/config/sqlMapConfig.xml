@@ -9,5 +9,6 @@
 		<package name="kimgibeom.dog.report.domain"/>
 		<package name="kimgibeom.dog.dog.domain"/>
 		<package name="kimgibeom.dog.review.domain"/>
+		<package name="kimgibeom.dog.donation.domain"/>
 	</typeAliases>
 </configuration>

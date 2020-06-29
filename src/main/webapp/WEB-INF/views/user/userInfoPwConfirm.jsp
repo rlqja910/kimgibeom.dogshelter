@@ -88,9 +88,9 @@ $(enroll);
 			<div class="content">
 				<div class='subMenu'>
 					<ul>
-						<li><a href='07.html' class='menuOn'>회원정보 변경</a></li>
-						<li><a href='../adopt/01.html'>입양 예약 조회</a></li>
-						<li><a href='09.html'>회원탈퇴</a></li>
+						<li><a href='<c:url value='/user/mypage'/>' class='menuOn'>회원정보 변경</a></li>
+						<li><a href='<c:url value='/adopt/adoptListView'/>'>입양 예약 조회</a></li>
+						<li><a href='<c:url value='/user/userWithdraw'/>'>회원탈퇴</a></li>
 					</ul>
 				</div>
 				<div class="member">				

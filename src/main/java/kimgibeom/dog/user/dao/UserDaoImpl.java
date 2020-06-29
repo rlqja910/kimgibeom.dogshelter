@@ -42,4 +42,9 @@ public class UserDaoImpl implements UserDao {
 	public int updatePw(String userId, String userPw) {
 		return userMap.updatePw(userId, userPw);
 	}
+
+	@Override
+	public int delUser(String userId) {
+		return userMap.delUser(userId);
+	}
 }

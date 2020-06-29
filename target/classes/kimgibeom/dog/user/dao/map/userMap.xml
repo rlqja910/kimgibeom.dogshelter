@@ -36,4 +36,9 @@
 		set password = #{userPw}
 		where user_id= #{userId}
 	</update>
+	
+	<delete id='delUser' parameterType='String'>
+		delete users
+		where user_id = #{userId}
+	</delete>
 </mapper>

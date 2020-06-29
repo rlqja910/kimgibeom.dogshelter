@@ -16,4 +16,7 @@ public interface UserDao {
 	User getUserMail(String userId);
 
 	int updatePw(String userId, String userPw);
+
+	// 회원 탈퇴
+	int delUser(String userId);
 }

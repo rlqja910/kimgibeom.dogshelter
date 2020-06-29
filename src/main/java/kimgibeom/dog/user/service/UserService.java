@@ -18,4 +18,6 @@ public interface UserService {
 	User findUserMail(String userId);
 
 	boolean modPw(String userId, String userPw);
+
+	boolean withdrawUser(String userId);
 }

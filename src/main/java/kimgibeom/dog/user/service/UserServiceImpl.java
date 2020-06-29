@@ -58,4 +58,9 @@ public class UserServiceImpl implements UserService {
 	public boolean modPw(String userId, String userPw) {
 		return userDao.updatePw(userId, userPw) > 0;
 	}
+
+	@Override
+	public boolean withdrawUser(String userId) {
+		return userDao.delUser(userId) > 0;
+	}
 }

@@ -761,7 +761,7 @@ body {
 							<br> <br>
 							<div class='button'>
 								<button type='button' class='btn btn-primary'
-									onClick="location.href='02.html'">등록</button>
+									onClick="location.href='dogRegist'">등록</button>
 								<button type='button' class='btn btn-warning' id='delete'>삭제</button>
 							</div>
 						</div>

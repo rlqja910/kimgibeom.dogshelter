@@ -24,6 +24,16 @@ public class UserController {
 	@Autowired
 	private JavaMailSender mailSender;
 
+	@RequestMapping("/mypage")
+	public String userMypage() {
+		return "user/userInfoPwConfirm";
+	}
+
+	@RequestMapping("/userWithdraw")
+	public String userWithdraw() {
+		return "user/userWithdraw";
+	}
+
 	@RequestMapping("/login")
 	public void userLogin() {
 	}
@@ -133,5 +143,21 @@ public class UserController {
 	@ResponseBody
 	public boolean pwFindOut(String userId, String userPw) {
 		return userService.modPw(userId, userPw);
+	}
+
+	// 회원 탈퇴
+	@RequestMapping(value = "/pwCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean pwCheck(String userId, String userPw, HttpServletRequest request) {
+		String pw = userService.readuserPw(userId);
+
+		if (pw.equals(userPw)) {
+			userService.withdrawUser(userId);
+			request.getSession().invalidate();
+
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
