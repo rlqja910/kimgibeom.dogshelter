@@ -79,7 +79,7 @@ let dogsCnt=${dogsCnt};
 							if(isOnePage===false){ //한페이지가 아니라 여러 페이지일 경우
 								console.log('not onepage');
 								dogsData=data.pageData; //controller에서 뽑은 데이터들을 준비한다.
-								console.log(dogsData);
+								console.log(dogsData); 
 								
 								for(let i=1;i<=8;i++){ //한페이지당 8개의 게시물이 있으므로 8번 반복한다.
 									$('#dogPost').append('<a href="../adopt/adoptReservation/'+dogsData[i-1].dogNum+'"><ul><li><img src="<c:url value="/attach/dog/'+dogsData[i-1].attachName+'" />" /></li><li>'+dogsData[i-1].dogTitle+'</li><li>'+dogsData[i-1].dogContent+'</li><li>+더보기</li></ul></a>');
