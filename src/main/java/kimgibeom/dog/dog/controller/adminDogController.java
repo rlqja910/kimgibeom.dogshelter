@@ -1,10 +1,15 @@
 package kimgibeom.dog.dog.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +26,8 @@ import net.sf.json.JSONArray;
 public class adminDogController {
 	@Autowired
 	private DogService dogService;
+	@Value("${dogAttachDir}")
+	private String attachDir;
 
 	@RequestMapping(value = "/dogRegist")
 	public void dogRegistPage() {
@@ -28,27 +35,52 @@ public class adminDogController {
 
 	@RequestMapping(value = "/dogRegist", method = RequestMethod.POST)
 	public void dogRegist(String dogTitle, String dogName, String dogKind, int dogWeight, int dogAge,
-			String dogEntranceDate, String dogGender, String dogContent, MultipartFile attachFile) {
-		System.out.println(dogTitle);
-		System.out.println(dogName);
-		System.out.println(dogKind);
-		System.out.println(dogWeight);
-		System.out.println(dogAge);
-		System.out.println(dogEntranceDate);
-		System.out.println(dogGender);
-		System.out.println(dogContent);
-		System.out.println(attachFile.getOriginalFilename());
+			String dogEntranceDate, String dogGender, String dogContent, MultipartFile attachFile,
+			HttpServletRequest request) {
+		String fileName = (int) (Math.random() * 100000000) + attachFile.getOriginalFilename(); // 파일명 중복방지
+
+		try {
+			Dog dog = new Dog(1, dogTitle, dogName, dogAge, dogKind, dogWeight, dogGender, "", dogEntranceDate,
+					dogContent, fileName);
+
+			dogService.writeDog(dog); // dog 추가
+
+			String dir = request.getServletContext().getRealPath(attachDir);
+			System.out.println("dir : " + dir);
+
+			save(dir + "/" + fileName, attachFile);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void save(String filePath, MultipartFile attachFile) {
+		try {
+			attachFile.transferTo(new File(filePath));
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@RequestMapping("/dogListView")
 	public void dogListView(Model model) {
+		model.addAttribute("totalPageCnt", "null");
+		model.addAttribute("dogsCnt", "null");
+		model.addAttribute("lastPageDataCnt", "null");
+		model.addAttribute("onlyOnePageData", "null");
+		model.addAttribute("isOnePage", "null");
+		model.addAttribute("pageData", "null");
+
 		List<Dog> dogs = dogService.readDogs();
 		JSONArray jsonDogArray = new JSONArray();
 
 		int dogsCnt = dogs.size(); // 데이터 개수
 		model.addAttribute("dogsCnt", dogsCnt);
 		System.out.println(dogsCnt + "개의 데이터가 있음--admin");
-
 		int pageCnt = 0;
 		if (dogsCnt % 8 == 0) {
 			pageCnt = dogsCnt / 8; // 총 페이지 개수 (마지막 페이지 번호)
@@ -59,7 +91,6 @@ public class adminDogController {
 		System.out.println("총 페이지 개수 --admin: " + pageCnt);
 		// 총페이지 개수 model 저장-------------------------
 		model.addAttribute("totalPageCnt", pageCnt);
-
 		int lastPageDataCnt = dogsCnt % 8;// 마지막 페이지 데이터 개수
 		if (lastPageDataCnt == 0) {
 			lastPageDataCnt = 8;
@@ -69,7 +100,6 @@ public class adminDogController {
 		}
 		model.addAttribute("lastPageDataCnt", lastPageDataCnt);
 		System.out.println("마지막 페이지 데이터 개수--admin:" + lastPageDataCnt);
-
 		if (dogsCnt > 0 && dogsCnt <= 8) { // 데이터가 8개 이하면 페이지가 1페이지밖에 없으므로 기억해둔다.
 			model.addAttribute("isOnePage", "true");// 데이터가 8개 이하인지 boolean값 model
 													// 저장-------------------------
@@ -88,7 +118,6 @@ public class adminDogController {
 			List<Dog> dogList = new ArrayList<Dog>();
 			for (int i = 1; i <= pageCnt; i++) { // 모든페이지 데이터를 저장한다.
 				System.out.println("for");
-
 				if (i == pageCnt) { // 마지막 페이지 저장할때
 					int cnt = 0;
 					System.out.println("for접근:마지막페이지-" + i + "페이지--admin");
@@ -104,6 +133,7 @@ public class adminDogController {
 				}
 			}
 			model.addAttribute("pageData", jsonDogArray.fromObject(dogList));// 모든페이지 데이터 저장
+			System.out.println(dogList);
 		}
 	}
 
@@ -112,15 +142,11 @@ public class adminDogController {
 	public HashMap<String, Object> getDogs(String dogTitle) {
 		System.out.println(dogTitle + "==제목=============--admin");
 		HashMap<String, Object> map = new HashMap<String, Object>();
-
 		List<Dog> dogs = dogService.findDogsForTitle(dogTitle);
-
 		JSONArray jsonDogArray = new JSONArray();
-
 		int dogsCnt = dogs.size(); // 데이터 개수
 		map.put("dogsCnt", dogsCnt);
 		System.out.println(dogsCnt + "개의 데이터가 있음--admin");
-
 		int pageCnt = 0;
 		if (dogsCnt % 8 == 0) {
 			pageCnt = dogsCnt / 8; // 총 페이지 개수 (마지막 페이지 번호)
@@ -131,7 +157,6 @@ public class adminDogController {
 		System.out.println("총 페이지 개수--admin : " + pageCnt);
 		// 총페이지 개수 model 저장-------------------------
 		map.put("totalPageCnt", pageCnt);
-
 		int lastPageDataCnt = dogsCnt % 8;// 마지막 페이지 데이터 개수
 		if (lastPageDataCnt == 0) {
 			lastPageDataCnt = 8;
@@ -141,7 +166,6 @@ public class adminDogController {
 		}
 		map.put("lastPageDataCnt", lastPageDataCnt);
 		System.out.println("마지막 페이지 데이터 개수--admin:" + lastPageDataCnt);
-
 		if (dogsCnt > 0 && dogsCnt <= 8) { // 데이터가 8개 이하면 페이지가 1페이지밖에 없으므로 기억해둔다.
 			// 데이터가 8개 이하인지 boolean값
 			// 저장-------------------------
@@ -163,7 +187,6 @@ public class adminDogController {
 			List<Dog> dogList = new ArrayList<Dog>();
 			for (int i = 1; i <= pageCnt; i++) { // 모든페이지 데이터를 저장한다.
 				System.out.println("for");
-
 				if (i == pageCnt) { // 마지막 페이지 저장할때
 					int cnt = 0;
 					System.out.println("for접근:마지막페이지-" + i + "페이지--admin");
@@ -190,15 +213,11 @@ public class adminDogController {
 	public HashMap<String, Object> searchBeforeAdopt(String dogTitle) {
 		System.out.println(dogTitle + "==제목=============--admin");
 		HashMap<String, Object> map = new HashMap<String, Object>();
-
 		List<Dog> dogs = dogService.findBeforeAdoptDogs(dogTitle);
-
 		JSONArray jsonDogArray = new JSONArray();
-
 		int dogsCnt = dogs.size(); // 데이터 개수
 		map.put("dogsCnt", dogsCnt);
 		System.out.println(dogsCnt + "개의 데이터가 있음--admin");
-
 		int pageCnt = 0;
 		if (dogsCnt % 8 == 0) {
 			pageCnt = dogsCnt / 8; // 총 페이지 개수 (마지막 페이지 번호)
@@ -209,7 +228,6 @@ public class adminDogController {
 		System.out.println("총 페이지 개수--admin : " + pageCnt);
 		// 총페이지 개수저장-------------------------
 		map.put("totalPageCnt", pageCnt);
-
 		int lastPageDataCnt = dogsCnt % 8;// 마지막 페이지 데이터 개수
 		if (lastPageDataCnt == 0) {
 			lastPageDataCnt = 8;
@@ -219,7 +237,6 @@ public class adminDogController {
 		}
 		map.put("lastPageDataCnt", lastPageDataCnt);
 		System.out.println("마지막 페이지 데이터 개수--admin:" + lastPageDataCnt);
-
 		if (dogsCnt > 0 && dogsCnt <= 8) { // 데이터가 8개 이하면 페이지가 1페이지밖에 없으므로 기억해둔다.
 			// 데이터가 8개 이하인지 boolean값
 			// 저장-------------------------
@@ -241,7 +258,6 @@ public class adminDogController {
 			List<Dog> dogList = new ArrayList<Dog>();
 			for (int i = 1; i <= pageCnt; i++) { // 모든페이지 데이터를 저장한다.
 				System.out.println("for");
-
 				if (i == pageCnt) { // 마지막 페이지 저장할때
 					int cnt = 0;
 					System.out.println("for접근:마지막페이지-" + i + "페이지--admin");
@@ -268,15 +284,11 @@ public class adminDogController {
 	public HashMap<String, Object> searchAfterAdopt(String dogTitle) {
 		System.out.println(dogTitle + "==제목=============--admin");
 		HashMap<String, Object> map = new HashMap<String, Object>();
-
 		List<Dog> dogs = dogService.findAfterAdoptDogs(dogTitle);
-
 		JSONArray jsonDogArray = new JSONArray();
-
 		int dogsCnt = dogs.size(); // 데이터 개수
 		map.put("dogsCnt", dogsCnt);
 		System.out.println(dogsCnt + "개의 데이터가 있음--admin");
-
 		int pageCnt = 0;
 		if (dogsCnt % 8 == 0) {
 			pageCnt = dogsCnt / 8; // 총 페이지 개수 (마지막 페이지 번호)
@@ -287,7 +299,6 @@ public class adminDogController {
 		System.out.println("총 페이지 개수--admin : " + pageCnt);
 		// 총페이지 개수 저장-------------------------
 		map.put("totalPageCnt", pageCnt);
-
 		int lastPageDataCnt = dogsCnt % 8;// 마지막 페이지 데이터 개수
 		if (lastPageDataCnt == 0) {
 			lastPageDataCnt = 8;
@@ -297,7 +308,6 @@ public class adminDogController {
 		}
 		map.put("lastPageDataCnt", lastPageDataCnt);
 		System.out.println("마지막 페이지 데이터 개수--admin:" + lastPageDataCnt);
-
 		if (dogsCnt > 0 && dogsCnt <= 8) { // 데이터가 8개 이하면 페이지가 1페이지밖에 없으므로 기억해둔다.
 			// 데이터가 8개 이하인지 boolean값
 			// 저장-------------------------
@@ -319,7 +329,6 @@ public class adminDogController {
 			List<Dog> dogList = new ArrayList<Dog>();
 			for (int i = 1; i <= pageCnt; i++) { // 모든페이지 데이터를 저장한다.
 				System.out.println("for");
-
 				if (i == pageCnt) { // 마지막 페이지 저장할때
 					int cnt = 0;
 					System.out.println("for접근:마지막페이지-" + i + "페이지--admin");

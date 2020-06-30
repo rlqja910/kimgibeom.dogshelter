@@ -21,7 +21,6 @@ function onTypying(){
 	$('input[name="dogGender"]').change(()=>{$('#registGenderMsg').text(''); });
 	$('#attachFile').change(()=>{$('#registAttachMsg').text(''); });
 }
-
 function maxLengthCheck(object){ //숫자 max값 초과시 제한
     if (object.value.length > object.maxLength){
       object.value = object.value.slice(0, object.maxLength);
@@ -31,21 +30,15 @@ function maxLengthCheck(object){ //숫자 max값 초과시 제한
  function limitContent(){
 	 let editor = CKEDITOR.instances.description;
 		editor.on('key', function(e) {
-		    content = this;
-		    if (content.getData().length >= 1250) {
-				$('#registContentMsg').text(' 내용은 최대 1270자 입력 가능합니다.');
-		    }
-			if (content.getData().length >= 1270) {
-				$('#registContentMsg').text('최대 글자수를 초과했습니다..');
-				if(content.getData().length >= 1280){
-					let str=content.getData().substr(0,1270);
-					str+='</p>';
-					CKEDITOR.instances.description.setData(str);
-					console.log(str);
+			 content = this;
+			    text = content.getData();
+			    if(text.length > 1250) {
+					$("#registContentMsg").text("내용은 1250자까지 입력 가능합니다.");
+					$("#registBtn").attr("disabled", true);
+				}else{
+					$("#registContentMsg").text("");
+					$("#registBtn").attr("disabled", false);
 				}
-			} else if(content.getData().length < 1250){
-				$('#registContentMsg').text('');
-			}
 		});
  }
 	$(()=>{
@@ -101,7 +94,6 @@ function maxLengthCheck(object){ //숫자 max값 초과시 제한
 				return false;
 			}else if(dogContent!=''){
 				$('#registContentMsg').text('');
-
 				
 				if( $("#attachFile").val() != "" ){
 					let ext = $('#attachFile').val().split('.').pop().toLowerCase(); //확장자만 추출
@@ -115,6 +107,7 @@ function maxLengthCheck(object){ //숫자 max값 초과시 제한
 					return false;
 				}
 			}
+			location.href='dogListView';
 		});
 	});
 	
@@ -255,7 +248,6 @@ textarea {
 							유기견 관리 > 등록</strong>
 					</h3>
 					<br> <br>
-
 					<form method='post' enctype='multipart/form-data'>
 						<table class='table'>
 							<tr>
@@ -311,11 +303,10 @@ textarea {
 									style='color: red'></span></td>
 							</tr>
 						</table>
-
 						<div class='button' style='text-align: right;'>
 							<button type='submit' class='btn btn-primary' id='registBtn'>등록</button>
 							<button type='button' class='btn btn-default'
-								onClick="<c:url value=''/>">취소</button>
+								onClick="<c:url value='dogListView' />">취소</button>
 						</div>
 					</form>
 				</div>
