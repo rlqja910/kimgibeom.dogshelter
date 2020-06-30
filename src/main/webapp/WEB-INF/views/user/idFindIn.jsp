@@ -31,7 +31,7 @@
 	.idFind form .button .ok{background-color:#f5bf25; border:1px solid #f5bf25; width:70px; color:#fff; margin-left:5px;}
 	.idFind form .button .no{width:70px; margin-left:5px; background-color:#fff; border:1px solid #ccc;}
 	.idFind table tr{height:30px;}
-	.idFind th{border-left:1px solid #fff;padding:0 10px; border-bottom:1px solid #ccc; height:45px;background-color:#eee; color:#333;}
+	.idFind th{border-left:1px solid #fff;padding:0 10px; border-bottom:1px solid #ccc; width:100px; height:45px;background-color:#eee; color:#333;}
 	.idFind td{border-right:1px solid #fff;padding:0 10px; border-bottom:1px solid #ccc; height:50px;}
 	.idFind th span{color:red;}
 	.idFind .text td span{font-size:12px;}

@@ -14,6 +14,4 @@ public interface DogDao {
 	List<Dog> searchBeforeAdoptDogs(String dogTitle);
 
 	List<Dog> searchAfterAdoptDogs(String dogTitle);
-
-	int addDog(Dog dog);
 }

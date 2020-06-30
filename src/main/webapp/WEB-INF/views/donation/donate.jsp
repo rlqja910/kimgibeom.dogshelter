@@ -381,8 +381,9 @@ table {
 }
 
 .modal-body table .cardNum td input {
-	width: 80%;
+	width: 100%;
 	margin-bottom: 20px;
+	font-size: small;
 }
 
 /* 모바일 스타일 */
@@ -525,7 +526,7 @@ table {
 
 					<div id='donationButton'>
 						<input type='button' class='donaButton' id='donate'
-							data-target='#myModal' data-toggle='modal' value='후원하기' />
+							data-target='#myModal' data-toggle='modal' value='후원하기'/>
 					</div>
 				</div>
 
@@ -546,7 +547,7 @@ table {
 									<tr class='tall'>
 										<th>전화번호</th>
 										<td><input type='number' id="userPhone1" min="0"
-											maxlength="3" oninput="maxLengthCheck(this)" /> - <input
+											maxlength="3" oninput="maxLengthCheck(this)" value="010"/> - <input
 											type='number' id="userPhone2" min="0" maxlength="4"
 											oninput="maxLengthCheck(this)" /> - <input type='number'
 											id="userPhone3" min="0" maxlength="4"
@@ -555,7 +556,6 @@ table {
 								</table>
 							</div>
 							<div class='modal-footer'>
-								<!--data-target='#myModal_2' -->
 								<button class='btn btn-default' type='button'
 									data-toggle='modal' id="pay">결제</button>
 								<button class='btn btn-default' type='button'
@@ -576,21 +576,19 @@ table {
 							<div class='modal-body'>
 								<table>
 									<tr class='bank'>
-										<th>은행선택</th>
-										<td><select>
-												<option>국민은행</option>
-										</select></td>
+										<th>은행</th>
+										<td style="font-weight:bold;">국민은행</td>
 									</tr>
 									<tr class='cardNum'>
 										<th>카드번호</th>
-										<td><input type="number" id="account" min="14"
+										<td><input type="number" id="account" min="14" 
 											maxlength="14" oninput="maxLengthCheck(this)"
-											placeholder="'-'를 제외한 나머지 번호만 입력해 주시기 바랍니다." /></td>
+											placeholder="'-'를 제외한 번호만 입력해 주시기 바랍니다." /></td>
 									</tr>
 									<tr>
 										<th>후원 금액</th>
 										<td><input type="number" min="10000" value="10000"
-											id="price" step="10000" style='text-align: right;' /> 원</td>
+											id="price" step="10000" style="text-align: right;"/> 원</td>
 									</tr>
 								</table>
 							</div>
