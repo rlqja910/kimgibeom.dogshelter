@@ -121,11 +121,16 @@ public class UserController {
 
 		try {
 			message.addRecipient(RecipientType.TO, new InternetAddress(userEmail));
-			message.setSubject("유기견 보호소 인증번호 발송");
-			message.setText("<h3>유기견 보호소 비밀번호 찾기의 인증번호는 아래와 같습니다</h3><br>"
-					+ "<p style='font-size:large; text-decoration: underline;'>인증번호: &nbsp;" + code + "</p><br>"
-					+ "<p>인증번호 확인 후 홈페이지 비밀번호 찾기 인증번호 항목에 입력해주세요</p>", "utf-8", "html");
-
+			message.setSubject("BEFF - 유기견 보호소 인증번호 발송");
+			message.setText("<h2>안녕하세요. BEFF 입니다</h2>" + 
+					"<p>BEFF 비밀번호 찾기 인증번호는 다음과 같습니다</p><br>" + 
+					"<p style='color:red;'>인증번호 6자리를 진행 중인 화면에 입력해 주세요</p>" + 
+					"<div style='border: 1px solid black; width:400px; margin: 20px 0px 100px 0px; padding:30px; border-raius:3px; box-shadow: 3px 3px 3px 3px #999;'>" + 
+					"	<ul>" + 
+					"		<li><p style='font-size:large;font-weight:bold;'>인증번호: <span style=\"color:blue; font-weight:bold;\">"+ code +"</span></p></li>" + 
+					"	</ul>" + 
+					"</div>" + 
+					"<h4><strong>감사합니다</strong></h4>","utf-8", "html");
 		} catch (Exception e) {
 		}
 

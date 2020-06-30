@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,10 +13,22 @@
 	integrity="sha256-663tSdtipgBgyqJXfypOwf9ocmvECGG8Zdl3q+tk+n0="
 	crossorigin="anonymous"></script>
 <script src="../res/adminNavSub.js"></script>
-<script>
-function contributionSearch(){
+<script> 
+function sponsorSearch(){
 	$('#search').click(() => {
-		if($('#searchContent').val().trim()) {
+		if($('#searchName').val().trim()) {
+			$.ajax({
+				url: 'sponsorSearch',
+				data: {'userName': $(this).val()},
+			})
+		}else {
+			swal({
+				title: '', 
+				text: '검색할 내용을 입력해주세요.',
+				type: 'warning',
+				confirmButtonText: '확인',
+				closeOnConfirm: false
+			})			
 		}	
 	});
 }
@@ -24,10 +38,35 @@ function logoutSe(){
 	});
 }
 
+
 $(()=>{
-	contributionSearch();
+	sponsorSearch();
 	logoutSe();
 });
+
+
+var PagingHelper = {
+		'data':{
+			currentPage: 1, //현재페이지
+			pageSize: 5,
+			maxListCount: 10,
+			startNum: 1,
+			lastNum: 10,
+			totalCnt: 0,
+			totalPageCnt: 0
+		},
+		'setOption': (opt)=>{
+			if(typeof opt !='object') return;
+			for(key in opt){
+				if(key in this.data){
+					this.data[key] = opt[key];	//data에 입력받은 설정값 할당
+				}
+			}
+		},
+		'pagingHtml': function(pTotalCnt){
+			
+		}
+}
 </script>
 <style>
 * {
@@ -245,34 +284,23 @@ th {
 					<table class="table table-hover">
 						<tr>
 							<th>후원번호</th>
-							<th>후원자명</th>
+							<th>후원자아이디</th>
 							<th>후원날짜</th>
 							<th>후원금액</th>
 							<th>전화번호</th>
 						</tr>
-						<tr>
-							<td>3</td>
-							<td>김기범</td>
-							<td>2020-06-12</td>
-							<td>100,000</td>
-							<td>010-8898-1118</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>이창연</td>
-							<td>2020-05-12</td>
-							<td>500,000</td>
-							<td>010-1111-2222</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>김아림</td>
-							<td>2020-01-12</td>
-							<td>110,000</td>
-							<td>010-2222-3333</td>
-						</tr>
+						
+						<c:forEach var='sponsor' items='${sponsors}'>
+							<tr>
+								<td>${sponsor.donationNum}</td>
+								<td>${sponsor.userId }</td>
+								<td>${sponsor.donationDate}</td>
+								<td>${sponsor.price}</td>
+								<td>${sponsor.userPhone}</td>
+							</tr>
+						</c:forEach>
 					</table>
-					
+		
 					<div id="pagination">
 						<ul class="pagination">
 						    <li><a href="#">&laquo;</a></li>
@@ -284,6 +312,7 @@ th {
 						    <li><a href="#">&raquo;</a></li>
 						</ul>
 					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -336,8 +365,8 @@ th {
 	}
 
 	$(()=>{
-		animateCount1(143252300);
-		animateCount2(454000);
+		animateCount1(${donaTot});
+		animateCount2(${donaMon});
 	});
 </script>
 </html>

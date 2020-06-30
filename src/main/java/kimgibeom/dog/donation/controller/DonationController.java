@@ -28,5 +28,4 @@ public class DonationController {
 	public void addDonation(int price, String userId) {
 		donationService.readDonations(userId, price);
 	}
-
 }
