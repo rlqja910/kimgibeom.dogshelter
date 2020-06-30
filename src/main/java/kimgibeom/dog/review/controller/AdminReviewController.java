@@ -2,6 +2,7 @@ package kimgibeom.dog.review.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -94,9 +95,17 @@ public class AdminReviewController {
 	
 	@ResponseBody
 	@RequestMapping("/deleteReview")
-	public int deleteReview(String checkNum) {
-		int reviewNum = Integer.parseInt(checkNum);
-		return reviewService.removeReview(reviewNum);
+	public boolean deleteReview(@RequestParam("checkNums[]") List<String> checkNums) {
+		boolean isDel = false;
+		int reviewNum = 0;
+		
+		for(String checkNum:checkNums) {
+			reviewNum = Integer.parseInt(checkNum);
+			reviewService.removeReview(reviewNum);
+			isDel = true;
+		}
+		
+		return isDel;
 	}
 	
 	private void save(MultipartFile attachFile, File saveFile) {

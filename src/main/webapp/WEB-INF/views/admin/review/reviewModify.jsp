@@ -198,10 +198,10 @@ textarea{
 		<div class='header'>
 			<strong>&nbsp;&nbsp;ADMINSTRATOR</strong>
 			<div id='topButton'>
-				 	<a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
+				 	<a href="<c:url value='/admin/logo/logoRegist'/>">로고관리</a>&nbsp;|&nbsp;
 					<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-					<a href='../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-					<a href='user/logout'>로그아웃</a>
+					<a href="<c:url value='/'/>">홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+					<a href="<c:url value='/user/logout'/>">로그아웃</a>
 			</div>
 		</div>
 		<div class='info'>
@@ -248,11 +248,11 @@ textarea{
 
 									    if(text.length > 1250) {
 											$("#chkContent").text("내용은 1250자까지 입력 가능합니다.");
-											$("#addReview").attr("disabled", true);
+											$("#modifyReview").attr("disabled", true);
 
 										}else{
 											$("#chkContent").text("");
-											$("#addReview").attr("disabled", false);
+											$("#modifyReview").attr("disabled", false);
 										}
 									});
 								</script>	

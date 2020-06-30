@@ -17,8 +17,12 @@ function addReview(){
 
 function delReview(){
 	$("#deleteReview").click(() => {
-		let checkNum = $("input[name='checkNum']:checked").val();
-		if(checkNum) {
+		let checkNums = []; 
+		$("input[name='checkNum']:checked").each(function() {
+			checkNums.push($(this).val());	
+		});
+		
+		if($("input[name='checkNum']:checked").val()) {
 			swal({
 				title: '',
 				text: '정말 후기를 삭제하시겠습니까?',
@@ -32,9 +36,10 @@ function delReview(){
 				if(isConfirm) {
 					$.ajax({
 						url: "deleteReview",
-						data: {"checkNum": checkNum},
-						success: (delCnt) => {
-							if(delCnt > 0){
+						data: {"checkNums": checkNums},
+						success: (isDel) => {
+							if(isDel){
+								console.log(isDel);
 								swal({
 									title: '',
 									text: '후기가 삭제되었습니다.',
@@ -261,10 +266,10 @@ img {
       <div class='header'>
          <strong>&nbsp;&nbsp;ADMINSTRATOR</strong>
          <div id='topButton'>
-         	<a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
-			<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-			<a href='../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-			<a href='user/logout'>로그아웃</a>
+         	<a href="<c:url value='/admin/logo/logoRegist'/>">로고관리</a>&nbsp;|&nbsp;
+			<a href="<c:url value='/admin/banner/bannerRegist'/>">배너관리</a>&nbsp;|&nbsp; 
+			<a href="<c:url value='/'/>">홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+			<a href="<c:url value='/user/logout'/>">로그아웃</a>
          </div>
       </div>
       <div class='info'>
