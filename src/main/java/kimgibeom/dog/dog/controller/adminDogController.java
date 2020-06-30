@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,12 +30,23 @@ public class adminDogController {
 	@Value("${dogAttachDir}")
 	private String attachDir;
 
+	@RequestMapping("/dogView/{dogNumber}")
+	public String readDogInfo(@PathVariable String dogNumber, Model model) {
+		int dogNum = Integer.parseInt(dogNumber);
+		Dog dog = dogService.findDog(dogNum);
+
+		System.out.println(dog);
+		model.addAttribute("dog", dog);
+
+		return "admin/dog/dogView";
+	}
+
 	@RequestMapping(value = "/dogRegist")
 	public void dogRegistPage() {
 	}
 
 	@RequestMapping(value = "/dogRegist", method = RequestMethod.POST)
-	public void dogRegist(String dogTitle, String dogName, String dogKind, int dogWeight, int dogAge,
+	public String dogRegist(String dogTitle, String dogName, String dogKind, int dogWeight, int dogAge,
 			String dogEntranceDate, String dogGender, String dogContent, MultipartFile attachFile,
 			HttpServletRequest request) {
 		String fileName = (int) (Math.random() * 100000000) + attachFile.getOriginalFilename(); // 파일명 중복방지
@@ -52,6 +64,8 @@ public class adminDogController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		return "redirect:dogListView";
 	}
 
 	private void save(String filePath, MultipartFile attachFile) {

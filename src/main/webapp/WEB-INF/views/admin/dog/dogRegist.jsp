@@ -48,7 +48,6 @@ function maxLengthCheck(object){ //숫자 max값 초과시 제한
 		limitContent();
 		
 		$('#registBtn').click(()=>{
-			
 			let dogTitle=$('#dogTitle').val();
 			let dogName=$('#dogName').val();
 			let dogKind=$('#dogKind').val();
@@ -107,7 +106,6 @@ function maxLengthCheck(object){ //숫자 max값 초과시 제한
 					return false;
 				}
 			}
-			location.href='dogListView';
 		});
 	});
 	
@@ -306,7 +304,7 @@ textarea {
 						<div class='button' style='text-align: right;'>
 							<button type='submit' class='btn btn-primary' id='registBtn'>등록</button>
 							<button type='button' class='btn btn-default'
-								onClick="<c:url value='dogListView' />">취소</button>
+								location.href="dogListView">취소</button>
 						</div>
 					</form>
 				</div>

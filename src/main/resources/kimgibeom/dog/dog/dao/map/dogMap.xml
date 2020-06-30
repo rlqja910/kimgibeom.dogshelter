@@ -59,4 +59,13 @@
 		insert into dogs
 		values(dog_num_seq.nextval,#{dogTitle},#{dogName},#{dogAge},#{dogKind},#{dogWeight},#{dogGender},'입양미완료',#{dogEntranceDate},#{dogContent},#{attachName})
 	</insert>
+	
+	<select id='searchDog' resultType="dog" parameterType="int">
+		select dog_num dogNum,title
+		dogTitle,name dogName,age dogAge ,kind dogKind,weight dogWeight,gender
+		dogGender,adoption_status dogAdoptionStatus,to_char(entrance_date,'yyyy-mm-dd')
+		dogEntranceDate,content dogContent,attach_name attachName
+		from dogs
+		where dog_num = #{dogNum}
+	</select>
 </mapper>
