@@ -81,11 +81,11 @@ function maxLengthCheck(object){ //숫자 max값 초과시 제한
 				return false;
 			}else if(dogEntranceDate===''){
 				console.log('dogEntranceDate');
-				$('#registEntranceDateMsg').text('입소날짜를 입력해 주세요');
+				$('#registEntranceDateMsg').text('입소날짜를 선택해 주세요');
 				return false;
 			}else if(dogGender==null){
 				console.log('dogGender');
-				$('#registGenderMsg').text('성별을 입력해 주세요');
+				$('#registGenderMsg').text('성별을 선택해 주세요');
 				return false;
 			}else if(dogContent===''){
 				console.log('dogContent');
