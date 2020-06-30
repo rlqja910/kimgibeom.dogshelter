@@ -424,7 +424,7 @@ let dogsCnt=${dogsCnt};
 				}
 		});
 	});
-	
+	 
 	function dogList(){
 		$('.pagination').append('<li><a href="#" id="firstViewBtn"><<</a></li>');
 		for(let i=1; i<=totalPageCnt;i++){
