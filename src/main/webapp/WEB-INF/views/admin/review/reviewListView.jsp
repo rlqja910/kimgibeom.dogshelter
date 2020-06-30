@@ -17,9 +17,10 @@ function addReview(){
 
 function delReview(){
 	$("#deleteReview").click(() => {
-		if($("input:checkbox").is(":checked")) {
+		let checkNum = $("input[name='checkNum']:checked").val();
+		if(checkNum) {
 			swal({
-				title: '후기 삭제',
+				title: '',
 				text: '정말 후기를 삭제하시겠습니까?',
 				type: 'warning',
 				showCancelButton: true,
@@ -29,22 +30,34 @@ function delReview(){
 			},
 			function(isConfirm) {
 				if(isConfirm) {
-					swal({
-						title: '',
-						text: '후기가 삭제되었습니다.',
-						type: 'success',
-						confirmButtonText: '확인'
+					$.ajax({
+						url: "deleteReview",
+						data: {"checkNum": checkNum},
+						success: (delCnt) => {
+							if(delCnt > 0){
+								swal({
+									title: '',
+									text: '후기가 삭제되었습니다.',
+									type: 'success',
+									confirmButtonText: '확인',
+									closeOnConfirm: false
+								},
+								function(isConfirm){
+									if(isConfirm) location.reload();
+								});
+							}
+						}
 					});
 				}
 			});
 		}else {
-		  swal({
-		      title: '',
-		      text: '항목을 선택하세요.',
-		      type: 'warning',
-		      confirmButtonText: '확인',
-		      closeOnConfirm: false
-		   });
+			swal({
+				 title: '',
+				 text: '항목을 선택하세요.',
+				 type: 'warning',
+				 confirmButtonText: '확인',
+				 closeOnConfirm: false
+	  		});
 		}
 	});
 }
@@ -174,8 +187,8 @@ body {
    width: 25px;
    height: 25px;
    position: relative;
-   top: -244.5px;
-   left: -165px;
+   top: -259px;
+   left: -178px;
 }
 
 /*------- 모든 이미지후기-------- */
@@ -192,8 +205,8 @@ body {
 }
 
 .img{
-   width: 355px;
-   height: 240px;
+   width: 370px;
+   height: 250px;
    text-align: center;
    margin-bottom: 5px;
    background-color: white;
@@ -201,19 +214,19 @@ body {
 }
 
 img {
-	width: 355px;
-	height: 240px;
+	width: 370px;
+	height: 250px;
 }
 
 .button{
    text-align: right;
-   margin-right: 100px;
+   margin-right: 40px;
 }
 
 #content {
    float: left;
    margin-left: 10px;
-   width: 400px;
+   width: 490px;
    display: inline;
 }
 
@@ -235,6 +248,7 @@ img {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+	margin-top: -30px;
 }
 </style>
 </head>
@@ -256,7 +270,7 @@ img {
       <div class='info'>
          <div class='content'>
             <h3><span class='glyphicon glyphicon-list'></span><strong> 후기관리</strong></h3>
-            <hr style='border: 1px solid #a0a0a0;'>
+            <hr style='border: 1px solid #a0a0a0; width:1570px;'>
             
             <form>
                <div>
@@ -279,17 +293,15 @@ img {
                			<p>등록된 후기가 없습니다.</p>
                		</c:when>
                		<c:when test="${!empty reviewList}">
-               			<div class='totalReview'>
+               			<div class="totalReview">
                				<c:forEach var="reviewList" items="${reviewList}">
-			                  <div class='imgbox'>
+			                  <div class="imgbox">
 			                     <a href='#' onclick="fn_reviewView(<c:out value='${reviewList.reviewNum}'/>)">
 			                     	<div class='img'>
-			                        	<div>
-			                        		<img src='<c:url value="/attach/review/${reviewList.attachName}"/>'/>
-			                        		<input type='checkbox' class='reviewCheck'/>
-			                        	</div>
+			                        	<div><img src="<c:url value='/attach/review/${reviewList.attachName}'/>"/></div>
 			                     	</div>
 			                     </a>
+			                     <input type="checkbox" class="reviewCheck" name="checkNum" value='${reviewList.reviewNum}'/>
 			                     <div class="titleBox">
 			                     	<strong><c:out value="${reviewList.title}"/></strong>
 			                     </div>
