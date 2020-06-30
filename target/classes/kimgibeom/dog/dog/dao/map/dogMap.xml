@@ -7,7 +7,7 @@
 		select dog_num dogNum,title
 		dogTitle,name dogName,age dogAge ,kind dogKind,weight dogWeight,gender
 		dogGender,adoption_status dogAdoptionStatus,to_char(entrance_date,'yyyy-mm-dd')
-		dogEntranceDate,content dogContent,attach_name dogAttachName
+		dogEntranceDate,content dogContent,attach_name attachName
 		from dogs
 		order by 1 desc
 	</select>
@@ -16,7 +16,7 @@
 		select dog_num dogNum,title
 		dogTitle,name dogName,age dogAge ,kind dogKind,weight dogWeight,gender
 		dogGender,adoption_status dogAdoptionStatus,to_char(entrance_date,'yyyy-mm-dd')
-		dogEntranceDate,content dogContent,attach_name dogAttachName
+		dogEntranceDate,content dogContent,attach_name attachName
 		from dogs
 		where kind like '%'||#{dogKind}||'%'
 		and entrance_date>=#{dogEntDate}
@@ -27,7 +27,7 @@
 		select dog_num dogNum,title
 		dogTitle,name dogName,age dogAge ,kind dogKind,weight dogWeight,gender
 		dogGender,adoption_status dogAdoptionStatus,to_char(entrance_date,'yyyy-mm-dd')
-		dogEntranceDate,content dogContent,attach_name dogAttachName
+		dogEntranceDate,content dogContent,attach_name attachName
 		from dogs
 		where title like '%'||#{dogTitle}||'%'
 		order by 1 desc
@@ -37,7 +37,7 @@
 		select dog_num dogNum,title
 		dogTitle,name dogName,age dogAge ,kind dogKind,weight dogWeight,gender
 		dogGender,adoption_status dogAdoptionStatus,to_char(entrance_date,'yyyy-mm-dd')
-		dogEntranceDate,content dogContent,attach_name dogAttachName
+		dogEntranceDate,content dogContent,attach_name attachName
 		from dogs
 		where title like '%'||#{dogTitle}||'%'
 		and adoption_status='입양미완료'
@@ -48,10 +48,15 @@
 		select dog_num dogNum,title
 		dogTitle,name dogName,age dogAge ,kind dogKind,weight dogWeight,gender
 		dogGender,adoption_status dogAdoptionStatus,to_char(entrance_date,'yyyy-mm-dd')
-		dogEntranceDate,content dogContent,attach_name dogAttachName
+		dogEntranceDate,content dogContent,attach_name attachName
 		from dogs
 		where title like '%'||#{dogTitle}||'%'
 		and adoption_status='입양완료'
 		order by 1 desc
 	</select>
+	
+	<insert id='addDog' parameterType="dog">
+		insert into dogs
+		values(dog_num_seq.nextval,#{dogTitle},#{dogName},#{dogAge},#{dogKind},#{dogWeight},#{dogGender},'입양미완료',#{dogEntranceDate},#{dogContent},#{attachName})
+	</insert>
 </mapper>
