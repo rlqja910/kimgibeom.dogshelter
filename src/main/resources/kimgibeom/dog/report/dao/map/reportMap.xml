@@ -8,7 +8,8 @@
 				title,
 				content,
 				view_count viewCount,
-				reg_date regDate
+				reg_date regDate,
+				attach_name attachName
 		from (
 				select report_num, 
 		               user_id, 
@@ -16,6 +17,7 @@
 		               content, 
 		               view_count, 
 		               reg_date, 
+		               attach_name,
 		               ROW_NUMBER() OVER(order by report_num DESC) as RNUM
 		         from reports)
 		where RNUM between #{rowStart} and #{rowEnd}
@@ -30,14 +32,14 @@
 	</select>
 	
 	<select id='getReport' parameterType='int' resultType='report'>
-		select report_num reportNum, user_id userId, title, content, view_count viewCount, reg_date regDate
+		select report_num reportNum, user_id userId, title, content, view_count viewCount, reg_date regDate, attach_name attachName
 		from reports
 		where report_num = #{reportNum}
 	</select>
 	
 	<insert id='addReport' parameterType='report'>
 		insert into reports
-		values(report_num_seq.nextval, #{userId}, #{title}, #{content}, 1, SYSDATE, null)
+		values(report_num_seq.nextval, #{userId}, #{title}, #{content}, 1, SYSDATE, #{attachName})
 	</insert>
 	
 	<update id='modifyReport' parameterType='report'>

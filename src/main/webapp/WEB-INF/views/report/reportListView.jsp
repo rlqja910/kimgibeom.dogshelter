@@ -30,7 +30,7 @@ function readReports() {
 		`<c:forEach var='report' items='${reports}'>
 			<a href='./reportView/${report.reportNum}'>
 				<ul>
-					<li><div style="height:100px; width:355px; border:1px solid;">유기견 이미지</div></li>
+					<li><div style="height:100px; width:355px; border:1px solid;"><img src='<c:url value="/attach/report/${report.attachName}"/>'/></div></li>
 					<li class='title'>${report.title}</li>
 					<li class='contents'>${report.content}</li>
 					<li class='more'>+더보기</li>

@@ -1,15 +1,21 @@
 package kimgibeom.dog.report.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import kimgibeom.dog.report.domain.Criteria;
 import kimgibeom.dog.report.domain.PageMaker;
@@ -25,6 +31,8 @@ public class ReportController {
 	private ReportService reportService;
 	@Autowired
 	private ReportReplyService reportReplyService;
+	@Value("${reportAttachDir}") 
+	private String reportAttachDir;
 	
 	// 게시물 목록 
 	@RequestMapping("/reportListView")
@@ -67,9 +75,26 @@ public class ReportController {
 	}
 	
 	@RequestMapping(value="/reportRegister", method=RequestMethod.POST)
-	public String reportOut(Report report) {
+	public String reportOut(String title, String userId, String content, MultipartFile attachFile, HttpServletRequest request) {
+		String dir = request.getServletContext().getRealPath(reportAttachDir);
+		String fileName = attachFile.getOriginalFilename();
+		save(dir + "/" + fileName, attachFile); // 서버에 저장되는 파일명, client로 부터 받은 첨부 파일
+		
+		Report report = new Report(title, userId, content, fileName);
+		
+		//report.setAttachFile(fileName);
+		
 		reportService.writeReport(report);
+		
 		return "redirect:reportListView";
+	}
+	
+	private void save(String destFile, MultipartFile attachFile) {
+		try { // 서버에 실제 파일을 저장한다.
+			attachFile.transferTo(new File(destFile)); // binary 데이터들을 새로운 파일 객체에 넣는다.
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	// 게시물 수정

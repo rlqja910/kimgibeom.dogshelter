@@ -281,7 +281,7 @@ textarea {
 				<div class='contTitle'>유기견 신고</div>
 				<hr class='contHr'>
 				<div class='reportWrite'>
-					<form action='reportRegister' method='post'>
+					<form action='reportRegister' method='post' enctype='multipart/form-data'>
 						<table>
 							<tr>
 								<th>제목</th>
@@ -300,7 +300,7 @@ textarea {
 							</tr>
 							<tr>
 								<th>이미지</th>
-								<td><input type='file'/></td>
+								<td><input type='file' name='attachFile'/></td>
 							</tr>
 						</table>
 	
