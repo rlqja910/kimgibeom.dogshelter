@@ -22,6 +22,13 @@ public class DogController {
 
 	@RequestMapping("/dogListView")
 	public void dogListView(Model model) {
+		model.addAttribute("totalPageCnt", "null");
+		model.addAttribute("dogsCnt", "null");
+		model.addAttribute("lastPageDataCnt", "null");
+		model.addAttribute("onlyOnePageData", "null");
+		model.addAttribute("isOnePage", "null");
+		model.addAttribute("pageData", "null");
+
 		List<Dog> dogs = dogService.readDogs();
 		JSONArray jsonDogArray = new JSONArray();
 

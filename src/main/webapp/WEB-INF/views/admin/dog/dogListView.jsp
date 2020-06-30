@@ -95,7 +95,7 @@ let dogsCnt=${dogsCnt};
 						console.log('onepage');
 						if(dogsCnt==0){ //아예 데이터가 없을때
 							$('.pagination').empty();
-							$('#dogPost').append('<ul><li>등록된 데이터가 없습니다.</li></ul>');
+							$('#dogPost').append('<div>등록된 데이터가 없습니다.</div>');
 						}else{ //아예 데이터가 없는게 아니라 단 하나라도 있을때
 							let onlyOnePageData=data.onlyOnePageData;
 							console.log(onlyOnePageData);
@@ -214,7 +214,7 @@ let dogsCnt=${dogsCnt};
 						console.log('onepage');
 						if(dogsCnt==0){ //아예 데이터가 없을때
 							$('.pagination').empty();
-							$('#dogPost').append('<ul><li>등록된 데이터가 없습니다.</li></ul>');
+							$('#dogPost').append('<div>등록된 데이터가 없습니다.</div>');
 						}else{ //아예 데이터가 없는게 아니라 단 하나라도 있을때
 							let onlyOnePageData=data.onlyOnePageData;
 							console.log(onlyOnePageData);
@@ -344,7 +344,7 @@ let dogsCnt=${dogsCnt};
 								console.log('onepage');
 								if(dogsCnt==0){ //아예 데이터가 없을때
 									$('.pagination').empty();
-									$('#dogPost').append('<ul><li>등록된 데이터가 없습니다.</li></ul>');
+									$('#dogPost').append('<div>등록된 데이터가 없습니다.</div>');
 								}else{ //아예 데이터가 없는게 아니라 단 하나라도 있을때
 									let onlyOnePageData=data.onlyOnePageData;
 									console.log(onlyOnePageData);
@@ -447,7 +447,7 @@ let dogsCnt=${dogsCnt};
 			console.log('onepage');
 			if(dogsCnt==0){ //아예 데이터가 없을때
 				$('.pagination').empty();
-				$('#dogPost').append('<ul><li>등록된 데이터가 없습니다.</li></ul>');
+				$('#dogPost').append('<div>등록된 데이터가 없습니다.</div>');
 			}else{ //아예 데이터가 없는게 아니라 단 하나라도 있을때
 				let onlyOnePageData=${onlyOnePageData};
 				console.log(onlyOnePageData);
@@ -661,12 +661,16 @@ body {
 	overflow: hidden;
 }
 
+.report .reviewCont div {
+	text-align: center;
+}
+
 .report .reviewCont ul {
 	width: 23.5%;
 	float: left;
 	margin: 1% 0 0 1%;
 	border: 1px solid #ccc;
-	height: 450px;
+	height: 400px;
 }
 
 .report .reviewCont li {
@@ -676,9 +680,9 @@ body {
 }
 
 .report .reviewCont ul li:nth-child(1) {
-	padding: 40% 0;
 	border-bottom: 1px solid #ccc;
 	text-align: center;
+	height: 70%;
 }
 
 .report .reviewCont ul li:nth-child(2) {
@@ -702,6 +706,7 @@ body {
 
 .report .reviewCont ul img {
 	width: 100%;
+	height: 100%;
 }
 
 .reviewCont ul {
