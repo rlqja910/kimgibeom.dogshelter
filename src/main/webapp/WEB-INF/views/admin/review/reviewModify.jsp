@@ -1,27 +1,84 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset='UTF-8'>
 <title>ADMIN PAGE</title>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
-<link rel='stylesheet' href='http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css'/>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js'></script>
-<script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
-<script src="../res/adminNavSub.js"></script>
-<script>function modify(){
-	let count = 0;
-	
-	$('#modify').click(() => { 
-		count++;	
-		if(count == 1)
-			$('.button').prepend('<font color="red">후기 수정이 완료되었습니다.</font>')
+<%@ include file="../common/scriptImport.jsp" %>
+<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+<script src="${path}/ckeditor/ckeditor.js"></script>
+<script>
+function modifyReview(){
+	$("#modifyReview").click(() => {
+		if(!$("#title").val().trim()){
+			$("#chkTitle").text("제목을 입력해주세요.");
+			$("#title").focus();
+		}else if(!$("#imgFile").val()){
+			$("#chkFile").html("첨부할 파일을 선택해주세요.");
+		}else if(!CKEDITOR.instances.description.getData()){
+			$("#chkContent").text("내용을 입력해주세요.");
+		}else {
+			$("#reviewForm").submit();
+		}
 	});
 }
 
-$(modify);
+function cencel(){
+	$("#cencel").click(() => {
+		let url = "reviewView";
+		url = url + "?reviewNum=" + ${reviewView.reviewNum};
+		
+		location.href = url;
+	});
+}
+
+function fn_chkByteTitle(obj){
+	   let maxByte = 100;
+	   let str = obj.value;
+	   let strLength = str.length;
+	   console.log(strLength);
+	   
+	   let titleByte = 0; 
+	   let titleLength = 0; 
+	   let oneChar = "";
+	   let str2 = "";
+	   
+	   for(let i=0; i<strLength; i++){
+	      oneChar = str.charAt(i); 
+	      
+	      if(escape(oneChar).length > 4) titleByte += 3;
+	      else titleByte++;
+	      
+	      if(titleByte <= maxByte) titleLength = i + 1; 
+	   }
+	   
+	   if(titleByte > maxByte){
+	      $("#chkTitle").text("한글" + Math.round(maxByte/3) + "자 / 영문" + maxByte + "자까지 입력 가능합니다.");
+	      str2 = str.substr(0, titleLength);
+	      obj.value = str2;
+	   }else {
+	      $("#chkTitle").text("");
+	   }
+	}
+
+function fn_chkFile(obj){
+	let ext = $("#imgFile").val().split(".").pop().toLowerCase(); 
+	
+	if($.inArray(ext, ["gif", "jpg", "jpeg", "png", "bmp"]) == -1){ 
+		$("#chkFile").html("gif, jpg, jpeg, png, bmp 파일만 업로드 해주세요.");
+		$("#imgFile").val("");
+	}else {
+		$("#chkFile").html("");
+	}
+}
+
+$(() => {
+	modifyReview();
+	cencel();
+});
 </script>
 <style>
 * {
@@ -118,7 +175,7 @@ body {
 }
 
 th{
-	background-color:#EFEFEF;
+	background-color: #EFEFEF;
 	text-align: center;
 	width: 150px;
 }
@@ -129,6 +186,7 @@ textarea{
 	resize: none;
 	padding: 20px;
 }
+
 </style>
 </head>
 <body>
@@ -154,35 +212,57 @@ textarea{
 				</h3>
 				<hr style='border: 1px solid #a0a0a0;'>
 			
-				<form>
+				<form id="reviewForm" action="modifyReview" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="reviewNumStr" value='${reviewView.reviewNum}' />
 					<table class='table'>
 						<tr>
 							<th>제목</th>
-							<td><input type='text' style='width:500px;' value='점박이 치와와 치치!! 따뜻한 가정으로'/></td>
+							<td>
+								<input type='text' id="title" name="title" style='width:500px;' 
+								value='${reviewView.title}' onkeyup="fn_chkByteTitle(this);"/>
+								<span id="chkTitle" style="color:red"></span>
+							</td>
 						</tr>
 						<tr>
 							<th>이미지</th>
 							<td>
-								<input type='file'/>
+								<input type='file' id="imgFile" name="attachFile" onchange="fn_chkFile(this)"/>
+								<span id="chkFile" style="color:red"></span>
 							</td>
 						</tr>
 						<tr>
 							<th>내용</th>
 							<td>
-								<textarea id="description"> 저희 센터에서 가장 작고 아담한 치와와 공주 치치가 드디어 좋은 견주를 만났어요. 자식가진 부모님 마음은 한결같죠!!
-내 자식이 가지고 싶은거 하고싶은거 할 수 있게 해주는거요~~!			
-사랑하는 따님의 생일선물로 치와와를 분양해가셨어요.
-견주님께서도 어릴때 강아지도 키워보고 너무나도 좋아했지만 그동안 잊고 지내셨었나봐요~
-따님 생일선물이기도 하지만 견주님께도 인생의 선물이 아닐까 싶네요 사랑스러운 새로운 가족이 생겼으니깐요^^
-								</textarea>
-								
+								<textarea id="description" maxlength="1250" name="content">${reviewView.content}</textarea>
+								<span id="chkContent" style="color:red"></span>
+								<script>
+									CKEDITOR.replace("description", {
+										removePlugins: "image",
+									});	
+									
+									CKEDITOR.instances.description.getData();
+									
+									CKEDITOR.instances.description.on('key', function(e) {
+									    content = this;
+									    text = content.getData();
+
+									    if(text.length > 1250) {
+											$("#chkContent").text("내용은 1250자까지 입력 가능합니다.");
+											$("#addReview").attr("disabled", true);
+
+										}else{
+											$("#chkContent").text("");
+											$("#addReview").attr("disabled", false);
+										}
+									});
+								</script>	
 							</td>
 						</tr>
 					</table>
 					
 					<div class='button' style='text-align:right;'>
-						<button type='button' class='btn btn-primary' id='modify'>수정</button>&nbsp;
-						<button type='button' class='btn btn-default' onClick="location.href='01.html'">취소</button>
+						<button type='button' class='btn btn-primary' id="modifyReview">수정</button>&nbsp;
+						<button type='button' class='btn btn-default' id="cencel">취소</button>
 					</div>
 				</form>	
 			</div>	
