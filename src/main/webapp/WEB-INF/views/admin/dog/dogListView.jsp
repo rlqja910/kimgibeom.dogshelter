@@ -382,7 +382,7 @@ let dogsCnt=${dogsCnt};
 									
 									if(isOnePage){ //페이지가 만약 1페이지밖에 없다면 진입
 										dogsData=data.onlyOnePageData;
-										
+										 
 										let cnt=0;
 										for(let j=1;j<=lastPageDataCnt;j++){ //마지막 페이지의 data 개수만큼 for를 작동
 											console.log((i-1)*8+cnt+"------------");
