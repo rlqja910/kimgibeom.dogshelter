@@ -31,21 +31,17 @@ function maxLengthCheck(object){ //숫자 max값 초과시 제한
  function limitContent(){
 	 let editor = CKEDITOR.instances.description;
 		editor.on('key', function(e) {
-		    content = this;
-		    if (content.getData().length >= 1250) {
-				$('#registContentMsg').text(' 내용은 최대 1270자 입력 가능합니다.');
-		    }
-			if (content.getData().length >= 1270) {
-				$('#registContentMsg').text('최대 글자수를 초과했습니다..');
-				if(content.getData().length >= 1280){
-					let str=content.getData().substr(0,1270);
-					str+='</p>';
-					CKEDITOR.instances.description.setData(str);
-					console.log(str);
+			 content = this;
+			    text = content.getData();
+
+			    if(text.length > 1250) {
+					$("#registContentMsg").text("내용은 1250자까지 입력 가능합니다.");
+					$("#registBtn").attr("disabled", true);
+
+				}else{
+					$("#registContentMsg").text("");
+					$("#registBtn").attr("disabled", false);
 				}
-			} else if(content.getData().length < 1250){
-				$('#registContentMsg').text('');
-			}
 		});
  }
 	$(()=>{

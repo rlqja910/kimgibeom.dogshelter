@@ -38,4 +38,8 @@ public class DogDaoImpl implements DogDao {
 		return dogMap.searchAfterAdoptDogs(dogTitle);
 	}
 
+	@Override
+	public int addDog(Dog dog) {
+		return dogMap.addDog(dog);
+	}
 }

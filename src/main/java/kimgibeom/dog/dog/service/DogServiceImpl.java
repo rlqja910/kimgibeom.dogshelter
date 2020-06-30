@@ -38,4 +38,9 @@ public class DogServiceImpl implements DogService {
 		return dogDao.searchAfterAdoptDogs(dogTitle);
 	}
 
+	@Override
+	public int writeDog(Dog dog) {
+		return dogDao.addDog(dog);
+	}
+
 }

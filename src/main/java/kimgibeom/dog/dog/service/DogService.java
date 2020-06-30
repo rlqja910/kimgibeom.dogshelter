@@ -14,4 +14,6 @@ public interface DogService {
 	List<Dog> findBeforeAdoptDogs(String dogTitle);
 
 	List<Dog> findAfterAdoptDogs(String dogTitle);
+
+	int writeDog(Dog dog);
 }
