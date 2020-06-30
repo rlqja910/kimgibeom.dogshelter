@@ -224,7 +224,10 @@ $(checkAuthority);
 						<tr>
 							<td colspan='2'>
 								<div class='reportInfo'>조회 ${report.viewCount} &nbsp;&nbsp;&nbsp;${report.regDate}</div><br><br>
-								<div style="height:100px; width:120px; border:1px solid;">강아지 이미지</div><br><br>
+								<div style="height:100px; width:120px; border:1px solid;">
+									<img src='<c:url value="/attach/report/${report.attachName}"/>'/>
+								</div>
+								<br><br>
 								${report.content}
 							</td>
 						</tr>

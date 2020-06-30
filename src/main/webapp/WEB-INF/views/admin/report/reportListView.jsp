@@ -96,6 +96,9 @@ function managePaging() {
 	if (params.page == 1 || typeof params.page == 'undefined') { // 첫 페이지
 		$('#pagination').find('a').first().removeAttr('href');
     	$('#pagination').find('a').eq(1).css({'background-color':'#333', color:'#fff'});
+    	
+    	if ($('#pagination').find('a').length == 3) // 첫 페이지가 마지막 페이지인 경우 
+    		$('#pagination').find('a').last().removeAttr('href');
     } else {
     	$('#pagination').find('a').eq(params.page).css({'background-color':'#333', color:'#fff'});
  
@@ -112,12 +115,16 @@ function managePaging() {
     })
     
     // next 버튼
-    $('#pagination').find('a').last().click(function() {
+    $('.page').find('a').last().click(function() {
     	let next = Number(params.page) + 1;
     	
-    	if (typeof params.page == 'undefined') { // 게시판 첫 진입
+    	let isNext = true;
+    	if ($('.page').find('a').length == 3)
+    		isNext = false;
+    	
+    	if (typeof params.page == 'undefined' && isNext) { // 게시판 첫 진입 시 2페이지로 이동
     		$(this).attr('href', 'reportListView?page=2');
-    	} else if (params.page != ${pageMaker.endPage}) {
+    	} else if (params.page != ${pageMaker.endPage} && isNext) { // 다음 페이지로 이동
     		$(this).attr('href', 'reportListView?page=' + next);
     	}
     })

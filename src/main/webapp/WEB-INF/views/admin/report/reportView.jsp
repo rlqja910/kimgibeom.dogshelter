@@ -204,6 +204,9 @@ body {
 				<span class='glyphicon glyphicon-time reportInfo'>&nbsp;${report.regDate}</span>							
 			</div>
 			<hr>
+			<div style="height:100px; width:120px; border:1px solid;">
+				<img src='<c:url value="/attach/report/${report.attachName}"/>'/>
+			</div>
 			<div class='reportContent'>
 				${report.content}
 			</div>	

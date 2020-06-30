@@ -30,7 +30,8 @@ function readReports() {
 		`<c:forEach var='report' items='${reports}'>
 			<a href='./reportView/${report.reportNum}'>
 				<ul>
-					<li><div style="height:100px; width:355px; border:1px solid;"><img src='<c:url value="/attach/report/${report.attachName}"/>'/></div></li>
+					<li><div style="height:100px; width:355px; border:1px solid;">
+						<img src='<c:url value="/attach/report/${report.attachName}"/>'/></div></li>
 					<li class='title'>${report.title}</li>
 					<li class='contents'>${report.content}</li>
 					<li class='more'>+더보기</li>
@@ -57,6 +58,9 @@ function managePaging() {
 	if (params.page == 1 || typeof params.page == 'undefined') { // 첫 페이지
 		$('.page').find('a').first().removeAttr('href');
     	$('.page').find('a').eq(1).css({'background-color':'#333', color:'#fff'});
+    	
+    	if ($('.page').find('a').length == 3) // 첫 페이지가 마지막 페이지인 경우 
+    		$('.page').find('a').last().removeAttr('href');
     } else {
     	$('.page').find('a').eq(params.page).css({'background-color':'#333', color:'#fff'});
  
@@ -76,9 +80,13 @@ function managePaging() {
     $('.page').find('a').last().click(function() {
     	let next = Number(params.page) + 1;
     	
-    	if (typeof params.page == 'undefined') { // 게시판 첫 진입 시 2페이지로 이동
+    	let isNext = true;
+    	if ($('.page').find('a').length == 3)
+    		isNext = false;
+    	
+    	if (typeof params.page == 'undefined' && isNext) { // 게시판 첫 진입 시 2페이지로 이동
     		$(this).attr('href', 'reportListView?page=2');
-    	} else if (params.page != ${pageMaker.endPage}) { // 다음 페이지로 이동
+    	} else if (params.page != ${pageMaker.endPage} && isNext) { // 다음 페이지로 이동
     		$(this).attr('href', 'reportListView?page=' + next);
     	}
     })

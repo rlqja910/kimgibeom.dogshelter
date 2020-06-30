@@ -78,11 +78,9 @@ public class ReportController {
 	public String reportOut(String title, String userId, String content, MultipartFile attachFile, HttpServletRequest request) {
 		String dir = request.getServletContext().getRealPath(reportAttachDir);
 		String fileName = attachFile.getOriginalFilename();
-		save(dir + "/" + fileName, attachFile); // 서버에 저장되는 파일명, client로 부터 받은 첨부 파일
+		save(dir + "/" + fileName, attachFile);
 		
 		Report report = new Report(title, userId, content, fileName);
-		
-		//report.setAttachFile(fileName);
 		
 		reportService.writeReport(report);
 		
