@@ -17,7 +17,7 @@ function reportSearch() {
 				text: '검색어를 입력해주세요.',
 				type: 'warning',
 				confirmButtonText: '확인'
-			})	
+			})	 
 		}
 	});
 }
