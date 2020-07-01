@@ -11,6 +11,7 @@
 function addReply(){
 	$("#addRepy").click(() => {
 		let content = $("#reply").val().trim();
+		console.log(content.length);
 		let reviewNumStr = ${reviewView.reviewNum};
 		let userId = `${userId}`;
 
@@ -40,8 +41,9 @@ function delButton(){
 }
 
 function delReply(){
-	$(".delButton").click(() => {
-		let replyNumStr = $(".view").find("input").attr("id");
+	$(".viewDel").click(function(e){
+		let replyNumStr = $(this).children().attr("id"); //this를 쓸때는 function을 사용한다.
+		console.log(replyNumStr);
 		
 		swal({
 			title: '',
@@ -97,9 +99,10 @@ $(() => {
 
 	/* 댓글 */
 	.writeCont{width:100%;}
-	.writeCont p{font-size:20px; font-weight:bold; colo:#333;}
+	.writeCont p{font-size:20px; font-weight:bold; color:#333;}
 	.writeCont .write{border:1px solid #ccc;}
-	.writeCont .write textarea{width: 98%; height: 60px; padding:1%; border:0px; font-size: 14px; resize: both;}
+	.writeCont .write textarea{width: 98%; height: 60px; padding:1%; border:0px; font-size: 14px; 
+      							font-family: "맑은고딕","Malgun Gothic",serif; resize: both;}
 	.writeCont .write div{text-align:right;}
 	.writeCont .write div div{width:100%; border-top:1px solid #e2e2e2;}
 	.writeCont .write div div input{background-color:#f5bf25; width:70px; height:40px; border:0px; color:#fff;}
@@ -131,14 +134,8 @@ $(() => {
 		.writeCont .view ul li:nth-child(1){margin-bottom:2%;}
 	}
 	
-	.marker {
-		background-color: yellow;
-	}
-	
-	p {
-		margin-top: 0;
-		margin-bottom: 0;
-	}
+	.marker{background-color: yellow;}
+	p{margin-top: 0; margin-bottom: 0;}
 </style>
 </head>
 <body>
@@ -185,7 +182,7 @@ $(() => {
 							<br>
 							<div class='write'>
 								<div>
-									<textarea id="reply" placeholder="댓글을 입력하세요."></textarea>
+									<textarea id="reply" placeholder="댓글을 입력하세요." maxlength="1050"></textarea>
 									<div>
 										<input id="addRepy" type='button' value='등록'/>
 									</div>
@@ -199,8 +196,12 @@ $(() => {
 									<c:when test="${!empty replyList}">
 										<c:forEach var="replyList" items="${replyList}">
 											<ul class="${replyList.userId}">
-												<li>${replyList.userId} <span>${replyList.regDate}</span> <span class='viewDel'>
-												<input id="${replyList.replyNum}" class="delButton" type='button' value='삭제'/></li>
+												<li>
+													${replyList.userId} <span>${replyList.regDate}</span> 
+													<span class='viewDel'>
+														<input id="${replyList.replyNum}" class="delButton" type='button' value='삭제'/>
+													</span>
+												</li>
 												<li>${replyList.content}</li>
 											</ul>
 										</c:forEach>

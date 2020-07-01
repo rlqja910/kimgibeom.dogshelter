@@ -39,7 +39,6 @@ function fn_chkByteTitle(obj){
 	   let maxByte = 100;
 	   let str = obj.value;
 	   let strLength = str.length;
-	   console.log(strLength);
 	   
 	   let titleByte = 0; 
 	   let titleLength = 0; 

@@ -1,26 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset='UTF-8'>
 <title>ADMIN PAGE</title>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<link rel='stylesheet'
-	href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
-<link rel='stylesheet'
-	href='http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css' />
-<script
-	src='https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js'></script>
-<link rel="stylesheet"
-	href="http://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-<script src='http://code.jquery.com/jquery-3.4.1.min.js'></script>
+<%@ include file="../common/scriptImport.jsp" %>
 <script src="../res/adminNavSub.js"></script>
 <script>
-function del() {
-	$('.delete').click(() => {
+function delReply() {
+	$(".delete").click(function(e){
+		let replyNumStr = $(this).attr("id");
+		console.log(replyNumStr);
+		
 		swal({
 			title: '',
 			text: '댓글을 삭제하시겠습니까?',
@@ -29,17 +23,39 @@ function del() {
 			confirmButtonText: '확인',
 			cancelButtonText: '취소',
 			closeOnConfirm: false
-		},function(isConfirm){
-			if(isConfrim){
+		},
+		function(isConfirm){
+			if(isConfirm){
 				$.ajax({
-					
+					url: "deleteReply",
+					data: {"replyNumStr": replyNumStr},
+					success: () => {location.reload();}
 				});
 			}
-		});
+		})
 	});
 };
 
-$(del);
+function modifyReview(){
+	$("#modifyReview").click(() => {
+		let url = "reviewModify";
+		url = url + "?reviewNum=" + ${reviewView.reviewNum};
+		
+		location.href = url;
+	});
+}
+
+function cencel(){
+	$("#cencel").click(() => {
+		location.href = "reviewListView";
+	});
+}
+
+$(() => {
+	delReply();
+	modifyReview();
+	cencel();
+});
 </script>
 <style>
 * {
@@ -153,13 +169,10 @@ textarea {
 	padding: 15px;
 }
 
-.img {
-	border: 1px solid darkgray;
-	width: 500px;
-	height: 200px;
-	text-align: center;
-	padding: 90px;
-	background-color: white;
+img {
+	width: 355px;
+	height: 240px;
+	padding-bottom: 0;
 }
 
 .replyBox {
@@ -174,6 +187,10 @@ textarea {
 	float: right;
 	margin-top: 3px;
 }
+
+.marker{
+	background-color: yellow;
+}
 </style>
 </head>
 <body>
@@ -185,10 +202,10 @@ textarea {
 			<div class='header'>
 				<strong>&nbsp;&nbsp;ADMINSTRATOR</strong>
 				<div id='topButton'>
-					  <a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
-					<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-					<a href='../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-					<a href='user/logout'>로그아웃</a>
+					<a href="<c:url value='/admin/logo/logoRegist'/>">로고관리</a>&nbsp;|&nbsp;
+					<a href="<c:url value='/admin/banner/bannerRegist'/>">배너관리</a>&nbsp;|&nbsp; 
+					<a href="<c:url value='/'/>">홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+					<a href="<c:url value='/user/logout'/>">로그아웃</a>
 				</div>
 			</div>
 			<div class='info'>
@@ -203,27 +220,23 @@ textarea {
 						<table class='table'>
 							<tr>
 								<th>제목</th>
-								<td>점박이 치와와 치치!! 따뜻한 가정으로</td>
+								<td>${reviewView.title}</td>
 							</tr>
 							<tr>
-								<th style='height: 350px;'>내용</th>
+								<th>내용</th>
 								<td>
-									<div class='img'>유기견 이미지</div> <br>
-									<div>저희 센터에서 가장 작고 아담한 치와와 공주 치치가 드디어 좋은 견주를 만났어요. 자식가진
-										부모님 마음은 한결같죠!! 내 자식이 가지고 싶은거 하고싶은거 할 수 있게 해주는거요~~! 사랑하는 따님의
-										생일선물로 치와와를 분양해가셨어요. 견주님께서도 어릴때 강아지도 키워보고 너무나도 좋아했지만 그동안 잊고
-										지내셨었나봐요~ 따님 생일선물이기도 하지만 견주님께도 인생의 선물이 아닐까 싶네요 사랑스러운 새로운 가족이
-										생겼으니깐요^^</div>
+									<div class='img'>
+										<img src='<c:url value="/attach/review/${reviewView.attachName}"/>'/>
+									</div><br>
+									<div>${reviewView.content}</div>
 								</td>
 							</tr>
 						</table>
 
 						<div class='button' style='text-align: right;'>
-							<button type='button' class='btn btn-primary'
-								onClick="location.href='04.html'">수정</button>
+							<button type='button' class='btn btn-primary' id="modifyReview">수정</button>
 							&nbsp;
-							<button type='button' class='btn btn-default'
-								onClick="location.href='01.html'">취소</button>
+							<button type='button' class='btn btn-default' id="cencel">취소</button>
 						</div>
 					</form>
 				</div>
@@ -232,47 +245,27 @@ textarea {
 					<strong>댓글</strong>
 				</h4>
 				<br>
-<<<<<<< HEAD
-				<c:choose>
-					<c:when test="${empty replyList}">
-						<p style="font-size: 15px;">등록된 댓글이 없습니다.</p>
-					</c:when>
-					<c:when test="${!empty replyList}">
-						<c:forEach var="replyList" items="${replyList}">
-							<div style='background-color: #eeeeee;'>
-								<div class='replyBox'>
-									<span><strong>${replyList.userId}</strong>&nbsp;&nbsp;${replyList.regDate}</span>
-									<button type='button' class='btn btn-danger delete'>삭제</button>
+				<div>
+					<c:choose>
+						<c:when test="${empty replyList}">
+							<p style="font-size: 15px;">등록된 댓글이 없습니다.</p>
+						</c:when>
+						<c:when test="${!empty replyList}">
+							<c:forEach var="replyList" items="${replyList}">
+								<div class='replyBox' style='background-color: #eeeeee;'>
+									<span>
+										<strong>${replyList.userId}</strong>
+										&nbsp;&nbsp;${replyList.regDate}
+									</span>
+									<button id="${replyList.replyNum}" type='button' class='btn btn-danger delete'>삭제</button>
 									<div class='replyContent'>${replyList.content}</div>
 								</div>
-							</div>
-							<br>
-						</c:forEach>
-					</c:when>
-				</c:choose>
-				
-=======
-				<div style='background-color: #eeeeee;'>
-					<div class='replyBox'>
-						<span><strong>miso93</strong>&nbsp;&nbsp;2020-06-10</span>
-						<button type='button' class='btn btn-danger delete'>삭제</button>
-						<div class='replyContent'>아이가 얼른 주인분 만났으면 좋겠네요.</div>
-					</div>
-
+								<br>
+							</c:forEach>
+						</c:when>
+					</c:choose>
 				</div>
 				<br>
-				<div style='background-color: #eeeeee;'>
-					<div class='replyBox'>
-						<span><strong>smile1</strong>&nbsp;&nbsp;2020-06-10</span>
-						<button type='button' class='btn btn-danger delete'>삭제</button>
-						<div class='replyContent'>
-							안타깝네요. <br>안타깝네요. <br>안타깝네요. <br>안타깝네요. <br>안타깝네요.
-							<br>안타깝네요. <br>안타깝네요.
-						</div>
-					</div>
-				</div>
-				<br>
->>>>>>> branch 'master' of https://github.com/rlqja910/kimgibeom.dog.git
 			</div>
 		</div>
 	</div>

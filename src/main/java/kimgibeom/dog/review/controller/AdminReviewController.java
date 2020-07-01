@@ -42,6 +42,7 @@ public class AdminReviewController {
 	public String moveReviewView(Model model, @RequestParam("reviewNum") int reviewNum) {
 		model.addAttribute("reviewView", reviewService.readReview(reviewNum));
 		model.addAttribute("replyList", reviewReplyService.readReviewReplies(reviewNum));
+		
 		return "admin/review/reviewView";
 	}
 	
@@ -109,6 +110,13 @@ public class AdminReviewController {
 		}
 		
 		return isDel;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/deleteReply")
+	public int deleteReply(@RequestParam("replyNumStr") String replyNumStr) {
+		int replyNum = Integer.parseInt(replyNumStr);
+		return reviewReplyService.removeReviewReply(replyNum);
 	}
 	
 	private void save(MultipartFile attachFile, File saveFile) {

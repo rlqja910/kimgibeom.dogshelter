@@ -55,14 +55,12 @@ function fn_reviewView(reviewNum){
 		.review .page ul li a{padding:8px 14px;}
 	}
 	
-	.marker { /*에디터 marker클래스*/
-		background-color: yellow;
-	}
-	
-	p {
-		margin-top: 0;
-		margin-bottom: 0;
-	}
+	/*에디터 marker클래스*/
+	.marker {background-color: yellow;}
+	p{margin-top: 0; margin-bottom: 0;  float:left;}
+	h1, h2, h3, h4, h5, h6{font-size: 1em; border-style:none; font-weight: normal;}
+	strong{font-weight: normal;}
+	big, small{font-size: 1em;}
 </style>
 </head>
 <body>
@@ -97,7 +95,9 @@ function fn_reviewView(reviewNum){
 												</div>
 											</li>
 											<li>${reviewList.title}</li>
-											<li>${reviewList.content}</li>
+											<li>
+												
+											</li>
 											<li>+더보기</li>
 										</ul>
 									</a>
