@@ -77,8 +77,7 @@ public class UserController {
 	@RequestMapping("/loginProc") // 로그인 정보확인
 	@ResponseBody
 	public int userLoginProc(HttpServletRequest request, String userId, String userPw) {
-		String pw = userService.readuserPw(userId); // 입력한 ID의 PW를 추출
-		System.out.println(pw); // null일경우 아이디가 없다는 의미
+		String pw = userService.readuserPw(userId); // 입력한 ID의 PW를 추출// null일경우 아이디가 없다는 의미
 
 		if (userPw.equals(pw)) { // 로그인 성공
 			request.getSession().setAttribute("userId", userId);

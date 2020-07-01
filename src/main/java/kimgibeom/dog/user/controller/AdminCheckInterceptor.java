@@ -9,9 +9,7 @@ public class AdminCheckInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		boolean isCheck = true;
-		System.out.println(request.getServletPath());
 		String urlFirstPath = (request.getServletPath().split("/"))[1]; // 묹자열 admin 추출, url servletPath 맨앞만 추출
-		System.out.println(urlFirstPath);
 		try {
 			if (urlFirstPath.equals("admin")) { // url 쳐서 관리자페이지로 가려고할경우
 				if (((String) request.getSession().getAttribute("userId")) == null) { // 현재 로그인 안했을경우 사용자페이지 main으로
