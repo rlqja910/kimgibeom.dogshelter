@@ -12,7 +12,7 @@
 function reportSearch() { 
 	$('#search').click(() => {
 		if(!$('#searchContent').val().trim()) {
-			swal({
+			swal({ 
 				title: '',
 				text: '검색어를 입력해주세요.',
 				type: 'warning',
