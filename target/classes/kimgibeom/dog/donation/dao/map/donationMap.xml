@@ -5,7 +5,7 @@
 <mapper namespace='kimgibeom.dog.donation.dao.map.DonationMap'>
 <!--이번달 후원금액 -->
 	<select id='getDonationMon' resultType='int'>
-		select sum(price)
+		select nvl(sum(price),0)
 		from donations
 		where donation_date between trunc(sysdate,'month') and last_day(sysdate)
 	</select>
