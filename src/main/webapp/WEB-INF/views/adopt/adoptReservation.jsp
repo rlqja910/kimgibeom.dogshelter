@@ -88,7 +88,6 @@ $(()=>{
 /* 무료입양 */
 .review {
 	width: 80%;
-	font-size: 14px;
 	margin: 0 auto;
 	margin-top: 100px;
 	margin-bottom: 100px;
