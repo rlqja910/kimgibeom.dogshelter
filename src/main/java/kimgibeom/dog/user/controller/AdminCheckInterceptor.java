@@ -9,7 +9,6 @@ public class AdminCheckInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		boolean isCheck = true;
-		System.out.println("interceptor 진입");
 		System.out.println(request.getServletPath());
 		String urlFirstPath = (request.getServletPath().split("/"))[1]; // 묹자열 admin 추출, url servletPath 맨앞만 추출
 		System.out.println(urlFirstPath);

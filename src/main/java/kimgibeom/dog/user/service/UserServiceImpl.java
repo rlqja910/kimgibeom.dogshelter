@@ -25,13 +25,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean idCheck(String userId) {
-		System.out.println(userId + "를 갖고 service idcheck진입");
 		boolean availableId = true;
 		List<User> users = userDao.getUsers();
 		for (User user : users) {
 			System.out.println(user.getUserId());
 			if (user.getUserId().equals(userId)) {
-				System.out.println("false형성 if문 진입");
 				availableId = false;
 			}
 		}

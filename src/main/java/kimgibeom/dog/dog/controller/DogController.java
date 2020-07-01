@@ -34,7 +34,6 @@ public class DogController {
 
 		int dogsCnt = dogs.size(); // 데이터 개수
 		model.addAttribute("dogsCnt", dogsCnt);
-		System.out.println(dogsCnt + "개의 데이터가 있음");
 
 		int pageCnt = 0;
 		if (dogsCnt % 8 == 0) {
@@ -42,8 +41,6 @@ public class DogController {
 		} else {
 			pageCnt = dogsCnt / 8 + 1;
 		}
-		System.out.println(dogsCnt);
-		System.out.println("총 페이지 개수 : " + pageCnt);
 		// 총페이지 개수 model 저장-------------------------
 		model.addAttribute("totalPageCnt", pageCnt);
 
@@ -55,36 +52,28 @@ public class DogController {
 			lastPageDataCnt = 0;
 		}
 		model.addAttribute("lastPageDataCnt", lastPageDataCnt);
-		System.out.println("마지막 페이지 데이터 개수:" + lastPageDataCnt);
 
 		if (dogsCnt > 0 && dogsCnt <= 8) { // 데이터가 8개 이하면 페이지가 1페이지밖에 없으므로 기억해둔다.
 			model.addAttribute("isOnePage", "true");// 데이터가 8개 이하인지 boolean값 model
 													// 저장-------------------------
-			System.out.println(dogs);
 			model.addAttribute("onlyOnePageData", jsonDogArray.fromObject(dogs));// 데이터가 8개 이하면 dog값들 model
 			// 저장-------------------------
-			System.out.println(dogs);
-			System.out.println("isOnePage에 true 박힘");
 		} else if (dogsCnt == 0) {
 			model.addAttribute("isOnePage", "true");
 			model.addAttribute("pageData", "empty");
-			System.out.println("isOnePage에 true박히고 pageData에 empty 박힘");
 		} else {
 			model.addAttribute("isOnePage", "false");// 데이터가 9개 이상인지 boolean값 model
 														// 저장-------------------------
 			List<Dog> dogList = new ArrayList<Dog>();
 			for (int i = 1; i <= pageCnt; i++) { // 모든페이지 데이터를 저장한다.
-				System.out.println("for");
 
 				if (i == pageCnt) { // 마지막 페이지 저장할때
 					int cnt = 0;
-					System.out.println("for접근:마지막페이지-" + i + "페이지");
 					for (int j = 1; j <= lastPageDataCnt; j++) {
 						dogList.add(dogs.get((i - 1) * 8 + cnt++));
 					}
 				} else {
 					int cnt = 0;
-					System.out.println("for접근:" + i + "번째페이지임");
 					for (int j = 1; j <= 8; j++) {// 마지막 페이지가 아닌 데이터들을 저장할때
 						dogList.add(dogs.get((i - 1) * 8 + cnt++));
 					}
@@ -97,8 +86,6 @@ public class DogController {
 	@RequestMapping("/dogSearch") // 겅색 리스트 추출
 	@ResponseBody
 	public HashMap<String, Object> getSearchDogs(String dogKind, String dogEntDate) {
-		System.out.println(dogKind + "==품종=============");
-		System.out.println(dogEntDate + "==입소날짜=============");
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
 		List<Dog> dogs = dogService.findDogs(dogKind, dogEntDate);
@@ -108,7 +95,6 @@ public class DogController {
 		int dogsCnt = dogs.size(); // 데이터 개수
 		// model.addAttribute("dogsCnt", dogsCnt);
 		map.put("dogsCnt", dogsCnt);
-		System.out.println(dogsCnt + "개의 데이터가 있음");
 
 		int pageCnt = 0;
 		if (dogsCnt % 8 == 0) {
@@ -116,8 +102,6 @@ public class DogController {
 		} else {
 			pageCnt = dogsCnt / 8 + 1;
 		}
-		System.out.println(dogsCnt);
-		System.out.println("총 페이지 개수 : " + pageCnt);
 		// 총페이지 개수 model 저장-------------------------
 		// model.addAttribute("totalPageCnt", pageCnt);
 		map.put("totalPageCnt", pageCnt);
@@ -131,7 +115,6 @@ public class DogController {
 		}
 		// model.addAttribute("lastPageDataCnt", lastPageDataCnt);
 		map.put("lastPageDataCnt", lastPageDataCnt);
-		System.out.println("마지막 페이지 데이터 개수:" + lastPageDataCnt);
 
 		if (dogsCnt > 0 && dogsCnt <= 8) { // 데이터가 8개 이하면 페이지가 1페이지밖에 없으므로 기억해둔다.
 			// model.addAttribute("isOnePage", "true");// 데이터가 8개 이하인지 boolean값 model
@@ -141,31 +124,25 @@ public class DogController {
 			// 8개 이하면 dog값들 model
 			map.put("onlyOnePageData", dogs);
 			// 저장-------------------------
-			System.out.println(dogs);
-			System.out.println("isOnePage에 true 박힘");
 		} else if (dogsCnt == 0) {
 			// model.addAttribute("isOnePage", "true");
 			map.put("isOnePage", true);
 			// model.addAttribute("pageData", "empty");
 			map.put("pageData", "empty");
-			System.out.println("isOnePage에 true박히고 pageData에 empty 박힘");
 		} else {
 			// model.addAttribute("isOnePage", "false");// 데이터가 9개 이상인지 boolean값 model
 			// 저장-------------------------
 			map.put("isOnePage", false);
 			List<Dog> dogList = new ArrayList<Dog>();
 			for (int i = 1; i <= pageCnt; i++) { // 모든페이지 데이터를 저장한다.
-				System.out.println("for");
 
 				if (i == pageCnt) { // 마지막 페이지 저장할때
 					int cnt = 0;
-					System.out.println("for접근:마지막페이지-" + i + "페이지");
 					for (int j = 1; j <= lastPageDataCnt; j++) {
 						dogList.add(dogs.get((i - 1) * 8 + cnt++));
 					}
 				} else {
 					int cnt = 0;
-					System.out.println("for접근:" + i + "번째페이지임");
 					for (int j = 1; j <= 8; j++) {// 마지막 페이지가 아닌 데이터들을 저장할때
 						dogList.add(dogs.get((i - 1) * 8 + cnt++));
 					}
