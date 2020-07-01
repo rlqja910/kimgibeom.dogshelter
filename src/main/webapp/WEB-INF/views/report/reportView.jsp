@@ -60,11 +60,16 @@ function readReply() {
 	$('.view').html(
 			`<c:forEach var='reply' items='${replies}'>
 				<ul class='${reply.userId}'>
-					<li>${reply.userId} <span>${reply.regDate}</span><span class='replyDel'>
-						<input id='${reply.replyNum}' type='button' value='삭제'/></span></li>
+					<li>
+						${reply.userId} 
+						<span>${reply.regDate}</span>
+						<span class='replyDel'>
+							<input id='${reply.replyNum}' type='button' value='삭제'/>
+						</span>
+					</li>
 					<li>${reply.content}</li>
 				</ul>
-			</c:forEach>`	
+			</c:forEach>`
 		);
 		
 		if ($('.view').html() == ``) {
@@ -74,7 +79,7 @@ function readReply() {
 
 function delReply() {
 	$('.replyDel').click(function(e) {
-		let replyNo = $('.view').find('input').attr('id');
+		let replyNo = $(this).children().attr('id');
 		
 		swal({
 			title: '',
