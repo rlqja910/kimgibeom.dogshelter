@@ -13,23 +13,13 @@ public class ReviewReplyServiceImpl implements ReviewReplyService{
 	@Autowired private ReviewReplyDao reviewReplyDao;
 	
 	@Override
-	public List<ReviewReply> readReviewReplies(){
-		return reviewReplyDao.getReviewReplies();
-	}
-	
-	@Override
-	public ReviewReply readReviewReply(int replyNum) {
-		return reviewReplyDao.getReviewReply(replyNum);
+	public List<ReviewReply> readReviewReplies(int reviewNum){
+		return reviewReplyDao.getReviewReplies(reviewNum);
 	}
 	
 	@Override
 	public int writeReviewReply(ReviewReply reviewReply) {
 		return reviewReplyDao.addReviewReply(reviewReply);
-	}
-	
-	@Override
-	public int updateReviewReply(ReviewReply reviewReply) {
-		return reviewReplyDao.modifyReviewReply(reviewReply);
 	}
 	
 	@Override

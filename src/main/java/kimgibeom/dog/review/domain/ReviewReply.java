@@ -10,6 +10,12 @@ public class ReviewReply {
 	private Date regDate;
 	
 	public ReviewReply() {}
+	
+	public ReviewReply(int reviewNum, String userId, String content) {
+		this.reviewNum = reviewNum;
+		this.userId = userId;
+		this.content = content;
+	}
 
 	public int getReviewNum() {
 		return reviewNum;

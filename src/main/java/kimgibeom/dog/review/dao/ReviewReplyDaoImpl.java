@@ -13,23 +13,13 @@ public class ReviewReplyDaoImpl implements ReviewReplyDao{
 	@Autowired private ReviewReplyMap reviewReplyMap;
 	
 	@Override
-	public List<ReviewReply> getReviewReplies(){
-		return reviewReplyMap.getReviewReplies();
-	}
-	
-	@Override
-	public ReviewReply getReviewReply(int replyNum) {
-		return reviewReplyMap.getReviewReply(replyNum);
+	public List<ReviewReply> getReviewReplies(int reviewNum){
+		return reviewReplyMap.getReviewReplies(reviewNum);
 	}
 	
 	@Override
 	public int addReviewReply(ReviewReply reviewReply) {
 		return reviewReplyMap.addReviewReply(reviewReply);
-	}
-	
-	@Override
-	public int modifyReviewReply(ReviewReply reviewReply) {
-		return reviewReplyMap.modifyReviewReply(reviewReply);
 	}
 	
 	@Override

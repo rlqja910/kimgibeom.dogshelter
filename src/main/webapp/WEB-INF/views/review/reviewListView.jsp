@@ -1,11 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>유기견 보호소</title>
 <%@ include file="../common/scriptImport.jsp" %>
+<script>
+function fn_reviewView(reviewNum){
+	let url = "reviewView";
+	url = url + "?reviewNum=" + reviewNum;
+	
+	location.href = url;
+}
+</script>
 <style>
 	/* header */
 	.header{width:100%; height:<a href=''><</a>80px; background-color:#ccc; background-image:url('../img/loginImg.jpg'); background-position: center;}
@@ -20,9 +29,9 @@
 	.review{width:80%;font-size:14px; margin:0 auto; margin-top:100px; margin-bottom:100px;}
 	.review .reviewCont{width:100%; overflow:hidden;}
 	.review .reviewCont ul{width:23.5%; float:left; margin:1% 0 0 1%; border:1px solid #ccc;}
-	.review .reviewCont ul li:nth-child(2){font-weight:bold; margin:5% 3% 3% 3%;}
-	.review .reviewCont ul li:nth-child(3){margin:0 3% 0 3%; color:#666; font-size:12px;}
-	.review .reviewCont ul li:nth-child(4){text-align:right; margin:6% 3% 5% 3%;}
+	.review .reviewCont ul li:nth-child(2){font-weight:bold; margin:5% 3% 3% 3%; overflow:hidden; text-overflow: ellipsis; white-space: nowrap; }
+	.review .reviewCont ul li:nth-child(3){margin:0 3% 0 3%; color:#666; font-size:12px; overflow:hidden; text-overflow: ellipsis; white-space: nowrap;}
+	.review .reviewCont ul li:nth-child(4){text-align:right; margin:4% 3% 5% 3%;}
 	.review .reviewCont ul img{width:100%;}
 	
 	/* 페이징 */
@@ -45,6 +54,15 @@
 		.review .page{width:100%; margin-top:10%;}
 		.review .page ul li a{padding:8px 14px;}
 	}
+	
+	.marker { /*에디터 marker클래스*/
+		background-color: yellow;
+	}
+	
+	p {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
 </style>
 </head>
 <body>
@@ -65,70 +83,27 @@
 					<div class='contTitle'>입양후기</div>
 					<hr class='contHr'>
 					<div class='reviewCont'>
-						<a href='02.html'>
-							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">유기견 이미지</div></li>
-								<li>치와와치치 따뜻한 가정으로</li>
-								<li>작고 아담한 치와와 치치가...</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
-						<a href='02.html'>
-							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">유기견 이미지</div></li>
-								<li>말티즈콩이 따뜻한 가정으로</li>
-								<li>작고 아담한 말티즈콩이가...</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
-						<a href='02.html'>
-							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">유기견 이미지</div></li>
-								<li>푸들냥맨 따뜻한 가정으로</li>
-								<li>작고 아담한 푸들냥맨...</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
-						<a href='02.html'>
-							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">유기견 이미지</div></li>
-								<li>푸들솜탄 따뜻한 가정으로</li>
-								<li>작고 아담한 푸들솜탄...</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
-						<a href='02.html'>
-							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">유기견 이미지</div></li>
-								<li>말티즈커피 따뜻한 가정으로</li>
-								<li>작고 아담한 말티즈커피가...</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
-						<a href='02.html'>
-							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">유기견 이미지</div></li>
-								<li>시바견쓰읍 따뜻한 가정으로</li>
-								<li>작고 아담한 시바견쓰읍...</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
-						<a href='02.html'>
-							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">유기견 이미지</div></li>
-								<li>말티즈디비 따뜻한 가정으로</li>
-								<li>작고 아담한 말티즈디비가...</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
-						<a href='02.html'>
-							<ul>
-								<li><div style="height:100px; width:273px; border:1px solid;">유기견 이미지</div></li>
-								<li>비글오라클 따뜻한 가정으로</li>
-								<li>작고 아담한 치와와 치치가...</li>
-								<li>+더보기</li>
-							</ul>
-						</a>
+						<c:choose>
+							<c:when test="${empty reviewList}">
+								<p style="font-size: 15px;">등록된 후기글이 없습니다.</p>
+							</c:when>
+							<c:when test="${!empty reviewList}">
+								<c:forEach var="reviewList" items="${reviewList}">
+									<a href='#' onclick="fn_reviewView(<c:out value='${reviewList.reviewNum}'/>)">
+										<ul>
+											<li>
+												<div style="height:200px; width:100%;">
+													<img style="height:200px;" src="<c:url value='/attach/review/${reviewList.attachName}'/>"/>
+												</div>
+											</li>
+											<li>${reviewList.title}</li>
+											<li>${reviewList.content}</li>
+											<li>+더보기</li>
+										</ul>
+									</a>
+								</c:forEach>
+							</c:when>
+						</c:choose>
 					</div>
 
 					<!-- 페이징 -->
@@ -140,10 +115,6 @@
 							<li><a href='#'>3</a></li>
 							<li><a href='#'>4</a></li>
 							<li><a href='#'>5</a></li>
-							<li><a href='#'>6</a></li>
-							<li><a href='#'>7</a></li>
-							<li><a href='#'>8</a></li>
-							<li><a href='#'>9</a></li>
 							<li><a href='#'>></a></li>
 						</ul>
 					</div>

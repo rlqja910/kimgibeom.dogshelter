@@ -5,7 +5,13 @@
 	<select id="getReviews" resultMap="reviewMap">
 		select review_num, title, content, reg_date, attach_name
 		from reviews
-		order by review_num desc
+		order by review_num DESC
+	</select>
+	
+	<select id="getReview" parameterType="int" resultMap="reviewMap">
+		select review_num, title, content, reg_date, attach_name
+		from reviews
+		where review_num = #{reviewNum}
 	</select>
 	
 	<resultMap id="reviewMap" type="review">
@@ -18,6 +24,17 @@
 	
 	<insert id="addReview" parameterType="review">
 		insert into reviews(review_num, title, content, reg_date, attach_name)
-		values(review_num_seq.nextval, #{title}, #{content}, sysdate, #{attachName})
+		values(review_num_seq.nextval, #{title}, #{content}, SYSDATE, #{attachName})
 	</insert>
+	
+	<update id="modifyReview" parameterType="review">
+		update reviews
+		set title = #{title}, content = #{content}, attach_name = #{attachName}
+		where review_num = #{reviewNum}
+	</update>
+
+	<delete id='delReview' parameterType='int'>
+		delete reviews
+		where review_num = #{reviewNum}
+	</delete>
 </mapper>	

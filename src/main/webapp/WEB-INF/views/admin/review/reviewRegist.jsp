@@ -10,8 +10,6 @@
 <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 <script src="${path}/ckeditor/ckeditor.js"></script>
 <script>
-CKEDITOR.config.resize_enabled = false;
-
 function cencelAdd(){
 	$("#cancelAdd").click(() => {
 		location.href = "reviewListView";
@@ -23,7 +21,7 @@ function addReview(){
 		if(!$("#title").val().trim()){
 			$("#chkTitle").text("제목을 입력해주세요.");
 			$("#title").focus();
-		}else if(!$("#contentFile").val()){
+		}else if(!$("#imgFile").val()){
 			$("#chkFile").html("첨부할 파일을 선택해주세요.");
 		}else if(!CKEDITOR.instances.description.getData()){
 			$("#chkContent").text("내용을 입력해주세요.");
@@ -37,7 +35,6 @@ function fn_chkByteTitle(obj){
 	   let maxByte = 100; //최대 입력 바이트 수
 	   let str = obj.value;
 	   let strLength = str.length;
-	   console.log(strLength);
 	   
 	   let titleByte = 0; 
 	   let titleLength = 0; 
@@ -63,12 +60,12 @@ function fn_chkByteTitle(obj){
 	}
 
 function fn_chkFile(obj){
-	let ext = $("#contentFile").val().split(".").pop().toLowerCase(); 
+	let ext = $("#imgFile").val().split(".").pop().toLowerCase(); 
 	//"."를 기준으로 문자열로 나눈다. 배열의 마지막 요소를 제거한 후 제거한 요소를 반환하여 소문자로 변환한다.
 	
 	if($.inArray(ext, ["gif", "jpg", "jpeg", "png", "bmp"]) == -1){ //요소가 없을 경우 -1을 반환 
 		$("#chkFile").html("gif, jpg, jpeg, png, bmp 파일만 업로드 해주세요.");
-		$("#contentFile").val("");
+		$("#imgFile").val("");
 	}else {
 		$("#chkFile").html("");
 	}
@@ -188,7 +185,6 @@ textarea{
 	resize: none;
 	padding: 20px;
 }
-
 </style>
 </head>
 <body>
@@ -200,10 +196,10 @@ textarea{
 		<div class='header'>
 			<strong>&nbsp;&nbsp;ADMINSTRATOR</strong>
 			<div id='topButton'>
-				  <a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
-					<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-					<a href='../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
-					<a href='user/logout'>로그아웃</a>
+				<a href="<c:url value='/admin/logo/logoRegist'/>">로고관리</a>&nbsp;|&nbsp;
+				<a href="<c:url value='/admin/banner/bannerRegist'/>">배너관리</a>&nbsp;|&nbsp; 
+				<a href="<c:url value='/'/>">홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+				<a href="<c:url value='/user/logout'/>">로그아웃</a>
 			</div>
 		</div>
 		<div class='info'>
@@ -226,7 +222,7 @@ textarea{
 						<tr>
 							<th>이미지</th>
 							<td>
-								<input type='file' id="contentFile" name="attachFile" onchange="fn_chkFile(this)"/>
+								<input type='file' id="imgFile" name="attachFile" onchange="fn_chkFile(this)"/>
 								<span id="chkFile" style="color:red"></span>
 							</td>
 						</tr>
@@ -237,9 +233,9 @@ textarea{
 								<span id="chkContent" style="color:red"></span>
 								<script>
 									CKEDITOR.replace("description", {
-										removePlugins: "image",
-									});	
-									
+										removePlugins: "image, blockquote",
+									});
+
 									CKEDITOR.instances.description.getData();
 									
 									CKEDITOR.instances.description.on('key', function(e) {

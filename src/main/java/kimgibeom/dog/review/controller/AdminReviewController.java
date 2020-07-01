@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -30,14 +31,17 @@ public class AdminReviewController {
 	@Value("${reviewAttachDir}") private String attachDir;
 	
 	@RequestMapping("/reviewListView")
-	public void readReviews(Model model, String saveFileName) {
+	public String readReviews(Model model, String saveFileName) {
 		model.addAttribute("saveFileName", saveFileName);
 		model.addAttribute("reviewList", reviewService.readReviews());
+		
+		return "admin/review/reviewListView";
 	}
 	
 	@RequestMapping("/reviewView")
 	public String moveReviewView(Model model, @RequestParam("reviewNum") int reviewNum) {
-		System.out.println(reviewNum);
+		model.addAttribute("reviewView", reviewService.readReview(reviewNum));
+		model.addAttribute("replyList", reviewReplyService.readReviewReplies(reviewNum));
 		return "admin/review/reviewView";
 	}
 	
@@ -48,7 +52,7 @@ public class AdminReviewController {
 	
 	@RequestMapping(value="/addReview", method=RequestMethod.POST)
 	public String addReview(String title, MultipartFile attachFile, String content,
-			@ModelAttribute("review") Review review, HttpServletRequest request, RedirectAttributes rttr) {
+			@ModelAttribute("review") Review review, HttpServletRequest request) {
 		String dir = request.getServletContext().getRealPath(attachDir); //물리적인 경로 생성
 		String attachName = attachFile.getOriginalFilename(); //원본 파일명
 		
@@ -59,10 +63,52 @@ public class AdminReviewController {
 		save(attachFile, saveFile);
 		
 		review = new Review(title, content, saveFileName);
-		rttr.addAttribute("saveFileName", saveFileName);
 		reviewService.writeReview(review);
 		
 		return "redirect:reviewListView";
+	}
+	
+	@RequestMapping("/reviewModify")
+	public String moveReviewModify(@ModelAttribute("review") Review review, Model model, 
+											@RequestParam("reviewNum") int reviewNum) {
+		model.addAttribute("reviewView", reviewService.readReview(reviewNum));
+		return "admin/review/reviewModify";
+	}
+	
+	@RequestMapping(value="/modifyReview", method=RequestMethod.POST)
+	public String modifyReview(String title, MultipartFile attachFile, String content, String reviewNumStr,
+			@ModelAttribute("review") Review review, HttpServletRequest request, RedirectAttributes rttr) {
+		String dir = request.getServletContext().getRealPath(attachDir); 
+		String attachName = attachFile.getOriginalFilename();
+		int reviewNum = Integer.parseInt(reviewNumStr);
+		
+		UUID uuid = UUID.randomUUID();
+		String saveFileName = uuid.toString() + "_" + attachName;
+				
+		File saveFile = new File(dir + saveFileName);
+		save(attachFile, saveFile);
+		
+		review = new Review(title, content, saveFileName);
+		review.setReviewNum(reviewNum);
+		rttr.addAttribute("reviewNum", reviewNum);
+		reviewService.updateReview(review);
+		
+		return "redirect:reviewView";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/deleteReview")
+	public boolean deleteReview(@RequestParam("checkNums[]") List<String> checkNums) {
+		boolean isDel = false;
+		int reviewNum = 0;
+		
+		for(String checkNum:checkNums) {
+			reviewNum = Integer.parseInt(checkNum);
+			reviewService.removeReview(reviewNum);
+			isDel = true;
+		}
+		
+		return isDel;
 	}
 	
 	private void save(MultipartFile attachFile, File saveFile) {

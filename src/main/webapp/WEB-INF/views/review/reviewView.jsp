@@ -1,11 +1,75 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>유기견 보호소</title>
 <%@ include file="../common/scriptImport.jsp" %>
+<script>
+function addReply(){
+	$("#addRepy").click(() => {
+		let content = $("#reply").val().trim();
+		let reviewNumStr = ${reviewView.reviewNum};
+		let userId = `${userId}`;
+
+		if(userId){
+			if(content){
+				$.ajax({
+					url: "addReply",
+					data: {"content": content, "reviewNumStr": reviewNumStr, "userId": userId},
+					success: () => {location.reload();}
+				});
+			}
+		}else {
+			location.href = "../user/login";
+		}
+	});
+}
+
+function delButton(){
+	$(".view").find("ul").each(function() {
+		let loginUserId = `${userId}`;
+		let replyUserId = $(this).attr("class");
+
+		if(loginUserId != replyUserId) {
+			$(".delButton").eq($(this).index()).hide(); //eq로 해당 인덱스에 해당하는 버튼을 찾는다.
+		}
+	});
+}
+
+function delReply(){
+	$(".delButton").click(() => {
+		let replyNumStr = $(".view").find("input").attr("id");
+		
+		swal({
+			title: '',
+			text: '댓글을 삭제하시겠습니까?',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonText: '확인',
+			cancelButtonText: '취소',
+			closeOnConfirm: false
+		},
+		function(isConfirm) {
+			if (isConfirm) {
+				$.ajax({
+					url: "delReply",
+					data: {"replyNumStr": replyNumStr},
+					success: () => {location.reload();}
+				});
+			}	
+		});
+	});
+}
+
+$(() => {
+	addReply();
+	delButton();
+	delReply();
+});
+</script>
 <style>
 	/* header */
 	.header{width:100%; height:380px; background-color:#ccc; background-image:url('../img/loginImg.jpg'); background-position: center;}
@@ -17,7 +81,7 @@
 	.contTitle{font-size:32px; font-weight:bold; text-align:center;}
 
 	/* 입양후기 */
-	.review{width:80%;font-size:14px; margin:0 auto; margin-top:100px; margin-bottom:100px;}
+	.review{width:80%; font-size:14px; margin:0 auto; margin-top:100px; margin-bottom:100px;}
 	.review .reviewView{width:90%; margin:0 auto;}
 	.review .reviewView table{width:100%; border-collapse: collapse;}
 	.review .reviewView table tr{font-size:16px;}
@@ -28,7 +92,7 @@
 	.review .reviewView table tr:nth-child(2) td{padding:2% 0 2% 2%;}
 	
 	/* 목록 버튼 */
-	.button{text-align:center;}
+	.button{text-align:right;}
 	.button input{background-color:#f5bf25; width:70px; height:40px; border:0px; color:#fff; margin-top:30px;}
 
 	/* 댓글 */
@@ -59,12 +123,21 @@
 		.review .reviewView{width:100%;}
 		.review .reviewView table tr{font-size:14px;}
 		.review .reviewView table tr th{background-color:#ccc; width:20%; padding:2% 0;}
-
+	
 		.button input{margin-top:5%;}
 
 		.writeCont .view{font-size:14px;}
 		.writeCont .view ul{border-bottom:1px solid #ccc; padding:4% 0;}
 		.writeCont .view ul li:nth-child(1){margin-bottom:2%;}
+	}
+	
+	.marker {
+		background-color: yellow;
+	}
+	
+	p {
+		margin-top: 0;
+		margin-bottom: 0;
 	}
 </style>
 </head>
@@ -89,52 +162,50 @@
 						<table>
 							<tr>
 								<th>제목</th>
-								<td>차와와 치치!! 따뜻한 가정으로</td>
+								<td>${reviewView.title}</td>
 							</tr>
 							<tr>
 								<td colspan='2'>
-									<div style="height:100px; width:120px; border:1px solid;">유기견 이미지</div><br><br>
-									저희 센터에서 가장 작고 아담한 치와와 공주 치치가 드디어 좋은 견주를 만났어요. > <<br>
-									자식가진 부모님 마음은 한결같죠!!<br>
-									내 자식이 가지고 싶은거 하고 싶은거 할 수 잏게 해주는거요!!!<br>
-									사랑하는 따님의 생일선물로 치와와를 분양해 가셨어요.<br>
-									견주님께서도 어릴때 강아지도 키워보고 너무나도 좋아했지만 그동안 잊고 지내셨었나봐요~<br>
-									따님 생일선물이기도 하지만 경주님께도 인생의 선물이 아닐가싶네요. 사랑스러운 새로운 가족이 생겼으니깐요.^^
+									<div style="height:250px; width:100%;">
+										<img style="height:250px; width:370px;" src="<c:url value='/attach/review/${reviewView.attachName}'/>"/>
+									</div><br>
+									${reviewView.content}
 								</td>
 							</tr>
 						</table>
 						
 						<!-- 목록 버튼 -->
 						<div class='button'>
-							<input type='button' value='목록' onClick="location.href='01.html'"/>
+							<input type='button' value='목록' onClick="location.href='reviewListView'"/>
 						</div>
 						
 						<!-- 답글 -->
 						<div class='writeCont'>
 							<p>댓글</p>
+							<br>
 							<div class='write'>
 								<div>
-									<textarea>
-
-									</textarea>
+									<textarea id="reply" placeholder="댓글을 입력하세요."></textarea>
 									<div>
-										<input type='button' value='등록' onClick="location.href='02.html'"/>
+										<input id="addRepy" type='button' value='등록'/>
 									</div>
 								</div>
 							</div>
 							<div class='view'>
-								<ul>
-									<li>Smile1 <span>2020-06-17</span> <span class='viewDel'><input type='button' value='삭제'/></li>
-									<li>치와와 치치가 좋은 주인을 만난거 같아서 너무 다행이네요~!</li>
-								</ul>
-								<ul>
-									<li>Smile1 <span>2020-06-17</span> <span class='viewDel'><input type='button' value='삭제'/></li>
-									<li>치와와 치치가 좋은 주인을 만난거 같아서 너무 다행이네요~!</li>
-								</ul>
-								<ul>
-									<li>Smile1 <span>2020-06-17</span> <span class='viewDel'><input type='button' value='삭제'/></li>
-									<li>치와와 치치가 좋은 주인을 만난거 같아서 너무 다행이네요~!</li>
-								</ul>
+								<c:choose>
+									<c:when test="${empty replyList}">
+										<p style="font-size: 15px;">등록된 댓글이 없습니다.</p>
+									</c:when>
+									<c:when test="${!empty replyList}">
+										<c:forEach var="replyList" items="${replyList}">
+											<ul class="${replyList.userId}">
+												<li>${replyList.userId} <span>${replyList.regDate}</span> <span class='viewDel'>
+												<input id="${replyList.replyNum}" class="delButton" type='button' value='삭제'/></li>
+												<li>${replyList.content}</li>
+											</ul>
+										</c:forEach>
+									</c:when>
+								</c:choose>
 							</div>
 						</div>
 					</div>
