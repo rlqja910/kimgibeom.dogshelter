@@ -76,7 +76,7 @@ let dogsCnt=${dogsCnt};
 							}else if(isOnePage){ //1페이지만 있을때 (데이터가 아예 없는 경우에도 여기로 진입한다)
 								if(dogsCnt==0){ //아예 데이터가 없을때
 									$('#pagingUl').empty();
-									$('#dogPost').append('<ul><li>등록된 데이터가 없습니다.</li></ul>');
+									$('#dogPost').append('<div>등록된 데이터가 없습니다.</div>');
 								}else{ //아예 데이터가 없는게 아니라 단 하나라도 있을때
 									let onlyOnePageData=data.onlyOnePageData;
 									
@@ -170,7 +170,7 @@ let dogsCnt=${dogsCnt};
 		}else if(isOnePage){ //1페이지만 있을때 (데이터가 아예 없는 경우에도 여기로 진입한다)
 			if(dogsCnt==0){ //아예 데이터가 없을때
 				$('#pagingUl').empty();
-				$('#dogPost').append('<ul><li>등록된 데이터가 없습니다.</li></ul>');
+				$('#dogPost').append('<div>등록된 데이터가 없습니다.</div>');
 			}else{ //아예 데이터가 없는게 아니라 단 하나라도 있을때
 				let onlyOnePageData=${onlyOnePageData};
 				
@@ -303,8 +303,8 @@ big, small {
 /* 유기견 신고 */
 .report {
 	font-size: 14px;
-	margin-top: 10px;
-	margin-bottom: 40px;
+	margin-top: 100px;
+	margin-bottom: 100px;
 }
 
 .report .reviewCont {

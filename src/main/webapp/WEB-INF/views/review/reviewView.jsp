@@ -182,7 +182,7 @@ $(() => {
 							<br>
 							<div class='write'>
 								<div>
-									<textarea id="reply" placeholder="댓글을 입력하세요." maxlength="1050"></textarea>
+									<textarea id="reply" placeholder="댓글을 입력하세요." maxlength="840"></textarea>
 									<div>
 										<input id="addRepy" type='button' value='등록'/>
 									</div>

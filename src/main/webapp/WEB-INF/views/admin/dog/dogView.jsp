@@ -154,7 +154,7 @@ td {
 					<hr style='border: 1px solid #a0a0a0;'>
 
 					<h4>
-						<strong>비글 오렌지 책임분양</strong>
+						<strong>${dog.dogTitle}</strong>
 					</h4>
 
 					<hr>

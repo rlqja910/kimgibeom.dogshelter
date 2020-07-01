@@ -87,8 +87,8 @@ let dogsCnt=${dogsCnt};
 							$('#dogPost').append('<div>등록된 데이터가 없습니다.</div>');
 						}else{ //아예 데이터가 없는게 아니라 단 하나라도 있을때
 							let onlyOnePageData=data.onlyOnePageData;
-							let contentStr=onlyOnePageData[i-1].dogContent.replace(/<p>/gi,' ');
 							for(let i=1;i<=lastPageDataCnt;i++){ //데이터 출력
+								let contentStr=onlyOnePageData[i-1].dogContent.replace(/<p>/gi,' ');
 								$('#dogPost').append('<a href="../dog/dogView/'+onlyOnePageData[i-1].dogNum+'"><ul><li><img src="<c:url value="/attach/dog/'+onlyOnePageData[i-1].attachName+'" />" /></li><li>'+onlyOnePageData[i-1].dogTitle+'</li><li>'+contentStr+'</li><li>+더보기</li><li class="checkB"><input type="checkbox"/></li></ul></a>');
 							}
 						}
@@ -752,7 +752,7 @@ body {
 								style='width: 100px; height: 35px; float: left;'>제목</button>
 							<div class='form-group' id='content'>
 								<input type='text' id='dogTitle' class='form-control'
-									placeholder='검색어를 입력해주세요.' maxlength=10/>
+									placeholder='검색어를 입력해주세요.' maxlength=10 />
 							</div>
 							<div class='form-group'>
 								<button type='button' class='btn btn-default' id='searchDogBtn'>
