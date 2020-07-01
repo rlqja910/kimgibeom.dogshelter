@@ -89,7 +89,7 @@ let dogsCnt=${dogsCnt};
 								console.log('onepage');
 								if(dogsCnt==0){ //아예 데이터가 없을때
 									$('#pagingUl').empty();
-									$('#dogPost').append('<ul><li>등록된 데이터가 없습니다.</li></ul>');
+									$('#dogPost').append('<div>등록된 데이터가 없습니다.</div>');
 								}else{ //아예 데이터가 없는게 아니라 단 하나라도 있을때
 									let onlyOnePageData=data.onlyOnePageData;
 									console.log(onlyOnePageData);
@@ -302,6 +302,10 @@ let dogsCnt=${dogsCnt};
 }
 
 /* 유기견 신고 */
+.report .reviewCont div {
+	text-align: center;
+}
+
 .report {
 	font-size: 14px;
 	margin-top: 10px;

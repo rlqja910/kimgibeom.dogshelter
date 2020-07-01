@@ -119,6 +119,7 @@ $(enroll);
 							<tr class="text">
 								<th><span>*</span> 이름</th>
 								<td>이창연</td>
+								<input type='text' value=''+${user.userName} />
 							</tr>
 							<tr class="number">
 								<th><span>*</span> 전화번호</th>

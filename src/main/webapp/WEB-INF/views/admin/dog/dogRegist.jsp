@@ -55,19 +55,20 @@ function maxLengthCheck(object){ //숫자 max값 초과시 제한
 			let dogAge=$('#dogAge').val();
 			let dogEntranceDate=$('#dogEntranceDate').val();
 			let dogGender=$('input[name="dogGender"]:checked').val();
-			let dogContent = CKEDITOR.instances.description.getData();
+			let dogContent = CKEDITOR.instances.description.getData().trim();
+			console.log(CKEDITOR.instances.description);
 			
 			console.log(dogTitle,dogName,dogKind,dogWeight,dogAge,dogEntranceDate,dogGender,dogContent);
 			
-			if(dogTitle===''){
+			if(dogTitle.trim()===''){
 				console.log('dogTitle');
 				$('#registTitleMsg').text('제목을 입력해 주세요');
 				return false;
-			}else if(dogName===''){
+			}else if(dogName.trim()===''){
 				console.log('dogName');
 				$('#registNameMsg').text('이름을 입력해 주세요');
 				return false;
-			}else if(dogKind===''){
+			}else if(dogKind.trim()===''){
 				console.log('dogKind');
 				$('#registKindMsg').text('품종을 입력해 주세요');
 				return false;
@@ -87,7 +88,7 @@ function maxLengthCheck(object){ //숫자 max값 초과시 제한
 				console.log('dogGender');
 				$('#registGenderMsg').text('성별을 선택해 주세요');
 				return false;
-			}else if(dogContent===''){
+			}else if(dogContent.trim()===''){
 				console.log('dogContent');
 				$('#registContentMsg').text('내용을 입력해 주세요');
 				return false;
@@ -111,7 +112,7 @@ function maxLengthCheck(object){ //숫자 max값 초과시 제한
 	
 	function textEditer(){
 		CKEDITOR.replace('description', {
-			removePlugins : 'image'
+			removePlugins : 'image',
 		});
 	}
 </script>
