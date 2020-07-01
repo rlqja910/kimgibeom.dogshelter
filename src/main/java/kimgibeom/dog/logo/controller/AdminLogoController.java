@@ -25,17 +25,14 @@ public class AdminLogoController {
 	@RequestMapping(value = "/registProc", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean logoRegistProc(MultipartFile attachFile, HttpServletRequest request) {
-		System.out.println("registProc 진입");
 
 		boolean stored = true;
 		String dir = request.getServletContext().getRealPath(logoAttachDir);
 
 		try {
 			save(dir + "/" + "logo.jpg", attachFile);
-			System.out.println("첨부함");
 		} catch (IOException e) {
 			stored = false;
-			System.out.println("실패");
 		}
 
 		return stored;

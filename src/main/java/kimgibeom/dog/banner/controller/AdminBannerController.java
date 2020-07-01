@@ -25,7 +25,6 @@ public class AdminBannerController {
 	@RequestMapping(value = "/registProc", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean bannerRegistProc(MultipartFile attachFile, HttpServletRequest request) {
-		System.out.println("registProc 진입");
 
 		boolean stored = true;
 		String dir = request.getServletContext().getRealPath(bannerAttachDir);
