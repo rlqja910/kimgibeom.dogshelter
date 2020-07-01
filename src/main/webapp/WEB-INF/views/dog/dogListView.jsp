@@ -574,7 +574,7 @@ big, small {
 						<div class='select'>
 							<p>품종</p>
 						</div>
-						<input type='text' id='dogKind' /> <input type='button'
+						<input type='text' id='dogKind' maxlength='10'/> <input type='button'
 							value='검색' id='searchDogBtn' />
 					</div>
 				</div>

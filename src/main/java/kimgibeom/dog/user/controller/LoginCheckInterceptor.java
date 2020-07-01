@@ -18,6 +18,18 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
 					return false;
 				}
 			}
+			if (urlFirstPath.equals("userWithdraw")) {
+				if (request.getSession().getAttribute("userId") == null) {
+					response.sendRedirect("/dog");
+					return false;
+				}
+			}
+			if (urlFirstPath.equals("reportRegister")) {
+				if (request.getSession().getAttribute("userId") == null) {
+					response.sendRedirect("/dog");
+					return false;
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

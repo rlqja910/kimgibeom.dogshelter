@@ -752,7 +752,7 @@ body {
 								style='width: 100px; height: 35px; float: left;'>제목</button>
 							<div class='form-group' id='content'>
 								<input type='text' id='dogTitle' class='form-control'
-									placeholder='검색어를 입력해주세요.' />
+									placeholder='검색어를 입력해주세요.' maxlength=10/>
 							</div>
 							<div class='form-group'>
 								<button type='button' class='btn btn-default' id='searchDogBtn'>

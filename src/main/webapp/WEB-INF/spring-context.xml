@@ -99,6 +99,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/user/**" /> <!-- user 업무 시작시 로그인 확인 -->
+			<mvc:mapping path="/report/**" />
 			<ref bean='loginCheckInterceptor' />
 		</mvc:interceptor>
 	</mvc:interceptors>
