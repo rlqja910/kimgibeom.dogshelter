@@ -184,8 +184,8 @@ td {
 						<div class='img'>
 							<img src='../../../attach/dog/${dog.attachName}' />
 						</div>
-						<div class='txt'>${dog.dogContent}</div>
 					</div>
+					<div style='overflow: hidden' class='txt'>${dog.dogContent}</div>
 
 					<br>
 					<hr style='border: 1px solid #a0a0a0;'>
