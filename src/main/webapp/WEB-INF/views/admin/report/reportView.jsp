@@ -44,8 +44,17 @@ function replyNum() {
 			+ replyNum + '</font>');
 }
 
+function validate() {
+	// 이미지가 없는 글
+	$('img').each(function() { 
+		if (isFinite($(this).attr('src').split('/').pop()))
+			$(this).remove();
+	})
+}
+
 $(replyDel);
 $(replyNum);
+$(validate);
 </script>
 <style>
 * {
@@ -185,7 +194,7 @@ body {
 			<div id='topButton'>
 					<a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
 					<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-					<a href='../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+					<a href='../../../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
 					<a href='user/logout'>로그아웃</a>
 			</div>
 		</div>
@@ -204,9 +213,8 @@ body {
 				<span class='glyphicon glyphicon-time reportInfo'>&nbsp;${report.regDate}</span>							
 			</div>
 			<hr>
-			<div style="height:100px; width:120px; border:1px solid;">
-				<img src='<c:url value="/attach/report/${report.attachName}"/>'/>
-			</div>
+			
+			<img src='<c:url value="/attach/report/${report.attachName}"/>'/><br><br>
 			<div class='reportContent'>
 				${report.content}
 			</div>	

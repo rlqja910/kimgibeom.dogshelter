@@ -6,10 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>유기견 보호소</title>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script src="../res/layoutsub.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 <%@ include file="../common/scriptImport.jsp"%>
 <script>
 function delReport() {
@@ -113,9 +110,16 @@ function checkAuthority() {
 			$('.replyDel').eq($(this).index()).hide();
 	})
 	
-	if (!`${userId}`) { // 댓글 등록 시 로그인 안 한 상태이면 로그인 페이지로 이동
+	// 댓글 등록 시 로그인 안 한 상태이면 로그인 페이지로 이동
+	if (!`${userId}`) { 
 		$('#replyRegister').attr('onClick', "location.href='../../user/login'");
 	}
+	
+	// 이미지가 없는 글
+	$('img').each(function() { 
+		if (isFinite($(this).attr('src').split('/').pop()))
+			$(this).remove();
+	})
 }
 
 $(delReport);
@@ -224,9 +228,7 @@ $(checkAuthority);
 						<tr>
 							<td colspan='2'>
 								<div class='reportInfo'>조회 ${report.viewCount} &nbsp;&nbsp;&nbsp;${report.regDate}</div><br><br>
-								<div style="height:100px; width:120px; border:1px solid;">
-									<img src='<c:url value="/attach/report/${report.attachName}"/>'/>
-								</div>
+								<img src='<c:url value="/attach/report/${report.attachName}"/>'/>
 								<br><br>
 								${report.content}
 							</td>

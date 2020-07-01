@@ -5,15 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>유기견 보호소</title>
-<script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script src="../res/layoutsub.js"></script>
 <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 <script src="${path}/ckeditor/ckeditor.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 <%@ include file="../common/scriptImport.jsp"%>	
 <script>
 function validateReport() { // 등록 버튼 누르기 전 검증
@@ -49,21 +43,32 @@ function registReport() {
 	
 	$('#register').click(() => {
 		let content = CKEDITOR.instances.description.getData();
+		let isSubmit = false;
 		
-		if ($('input[name="title"]').val()) {
-			if (content) {
-				swal({
-					title:'',
-					text:'게시물이 등록되었습니다.',
-					type:'success',
-					confirmButtonText: '확인',
-					closeOnConfirm: false
-				},
-				function(isConfirm) {
-					if (isConfirm) {
-						$('form').submit();
-					}	
-				});
+	    if ($('input[name="attachFile"]').val()) {
+	      	let ext = $('input[name="attachFile"]').val().split('.').pop().toLowerCase();
+	      	if ($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+				$('input[name="attachFile"]').val('');
+				$('font').eq(2).text('gif, png, jpg, jpeg 파일만 첨부할 수 있습니다.');
+		  	} else isSubmit = true;
+	    } else isSubmit = true;
+		
+		if ($('input[name="title"]').val().trim()) {
+			if (content && content.trim()) {
+			    if (isSubmit) {
+					swal({
+						title:'',
+						text:'게시물이 등록되었습니다.',
+						type:'success',
+						confirmButtonText: '확인',
+						closeOnConfirm: false
+					},
+					function(isConfirm) {
+						if (isConfirm) {
+							$('form').submit();
+						}	
+					});
+			    }
 			} else swal('', '내용을 입력하세요.', 'warning');
 		} else 	{	
 			swal({
@@ -72,7 +77,7 @@ function registReport() {
 				type:'warning',
 				confirmButtonText:'확인'
 			});
-		}	
+		}
 	});
 }
 
@@ -300,7 +305,10 @@ textarea {
 							</tr>
 							<tr>
 								<th>이미지</th>
-								<td><input type='file' name='attachFile'/></td>
+								<td>
+									<input type='file' name='attachFile'/>
+									<font color='red'></font>
+								</td>
 							</tr>
 						</table>
 	

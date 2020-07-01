@@ -10,23 +10,6 @@ public class Report {
 	private Date regDate;
 	private int reportNum;
 	private String attachName;
-	
-	public Report() {}
-	
-	public Report(String title, String userId, String content, String attachName) {
-		this.title = title;
-		this.userId = userId;
-		this.content = content;
-		this.attachName = attachName;
-	}
-
-	public String getAttachName() {
-		return attachName;
-	}
-
-	public void setAttachName(String attachName) {
-		this.attachName = attachName;
-	}	
 
 	public String getTitle() {
 		return title;
@@ -75,4 +58,12 @@ public class Report {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	
+	public String getAttachName() {
+		return attachName;
+	}
+
+	public void setAttachName(String attachName) {
+		this.attachName = attachName;
+	}	
 }

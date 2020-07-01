@@ -33,6 +33,7 @@ public class ReportController {
 	private ReportReplyService reportReplyService;
 	@Value("${reportAttachDir}") 
 	private String reportAttachDir;
+	private int attachSeq;
 	
 	// 게시물 목록 
 	@RequestMapping("/reportListView")
@@ -75,13 +76,14 @@ public class ReportController {
 	}
 	
 	@RequestMapping(value="/reportRegister", method=RequestMethod.POST)
-	public String reportOut(String title, String userId, String content, MultipartFile attachFile, HttpServletRequest request) {
+	public String reportOut(Report report, MultipartFile attachFile, HttpServletRequest request) {
 		String dir = request.getServletContext().getRealPath(reportAttachDir);
-		String fileName = attachFile.getOriginalFilename();
+		
+		attachSeq++;
+		String fileName = attachSeq + attachFile.getOriginalFilename(); // 첨부 파일명 중복 방지
 		save(dir + "/" + fileName, attachFile);
-		
-		Report report = new Report(title, userId, content, fileName);
-		
+
+		report.setAttachName(fileName);
 		reportService.writeReport(report);
 		
 		return "redirect:reportListView";

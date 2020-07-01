@@ -5,10 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>유기견 보호소</title>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script src="../res/layoutsub.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 <script src="${path}/ckeditor/ckeditor.js"></script>
 <%@ include file="../common/scriptImport.jsp"%>
@@ -45,9 +42,18 @@ function modifyReport() {
 	
 	$('#modify').click(() => {
 		let content = CKEDITOR.instances.description.getData();
+		let isSubmit = false;
 		
-		if($('input[name="title"]').val()) {
-			if (content) {
+	    if ($('input[name="attachFile"]').val()) {
+	      	let ext = $('input[name="attachFile"]').val().split('.').pop().toLowerCase();
+	      	if ($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+				$('input[name="attachFile"]').val('');
+				$('font').eq(2).text('gif, png, jpg, jpeg 파일만 첨부할 수 있습니다.');
+		  	} else isSubmit = true;
+	    } else isSubmit = true;
+		
+		if($('input[name="title"]').val().trim()) {
+			if (content && content.trim()) {
 				swal({
 					title:'',
 					text:'게시물이 수정되었습니다.',

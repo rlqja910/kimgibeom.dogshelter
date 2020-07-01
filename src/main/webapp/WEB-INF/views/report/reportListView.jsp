@@ -6,10 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>유기견 보호소</title>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script src="../res/layoutsub.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 <%@ include file="../common/scriptImport.jsp"%>
 <script>
 function reportSearch() { 
@@ -25,35 +22,10 @@ function reportSearch() {
 	});
 }
 
-function readReports() {
-	$('.reportCont').html(
-		`<c:forEach var='report' items='${reports}'>
-			<a href='./reportView/${report.reportNum}'>
-				<ul>
-					<li><div style="height:100px; width:355px; border:1px solid;">
-						<img src='<c:url value="/attach/report/${report.attachName}"/>'/></div></li>
-					<li class='title'>${report.title}</li>
-					<li class='contents'>${report.content}</li>
-					<li class='more'>+더보기</li>
-				</ul>
-			</a>
-		</c:forEach>`);
-	
-	if ($('.reportCont').html() == ``) {
-		$('.reportCont').html('<br><br><br><div class="reportEmpty">등록된 게시글이 없습니다.</div><br>');
-	}
-	
-	$('.contents').each(function (idx, content) {
-		if ($(this).text().length >= 31) {
-			$(this).text($(this).text().substring(0, 30) + "...");
-		}
-	})
-}
-
 function managePaging() {
     let params = {};
     window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
-    
+
     // active 표시
 	if (params.page == 1 || typeof params.page == 'undefined') { // 첫 페이지
 		$('.page').find('a').first().removeAttr('href');
@@ -92,6 +64,45 @@ function managePaging() {
     })
 }
 
+function readReports() {
+	$('.reportCont').html(
+		`<c:forEach var='report' items='${reports}'>
+			<a href='./reportView/${report.reportNum}'>
+				<ul>
+					<li>
+						<div style="height:280px; width:99.7%; border:1px solid #ccc;">
+							<img src='<c:url value="/attach/report/${report.attachName}"/>'/>
+						</div>
+					</li>
+					<li class='title'>${report.title}</li>
+					<li class='contents'>${report.content}</li>
+					<li class='more'>+더보기</li>
+				</ul>
+			</a>
+		</c:forEach>`);
+	
+	if ($('.reportCont').html() == ``) { // 게시물 없을 때
+		$('.reportCont').html('<br><br><br><div class="reportEmpty">등록된 게시글이 없습니다.</div><br>');
+	
+		$('.page').find('li').first().after('<li><a href="">1</a></li>');
+		$('.page').find('a').removeAttr('href');
+		$('.page').find('a').removeAttr('style');
+	}
+	
+	$('img').each(function() { // 이미지가 없는 글
+		if (isFinite($(this).attr('src').split('/').pop())) {
+			$(this).parent().text('이미지 없음');
+			$(this).remove();
+		}
+	})
+	
+	$('.contents').each(function (idx, content) { // 내용이 30자 이상이면 ... 처리
+		if ($(this).text().length >= 31) {
+			$(this).text($(this).text().substring(0, 30) + "...");
+		}
+	})
+}
+
 function register() {
 	if (`${userId}`) { // 로그인 한 상태이면 등록 페이지로 이동
 		$('#register').attr('onClick', "location.href='./reportRegister'");
@@ -100,9 +111,9 @@ function register() {
 	}
 }
 
-$(readReports);
-$(managePaging);
 $(reportSearch);
+$(managePaging);
+$(readReports);
 $(register);
 </script>
 <style>
@@ -119,14 +130,14 @@ $(register);
 	.report{width:80%;font-size:14px; margin:0 auto; margin-top:100px; margin-bottom:100px;}
 	.report .reportCont{width:100%; overflow:hidden;}
 	.report .reportCont ul{width:23.5%; float:left; margin:1% 0 0 1%; border:1px solid #ccc;}
+	.report .reportCont ul img{width:100%; height:100%;}
 	.report .reportCont .title{font-weight:bold; margin:5% 3% 3% 3%;
 		white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 	.report .reportCont .contents{margin:0 3% 0 3%; color:#666; font-size:12px; 
 		white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
-	.report P{margin-block-start: 0em; margin-block-end: 0em;}	
-	.report .reportCont .more{text-align:right; margin:6% 3% 5% 3%;}
-	.report .reportCont ul img{width:100%;}
-	.report .reportEmpty{text-align: center;}
+	.report .reportCont P{margin-block-start: 0em; margin-block-end: 0em;}	
+	.report .reportCont .more{text-align:right; margin:6% 3% 3% 3%;}
+	.report .reportCont .reportEmpty{text-align: center;}
 	.report .reportCont .marker{background-color:yellow;}
 
 	/* 검색 */
@@ -213,11 +224,11 @@ $(register);
 				<!-- 페이징 -->
 				<div class='page'>
 					<ul>
-						<li><a href=''><</a></li>
+						<li><a href=''><<</a></li>
 					    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
 					    	<li><a href="reportListView${pageMaker.makeQuery(idx)}">${idx}</a></li>
 					    </c:forEach>
-					    <li><a href=''>></a></li>
+					    <li><a href=''>>></a></li>
 					</ul>
 				</div>
 			</div>

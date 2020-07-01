@@ -24,6 +24,48 @@ function reportSearch() {
 	});
 }
 
+function managePaging() {
+    let params = {};
+    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
+    
+    // active 표시
+	if (params.page == 1 || typeof params.page == 'undefined') { // 첫 페이지
+		$('#pagination').find('a').first().removeAttr('href');
+    	$('#pagination').find('a').eq(1).css({'background-color':'#333', color:'#fff'});
+    	
+    	if ($('#pagination').find('a').length == 3) // 첫 페이지가 마지막 페이지인 경우 
+    		$('#pagination').find('a').last().removeAttr('href');
+    } else {
+    	$('#pagination').find('a').eq(params.page).css({'background-color':'#333', color:'#fff'});
+ 
+    	if (params.page == ${pageMaker.endPage}) // 마지막 페이지
+        	$('#pagination').find('a').last().removeAttr('href');
+    }
+    
+    // prev 버튼
+    $('#pagination').find('a').first().click(function() {
+    	let prev = params.page - 1;
+    	
+    	if (prev > 0) 
+    		$(this).attr('href', 'reportListView?page=' + prev);
+    })
+    
+    // next 버튼
+    $('#pagination').find('a').last().click(function() {
+    	let next = Number(params.page) + 1;
+    	
+    	let isNext = true;
+    	if ($('#pagination').find('a').length == 3)
+    		isNext = false;
+    	
+    	if (typeof params.page == 'undefined' && isNext) { // 게시판 첫 진입 시 2페이지로 이동
+    		$(this).attr('href', 'reportListView?page=2');
+    	} else if (params.page != ${pageMaker.endPage} && isNext) { // 다음 페이지로 이동
+    		$(this).attr('href', 'reportListView?page=' + next);
+    	}
+    })
+}
+
 function reportList() {
 	let date = new Date(); 
 	
@@ -41,6 +83,10 @@ function reportList() {
 	
 	if ($('tbody').html() == ``) {
 		$('tbody').html('<tr><td colspan="5">게시글이 없습니다.</td></tr>');
+		
+		$('#pagination').find('li').first().after('<li><a href="">1</a></li>');
+		$('#pagination').find('a').removeAttr('href');
+		$('#pagination').find('a').removeAttr('style');
 	}	
 }
 
@@ -88,52 +134,10 @@ function reportDel() {
 	});
 }
 
-function managePaging() {
-    let params = {};
-    window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
-    
-    // active 표시
-	if (params.page == 1 || typeof params.page == 'undefined') { // 첫 페이지
-		$('#pagination').find('a').first().removeAttr('href');
-    	$('#pagination').find('a').eq(1).css({'background-color':'#333', color:'#fff'});
-    	
-    	if ($('#pagination').find('a').length == 3) // 첫 페이지가 마지막 페이지인 경우 
-    		$('#pagination').find('a').last().removeAttr('href');
-    } else {
-    	$('#pagination').find('a').eq(params.page).css({'background-color':'#333', color:'#fff'});
- 
-    	if (params.page == ${pageMaker.endPage}) // 마지막 페이지
-        	$('#pagination').find('a').last().removeAttr('href');
-    }
-    
-    // prev 버튼
-    $('#pagination').find('a').first().click(function() {
-    	let prev = params.page - 1;
-    	
-    	if (prev > 0) 
-    		$(this).attr('href', 'reportListView?page=' + prev);
-    })
-    
-    // next 버튼
-    $('.page').find('a').last().click(function() {
-    	let next = Number(params.page) + 1;
-    	
-    	let isNext = true;
-    	if ($('.page').find('a').length == 3)
-    		isNext = false;
-    	
-    	if (typeof params.page == 'undefined' && isNext) { // 게시판 첫 진입 시 2페이지로 이동
-    		$(this).attr('href', 'reportListView?page=2');
-    	} else if (params.page != ${pageMaker.endPage} && isNext) { // 다음 페이지로 이동
-    		$(this).attr('href', 'reportListView?page=' + next);
-    	}
-    })
-}
-
 $(reportSearch);
+$(managePaging);
 $(reportList);
 $(reportDel);
-$(managePaging);
 </script>
 <style>
 * {
@@ -285,7 +289,7 @@ th {
 			<div id='topButton'>
 					<a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
 					<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-					<a href='../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+					<a href='../../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
 					<a href='user/logout'>로그아웃</a>
 			</div>
 		</div>
@@ -334,11 +338,11 @@ th {
 					
 				<div id="pagination">
 					<ul class="pagination">
-						<li><a href=''><</a></li>
+						<li><a href=''><<</a></li>
 					    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
 					    	<li><a href="reportListView${pageMaker.makeQuery(idx)}">${idx}</a></li>
 					    </c:forEach>
-					    <li><a href=''>></a></li>
+					    <li><a href=''>>></a></li>
 					</ul>
 				</div>
 			</div>
