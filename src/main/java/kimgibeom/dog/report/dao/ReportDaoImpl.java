@@ -38,6 +38,11 @@ public class ReportDaoImpl implements ReportDao {
 	public int modifyReport(Report report) {
 		return reportMap.modifyReport(report);
 	}
+	
+	@Override
+	public int modifyViewCnt(int reportNum) {
+		return reportMap.modifyViewCnt(reportNum);
+	}
 
 	@Override
 	public int delReport(int reportNum) {

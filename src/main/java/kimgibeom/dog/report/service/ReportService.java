@@ -15,6 +15,8 @@ public interface ReportService {
 	int writeReport(Report report);
 
 	int updateReport(Report report);
+	
+	int updateViewCnt(int reportNum);
 
 	int removeReport(int reportNum);
 }
