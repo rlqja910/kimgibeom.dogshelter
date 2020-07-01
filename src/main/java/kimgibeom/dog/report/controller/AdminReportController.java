@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kimgibeom.dog.report.domain.Criteria;
@@ -61,9 +62,11 @@ public class AdminReportController {
 	// 게시물 삭제
 	@ResponseBody
 	@RequestMapping("/remove")
-	public int removeReport(String reportNum) {
-		int reportNo = Integer.parseInt(reportNum);
-		return reportService.removeReport(reportNo);
+	public void removeReport(@RequestParam(value="reportNums[]") List<String> reportNums) {
+		for (String reportNum:reportNums) {
+			int reportNo = Integer.parseInt(reportNum);
+			reportService.removeReport(reportNo);
+		}
 	}
 
 	// 댓글 삭제
