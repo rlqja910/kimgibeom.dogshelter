@@ -5,15 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>유기견 보호소</title>
-<script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script src="../res/layoutsub.js"></script>
 <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 <script src="${path}/ckeditor/ckeditor.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 <%@ include file="../common/scriptImport.jsp"%>	
 <script>
 function validateReport() { // 등록 버튼 누르기 전 검증
@@ -23,7 +17,7 @@ function validateReport() { // 등록 버튼 누르기 전 검증
 			$('font').eq(0).text(' 제목은 최대 30자 입력 가능합니다.');
 		} else $('font').eq(0).text('');
 	});
-	
+	  
 	// 내용 글자수 검증
 	CKEDITOR.replace('description', {
 		removePlugins : 'image'
@@ -50,8 +44,8 @@ function registReport() {
 	$('#register').click(() => {
 		let content = CKEDITOR.instances.description.getData();
 		
-		if ($('input[name="title"]').val()) {
-			if (content) {
+		if ($('input[name="title"]').val().trim()) {
+			if (content && content.trim()) {
 				swal({
 					title:'',
 					text:'게시물이 등록되었습니다.',
@@ -65,7 +59,7 @@ function registReport() {
 					}	
 				});
 			} else swal('', '내용을 입력하세요.', 'warning');
-		} else 	{	
+		} else {	
 			swal({
 				title:'',
 				text:'제목을 입력하세요.',

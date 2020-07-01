@@ -14,12 +14,12 @@
 function reportSearch() { 
 	$('#search').click(() => {
 		if(!$('#searchContent').val().trim()) {
-			swal({
+			swal({ 
 				title: '',
 				text: '검색어를 입력해주세요.',
 				type: 'warning',
 				confirmButtonText: '확인'
-			})	
+			})	 
 		}
 	});
 }
@@ -285,7 +285,7 @@ th {
 			<div id='topButton'>
 					<a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
 					<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-					<a href='../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+					<a href='../../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
 					<a href='user/logout'>로그아웃</a>
 			</div>
 		</div>

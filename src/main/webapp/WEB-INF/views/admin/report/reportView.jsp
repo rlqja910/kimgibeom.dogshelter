@@ -17,9 +17,9 @@ function replyDel() {
 		
 		swal({
 			title: '',
-			text: '댓글을 삭제하시겠습니까?',
+			text: '댓글을 삭제하시겠습니까?', 
 			type: 'warning',
-			showCancelButton: true,
+			showCancelButton: true, 
 			confirmButtonText: '확인',
 			cancelButtonText: '취소',
 			closeOnConfirm: false
@@ -185,7 +185,7 @@ body {
 			<div id='topButton'>
 					<a href='logo/logoRegist'>로고관리</a>&nbsp;|&nbsp;
 					<a href='banner/bannerRegist'>배너관리</a>&nbsp;|&nbsp; 
-					<a href='../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
+					<a href='../../../../dog'>홈페이지 돌아가기</a>&nbsp;|&nbsp; 
 					<a href='user/logout'>로그아웃</a>
 			</div>
 		</div>
