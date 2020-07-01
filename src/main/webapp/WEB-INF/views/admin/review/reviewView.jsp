@@ -29,7 +29,13 @@ function delReply() {
 			confirmButtonText: '확인',
 			cancelButtonText: '취소',
 			closeOnConfirm: false
-		})
+		},function(isConfirm){
+			if(isConfrim){
+				$.ajax({
+					
+				});
+			}
+		});
 	});
 };
 
@@ -242,14 +248,24 @@ img {
 					<strong>댓글</strong>
 				</h4>
 				<br>
-				<div style='background-color: #eeeeee;'>
-					<div class='replyBox'>
-						<span><strong>miso93</strong>&nbsp;&nbsp;2020-06-10</span>
-						<button type='button' class='btn btn-danger delete'>삭제</button>
-						<div class='replyContent'>아이가 얼른 주인분 만났으면 좋겠네요.</div>
-					</div>
-				</div>
-				<br>
+				<c:choose>
+					<c:when test="${empty replyList}">
+						<p style="font-size: 15px;">등록된 댓글이 없습니다.</p>
+					</c:when>
+					<c:when test="${!empty replyList}">
+						<c:forEach var="replyList" items="${replyList}">
+							<div style='background-color: #eeeeee;'>
+								<div class='replyBox'>
+									<span><strong>${replyList.userId}</strong>&nbsp;&nbsp;${replyList.regDate}</span>
+									<button type='button' class='btn btn-danger delete'>삭제</button>
+									<div class='replyContent'>${replyList.content}</div>
+								</div>
+							</div>
+							<br>
+						</c:forEach>
+					</c:when>
+				</c:choose>
+				
 			</div>
 		</div>
 	</div>
