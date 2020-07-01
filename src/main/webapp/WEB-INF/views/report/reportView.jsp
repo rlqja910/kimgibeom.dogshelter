@@ -44,13 +44,15 @@ function registerReply() {
 			content: $('textarea').val()
 		};
 		
-		$.ajax({
-			url: '../replyView',
-			data: reply,
-			success: () => {
-				location.reload();
-			}
-		})
+		if (`${userId}` != '') {
+			$.ajax({
+				url: '../replyView',
+				data: reply,
+				success: () => {
+					location.reload();
+				}
+			})
+		}
 	})
 }
 
@@ -248,7 +250,7 @@ $(checkAuthority);
 						<p>댓글</p>
 						<div class='write'>
 							<div>
-								<textarea name='content' placeholder='댓글을 입력하세요.' maxlength='1050'></textarea>
+								<textarea name='content' placeholder='댓글을 입력하세요.' maxlength='840'></textarea>
 								<div>
 									<input type='button' id='replyRegister' value='등록'/>
 								</div>

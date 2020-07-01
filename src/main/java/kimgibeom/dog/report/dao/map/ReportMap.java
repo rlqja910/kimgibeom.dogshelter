@@ -15,6 +15,8 @@ public interface ReportMap {
 	int addReport(Report report);
 
 	int modifyReport(Report report);
+	
+	int modifyViewCnt(int reportNum);
 
 	int delReport(int reportNum);
 }

@@ -48,6 +48,12 @@
 		where report_num = #{reportNum}
 	</update>
 	
+	<update id='modifyViewCnt' parameterType='int'>
+		update reports
+		set view_count = view_count + 1
+		where report_num = #{reportNum}
+	</update>	
+	
 	<delete id='delReport' parameterType='int'>
 		delete reports
 		where report_num = #{reportNum}

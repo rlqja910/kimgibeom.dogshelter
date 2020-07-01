@@ -38,6 +38,11 @@ public class ReportServiceImpl implements ReportService {
 	public int updateReport(Report report) {
 		return reportDao.modifyReport(report);
 	}
+	
+	@Override
+	public int updateViewCnt(int reportNum) {
+		return reportDao.modifyViewCnt(reportNum);
+	}
 
 	@Override
 	public int removeReport(int reportNum) {

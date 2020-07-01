@@ -55,6 +55,9 @@ public class ReportController {
 		Report report = reportService.readReport(reportNo);
 		model.addAttribute("report", report);
 
+		// 조회수 갱신
+		reportService.updateViewCnt(reportNo);
+		
 		// 댓글 조회
 		List<ReportReply> replies = reportReplyService.readReportReplies();
 		List<ReportReply> repliesOfReport = new ArrayList<ReportReply>();

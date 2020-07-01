@@ -16,5 +16,7 @@ public interface ReportDao {
 
 	int modifyReport(Report report);
 
+	int modifyViewCnt(int reportNum);
+	
 	int delReport(int reportNum);
 }
